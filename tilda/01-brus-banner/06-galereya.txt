@@ -1,0 +1,27 @@
+Заголовок блока:
+Примеры конструкций
+
+Загрузите в галерею Тильды (порядок):
+
+1. sm-brus-banner-presswall-standard.jpg
+   Подпись: Стандартный пресс-волл 5×3 м
+
+2. sm-brus-banner-5x3-logo-full.jpg
+   Подпись: Бренд-волл с раппортом логотипа
+
+3. sm-brus-banner-6x3-scene.jpg
+   Подпись: Фон сцены 6×3 м
+
+4. sm-brus-banner-uglovoy.jpg
+   Подпись: Угловой L-образный баннер
+
+5. sm-brus-banner-figurniy.jpg
+   Подпись: Фигурный брус-баннер
+
+6. sm-brus-banner-kolonny-scena.jpg
+   Подпись: Колонны для оформления сцены
+
+7. sm-brus-banner-registration.jpg
+   Подпись: Зона регистрации 4×2,5 м
+
+Папка файлов: visualizations/brus-banners/

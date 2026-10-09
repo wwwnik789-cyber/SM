@@ -1,0 +1,35 @@
+Заголовок блока:
+Как это выглядит
+
+Порядок загрузки в галерею Тильды.
+Папка: visualizations/reception-zones/
+
+1. sm-reception-zone-1.jpg
+   Ресепшн SM: стойка, бетон, объёмный логотип с подсветкой
+
+2. sm-reception-premium-dark.jpg
+   Премиум-стойка, navy enamel, LED по цоколю
+
+3. sm-reception-corner-it.jpg
+   Угловой ресепшн 2,8 м, IT-офис
+
+4. reception-light-example.jpg
+   Светлый ресепшн, дерево + белый акрил
+
+5. sm-volumetric-logo-wall.jpg
+   Объёмный логотип с halo-подсветкой
+
+6. office-branding-wall.jpg
+   Логотип на колонне в open space
+
+7. sm-office-navigation-set.jpg
+   Навигация: директория, таблички, указатели
+
+8. sm-branded-wall-panels.jpg
+   Стеновые панели и 3D-буквы
+
+9. sm-showroom-branding.jpg
+   Шоурум под ключ
+
+10. sm-meeting-room-branding.jpg
+    Брендированная переговорная
