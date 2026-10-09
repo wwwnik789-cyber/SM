@@ -1,0 +1,21 @@
+Заголовок блока:
+Как это выглядит
+
+Папка файлов: visualizations/photozones/
+
+1. sm-photozone-infinity-mirror.jpg
+   Зеркало бесконечности, зеркальный пол, объём SM
+
+2. sm-photozone-letters-podium.jpg
+   Объёмные буквы на подиуме с LED-кромкой
+
+3. sm-photozone-neon-lightboxes.jpg
+   Неон и световые короба
+
+4. sm-photozone-multilevel.jpg
+   Многоуровневая инсталляция с подвесом и цветами
+
+5. sm-photozone-hanging.jpg
+   Подвесная зона: обруч, драпировка, круглый подиум
+
+Если есть живые фото с Burger King (зеркало бесконечности 1,6×2,5), MIKS Karting (угловая с подсветкой), Invest Battle (подиум Ø6 м) — поставьте их первыми, рендеры оставьте как типы конструкций.
