@@ -9,8 +9,9 @@
 | `01-brus-banner/` | Страница услуги «Брус-баннер» |
 | `02-ofis-resepshn/` | Страница «Брендирование офисов и ресепшн» |
 | `03-imidzhevye-fotozony/` | Страница «Имиджевые фотозоны» |
+| `04-hvataika/` | Страница «Хватайка на мероприятие» |
 | `smm/` | Посты в соцсети (не на Тильду) |
-| Картинки | `visualizations/brus-banners/`, `reception-zones/`, `photozones/` |
+| Картинки | `visualizations/brus-banners/`, `reception-zones/`, `photozones/`, `hvataika/` |
 
 В каждой странице файлы пронумерованы: `01-...txt`, `02-...txt` — это порядок блоков сверху вниз.
 
