@@ -17,3 +17,6 @@ pnpm-debug.log*
 .idea
 .vercel
 *.tsbuildinfo
+
+# локальное окружение для сборки макетов
+.venv
