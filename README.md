@@ -36,6 +36,30 @@ npm run preview  # превью прод-сборки
 node scripts/smoke.mjs  # SSR-смоук всех маршрутов
 ```
 
+## Баннеры и печатные материалы
+
+В репозитории лежит серия печатных баннеров «Кастинг» с подготовленными к
+печати мастерами и производными версиями для сайта и соцсетей.
+
+```
+banners/casting-series/print/     печатные мастеры, JPEG, 300 dpi
+public/media/banners/              веб-версии, 1600 px
+public/media/banners/social/       1080×1920 · 1080×1350 · 1080×1080 · 1920×1080
+docs/konstruktsii/banners/         спецификация и препресс-регламент
+```
+
+Пересборка и проверка QR-кодов:
+
+```bash
+pip install pillow numpy opencv-python-headless segno zxing-cpp
+python3 scripts/banners/build_banners.py
+python3 scripts/banners/jfif_density.py 300 banners/casting-series/print/*.jpg
+```
+
+Скрипт `build_banners.py` находит QR по finder-паттернам, восстанавливает фон
+под кодом, вписывает рабочий QR версии 3 и **проверяет результат декодером** —
+если код не считывается, об этом печатается предупреждение.
+
 ## Деплой на Vercel через GitHub
 
 1. Запушьте репозиторий на GitHub (ветка `main`).

@@ -17,3 +17,7 @@ pnpm-debug.log*
 .idea
 .vercel
 *.tsbuildinfo
+
+# Python
+__pycache__/
+*.pyc

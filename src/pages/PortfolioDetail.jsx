@@ -63,6 +63,25 @@ export default function PortfolioDetail() {
           ))}
         </div>
 
+        {p.gallery && p.gallery.length > 0 && (
+          <div className="mt-16">
+            <h2 className="display-h text-2xl font-bold md:text-3xl">Галерея проекта</h2>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {p.gallery.map((g, i) => (
+                <Reveal key={g.src} delay={(i % 3) * 0.07}>
+                  <figure className="img-zoom overflow-hidden rounded-3xl border border-line bg-bg2">
+                    <img src={g.src} alt={g.title} loading="lazy" className="w-full object-cover" />
+                    <figcaption className="border-t border-line px-6 py-5">
+                      <p className="font-display text-sm font-bold">{g.title}</p>
+                      <p className="mt-1 text-xs text-mut">{g.note}</p>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="mt-14 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-10">
           <div>
             <p className="text-sm text-mut">Следующий кейс</p>
