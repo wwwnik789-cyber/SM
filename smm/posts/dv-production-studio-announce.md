@@ -1,6 +1,6 @@
 # ДВ Продакшен — анонс актёрско-модельной студии
 
-Контент под новый макет `visualizations/dv-production/dv-production-poster-16x9.jpg`.
+Контент под новый макет `visualizations/dv-production/dv-production-banner-square.jpg`.
 
 ---
 ## Пост-анонс (ВК, Telegram, Instagram*)
@@ -33,7 +33,7 @@
 
 #двпродакшен #кастинг #кастингнакино #актерскомодельнаястудия #реалитишоу #пробывкино #съемкидлядетей #актерымосква #кастингактеров
 
-**Визуал:** `dv-production-poster-16x9.jpg` (для ленты) → `dv-production-post-4x5.jpg` (для Telegram/карусели).
+**Визуал:** `dv-production-banner-square.jpg` (для ленты) → `dv-production-casting-kino.jpg` / `dv-production-casting-pokaz.jpg` (для сторис).
 
 ---
 
