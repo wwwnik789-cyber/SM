@@ -35,6 +35,13 @@ MASTERS = {
     "dv-production": PRINT_DIR / "banner-dv-production-300x270.jpg",
 }
 
+# Чистые макеты: без подписей, логотипа и QR-кодов.
+BARE_MASTERS = {
+    "kino (чистый)": PRINT_DIR / "banner-kino-300x270-bare.jpg",
+    "pokaz (чистый)": PRINT_DIR / "banner-pokaz-300x270-bare.jpg",
+    "dv-production (чистый)": PRINT_DIR / "banner-dv-production-300x270-bare.jpg",
+}
+
 EXPECT_URL = "https://model.dvkino.ru"
 
 
@@ -84,6 +91,31 @@ def qr_from_master(path: Path) -> str | None:
     return None
 
 
+def check_master(key: str, path: Path, expect_qr: bool | None) -> bool:
+    """Проверки одного мастера: геометрия, dpi, 4:4:4 и QR."""
+    units, density, sampling, width, height = jfif_info(path)
+    size_mb = path.stat().st_size / 1024 / 1024
+
+    checks = [
+        ("размер", (width, height) == (W, H), f"{width}×{height} px"),
+        ("dpi", units == 1 and density == DPI, f"{density} dpi"),
+        ("4:4:4", sampling == "4:4:4", sampling),
+    ]
+    url = qr_from_master(path)
+    if expect_qr is None:
+        checks.append(("QR", url is None, url or "QR не найден — как и задумано"))
+    elif expect_qr:
+        checks.append(("QR", url == EXPECT_URL, url or "не найден"))
+    else:
+        checks.append(("QR", url is None, "в макете нет QR"))
+
+    bad = [c for c in checks if not c[1]]
+    print(f"{'✓' if not bad else '✗'} {key}: {path.name} ({size_mb:.0f} МБ)")
+    for name, good, value in checks:
+        print(f"    {'✓' if good else '✗'} {name}: {value}")
+    return not bad
+
+
 def main() -> int:
     ok = True
     for key, path in MASTERS.items():
@@ -91,25 +123,15 @@ def main() -> int:
             print(f"✗ {key}: нет файла {path.name}")
             ok = False
             continue
-        units, density, sampling, width, height = jfif_info(path)
-        size_mb = path.stat().st_size / 1024 / 1024
+        expect_qr = None if key == "dv-production" else True
+        ok = check_master(key, path, expect_qr) and ok
 
-        checks = [
-            ("размер", (width, height) == (W, H), f"{width}×{height} px"),
-            ("dpi", units == 1 and density == DPI, f"{density} dpi"),
-            ("4:4:4", sampling == "4:4:4", sampling),
-        ]
-        if key == "dv-production":
-            checks.append(("QR", True, "в макете нет QR"))
-        else:
-            url = qr_from_master(path)
-            checks.append(("QR", url == EXPECT_URL, url or "не найден"))
-
-        bad = [c for c in checks if not c[1]]
-        ok = ok and not bad
-        print(f"{'✓' if not bad else '✗'} {key}: {path.name} ({size_mb:.0f} МБ)")
-        for name, good, value in checks:
-            print(f"    {'✓' if good else '✗'} {name}: {value}")
+    for key, path in BARE_MASTERS.items():
+        if not path.exists():
+            print(f"✗ {key}: нет файла {path.name}")
+            ok = False
+            continue
+        ok = check_master(key, path, None) and ok
     return 0 if ok else 1
 
 

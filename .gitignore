@@ -22,6 +22,7 @@ pnpm-debug.log*
 __pycache__/
 *.pyc
 
-# Печатные мастера 300×270 см (~335 МБ) — воспроизводимые артефакты
-# scripts/banners/build_300x270.py, превью и схема — в репозитории.
-banners/casting-series/print/*-300x270.jpg
+# Печатные мастера 300×270 см (~670 МБ вместе с чистыми версиями) —
+# воспроизводимые артефакты: scripts/banners/build_300x270.py.
+# Превью и схема раскладки — в репозитории.
+banners/casting-series/print/*-300x270*.jpg

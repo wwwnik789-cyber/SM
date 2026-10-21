@@ -15,13 +15,17 @@ banners/casting-series/
 │   ├── banner-dv-production-original-6144x6144.jpg ← исходник клиента для правки
 │   ├── banner-kino-300x270.jpg                     ← версия под конструкцию 300 × 270
 │   ├── banner-pokaz-300x270.jpg
-│   └── banner-dv-production-300x270.jpg
+│   ├── banner-dv-production-300x270.jpg
+│   ├── banner-kino-300x270-bare.jpg                ← чистые, без подписей и QR
+│   ├── banner-pokaz-300x270-bare.jpg
+│   └── banner-dv-production-300x270-bare.jpg
 ├── preview/                   итоговый вид серии (для согласования и клиента)
 │   ├── casting-series-contact-sheet.jpg
 │   ├── casting-qr-proof.jpg
 │   ├── casting-300x270-layout.jpg         ← схема раскладки 300 × 270
 │   ├── casting-300x270-contact-sheet.jpg  ← три макета 300 × 270 рядом
-│   └── casting-300x270-{kino,pokaz,dv-production}.jpg
+│   ├── casting-300x270-bare-contact-sheet.jpg
+│   └── casting-300x270-{kino,pokaz,dv-production}[-bare].jpg
 └── README.md
 ```
 
@@ -71,6 +75,28 @@ public/media/banners/social/    1080×1920, 1080×1350, 1080×1080, 1920×1080
 изображение идёт непрерывно через всю конструкцию.
 
 Печатные мастеры: **35 433 × 31 890 px, 300 dpi, sRGB, 4:4:4**, без вылетов.
+
+### Чистые макеты (без подписей, логотипа и QR)
+
+Та же композиция, но без единой надписи, без монограммы и без QR-кода —
+чистые фоны, куда можно ставить свой текст или зашивать экран/свет:
+
+| Файл | Что это |
+|------|---------|
+| `banner-kino-300x270-bare.jpg` | «Кастинг на пробы в кино» без текста и QR |
+| `banner-pokaz-300x270-bare.jpg` | «Кастинг на модный показ» без текста и QR |
+| `banner-dv-production-300x270-bare.jpg` | «ДВ ПРОДАКШЕН» — только сцена, без логотипа и подписей |
+
+Собирается тем же скриптом с флагом `--bare`:
+
+```bash
+python3 scripts/banners/build_300x270.py --bare
+```
+
+Геометрия, раскладка, загибы, уши и стыки — ровно как у основной серии,
+разница только в наборе слоёв: слои текста, монограммы и QR не накладываются.
+Производные версии получают суффикс `-bare`
+(`public/media/banners/{key}-300x270-bare.*` и `-300x270-bare-1080x1920.jpg` и т. д.).
 
 
 ## Ключевое

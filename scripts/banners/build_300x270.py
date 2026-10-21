@@ -31,6 +31,7 @@
 Запуск:
   python3 scripts/banners/build_300x270.py
   python3 scripts/banners/build_300x270.py --only kino
+  python3 scripts/banners/build_300x270.py --bare      # без подписей, логотипа и QR
 """
 from __future__ import annotations
 
@@ -411,15 +412,15 @@ def write_master(raw: Path, out: Path) -> None:
           f"{out.stat().st_size // 1024 // 1024} МБ, {dpi})")
 
 
-def build_derivatives(raw: Path, key: str) -> None:
+def build_derivatives(raw: Path, key: str, suffix: str = "") -> None:
     """Web- и social-версии — те же параметры, что у всей серии."""
     img = pyvips.Image.rawload(str(raw), W, H, 3, access="sequential")
     WEB_DIR.mkdir(parents=True, exist_ok=True)
     SOCIAL_DIR.mkdir(parents=True, exist_ok=True)
 
     web = img.resize(1600 / W, kernel="lanczos3")
-    web.write_to_file(str(WEB_DIR / f"{key}-300x270.jpg"), Q=84, strip=True)
-    web.write_to_file(str(WEB_DIR / f"{key}-300x270.webp"), Q=80, strip=True)
+    web.write_to_file(str(WEB_DIR / f"{key}-300x270{suffix}.jpg"), Q=84, strip=True)
+    web.write_to_file(str(WEB_DIR / f"{key}-300x270{suffix}.webp"), Q=80, strip=True)
 
     bg = [float(c.avg()) for c in img.crop(0, 0, 1, 1).bandsplit()]
     for name, tw, th in (("1080x1920", 1080, 1920), ("1080x1350", 1080, 1350),
@@ -429,31 +430,37 @@ def build_derivatives(raw: Path, key: str) -> None:
         small = img.resize(scale, kernel="lanczos3")
         small = small.embed((tw - nw) // 2, (th - nh) // 2, tw, th,
                             extend="background", background=bg)
-        small.write_to_file(str(SOCIAL_DIR / f"{key}-300x270-{name}.jpg"), Q=86, strip=True)
-    print(f"  производные: {key}-300x270 (web 1600 px + 4 social)")
+        small.write_to_file(str(SOCIAL_DIR / f"{key}-300x270{suffix}-{name}.jpg"),
+                            Q=86, strip=True)
+    print(f"  производные: {key}-300x270{suffix} (web 1600 px + 4 social)")
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", choices=list(SOURCES), help="собрать только один макет")
+    ap.add_argument("--bare", action="store_true",
+                    help="чистые макеты: без подписей, логотипа и QR-кодов")
     ap.add_argument("--keep-work", action="store_true")
     args = ap.parse_args()
 
     pyvips.cache_set_max_mem(256 * 1024 * 1024)
     pyvips.cache_set_max(80)
 
+    suffix = "-bare" if args.bare else ""
     keys = [args.only] if args.only else list(SOURCES)
     work = Path(tempfile.mkdtemp(prefix="banners300-"))
     try:
         for key in keys:
-            print(f"→ {key}")
+            print(f"→ {key}{' (без подписей)' if args.bare else ''}")
             plate = clean_plate(key)
             logo = None
-            if key == "dv-production":
-                arr = np.array(Image.open(SOURCES[key]).convert("RGB"))
-                mono, _ = edp.extract_logo(arr)
-                logo = logo_block(mono, cm(32))
-            layers = overlays_for(key, logo)
+            layers = []
+            if not args.bare:
+                if key == "dv-production":
+                    arr = np.array(Image.open(SOURCES[key]).convert("RGB"))
+                    mono, _ = edp.extract_logo(arr)
+                    logo = logo_block(mono, cm(32))
+                layers = overlays_for(key, logo)
 
             raw = work / f"{key}_canvas.raw"
             canvas = np.memmap(raw, dtype=np.uint8, mode="w+", shape=(H, W, 3))
@@ -461,9 +468,9 @@ def main() -> int:
             del plate, layers
             gc.collect()
             finish_canvas(canvas)
-            out = PRINT_DIR / f"banner-{key}-300x270.jpg"
+            out = PRINT_DIR / f"banner-{key}-300x270{suffix}.jpg"
             write_master(raw, out)
-            build_derivatives(raw, key)
+            build_derivatives(raw, key, suffix)
             del canvas
             raw.unlink(missing_ok=True)
     finally:
