@@ -244,12 +244,13 @@ def taubin_smooth(pts: np.ndarray, pinned: np.ndarray | np.ndarray,
 
 
 def straighten_edges(pts: np.ndarray, corners: np.ndarray, tol: float = 8.0,
-                     min_len: float = 120.0, margin: float = 40.0) -> np.ndarray:
+                     min_len: float = 100.0, margin: float = 45.0) -> np.ndarray:
     """Прямые участки между углами прищёлкиваются к точной прямой.
 
     Исходник (AI-рендер) даёт по краю ломаной волну ±3–4 px — в плоской
     заливке это видно. Вершины углов и переходы рядом с ними остаются
-    нетронутыми, выпрямляются только длинные прямые пролёты.
+    нетронутыми, выпрямляются только длинные прямые пролёты; на границах
+    ребра вес плавно нарастает, поэтому «ступеньки» не появляется.
     """
     out = pts.copy()
     if len(corners) < 2:
@@ -265,22 +266,31 @@ def straighten_edges(pts: np.ndarray, corners: np.ndarray, tol: float = 8.0,
         if len(idx) < 8:
             continue
         seg = pts[idx]
-        m = int(margin)
-        core = seg[m:-m] if len(seg) > 2 * m + 4 else seg
-        if len(core) < 4:
+        # длина дуги — отступы задаём в пикселях, а не в точках
+        arc = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(seg, axis=0), axis=1))])
+        i_a = int(np.searchsorted(arc, margin))
+        i_b = len(seg) - int(np.searchsorted(arc[::-1], margin))
+        if i_b - i_a < 4:
             continue
+        core = seg[i_a:i_b]
         ctr = core.mean(axis=0)
         _, _, vt = np.linalg.svd(core - ctr, full_matrices=False)
         u = vt[0]
         nrm = np.array([-u[1], u[0]])
         dev = np.abs((core - ctr) @ nrm)
-        length = float((core[-1] - core[0]) @ u)
+        length = abs(float((core[-1] - core[0]) @ u))
         if length < min_len or dev.max() > tol:
             continue
         proj = ctr + np.outer((seg - ctr) @ u, u)
-        keep = idx[1:-1]          # вершины углов не трогаем
-        out[keep, 0] = proj[1:-1, 0]
-        out[keep, 1] = proj[1:-1, 1]
+        # плавный переход от исходной точки к прямой
+        w = np.ones(len(seg))
+        ramp = np.clip(arc / margin, 0.0, 1.0)
+        ramp[arc > (arc[-1] - margin)] = np.clip(
+            (arc[-1] - arc[arc > (arc[-1] - margin)]) / margin, 0.0, 1.0)
+        w = np.minimum(ramp, ramp[::-1])
+        w[0] = w[-1] = 0.0        # вершины углов не трогаем
+        out[idx, 0] = seg[:, 0] + (proj[:, 0] - seg[:, 0]) * w
+        out[idx, 1] = seg[:, 1] + (proj[:, 1] - seg[:, 1]) * w
     return out
 
 
