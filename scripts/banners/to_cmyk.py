@@ -40,6 +40,7 @@ TARGETS = {
     "sheet/banner-kino-300x270.jpg": "кастинг-лист · пробы в кино",
     "sheet/banner-pokaz-300x270.jpg": "кастинг-лист · модный показ",
     "sheet/banner-dv-production-300x270.jpg": "кастинг-лист · ДВ ПРОДАКШЕН",
+    "stage/stage-print-xl-300dpi.jpg": "сцена · отдельный мастер",
 }
 
 

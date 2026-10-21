@@ -48,6 +48,17 @@ python3 scripts/banners/build_300x270.py --style sheet --bare --quality 78
 python3 scripts/banners/print_stage.py --src <кадр.png> --out-dir banners/casting-series/print/stage --width-cm 220
 ```
 
+## Логотип клиента — отдельный слой (`logo/`)
+
+Клиентский логотип пересобран в вектор: SVG + печатный PNG с прозрачностью
+(32 см, 300 dpi) и CMYK-версия с профилем FOGRA39. Форма взята из полного
+исходника 6144 × 6144 — присланный клиентом файл 500 × 500 обрезан.
+Подробности — в [`logo/README.md`](logo/README.md).
+
+```bash
+python3 scripts/banners/logo_vector.py --profile original --out-dir banners/casting-series/print/logo
+```
+
 ### Про качество и вес
 Полотно 300 × 270 см — это 1,13 гигапикселя, и в JPEG Q92 файл весит
 92–141 МБ. GitHub не принимает в git файлы больше 100 МБ, поэтому мастера
