@@ -102,6 +102,16 @@ JPEG q86. Пропорции сохраняются, поля добираютс
 | `*-1080x1080.jpg` | 1080 × 1080 | Квадратная публикация, превью |
 | `*-1920x1080.jpg` | 1920 × 1080 | Горизонтальный баннер, обложка, презентация |
 
+### Итоговый вид (`banners/casting-series/preview/`)
+
+| Файл | Что показывает |
+|------|----------------|
+| `casting-series-contact-sheet.jpg` | три макета рядом с подписями: размер в печати, пиксели, dpi |
+| `casting-qr-proof.jpg` | крупные планы обоих QR-кодов с фактическим декодированием из печатного мастера |
+
+Оба листа пересобираются одной командой (`scripts/banners/make_preview.py`)
+и берутся прямо из печатных мастеров, поэтому расхождение с ними невозможно.
+
 ---
 
 ## 5. Палитра серии
@@ -143,6 +153,7 @@ OpenCV `QRCodeDetector`, в вариантах RGB / GRAY / инвертиров
 |---------|-----------|
 | `scripts/banners/build_banners.py` | поиск QR по finder-паттернам, восстановление фона, вставка рабочего кода, сборка web/social-версий, автопроверка считывания |
 | `scripts/banners/jfif_density.py` | простановка 300 dpi в JPEG без перекодирования (правится только сегмент JFIF, картинка не пережимается) |
+| `scripts/banners/make_preview.py` | контактный лист серии и лист проверки QR (`banners/casting-series/preview/`) |
 
 Запуск:
 
@@ -150,6 +161,7 @@ OpenCV `QRCodeDetector`, в вариантах RGB / GRAY / инвертиров
 pip install pillow numpy opencv-python-headless segno zxing-cpp
 python3 scripts/banners/build_banners.py
 python3 scripts/banners/jfif_density.py 300 banners/casting-series/print/*.jpg
+python3 scripts/banners/make_preview.py
 ```
 
 Скрипт `build_banners.py` **идемпотентен**: если макет №1 уже с рабочим

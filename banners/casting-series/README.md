@@ -12,6 +12,9 @@ banners/casting-series/
 │   ├── banner-kasting-proby-v-kino-4608x8256.jpg
 │   ├── banner-kasting-modnyy-pokaz-5088x7584.jpg
 │   └── banner-ya-zvezda-6144x6144.jpg
+├── preview/                   итоговый вид серии (для согласования и клиента)
+│   ├── casting-series-contact-sheet.jpg
+│   └── casting-qr-proof.jpg
 └── README.md
 ```
 
@@ -19,7 +22,7 @@ banners/casting-series/
 и соцсети, не таская гигабайтные мастеры:
 
 ```
-public/media/banners/           веб, ширина 1600 px
+public/media/banners/           веб, ширина 1400 px (JPEG + WebP)
 public/media/banners/social/    1080×1920, 1080×1350, 1080×1080, 1920×1080
 ```
 
@@ -37,6 +40,7 @@ public/media/banners/social/    1080×1920, 1080×1350, 1080×1080, 1920×1080
 pip install pillow numpy opencv-python-headless segno zxing-cpp
 python3 scripts/banners/build_banners.py
 python3 scripts/banners/jfif_density.py 300 banners/casting-series/print/*.jpg
+python3 scripts/banners/make_preview.py     # контактный лист + проверка QR
 ```
 
 ## Требования к печати
