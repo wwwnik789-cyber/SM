@@ -343,19 +343,24 @@ FOGRA39** — `Coated FOGRA39 (L) VIGC 300` (X-Rite / ECI, 300 % TAC):
 в «копии» — белый блок внутри «Д». Ставить такой файл на баннер нельзя.
 
 Пересобрано в вектор: форма взята из полного исходника 6144 × 6144
-(монограмма 1944 × 1431, надпись 1830 × 317), маты — по тону (золото
-отделяется от мадженты, пересвеченные лучом участки не выпадают), контуры
-трассируются и сглаживаются (Douglas–Peucker → передискретизация по длине
-дуги → гаусс по кругу → Чакин).
+(монограмма 1944 × 1431), маты — по тону (золото отделяется от мадженты,
+пересвеченные лучом участки не выпадают), контуры аппроксимируются
+**кубическими кривыми Безье** по равномерному B-сплайну с регуляризацией:
+дуги ровные, без «дрожи» края; углы детектируются и закрепляются, поэтому
+остаются острыми, как в оригинале. Проверка формы: IoU монограммы с
+исходником 0,987.
 
 | Файл | Размер | Формат |
 |------|--------|--------|
-| `banners/casting-series/print/logo/logo-dv-production.svg` | 320 × 307 мм | SVG, 2 пути, evenodd — векторный слой для Illustrator/Figma/Photoshop |
-| `banners/casting-series/print/logo/logo-dv-production-32cm-300dpi.png` | 3780 × 3630 px (32 × 30,7 см) | PNG RGBA, sRGB, 300 dpi — растровый слой с прозрачностью |
-| `banners/casting-series/print/cmyk/logo-dv-production-32cm-300dpi-cmyk-fogra39.tif` | 3780 × 3630 px | TIFF CMYK 8 бит + альфа, ICC FOGRA39, 300 dpi |
+| `banners/casting-series/print/logo/logo-dv-production-mark.svg` | 320 × 231,6 мм | SVG, 1 путь, evenodd — **монограмма «Д» отдельным слоем** |
+| `banners/casting-series/print/logo/logo-dv-production-mark-32cm-300dpi.png` | 3780 × 2736 px (32 × 23,2 см) | PNG RGBA, sRGB, 300 dpi — растровый слой с прозрачностью |
+| `banners/casting-series/print/logo/logo-dv-production.svg` | 320 × 303,1 мм | SVG, 2 пути, evenodd — полный локап с надписью |
+| `banners/casting-series/print/logo/logo-dv-production-32cm-300dpi.png` | 3780 × 3581 px (32 × 30,3 см) | PNG RGBA, sRGB, 300 dpi — растровый слой с прозрачностью |
+| `banners/casting-series/print/cmyk/logo-dv-production-mark-32cm-300dpi-cmyk-fogra39.tif` | 3780 × 2736 px | TIFF CMYK 8 бит + альфа, ICC FOGRA39, 300 dpi |
+| `banners/casting-series/print/cmyk/logo-dv-production-32cm-300dpi-cmyk-fogra39.tif` | 3780 × 3581 px | TIFF CMYK 8 бит + альфа, ICC FOGRA39, 300 dpi |
 
 Градиент золота — клиентский (#FCE9A1 → #F0D994 → #CC9C34 → #A76F20),
-надпись — тёплый белый #FCF1D4. Скрипт — `scripts/banners/logo_vector.py`.
+надпись — тёплый белый #FCF1D4. Скрипт — `scripts/banners/logo_mark.py`.
 
 ### Про печать на ткани
 
