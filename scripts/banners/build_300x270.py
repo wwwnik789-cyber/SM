@@ -440,6 +440,9 @@ def main() -> int:
     ap.add_argument("--only", choices=list(SOURCES), help="собрать только один макет")
     ap.add_argument("--bare", action="store_true",
                     help="чистые макеты: без подписей, логотипа и QR-кодов")
+    ap.add_argument("--style", choices=("theatre", "sheet"), default="theatre",
+                    help="theatre — сценический маджент (по умолчанию), "
+                         "sheet — редакционная «бумага» (концепция «Кастинг-лист»)")
     ap.add_argument("--quality", type=int, default=78,
                     help="качество JPEG мастера (78 — влезает в лимит GitHub в 100 МБ, "
                          "92 — максимум, файл больше лимита и в git не кладётся)")
@@ -455,25 +458,38 @@ def main() -> int:
     try:
         for key in keys:
             print(f"→ {key}{' (без подписей)' if args.bare else ''}")
-            plate = clean_plate(key)
-            logo = None
-            layers = []
-            if not args.bare:
-                if key == "dv-production":
-                    arr = np.array(Image.open(SOURCES[key]).convert("RGB"))
-                    mono, _ = edp.extract_logo(arr)
-                    logo = logo_block(mono, cm(32))
-                layers = overlays_for(key, logo)
-
             raw = work / f"{key}_canvas.raw"
             canvas = np.memmap(raw, dtype=np.uint8, mode="w+", shape=(H, W, 3))
-            build_face(key, plate, layers, canvas)
-            del plate, layers
+
+            if args.style == "sheet":
+                import concept_sheet as cs  # noqa: E402  (другой стиль серии)
+
+                logo = None if args.bare else cs.load_logo()
+                cs.build_face_canvas(key, canvas, FACE_X0, FACE_Y0, PX_CM,
+                                     logo=logo, text=not args.bare)
+                out = PRINT_DIR / "sheet" / f"banner-{key}-300x270{suffix}.jpg"
+                web_suffix = "-sheet" + suffix
+            else:
+                plate = clean_plate(key)
+                logo = None
+                layers = []
+                if not args.bare:
+                    if key == "dv-production":
+                        arr = np.array(Image.open(SOURCES[key]).convert("RGB"))
+                        mono, _ = edp.extract_logo(arr)
+                        logo = logo_block(mono, cm(32))
+                    layers = overlays_for(key, logo)
+                build_face(key, plate, layers, canvas)
+                del plate, layers
+                gc.collect()
+                out = PRINT_DIR / f"banner-{key}-300x270{suffix}.jpg"
+                web_suffix = suffix
+
             gc.collect()
             finish_canvas(canvas)
-            out = PRINT_DIR / f"banner-{key}-300x270{suffix}.jpg"
+            out.parent.mkdir(parents=True, exist_ok=True)
             write_master(raw, out, args.quality)
-            build_derivatives(raw, key, suffix)
+            build_derivatives(raw, key, web_suffix)
             del canvas
             raw.unlink(missing_ok=True)
     finally:

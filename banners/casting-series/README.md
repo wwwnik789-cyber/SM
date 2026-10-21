@@ -18,14 +18,24 @@ banners/casting-series/
 │   ├── banner-dv-production-300x270.jpg
 │   ├── banner-kino-300x270-bare.jpg                ← чистые, без подписей и QR
 │   ├── banner-pokaz-300x270-bare.jpg
-│   └── banner-dv-production-300x270-bare.jpg
+│   ├── banner-dv-production-300x270-bare.jpg
+│   └── sheet/                                    ← вторая концепция «Кастинг-лист»
+│       ├── banner-kino-300x270.jpg
+│       ├── banner-pokaz-300x270.jpg
+│       ├── banner-dv-production-300x270.jpg
+│       ├── banner-kino-300x270-bare.jpg
+│       ├── banner-pokaz-300x270-bare.jpg
+│       └── banner-dv-production-300x270-bare.jpg
 ├── preview/                   итоговый вид серии (для согласования и клиента)
 │   ├── casting-series-contact-sheet.jpg
 │   ├── casting-qr-proof.jpg
 │   ├── casting-300x270-layout.jpg         ← схема раскладки 300 × 270
 │   ├── casting-300x270-contact-sheet.jpg  ← три макета 300 × 270 рядом
 │   ├── casting-300x270-bare-contact-sheet.jpg
-│   └── casting-300x270-{kino,pokaz,dv-production}[-bare].jpg
+│   ├── casting-300x270-{kino,pokaz,dv-production}[-bare].jpg
+│   └── sheet/                             ← превью второй концепции
+│       ├── casting-sheet-300x270-contact-sheet.jpg
+│       └── casting-sheet-300x270{,-bare}-{kino,pokaz,dv-production}[-face].jpg
 └── README.md
 ```
 
@@ -104,6 +114,39 @@ python3 scripts/banners/build_300x270.py --bare
 разница только в наборе слоёв: слои текста, монограммы и QR не накладываются.
 Производные версии получают суффикс `-bare`
 (`public/media/banners/{key}-300x270-bare.*` и `-300x270-bare-1080x1920.jpg` и т. д.).
+
+
+## Вторая концепция — «Кастинг-лист»
+
+Та же компания, та же конструкция 300 × 270 см и те же три макета — но
+принципиально другой визуальный язык. Вместо сценического маджента с золотом
+— редакционная «бумага»:
+
+| | «Кастинг» (основная) | «Кастинг-лист» (вторая) |
+|---|---|---|
+| Фон | тёмно-маджентовый, сценический свет | тёплый off-white `#F3EEE4` |
+| Цвет | маджента + золото | сине-чёрный `#141729` + вермильон `#E23A20` |
+| Фото | цветное, во всю высоту | общий дуотон, фотополоса 20…153 см |
+| Набор | крупный заголовок в центре | кикер → огромное слово → подпись, таблица данных |
+
+Три разных исходника приведены к одному дуотону (тени `#151A2E` → света
+`#F6F0E2`), поэтому ряд читается как одна серия. Весь текст собран в
+безопасной зоне 40…180 см: уши — зеркало крайних 40 см лица, и надписи
+там читались бы задом наперёд. QR-карточка 21 см переехала в правый нижний
+угол, на одну линию с таблицей данных.
+
+Мастера — в `banners/casting-series/print/sheet/` (манифест —
+[`print/sheet/README.md`](print/sheet/README.md)), превью — в
+`preview/sheet/`, веб-версии — с суффиксом `-300x270-sheet`.
+
+```bash
+python3 scripts/banners/build_300x270.py --style sheet
+python3 scripts/banners/build_300x270.py --style sheet --bare
+python3 scripts/banners/make_preview_300x270.py --style sheet
+```
+
+Сборщик и модуль концепции — `scripts/banners/build_300x270.py` и
+`scripts/banners/concept_sheet.py`.
 
 
 ## Ключевое

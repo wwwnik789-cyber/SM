@@ -10,6 +10,9 @@
 
 Запуск:
   python3 scripts/banners/qa_300x270.py
+
+Проверяются обе концепции серии: сценический маджент (`print/`) и
+редакционную «бумагу» (`print/sheet/`).
 """
 from __future__ import annotations
 
@@ -40,6 +43,19 @@ BARE_MASTERS = {
     "kino (чистый)": PRINT_DIR / "banner-kino-300x270-bare.jpg",
     "pokaz (чистый)": PRINT_DIR / "banner-pokaz-300x270-bare.jpg",
     "dv-production (чистый)": PRINT_DIR / "banner-dv-production-300x270-bare.jpg",
+}
+
+# Концепция «Кастинг-лист» (--style sheet): редакционная «бумага».
+SHEET_DIR = PRINT_DIR / "sheet"
+SHEET_MASTERS = {
+    "kino (лист)": SHEET_DIR / "banner-kino-300x270.jpg",
+    "pokaz (лист)": SHEET_DIR / "banner-pokaz-300x270.jpg",
+    "dv-production (лист)": SHEET_DIR / "banner-dv-production-300x270.jpg",
+}
+SHEET_BARE = {
+    "kino (лист, чистый)": SHEET_DIR / "banner-kino-300x270-bare.jpg",
+    "pokaz (лист, чистый)": SHEET_DIR / "banner-pokaz-300x270-bare.jpg",
+    "dv-production (лист, чистый)": SHEET_DIR / "banner-dv-production-300x270-bare.jpg",
 }
 
 EXPECT_URL = "https://model.dvkino.ru"
@@ -127,6 +143,21 @@ def main() -> int:
         ok = check_master(key, path, expect_qr) and ok
 
     for key, path in BARE_MASTERS.items():
+        if not path.exists():
+            print(f"✗ {key}: нет файла {path.name}")
+            ok = False
+            continue
+        ok = check_master(key, path, None) and ok
+
+    print("\nКонцепция «Кастинг-лист» (--style sheet):")
+    for key, path in SHEET_MASTERS.items():
+        if not path.exists():
+            print(f"✗ {key}: нет файла {path.name}")
+            ok = False
+            continue
+        ok = check_master(key, path, True) and ok
+
+    for key, path in SHEET_BARE.items():
         if not path.exists():
             print(f"✗ {key}: нет файла {path.name}")
             ok = False
