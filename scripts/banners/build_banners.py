@@ -42,7 +42,7 @@ QR_TARGET = "https://model.dvkino.ru"
 # Оригиналы, пришедшие от клиента (кладутся рядом со скриптом вручную).
 SOURCES = {
     "kino": PRINT_DIR / "banner-kasting-proby-v-kino-4608x8256.jpg",
-    "zvezda": PRINT_DIR / "banner-ya-zvezda-6144x6144.jpg",
+    "dv-production": PRINT_DIR / "banner-dv-production-6144x6144.jpg",
     "pokaz": PRINT_DIR / "banner-kasting-modnyy-pokaz-5088x7584.jpg",
 }
 

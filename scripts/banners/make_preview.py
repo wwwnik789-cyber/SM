@@ -22,19 +22,19 @@ OUT = REPO / "banners/casting-series/preview"
 PRINT = {
     "kino": REPO / "banners/casting-series/print/banner-kasting-proby-v-kino-4608x8256.jpg",
     "pokaz": REPO / "banners/casting-series/print/banner-kasting-modnyy-pokaz-5088x7584.jpg",
-    "zvezda": REPO / "banners/casting-series/print/banner-ya-zvezda-6144x6144.jpg",
+    "dv-production": REPO / "banners/casting-series/print/banner-dv-production-6144x6144.jpg",
 }
 
 WEB = {
     "kino": REPO / "public/media/banners/kino.jpg",
     "pokaz": REPO / "public/media/banners/pokaz.jpg",
-    "zvezda": REPO / "public/media/banners/zvezda.jpg",
+    "dv-production": REPO / "public/media/banners/dv-production.jpg",
 }
 
 META = {
     "kino": ("Кастинг на пробы в кино", "39 × 70 см", "4608 × 8256 px · 300 dpi", "сработанный QR"),
     "pokaz": ("Кастинг на модный показ", "43 × 64 см", "5088 × 7584 px · 300 dpi", "сработанный QR"),
-    "zvezda": ("Я звезда!", "52 × 52 см", "6144 × 6144 px · 300 dpi", "логотип SM PRODUCTION"),
+    "dv-production": ("ДВ ПРОДАКШЕН", "52 × 52 см", "6144 × 6144 px · 300 dpi", "логотип в углу"),
 }
 
 BG = (14, 10, 20)
@@ -92,7 +92,7 @@ def contact_sheet() -> Path:
            font=font(28), fill=MUTED)
     d.line([(90, 200), (W - 90, 200)], fill=(60, 44, 72), width=2)
 
-    order = ["kino", "pokaz", "zvezda"]
+    order = ["kino", "pokaz", "dv-production"]
     slot_w, gap = 660, 60
     x0 = 90
     top = 250

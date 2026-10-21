@@ -1,8 +1,8 @@
 # Серия баннеров «Кастинг» — SM Production
 
 Комплект из трёх макетов: два информационных (кастинг на пробы в кино и на
-модный показ) и один брендовый («Я звезда!»). Единая мадженто-золотая гамма,
-общий стиль — баннеры работают как комплект.
+модный показ) и один брендовый («Продюсерський центр ДВ ПРОДАКШЕН»).
+Единая мадженто-золотая гамма, общий стиль — баннеры работают как комплект.
 
 ## Структура
 
@@ -11,7 +11,8 @@ banners/casting-series/
 ├── print/                     печатные мастеры, JPEG, 300 dpi
 │   ├── banner-kasting-proby-v-kino-4608x8256.jpg
 │   ├── banner-kasting-modnyy-pokaz-5088x7584.jpg
-│   └── banner-ya-zvezda-6144x6144.jpg
+│   ├── banner-dv-production-6144x6144.jpg          ← итоговый квадратный макет
+│   └── banner-dv-production-original-6144x6144.jpg ← исходник клиента для правки
 ├── preview/                   итоговый вид серии (для согласования и клиента)
 │   ├── casting-series-contact-sheet.jpg
 │   └── casting-qr-proof.jpg
@@ -34,13 +35,20 @@ public/media/banners/social/    1080×1920, 1080×1350, 1080×1080, 1920×1080
 адрес, что и во втором макете). Подробности проверки и правок — в
 [спецификации серии](../../docs/konstruktsii/banners/01_seriya-kasting-prepress.md).
 
+**Квадратный макет переделан по правкам клиента:** вместо «Я звезда!» —
+«Продюсерський центр ДВ ПРОДАКШЕН», логотип перенесён в верхний угол, по
+центру добавлено «актёрско-модельная студия». Исходник сохранён рядом
+(`banner-dv-production-original-6144x6144.jpg`), мастер собирается из него скриптом
+`scripts/banners/edit_dv_production.py`.
+
 ## Как пересобрать
 
 ```bash
 pip install pillow numpy opencv-python-headless segno zxing-cpp
 python3 scripts/banners/build_banners.py
 python3 scripts/banners/jfif_density.py 300 banners/casting-series/print/*.jpg
-python3 scripts/banners/make_preview.py     # контактный лист + проверка QR
+python3 scripts/banners/edit_dv_production.py       # правка квадратного макета
+python3 scripts/banners/make_preview.py      # контактный лист + проверка QR
 ```
 
 ## Требования к печати

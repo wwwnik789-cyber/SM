@@ -166,7 +166,7 @@ export default function Home() {
           {[
             { src: "/media/banners/kino.jpg", t: "Кастинг на пробы в кино", n: "9:16 · 39 × 70 см" },
             { src: "/media/banners/pokaz.jpg", t: "Кастинг на модный показ", n: "2:3 · 43 × 64 см" },
-            { src: "/media/banners/zvezda.jpg", t: "Я звезда!", n: "1:1 · 52 × 52 см" },
+            { src: "/media/banners/dv-production.jpg", t: "ДВ ПРОДАКШЕН", n: "1:1 · 52 × 52 см" },
           ].map((b, i) => (
             <Reveal key={b.src} delay={i * 0.08}>
               <Link to="/portfolio/seriya-bannerov-kasting" className="card-hover img-zoom group block h-full overflow-hidden rounded-3xl border border-line bg-card">
