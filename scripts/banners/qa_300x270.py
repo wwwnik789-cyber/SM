@@ -155,7 +155,8 @@ def main() -> int:
             print(f"✗ {key}: нет файла {path.name}")
             ok = False
             continue
-        ok = check_master(key, path, True) and ok
+        # QR в этой концепции вставляет клиент — в мастере остаётся зона под код
+        ok = check_master(key, path, None) and ok
 
     for key, path in SHEET_BARE.items():
         if not path.exists():

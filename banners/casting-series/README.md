@@ -132,8 +132,9 @@ python3 scripts/banners/build_300x270.py --bare
 Три разных исходника приведены к одному дуотону (тени `#151A2E` → света
 `#F6F0E2`), поэтому ряд читается как одна серия. Весь текст собран в
 безопасной зоне 40…180 см: уши — зеркало крайних 40 см лица, и надписи
-там читались бы задом наперёд. QR-карточка 21 см переехала в правый нижний
-угол, на одну линию с таблицей данных.
+там читались бы задом наперёд. В правом нижнем углу, на одной линии с
+таблицей данных, — зона 21 × 21 см под QR: **код вставляет клиент**, в
+мастере остаётся тихая рамка.
 
 Мастера — в `banners/casting-series/print/sheet/` (манифест —
 [`print/sheet/README.md`](print/sheet/README.md)), превью — в
@@ -143,6 +144,9 @@ python3 scripts/banners/build_300x270.py --bare
 python3 scripts/banners/build_300x270.py --style sheet
 python3 scripts/banners/build_300x270.py --style sheet --bare
 python3 scripts/banners/make_preview_300x270.py --style sheet
+
+# CMYK с профилем FOGRA39 (TIFF, профиль встроен в файл)
+python3 scripts/banners/to_cmyk.py --profile scripts/banners/icc/Coated_Fogra39L_VIGC_300.icc
 ```
 
 Сборщик и модуль концепции — `scripts/banners/build_300x270.py` и

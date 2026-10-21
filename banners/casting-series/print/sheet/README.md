@@ -30,7 +30,7 @@
 | 170 см | | кикер вермильоном: «ОТКРЫТЫЙ КАСТИНГ» / «ПРОДЮСЕРСКИЙ ЦЕНТР» |
 | 178…204 см | | крупное слово: ПРОБЫ · ПОКАЗ · ДВ ПРОДАКШЕН |
 | 205 см | | подпись под заголовком |
-| 214…235 см | справа | QR-карточка 21 см на белой подложке, модуль 5,5 мм |
+| 214…235 см | справа | зона под QR 21 × 21 см: тонкая рамка (код вставляет клиент) |
 | 214…225 см | слева | таблица данных: ФОРМАТ · ПЛОЩАДКА · ГОРОД · СТАТУС |
 | 236…237,5 см | справа | подпись под QR |
 
@@ -49,6 +49,14 @@ python3 scripts/banners/build_300x270.py --style sheet --quality 78
 python3 scripts/banners/build_300x270.py --style sheet --bare --quality 78
 ```
 
+**QR-код вставляет клиент** — в мастере остаётся зона 21 × 21 см.
+Если нужен вариант с готовым кодом (собственный QR, `https://model.dvkino.ru`),
+добавьте флаг `--with-qr`:
+
+```bash
+python3 scripts/banners/build_300x270.py --style sheet --with-qr
+```
+
 Максимальное качество — `--quality 92` (файлы больше 100 МБ, в git не
 кладутся, отдавать типографии из рабочей папки).
 
@@ -57,6 +65,22 @@ python3 scripts/banners/build_300x270.py --style sheet --bare --quality 78
 ```bash
 python3 scripts/banners/make_preview_300x270.py --style sheet
 ```
+
+## CMYK (FOGRA39)
+
+По решению клиента собраны CMYK-версии всех шести мастеров обеих
+концепций — TIFF 8 бит/канал, профиль `Coated FOGRA39 (L) VIGC 300`
+(X-Rite / ECI) встроен в файл, рендеринг относительный с компенсацией
+чёрной точки:
+
+```bash
+python3 scripts/banners/to_cmyk.py --profile scripts/banners/icc/Coated_Fogra39L_VIGC_300.icc
+```
+
+Файлы крупные (114 МБ – 1,1 ГБ), в git не кладутся — отдаются типографии
+с рабочего диска. В репозитории лежат оба профиля:
+`scripts/banners/icc/Coated_Fogra39L_VIGC_300.icc` (X-Rite/ECI) и
+`scripts/banners/icc/craft-coated-fogra39.icc` (CC0, FOGRA39 по данным Fogra).
 
 ## Проверка
 

@@ -44,6 +44,7 @@ PAPER = (243, 238, 228)
 INK = (20, 23, 41)
 ACCENT = (226, 58, 32)
 MUTED = (124, 121, 114)
+PLACEHOLDER = (198, 193, 184)
 PHOTO_SHADOW = (21, 26, 46)
 PHOTO_LIGHT = (246, 240, 226)
 
@@ -266,7 +267,7 @@ def photo_slice(arr: np.ndarray, src_rect, dst_y0: float, dst_y1: float,
 # --------------------------------------------------------------------------
 # Слои макета
 # --------------------------------------------------------------------------
-def build_layers(key: str, S: float, logo=None):
+def build_layers(key: str, S: float, logo=None, with_qr: bool = False):
     """Все элементы лица: список (RGBA-картинка, x_px, y_px).
 
     logo — пара (монограмма, слово PRODUCTION) в RGBA или None.
@@ -337,9 +338,17 @@ def build_layers(key: str, S: float, logo=None):
     add(text_layer([c["sub"]], int(3.6 * S), int(0.12 * S), MUTED, fonts=cap_fonts),
         SAFE_L, SUB_Y)
 
-    # QR-карточка — в правом нижнем углу, на одной линии с таблицей
-    qr = qr_card(int(QR_SIZE * S), max(2, int(round(QR_MODULE_CM * S))))
-    add(qr, SAFE_R - QR_SIZE, QR_Y0)
+    # QR-карточка — в правом нижнем углу, на одной линии с таблицей.
+    # Код вставляет клиент: без него остаётся тихая рамка — зона под QR.
+    if with_qr:
+        qr = qr_card(int(QR_SIZE * S), max(2, int(round(QR_MODULE_CM * S))))
+        add(qr, SAFE_R - QR_SIZE, QR_Y0)
+    else:
+        qx = SAFE_R - QR_SIZE
+        add(rule(0, QR_SIZE, 0, 0.10, PLACEHOLDER, S), qx, QR_Y0)
+        add(rule(0, 0.10, 0, QR_SIZE, PLACEHOLDER, S), qx, QR_Y0)
+        add(rule(0, QR_SIZE, 0, 0.10, PLACEHOLDER, S), qx, QR_Y0 + QR_SIZE - 0.10)
+        add(rule(0, 0.10, 0, QR_SIZE, PLACEHOLDER, S), qx + QR_SIZE - 0.10, QR_Y0)
     add(text_layer(["СКАНИРУЙТЕ, ЧТОБЫ ЗАПИСАТЬСЯ"], int(1.05 * S), int(0.10 * S), INK,
                    fonts=cap_fonts), SAFE_R - QR_SIZE, QR_CAPTION_Y)
 
@@ -376,10 +385,10 @@ def load_logo():
 
 
 def render_face(key: str, arr: np.ndarray, S: float, band_cm: float = 8.0,
-                logo=None, emit=None):
+                logo=None, with_qr: bool = False, emit=None):
     """Собирает лицо полосами. emit(y0_cm, y1_cm, image) — вывод полосы."""
     c = CONTENT[key]
-    layers = build_layers(key, S, logo)
+    layers = build_layers(key, S, logo, with_qr)
     face_w = int(round(FACE_W_CM * S))
     y = 0.0
     while y < FACE_H_CM:
@@ -428,7 +437,8 @@ def blit(canvas: np.ndarray, tile: Image.Image, px: int, py: int,
 
 
 def build_face_canvas(key: str, canvas: np.ndarray, X0: int, Y0: int, S: float,
-                      logo=None, band_cm: float = 8.0, text: bool = True) -> None:
+                      logo=None, band_cm: float = 8.0, text: bool = True,
+                      with_qr: bool = False) -> None:
     """Лицо 220 × 250 см в печатном полотне (numpy memmap).
 
     X0, Y0 — левый верхний угол лица в полотне; S — пикселей на сантиметр.
@@ -452,7 +462,7 @@ def build_face_canvas(key: str, canvas: np.ndarray, X0: int, Y0: int, S: float,
     if not text:
         return
 
-    for tile, x, ty in build_layers(key, S, logo):
+    for tile, x, ty in build_layers(key, S, logo, with_qr):
         blit(canvas, tile, X0 + x, Y0 + ty, X0, Y0, face_w, face_h)
 
 

@@ -443,6 +443,9 @@ def main() -> int:
     ap.add_argument("--style", choices=("theatre", "sheet"), default="theatre",
                     help="theatre — сценический маджент (по умолчанию), "
                          "sheet — редакционная «бумага» (концепция «Кастинг-лист»)")
+    ap.add_argument("--with-qr", action="store_true",
+                    help="вставить QR-код в концепцию «Кастинг-лист» "
+                         "(по умолчанию код вставляет клиент — остаётся зона)")
     ap.add_argument("--quality", type=int, default=78,
                     help="качество JPEG мастера (78 — влезает в лимит GitHub в 100 МБ, "
                          "92 — максимум, файл больше лимита и в git не кладётся)")
@@ -466,7 +469,8 @@ def main() -> int:
 
                 logo = None if args.bare else cs.load_logo()
                 cs.build_face_canvas(key, canvas, FACE_X0, FACE_Y0, PX_CM,
-                                     logo=logo, text=not args.bare)
+                                     logo=logo, text=not args.bare,
+                                     with_qr=args.with_qr and not args.bare)
                 out = PRINT_DIR / "sheet" / f"banner-{key}-300x270{suffix}.jpg"
                 web_suffix = "-sheet" + suffix
             else:
