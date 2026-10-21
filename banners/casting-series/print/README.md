@@ -38,6 +38,16 @@ python3 scripts/banners/build_300x270.py --style sheet --quality 78
 python3 scripts/banners/build_300x270.py --style sheet --bare --quality 78
 ```
 
+## Сцена — отдельный мастер (`stage/`)
+
+Кадр сцены, обработанный под печать: чистка, грейд к фирменному мадженте
+#971a81 и апскейл до 220 см при 300 dpi. Композиция исходника не менялась.
+Описание пайплайна — в [`stage/README.md`](stage/README.md).
+
+```bash
+python3 scripts/banners/print_stage.py --src <кадр.png> --out-dir banners/casting-series/print/stage --width-cm 220
+```
+
 ### Про качество и вес
 Полотно 300 × 270 см — это 1,13 гигапикселя, и в JPEG Q92 файл весит
 92–141 МБ. GitHub не принимает в git файлы больше 100 МБ, поэтому мастера
