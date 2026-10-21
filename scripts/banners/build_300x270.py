@@ -440,8 +440,9 @@ def main() -> int:
     ap.add_argument("--only", choices=list(SOURCES), help="собрать только один макет")
     ap.add_argument("--bare", action="store_true",
                     help="чистые макеты: без подписей, логотипа и QR-кодов")
-    ap.add_argument("--quality", type=int, default=92,
-                    help="качество JPEG мастера (92 — максимум, 78 — влезает в лимит GitHub)")
+    ap.add_argument("--quality", type=int, default=78,
+                    help="качество JPEG мастера (78 — влезает в лимит GitHub в 100 МБ, "
+                         "92 — максимум, файл больше лимита и в git не кладётся)")
     ap.add_argument("--keep-work", action="store_true")
     args = ap.parse_args()
 
