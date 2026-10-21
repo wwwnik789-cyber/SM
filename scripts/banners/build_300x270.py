@@ -403,13 +403,13 @@ def finish_canvas(canvas: np.memmap) -> None:
         print(f"  уши {y0}–{y1} (RSS {rss_mb()} МБ)")
 
 
-def write_master(raw: Path, out: Path) -> None:
+def write_master(raw: Path, out: Path, quality: int = 92) -> None:
     """Пишет печатный мастер из сырого полотна (потоково, через libvips)."""
     img = pyvips.Image.rawload(str(raw), W, H, 3, access="sequential")
-    img.write_to_file(str(out), Q=92, subsample_mode="off", strip=True)
+    img.write_to_file(str(out), Q=quality, subsample_mode="off", strip=True)
     dpi = jfif.ensure_dpi(out, DPI)
     print(f"  мастер: {out.name} {W}×{H} px ({W / PX_CM:.0f}×{H / PX_CM:.0f} см, "
-          f"{out.stat().st_size // 1024 // 1024} МБ, {dpi})")
+          f"{out.stat().st_size // 1024 // 1024} МБ, Q{quality}, {dpi})")
 
 
 def build_derivatives(raw: Path, key: str, suffix: str = "") -> None:
@@ -440,6 +440,8 @@ def main() -> int:
     ap.add_argument("--only", choices=list(SOURCES), help="собрать только один макет")
     ap.add_argument("--bare", action="store_true",
                     help="чистые макеты: без подписей, логотипа и QR-кодов")
+    ap.add_argument("--quality", type=int, default=92,
+                    help="качество JPEG мастера (92 — максимум, 78 — влезает в лимит GitHub)")
     ap.add_argument("--keep-work", action="store_true")
     args = ap.parse_args()
 
@@ -469,7 +471,7 @@ def main() -> int:
             gc.collect()
             finish_canvas(canvas)
             out = PRINT_DIR / f"banner-{key}-300x270{suffix}.jpg"
-            write_master(raw, out)
+            write_master(raw, out, args.quality)
             build_derivatives(raw, key, suffix)
             del canvas
             raw.unlink(missing_ok=True)
