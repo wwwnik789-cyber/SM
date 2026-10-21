@@ -159,18 +159,18 @@ export default function Home() {
       {/* BANNERS series */}
       <section className="mx-auto max-w-7xl px-5 py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHead overline="Печать" title="Серия баннеров «Кастинг»" text="Три формата под три задачи: вертикаль 9:16 для сторис, 2:3 для афиши и квадрат 1:1 для брендового постера. Печатные мастеры 300 dpi, QR-коды проверены декодером." className="mb-0" />
+          <SectionHead overline="Печать" title="Серия баннеров «Кастинг»" text="Три макета под крупную конструкцию 300 × 270 см: видимое лицо 220 × 250 см, загибы 10 см по периметру, боковые уши по 40 см. Печатные мастеры 300 dpi, 4:4:4, QR-коды проверены декодером прямо из мастера." className="mb-0" />
           <ArrowLink to="/portfolio/seriya-bannerov-kasting" className="mb-2">Смотреть кейс</ArrowLink>
         </div>
         <div className="mt-12 grid gap-5 sm:grid-cols-3">
           {[
-            { src: "/media/banners/kino.jpg", t: "Кастинг на пробы в кино", n: "9:16 · 39 × 70 см" },
-            { src: "/media/banners/pokaz.jpg", t: "Кастинг на модный показ", n: "2:3 · 43 × 64 см" },
-            { src: "/media/banners/dv-production.jpg", t: "ДВ ПРОДАКШЕН", n: "1:1 · 52 × 52 см" },
+            { src: "/media/banners/kino-300x270-face.jpg", t: "Кастинг на пробы в кино", n: "300 × 270 см · лицо 220 × 250 см" },
+            { src: "/media/banners/pokaz-300x270-face.jpg", t: "Кастинг на модный показ", n: "300 × 270 см · лицо 220 × 250 см" },
+            { src: "/media/banners/dv-production-300x270-face.jpg", t: "ДВ ПРОДАКШЕН", n: "300 × 270 см · лицо 220 × 250 см" },
           ].map((b, i) => (
             <Reveal key={b.src} delay={i * 0.08}>
               <Link to="/portfolio/seriya-bannerov-kasting" className="card-hover img-zoom group block h-full overflow-hidden rounded-3xl border border-line bg-card">
-                <div className="overflow-hidden"><img src={b.src} alt={b.t} loading="lazy" className="h-[420px] w-full object-cover" /></div>
+                <div className="overflow-hidden bg-black/20"><img src={b.src} alt={b.t} loading="lazy" className="aspect-[8/9] w-full object-cover" /></div>
                 <div className="p-6">
                   <h3 className="display-h text-lg font-bold group-hover:text-accent">{b.t}</h3>
                   <p className="mt-1 font-display text-[11px] uppercase tracking-[0.2em] text-mut">{b.n}</p>

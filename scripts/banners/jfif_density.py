@@ -53,6 +53,24 @@ def set_dpi(path: Path, dpi: int = 300) -> str:
     raise ValueError(f"{path.name}: не найден сегмент APP0/JFIF")
 
 
+def ensure_dpi(path: Path, dpi: int = 300) -> str:
+    """Ставит dpi, а если сегмента JFIF нет — добавляет его сразу после SOI."""
+    try:
+        return set_dpi(path, dpi)
+    except ValueError:
+        pass
+    data = path.read_bytes()
+    if not data.startswith(SOI):
+        raise ValueError(f"{path.name}: не JPEG")
+    units = 1 if dpi >= 100 else 2
+    value = dpi if units == 1 else int(round(dpi / 2.54))
+    # APP0: длина, "JFIF\0", версия, units, Xdensity, Ydensity, без миниатюры
+    payload = (struct.pack(">H", 16) + b"JFIF\x00" + bytes((1, 1, units))
+               + struct.pack(">HH", value, value) + bytes((0, 0)))
+    path.write_bytes(data[:2] + bytes([0xFF, APP0]) + payload + data[2:])
+    return f"{value} dpi (сегмент JFIF добавлен)"
+
+
 if __name__ == "__main__":
     target = int(sys.argv[1]) if len(sys.argv) > 1 else 300
     for p in sys.argv[2:]:
