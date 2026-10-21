@@ -65,15 +65,15 @@ PROFILES = {
         "mono": (2174, 1584, 4118, 3015),
         "word": (2199, 3113, 4029, 3430),
         "upscale": 2.0,
-        "blur": 2.0,
+        "blur": 1.1,
         "fill_mono": 170_000,
         "fill_word": 40_000,
-        "eps_mono": 2.0,
-        "eps_word": 1.2,
+        "eps_mono": 1.2,
+        "eps_word": 0.8,
         "min_comp_mono": 8_000,
         "min_comp_word": 800,
-        "smooth_mono": 2.2,
-        "smooth_word": 2.0,
+        "smooth_mono": 2.6,
+        "smooth_word": 2.2,
     },
 }
 
@@ -122,8 +122,10 @@ def word_matte(rgb: np.ndarray) -> np.ndarray:
     hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV)
     s = hsv[:, :, 1].astype(np.float32) / 255.0
     v = hsv[:, :, 2].astype(np.float32) / 255.0
-    a = smoothstep(0.55, 0.72, v)
-    a *= (1.0 - smoothstep(0.16, 0.32, s))
+    a = smoothstep(0.45, 0.62, v)
+    # порог по насыщенности задаёт толщину штриха надписи (в оригинале
+    # отношение штриха к высоте букв — около 0.10)
+    a *= (1.0 - smoothstep(0.28, 0.44, s))
     return np.clip(a, 0.0, 1.0)
 
 
@@ -200,23 +202,110 @@ def resample_closed(pts: np.ndarray, factor: int = 4) -> np.ndarray:
     return np.stack([x, y], axis=1)
 
 
-def smooth_closed(pts: np.ndarray, sigma: float) -> np.ndarray:
-    """Гауссово сглаживание замкнутой кривой по кругу — убирает «дрожь» края."""
-    if sigma <= 0 or len(pts) < 8:
+def corner_indices(pts: np.ndarray, angle_deg: float = 35.0,
+                   window: int = 10, min_sep: int = 30) -> np.ndarray:
+    """Углы логотипа — вершины, где ломаная поворачивает резко.
+
+    Поворот считается на окне ±window точек: угол в оригинале слегка
+    скруглён, и по одной вершине его не видно. Эти точки нельзя двигать —
+    иначе прямые углы монограммы превращаются в скруглённые.
+    """
+    n = len(pts)
+    w = max(1, min(window, n // 8))
+    prev = pts - np.roll(pts, w, axis=0)          # вектор (i-w) -> i
+    nxt = np.roll(pts, -w, axis=0) - pts          # вектор i -> (i+w)
+    a_in = np.arctan2(prev[:, 1], prev[:, 0])
+    a_out = np.arctan2(nxt[:, 1], nxt[:, 0])
+    turn = np.abs((a_out - a_in + np.pi) % (2 * np.pi) - np.pi)
+    thr = np.deg2rad(angle_deg)
+    pinned: list[int] = []
+    for i in np.nonzero(turn > thr)[0]:
+        i = int(i)
+        if all(min(abs(i - j), n - abs(i - j)) > min_sep for j in pinned):
+            pinned.append(i)
+    return np.array(sorted(pinned), dtype=int)
+
+
+def taubin_smooth(pts: np.ndarray, pinned: np.ndarray | np.ndarray,
+                  iters: int = 14) -> np.ndarray:
+    """Сглаживание Лапласа/Таубина с закреплёнными углами.
+
+    Убирает «дрожь» края, но прямые углы логотипа остаются прямыми:
+    закреплённые вершины не смещаются, форма в целом не садится.
+    """
+    p = pts.astype(np.float64).copy()
+    free = ~np.asarray(pinned, dtype=bool)
+    for _ in range(max(0, iters)):
+        for weight in (0.5, -0.54):
+            neigh = np.roll(p, 1, axis=0) + np.roll(p, -1, axis=0)
+            new = 0.5 * p + 0.25 * neigh
+            p[free] = new[free]
+    return p
+
+
+def straighten_edges(pts: np.ndarray, corners: np.ndarray, tol: float = 8.0,
+                     min_len: float = 120.0, margin: float = 40.0) -> np.ndarray:
+    """Прямые участки между углами прищёлкиваются к точной прямой.
+
+    Исходник (AI-рендер) даёт по краю ломаной волну ±3–4 px — в плоской
+    заливке это видно. Вершины углов и переходы рядом с ними остаются
+    нетронутыми, выпрямляются только длинные прямые пролёты.
+    """
+    out = pts.copy()
+    if len(corners) < 2:
+        return out
+    n = len(pts)
+    cs = [int(c) for c in corners]
+    for k in range(len(cs)):
+        i0, i1 = cs[k], cs[(k + 1) % len(cs)]
+        if i1 <= i0:
+            idx = np.concatenate([np.arange(i0, n), np.arange(0, i1 + 1)])
+        else:
+            idx = np.arange(i0, i1 + 1)
+        if len(idx) < 8:
+            continue
+        seg = pts[idx]
+        m = int(margin)
+        core = seg[m:-m] if len(seg) > 2 * m + 4 else seg
+        if len(core) < 4:
+            continue
+        ctr = core.mean(axis=0)
+        _, _, vt = np.linalg.svd(core - ctr, full_matrices=False)
+        u = vt[0]
+        nrm = np.array([-u[1], u[0]])
+        dev = np.abs((core - ctr) @ nrm)
+        length = float((core[-1] - core[0]) @ u)
+        if length < min_len or dev.max() > tol:
+            continue
+        proj = ctr + np.outer((seg - ctr) @ u, u)
+        keep = idx[1:-1]          # вершины углов не трогаем
+        out[keep, 0] = proj[1:-1, 0]
+        out[keep, 1] = proj[1:-1, 1]
+    return out
+
+
+def gaussian_curve(pts: np.ndarray, sigma: float, free: np.ndarray) -> np.ndarray:
+    """Низкочастотное сглаживание вдоль кривой — только по незакреплённым точкам."""
+    if sigma <= 0:
         return pts
     r = max(1, int(3 * sigma))
     k = np.exp(-0.5 * (np.arange(-r, r + 1) / sigma) ** 2)
     k /= k.sum()
-    out = np.empty_like(pts)
+    out = pts.copy()
     for c in range(2):
         ext = np.concatenate([pts[-r:, c], pts[:, c], pts[:r, c]])
-        out[:, c] = np.convolve(ext, k, mode="same")[r:r + len(pts)]
+        sm = np.convolve(ext, k, mode="same")[r:r + len(pts)]
+        out[:, c] = np.where(free, sm, pts[:, c])
     return out
 
 
-def trace_paths(binary: np.ndarray, eps: float, smooth: int = 2,
-                curve_sigma: float = 0.0) -> list[np.ndarray]:
-    """Контуры маски → список замкнутых ломаных (внешние + дыры)."""
+def trace_paths(binary: np.ndarray, eps: float, smooth: int = 0,
+                curve_sigma: float = 0.0, corner_angle: float = 30.0,
+                pin_radius: int = 26) -> list[np.ndarray]:
+    """Контуры маски → список замкнутых ломаных (внешние + дыры).
+
+    Сглаживание идёт только между углами: углы логотипа не меняются.
+    """
     contours, _ = cv2.findContours(binary, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
     paths: list[np.ndarray] = []
     for c in contours:
@@ -226,12 +315,26 @@ def trace_paths(binary: np.ndarray, eps: float, smooth: int = 2,
         if len(ap) < 3:
             continue
         if curve_sigma > 0:
-            ap = smooth_closed(resample_closed(ap), curve_sigma)
+            fine = resample_closed(ap, factor=6)
+            corners = corner_indices(fine, angle_deg=corner_angle)
+            # вокруг каждого угла замораживаем cluster вершин: так скругление
+            # угла остаётся таким, как в оригинале, и не расплывается
+            frozen = np.zeros(len(fine), dtype=bool)
+            if len(corners):
+                for i in corners:
+                    d = np.abs(np.arange(len(fine)) - i)
+                    d = np.minimum(d, len(fine) - d)
+                    frozen[d <= pin_radius] = True
+            ap = taubin_smooth(fine, frozen, iters=int(round(curve_sigma * 6)))
+            ap = gaussian_curve(ap, curve_sigma * 5.0, ~frozen)
+            ap = straighten_edges(ap, corners)
             ap = cv2.approxPolyDP(ap.reshape(-1, 1, 2).astype(np.float32),
-                                   eps * 0.6, True).reshape(-1, 2)
+                                   max(0.4, eps * 0.35), True).reshape(-1, 2)
             if len(ap) < 3:
                 continue
-        paths.append(chaikin(ap, smooth))
+        if smooth > 0:
+            ap = chaikin(ap, smooth)
+        paths.append(ap)
     return paths
 
 
@@ -251,7 +354,8 @@ def paths_to_svg(paths: list[np.ndarray], scale: float = 1.0,
 # ------------------------------------------------------------------ сборка ----
 
 def build_lockup(mono_paths: list[np.ndarray], word_paths: list[np.ndarray],
-                 gap_ratio: float = 0.215) -> tuple[str, str, float, float]:
+                 gap_ratio: float = 0.2, word_ratio: float = 0.935
+                 ) -> tuple[str, str, float, float]:
     """Возвращает (svg-путь монограммы, svg-путь надписи, ширина, высота)."""
 
     def bbox(paths):
@@ -262,7 +366,9 @@ def build_lockup(mono_paths: list[np.ndarray], word_paths: list[np.ndarray],
     wx0, wy0, wx1, wy1 = bbox(word_paths)
 
     mono_w, mono_h = mx1 - mx0, my1 - my0
-    word_w = mono_w                                   # надпись по ширине монограммы
+    # пропорции локапа взяты из исходника: надпись уже монограммы (0.935) и
+    # прижата к её левому краю, зазор — 0.2 высоты монограммы
+    word_w = word_ratio * mono_w
     s = word_w / (wx1 - wx0)
     word_h = (wy1 - wy0) * s
     gap = gap_ratio * mono_h
@@ -272,7 +378,7 @@ def build_lockup(mono_paths: list[np.ndarray], word_paths: list[np.ndarray],
 
     mono_svg = paths_to_svg(mono_paths, 1.0, pad - mx0, pad - my0)
     word_svg = paths_to_svg(word_paths, s,
-                            pad + (mono_w - word_w) / 2.0 - wx0 * s,
+                            pad - wx0 * s,
                             pad + mono_h + gap - wy0 * s)
     return mono_svg, word_svg, total_w, total_h
 
