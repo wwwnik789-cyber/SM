@@ -156,6 +156,57 @@ export default function Home() {
         </div>
       </section>
 
+      {/* BANNERS series */}
+      <section className="mx-auto max-w-7xl px-5 py-24">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHead overline="Печать" title="Серия баннеров «Кастинг»" text="Три макета под крупную конструкцию 300 × 270 см: видимое лицо 220 × 250 см, загибы 10 см по периметру, боковые уши по 40 см. Печатные мастеры 300 dpi, 4:4:4, QR-коды проверены декодером прямо из мастера." className="mb-0" />
+          <ArrowLink to="/portfolio/seriya-bannerov-kasting" className="mb-2">Смотреть кейс</ArrowLink>
+        </div>
+        <div className="mt-12 grid gap-5 sm:grid-cols-3">
+          {[
+            { src: "/media/banners/kino-300x270-face.jpg", t: "Кастинг на пробы в кино", n: "300 × 270 см · лицо 220 × 250 см" },
+            { src: "/media/banners/pokaz-300x270-face.jpg", t: "Кастинг на модный показ", n: "300 × 270 см · лицо 220 × 250 см" },
+            { src: "/media/banners/dv-production-300x270-face.jpg", t: "ДВ ПРОДАКШЕН", n: "300 × 270 см · лицо 220 × 250 см" },
+          ].map((b, i) => (
+            <Reveal key={b.src} delay={i * 0.08}>
+              <Link to="/portfolio/seriya-bannerov-kasting" className="card-hover img-zoom group block h-full overflow-hidden rounded-3xl border border-line bg-card">
+                <div className="overflow-hidden bg-black/20"><img src={b.src} alt={b.t} loading="lazy" className="aspect-[8/9] w-full object-cover" /></div>
+                <div className="p-6">
+                  <h3 className="display-h text-lg font-bold group-hover:text-accent">{b.t}</h3>
+                  <p className="mt-1 font-display text-[11px] uppercase tracking-[0.2em] text-mut">{b.n}</p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-16 border-t border-line pt-12">
+          <SectionHead
+            overline="Вторая концепция"
+            title="«Кастинг-лист»"
+            text="Та же конструкция 300 × 270 см в редакционном стиле: тёплая бумага, глубокий сине-чёрный текст, вермильоновый акцент и общий дуотон фотографий — разные исходники читаются как один ряд. Фотополоса во всю ширину, крупный заголовок, QR-карточка и таблица данных."
+            className="mb-0"
+          />
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {[
+              { src: "/media/banners/kino-300x270-sheet-face.jpg", t: "Пробы · «Кастинг-лист»", n: "300 × 270 см · лицо 220 × 250 см" },
+              { src: "/media/banners/pokaz-300x270-sheet-face.jpg", t: "Показ · «Кастинг-лист»", n: "300 × 270 см · лицо 220 × 250 см" },
+              { src: "/media/banners/dv-production-300x270-sheet-face.jpg", t: "ДВ ПРОДАКШЕН · «Кастинг-лист»", n: "300 × 270 см · лицо 220 × 250 см" },
+            ].map((b, i) => (
+              <Reveal key={b.src} delay={i * 0.08}>
+                <Link to="/portfolio/seriya-bannerov-kasting" className="card-hover img-zoom group block h-full overflow-hidden rounded-3xl border border-line bg-card">
+                  <div className="overflow-hidden bg-black/20"><img src={b.src} alt={b.t} loading="lazy" className="aspect-[8/9] w-full object-cover" /></div>
+                  <div className="p-6">
+                    <h3 className="display-h text-lg font-bold group-hover:text-accent">{b.t}</h3>
+                    <p className="mt-1 font-display text-[11px] uppercase tracking-[0.2em] text-mut">{b.n}</p>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PROCESS mini-timeline */}
       <section className="mx-auto max-w-7xl px-5 py-24">
         <SectionHead overline="Процессы" title="Как рождается ваш проект" text="Четыре прозрачных этапа — от заявки до демонтажа и обратной связи." />

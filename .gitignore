@@ -17,3 +17,17 @@ pnpm-debug.log*
 .idea
 .vercel
 *.tsbuildinfo
+
+# Python
+__pycache__/
+*.pyc
+
+# Печатные мастера 300×270 см лежат в репозитории (banners/casting-series/print/):
+# каждый файл ≤ 100 МБ — ровно под лимит GitHub на один blob.
+# Максимальное качество (Q92) пересобирается флагом --quality 92.
+
+# CMYK-версии мастеров (1,13 гигапикселя, 114 МБ – 1,1 ГБ) — в git не кладутся:
+# печатные файлы в профиле FOGRA39 отдаются типографии с рабочего диска.
+banners/casting-series/print/cmyk/
+# Профиль X-Rite/ECI: свободное использование для печати, но не для редистрибуции.
+scripts/banners/icc/Coated_Fogra39L_VIGC_300.icc
