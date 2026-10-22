@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 from docx import Document
+from docx.enum.text import WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
@@ -13,6 +14,7 @@ from docx.shared import Cm, Pt, RGBColor
 ACCENT = RGBColor(0x97, 0x1A, 0x81)
 GREY = RGBColor(0x55, 0x55, 0x55)
 MONO_TABLE = 8.5
+IMG_WIDTH = Cm(17.0)
 
 
 def set_font(run, name="Manrope", size=10.5, bold=False, color=None, italic=False):
@@ -164,6 +166,23 @@ def build(md_path: Path, out_path: Path) -> None:
             add_rich(par, text)
             i += 1
             continue
+
+        m_img = re.fullmatch(r"!\[(.*?)\]\((.+?)\)", stripped)
+        if m_img:
+            alt, rel = m_img.group(1), m_img.group(2)
+            img_path = (md_path.parent / rel).resolve()
+            if img_path.exists():
+                par = doc.add_paragraph()
+                par.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                par.paragraph_format.space_before = Pt(8)
+                par.paragraph_format.space_after = Pt(2)
+                par.add_run().add_picture(str(img_path), width=IMG_WIDTH)
+                cap = doc.add_paragraph()
+                cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                cap.paragraph_format.space_after = Pt(10)
+                add_rich(cap, alt, size=8.5, color=GREY, italic=True)
+                i += 1
+                continue
 
         par = doc.add_paragraph()
         par.paragraph_format.space_after = Pt(4)
