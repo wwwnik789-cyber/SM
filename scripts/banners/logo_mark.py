@@ -96,7 +96,9 @@ def bspline_matrix(t: np.ndarray, n_ctrl: int, degree: int = 3) -> np.ndarray:
 
 def fit_bezier_chain(pts: np.ndarray, seg_len: float = 26.0,
                      lam: float = 0.35, straight_tol: float = 1.2,
-                     straight_min_len: float = 120.0) -> np.ndarray:
+                     straight_min_len: float = 120.0,
+                     straight_tol_all: float = 12.0,
+                     straight_min_len_all: float = 90.0) -> np.ndarray:
     """Подгонка цепочки кубических кривых по точкам контура.
 
     Базис — равномерный кубический B-сплайн; целевая функция штрафует
@@ -144,7 +146,21 @@ def fit_bezier_chain(pts: np.ndarray, seg_len: float = 26.0,
     if n1 > 0 and len(Q) > 3:
         h1 = min(float(np.linalg.norm(Q[-2] - Q[-1])), n1)
         Q[-2] = Q[-1] - d1 / n1 * h1
-    # ровные прямые: прямые участки (в том числе внутри смешанных рёбер)
+    # ровные прямые: ребро целиком прямое — прищёлкиваем к точной прямой
+    # от вершины угла (угол остаётся на месте и остаётся острым)
+    if len(Q) >= 6:
+        core = slice(int(len(Q) * 0.15), int(len(Q) * 0.85))
+        c = Q[core]
+        ctr = c.mean(axis=0)
+        _, _, vt = np.linalg.svd(c - ctr, full_matrices=False)
+        u = vt[0]
+        nrm = np.array([-u[1], u[0]])
+        dev = np.abs((c - ctr) @ nrm)
+        if (dev.max() <= straight_tol_all and
+                abs(float((c[-1] - c[0]) @ u)) >= straight_min_len_all):
+            Q = Q[0] + np.outer((Q - Q[0]) @ u, u)
+            return Q
+    # смешанные рёбра (прямой участок + дуга): прямые участки внутри ребра
     # прищёлкиваются к точной прямой — уходит «дрожь» края от AI-рендера
     Q = flatten_straight_runs(Q, tol=straight_tol, min_len=straight_min_len)
     return Q
@@ -157,9 +173,13 @@ def flatten_straight_runs(ctrl: np.ndarray, tol: float = 1.2,
 
     Ищутся скользящим окном (TLS-аппроксимация); на границах участка вес
     нарастает плавно, поэтому в месте перехода не появляется «ступенька».
+
+    Вершины углов и их касательные (первая и последняя опорные точки ребра)
+    не трогаются: иначе прищёлкивание «съедает» острый угол — в оригинале
+    углы монограммы острые, и их нужно сохранить.
     """
     n = len(ctrl)
-    if n < 6:
+    if n < 8:
         return ctrl
     out = ctrl.copy()
     i = 0
@@ -183,17 +203,23 @@ def flatten_straight_runs(ctrl: np.ndarray, tol: float = 1.2,
             i += 1
             continue
         j, ctr, u = best
-        nrm = np.array([-u[1], u[0]])
+        # границы участка: углы ребра (вершина + касательная) защищены
+        a = i + 2 if i == 0 else i
+        b = j - 2 if j == n - 1 else j
+        if b - a < 2:
+            i = j + 1
+            continue
         proj = ctr + np.outer((ctrl - ctr) @ u, u)
-        a = max(0, i - ramp)
-        b = min(n, j + 1 + ramp)
-        w = np.ones(b - a)
-        if i - a > 0:
-            w[:i - a] = np.linspace(0.0, 1.0, i - a + 1)[:-1]
-        if b - (j + 1) > 0:
-            w[j + 1 - a:] = np.linspace(1.0, 0.0, b - j)[1:]
-        out[a:b, 0] = ctrl[a:b, 0] + (proj[a:b, 0] - ctrl[a:b, 0]) * w
-        out[a:b, 1] = ctrl[a:b, 1] + (proj[a:b, 1] - ctrl[a:b, 1]) * w
+        # плавные переходы только со стороны, где участок не упирается в угол
+        w = np.ones(b - a + 1)
+        if i > 0 and a - i >= 1:
+            k = min(ramp, a - i)
+            w[:k] = np.linspace(0.0, 1.0, k + 1)[:-1]
+        if j < n - 1 and j - b >= 1:
+            k = min(ramp, j - b)
+            w[-k:] = np.linspace(1.0, 0.0, k + 1)[1:]
+        out[a:b + 1, 0] = ctrl[a:b + 1, 0] + (proj[a:b + 1, 0] - ctrl[a:b + 1, 0]) * w
+        out[a:b + 1, 1] = ctrl[a:b + 1, 1] + (proj[a:b + 1, 1] - ctrl[a:b + 1, 1]) * w
         i = j + 1
     return out
 
@@ -230,14 +256,17 @@ def contour_to_path(raw: np.ndarray, seg_len: float = 26.0,
                     lam: float = 0.35, step: float = 1.5,
                     angle: float = 32.0, window: int = 12,
                     min_sep: int = 40, straight_tol: float = 1.2,
-                    straight_min_len: float = 120.0) -> str:
+                    straight_min_len: float = 120.0,
+                    straight_tol_all: float = 12.0,
+                    straight_min_len_all: float = 90.0) -> str:
     """Контур -> путь SVG: острые углы + ровные дуги (кубические Безье)."""
     pts = resample_uniform(raw, step=step)
     corners = detect_corners(pts, angle_deg=angle, window=window, min_sep=min_sep)
     n = len(pts)
     cs = [int(c) for c in corners]
     if not cs:
-        ctrl = fit_bezier_chain(pts, seg_len, lam, straight_tol, straight_min_len)
+        ctrl = fit_bezier_chain(pts, seg_len, lam, straight_tol, straight_min_len,
+                                 straight_tol_all, straight_min_len_all)
         return chain_to_path(ctrl, True) + " Z"
     pieces: list[str] = []
     for k in range(len(cs)):
@@ -247,7 +276,8 @@ def contour_to_path(raw: np.ndarray, seg_len: float = 26.0,
         else:
             idx = np.arange(i0, i1 + 1)
         edge = pts[idx]
-        ctrl = fit_bezier_chain(edge, seg_len, lam, straight_tol, straight_min_len)
+        ctrl = fit_bezier_chain(edge, seg_len, lam, straight_tol, straight_min_len,
+                                 straight_tol_all, straight_min_len_all)
         pieces.append(chain_to_path(ctrl, k == 0))
     return " ".join(pieces) + " Z"
 
