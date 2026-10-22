@@ -70,7 +70,7 @@ export default function Home() {
           <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { t: "Срочный заказ", d: "фотозоны, пресс-воллы, баннеры — за 24 часа", to: "/uslugi/akciya-fotozona", icon: <Bolt size={18} /> },
-              { t: "Конференция под ключ", d: "сцена + каше + фотозона, от 89 000 ₽", to: "/uslugi/oformlenie-stseny", icon: <Factory size={18} /> },
+              { t: "Брус-баннер", d: "премиальный пресс-волл на скрытом каркасе", to: "/uslugi/brus-banner", icon: <Factory size={18} /> },
               { t: "Аренда оборудования", d: "свет, звук, мебель, фотобудки", to: "/arenda", icon: <Cube size={18} /> },
               { t: "Калькулятор", d: "смета фотозоны за 1 минуту", to: "/kalkulyator", icon: <Spark size={18} /> },
             ].map((c, i) => (
@@ -91,7 +91,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Marquee items={["Фотозоны", "Выставочные стенды", "Световые вывески", "Оформление сцен", "Баннеры", "Бренд-зоны", "Интерактив", "Аренда", "SM-Media"]} className="border-y border-line py-5" />
+      <Marquee items={["Фотозоны", "Выставочные стенды", "Световые вывески", "Оформление сцен", "Брус-баннеры", "Бренд-зоны", "Брендирование офисов", "Интерактив", "Аренда", "SM-Media"]} className="border-y border-line py-5" />
 
       {/* STATS */}
       <section className="mx-auto max-w-7xl px-5 py-20 md:py-28">
@@ -131,6 +131,30 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* NEW DIRECTION — брендирование офисов и ресепшн */}
+      <section className="mx-auto max-w-7xl px-5 pb-24">
+        <Reveal>
+          <Link to="/uslugi/brendirovanie-ofisov" className="card-hover img-zoom group relative flex min-h-[380px] flex-col justify-end overflow-hidden rounded-3xl border border-accent">
+            <img src="/media/reception.jpg" alt="Брендированная зона ресепшн" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-opacity group-hover:opacity-85" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/45 to-transparent" />
+            <div className="relative flex flex-col gap-6 p-8 md:flex-row md:items-end md:justify-between md:p-12">
+              <div>
+                <p className="inline-flex items-center gap-2 rounded-full bg-acid px-4 py-1.5 font-display text-[10px] uppercase tracking-[0.26em] text-black">
+                  <Spark size={12} /> Новое направление
+                </p>
+                <h2 className="display-h mt-4 max-w-2xl text-3xl font-black text-white md:text-5xl">Брендирование офисов и зон ресепшн под ключ</h2>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 md:text-base">
+                  Уникальные стойки ресепшн, объёмные логотипы, навигация и элементы фирменного стиля для офисов и шоурумов. Собственное производство, бесплатный замер, 3D-визуализация.
+                </p>
+              </div>
+              <span className="btn-sheen inline-flex shrink-0 items-center gap-2.5 rounded-xl bg-accent px-7 py-4 font-display text-[13px] uppercase tracking-[0.14em] text-white">
+                Получить расчёт <ArrowUpRight size={16} />
+              </span>
+            </div>
+          </Link>
+        </Reveal>
       </section>
 
       {/* PORTFOLIO horizontal */}

@@ -27,9 +27,11 @@ const { UIProvider } = await server.ssrLoadModule("/src/lib/store.jsx");
 const { default: App } = await server.ssrLoadModule("/src/App.jsx");
 
 const routes = [
-  "/", "/uslugi", "/uslugi/fotozony", "/uslugi/akciya-fotozona", "/proizvodstvo", "/proizvodstvo/svetovye-vyveski",
+  "/", "/uslugi", "/uslugi/fotozony", "/uslugi/akciya-fotozona", "/uslugi/brus-banner", "/uslugi/brendirovanie-ofisov",
+  "/proizvodstvo", "/proizvodstvo/svetovye-vyveski", "/proizvodstvo/brendirovanie-ofisov",
   "/media", "/arenda", "/portfolio", "/portfolio/ctc-kids-vk-fest-2025", "/process", "/o-kompanii", "/team", "/b2b",
-  "/blog", "/blog/trendy-oformleniya-meropriyatiy-2026", "/otzyvy", "/faq", "/kalkulyator", "/materialy", "/vakansii",
+  "/blog", "/blog/trendy-oformleniya-meropriyatiy-2026", "/blog/kak-vybrat-stoyku-resepshn",
+  "/otzyvy", "/faq", "/kalkulyator", "/materialy", "/vakansii",
   "/kontakty", "/politika-konfidencialnosti", "/karta-sayta", "/definitely-missing-page",
 ];
 
