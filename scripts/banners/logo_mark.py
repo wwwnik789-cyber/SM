@@ -95,8 +95,8 @@ def bspline_matrix(t: np.ndarray, n_ctrl: int, degree: int = 3) -> np.ndarray:
 
 
 def fit_bezier_chain(pts: np.ndarray, seg_len: float = 26.0,
-                     lam: float = 0.35, straight_tol: float = 12.0,
-                     straight_min_len: float = 90.0) -> np.ndarray:
+                     lam: float = 0.35, straight_tol: float = 1.2,
+                     straight_min_len: float = 120.0) -> np.ndarray:
     """Подгонка цепочки кубических кривых по точкам контура.
 
     Базис — равномерный кубический B-сплайн; целевая функция штрафует
@@ -144,22 +144,58 @@ def fit_bezier_chain(pts: np.ndarray, seg_len: float = 26.0,
     if n1 > 0 and len(Q) > 3:
         h1 = min(float(np.linalg.norm(Q[-2] - Q[-1])), n1)
         Q[-2] = Q[-1] - d1 / n1 * h1
-    # ровные прямые: если ребро по сути прямая — прищёлкиваем его к точной
-    # прямой, уходит «дрожь» края от AI-рендера. Направление берём по
-    # центральной части ребра, а начало — в вершине угла, поэтому угол
-    # остаётся на месте и остаётся острым.
-    if len(Q) >= 6:
-        core = slice(int(len(Q) * 0.15), int(len(Q) * 0.85))
-        c = Q[core]
-        ctr = c.mean(axis=0)
-        _, _, vt = np.linalg.svd(c - ctr, full_matrices=False)
-        u = vt[0]
-        nrm = np.array([-u[1], u[0]])
-        dev = np.abs((c - ctr) @ nrm)
-        if (dev.max() <= straight_tol and
-                abs(float((c[-1] - c[0]) @ u)) >= straight_min_len):
-            Q = Q[0] + np.outer((Q - Q[0]) @ u, u)
+    # ровные прямые: прямые участки (в том числе внутри смешанных рёбер)
+    # прищёлкиваются к точной прямой — уходит «дрожь» края от AI-рендера
+    Q = flatten_straight_runs(Q, tol=straight_tol, min_len=straight_min_len)
     return Q
+
+
+def flatten_straight_runs(ctrl: np.ndarray, tol: float = 1.2,
+                          min_len: float = 120.0, ramp: int = 4
+                          ) -> np.ndarray:
+    """Прямые участки опорных точек прищёлкиваются к точной прямой.
+
+    Ищутся скользящим окном (TLS-аппроксимация); на границах участка вес
+    нарастает плавно, поэтому в месте перехода не появляется «ступенька».
+    """
+    n = len(ctrl)
+    if n < 6:
+        return ctrl
+    out = ctrl.copy()
+    i = 0
+    while i < n:
+        best = None
+        j = i + 4
+        while j < min(n, i + 400):
+            seg = ctrl[i:j + 1]
+            ctr = seg.mean(axis=0)
+            _, _, vt = np.linalg.svd(seg - ctr, full_matrices=False)
+            u = vt[0]
+            nrm = np.array([-u[1], u[0]])
+            dev = np.abs((seg - ctr) @ nrm)
+            L = abs(float((seg[-1] - seg[0]) @ u))
+            if dev.max() > tol:
+                break
+            if L >= min_len:
+                best = (j, ctr, u)
+            j += 1
+        if best is None:
+            i += 1
+            continue
+        j, ctr, u = best
+        nrm = np.array([-u[1], u[0]])
+        proj = ctr + np.outer((ctrl - ctr) @ u, u)
+        a = max(0, i - ramp)
+        b = min(n, j + 1 + ramp)
+        w = np.ones(b - a)
+        if i - a > 0:
+            w[:i - a] = np.linspace(0.0, 1.0, i - a + 1)[:-1]
+        if b - (j + 1) > 0:
+            w[j + 1 - a:] = np.linspace(1.0, 0.0, b - j)[1:]
+        out[a:b, 0] = ctrl[a:b, 0] + (proj[a:b, 0] - ctrl[a:b, 0]) * w
+        out[a:b, 1] = ctrl[a:b, 1] + (proj[a:b, 1] - ctrl[a:b, 1]) * w
+        i = j + 1
+    return out
 
 
 def chain_to_path(ctrl: np.ndarray, first: bool) -> str:
@@ -193,8 +229,8 @@ def chain_to_path(ctrl: np.ndarray, first: bool) -> str:
 def contour_to_path(raw: np.ndarray, seg_len: float = 26.0,
                     lam: float = 0.35, step: float = 1.5,
                     angle: float = 32.0, window: int = 12,
-                    min_sep: int = 40, straight_tol: float = 12.0,
-                    straight_min_len: float = 90.0) -> str:
+                    min_sep: int = 40, straight_tol: float = 1.2,
+                    straight_min_len: float = 120.0) -> str:
     """Контур -> путь SVG: острые углы + ровные дуги (кубические Безье)."""
     pts = resample_uniform(raw, step=step)
     corners = detect_corners(pts, angle_deg=angle, window=window, min_sep=min_sep)
@@ -274,7 +310,7 @@ def build_lockup_svg(mono_paths: list[np.ndarray], word_paths: list[np.ndarray],
         contour_to_path((raw - np.array([wx0, wy0])) * s
                         + np.array([pad, pad + mono_h + gap]),
                         seg_len * 0.55, lam, step=0.9, angle=28.0, window=7,
-                        min_sep=14, straight_tol=7.0, straight_min_len=40.0)
+                        min_sep=14, straight_tol=1.0, straight_min_len=60.0)
         for raw in word_paths)
     body = (f'<path d="{d_mono}" fill="url(#gold)" fill-rule="evenodd"/>\n'
             f'  <path d="{d_word}" fill="{lv.WORD_COLOR}" fill-rule="evenodd"/>')
