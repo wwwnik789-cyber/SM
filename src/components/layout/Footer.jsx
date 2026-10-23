@@ -13,6 +13,8 @@ const cols = [
       ["Уличные стенды", "/uslugi/ulichnye-stendy"],
       ["Оформление сцен", "/uslugi/oformlenie-stseny"],
       ["Печать баннеров", "/uslugi/pechat-bannerov"],
+      ["Брус-баннер", "/uslugi/brus-banner"],
+      ["Брендирование офисов", "/uslugi/brendirovanie-ofisov"],
       ["Все услуги →", "/uslugi"],
     ],
   },

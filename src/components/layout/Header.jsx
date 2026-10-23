@@ -15,6 +15,8 @@ const servicesMenu = [
   ["Оформление сцен", "/uslugi/oformlenie-stseny"],
   ["Press-Wall", "/uslugi/press-wall"],
   ["Баннеры", "/uslugi/pechat-bannerov"],
+  ["Брус-баннер (премиум)", "/uslugi/brus-banner"],
+  ["Брендирование офисов", "/uslugi/brendirovanie-ofisov"],
 ];
 const companyMenu = [
   ["О компании", "/o-kompanii"],
@@ -80,7 +82,7 @@ export default function Header() {
 
           <nav className="hidden items-center lg:flex" aria-label="Основная навигация">
             <Drop label="Услуги">
-              <div className="grid w-[540px] grid-cols-2 gap-1">
+              <div className="grid w-[680px] grid-cols-3 gap-1">
                 {servicesMenu.map(([t, to]) => (
                   <DropLink key={to} to={to}>{t}</DropLink>
                 ))}
