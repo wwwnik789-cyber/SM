@@ -156,10 +156,13 @@ def page2(c):
             pdf = pdfium.PdfDocument(SLIDES_PDF)
             img = pdf[11].render(scale=1360 / 960).to_pil()
             # размытие убирает мелкий текст, оставляя композицию
-            img = img.filter(ImageFilter.GaussianBlur(2.2))
+            from PIL import ImageEnhance
+            img = ImageEnhance.Brightness(img).enhance(0.45)
+            img = ImageEnhance.Color(img).enhance(0.55)
+            img = img.filter(ImageFilter.GaussianBlur(3.4))
             img.save("/tmp/slide_bg.png")
             c.drawImage("/tmp/slide_bg.png", 150, 0, 980, 551)
-            c.setFillColor(Color(0.039, 0.039, 0.051, alpha=0.80))
+            c.setFillColor(Color(0.039, 0.039, 0.051, alpha=0.72))
             c.rect(0, 0, W, H, stroke=0, fill=1)
         except Exception:
             pass
@@ -169,7 +172,7 @@ def page2(c):
     txt(c, 56, 110, "Слева — горизонтали макета, справа — вертикальный ритм карточек", "Man-SB", 13, MUT)
 
     TOP, BOT = 156, 664
-    guides = [(156, "кикер 56 / заголовок 84"), (244, "первый ряд 200–220"),
+    guides = [(156, "начало контента 156"), (244, "первый ряд 200–220"),
               (380, "второй ряд 352–372"), (516, "третий ряд 512–524"),
               (664, "safe-зона 664"), (704, "колонтитул 704")]
     for gy, label in guides:
