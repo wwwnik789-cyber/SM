@@ -182,7 +182,11 @@ def h2(c, x, y_top, lines, size=46, lf=1.12):
             cx += sw_(s, "Unb-XB", size)
     return len(lines) * lh
 
-def footer(c, n):
+PAGE = [0]
+
+def footer(c, n=None):
+    if n is None:
+        n = PAGE[0]
     y = 704
     logo(c, 56, y - 19, 19, "logo-mark.png")
     txt(c, 56 + 32, y, "SM-PRODUCTION · БРЕНДИНГ ДЛЯ АВТОСАЛОНОВ", "Man-SB", 12.5,
@@ -193,8 +197,8 @@ def footer(c, n):
 #  СЛАЙДЫ
 # =====================================================================
 def s01(c):
-    cover(c, "showroom.jpg", 0, 0, 1280, 720, focus=(0.62, 0.5), fade=("right", 1.0, 0.0))
-    shade(c, 0, 0, 560, 720, 0.55)
+    cover(c, "as-omoda-c5.jpg", 0, 0, 1280, 720, focus=(0.55, 0.5), fade=("right", 1.0, 0.0))
+    shade(c, 0, 0, 640, 720, 0.72)
     logo(c, 56, 48, 112)
 
     kicker(c, 56, 268, "Презентация для дилерских центров")
@@ -209,12 +213,13 @@ def s01(c):
     chip_row(c, 56, 534, ["Срочные заказы от 3 дней", "КП в течение дня", "24/7 производство и монтаж"],
              ["acid", "o", "o"])
 
-    y = 668
+    y = 664
     txt(c, 56, y, "+7 495 799-00-19", "Man-B", 18, ACID)
     x = 56 + sw_("+7 495 799-00-19", "Man-B", 18) + 30
-    for s in ["sm-pro1@yandex.ru", "sm-production.ru"]:
-        txt(c, x, y, s, "Man-SB", 18, MUT); x += sw_(s, "Man-SB", 18) + 30
-    txt(c, 1224, y, "Москва · Остаповский проезд", "Man-SB", 18, DIM, "r")
+    for s_ in ["sm-pro1@yandex.ru", "sm-production.ru"]:
+        txt(c, x, y, s_, "Man-SB", 18, MUT); x += sw_(s_, "Man-SB", 18) + 30
+    # адрес — отдельной строкой, в затемнённой зоне слева
+    txt(c, 56, y + 28, "Москва, Остаповский проезд — центральное производство", "Man-SB", 15, MUT)
 
 def s02(c):
     cover(c, "workshop.jpg", 780, 0, 500, 720, fade=("left", 1.0, 0.0))
@@ -239,7 +244,7 @@ def s02(c):
         txt(c, cx + 24, cy + 78, small.upper(), "Man-B", 12, MUT)
     chip_row(c, 56, 574, ["Москва, Остаповский проезд — центральное производство",
                           "Доставка и монтаж по всей России"])
-    footer(c, 2)
+    footer(c)
 
 def s03(c):
     kicker(c, 56, 56, "Задача")
@@ -268,8 +273,8 @@ def s03(c):
         para(c, cx + 22, cy + 118, arrow, "Man-B", 14, 19.5, ACC, w_ - 44)
 
     cover_round(c, "reception.jpg", 832, 218, 392, 180)
-    cover_round(c, "sm-reception-zone-1.jpg", 832, 414, 392, 180)
-    footer(c, 3)
+    cover_round(c, "as-haval-day.jpg", 832, 414, 392, 180)
+    footer(c)
 
 def s04(c):
     kicker(c, 56, 56, "Что делаем")
@@ -278,16 +283,16 @@ def s04(c):
     items = [
         ("A · Интерьер", "Зона ресепшн и интерьер",
          "Стойки ресепшн, объёмные логотипы, навигация, брендирование стен и зон ожидания",
-         "sm-reception-zone-1.jpg"),
+         "as-baltavtotrade-wide.jpg"),
         ("B · Фасад", "Вывески и наружная реклама",
          "Световые короба и объёмные буквы, баннеры на фасад, флаги и виндеры, уличные конструкции",
          "lightbox.jpg"),
         ("C · Мероприятия", "События в салоне",
          "Дни открытых дверей, старты продаж, презентации моделей, конференции дилеров",
-         "hero-stage.jpg"),
+         "as-tenet-night.jpg"),
         ("D · Акции", "Сезонные акции и печать",
          "Срочная печать, сменные полотна, POS-продукция, оформление спецпредложений",
-         "sm-brus-banner-uglovoy.jpg"),
+         "as-haval-day2.jpg"),
     ]
     for i, (tag, title, body, img) in enumerate(items):
         cx = 56 + (i % 2) * 592
@@ -299,7 +304,7 @@ def s04(c):
         chip(c, tx, cy + 22, tag, "acc", 13, 14, 30)
         txt(c, tx, cy + 88, title, "Unb-XB", 18, INK)
         para(c, tx, cy + 104, body, "Man-SB", 14, 20, MUT, w_ - 200)
-    footer(c, 4)
+    footer(c)
 
 def s05(c):
     cover(c, "sm-reception-zone-1.jpg", 0, 0, 570, 720, fade=("right", 1.0, 0.0))
@@ -332,7 +337,7 @@ def s05(c):
         card(c, cx, cy, 290, 88)
         txt(c, cx + 18, cy + 40, p, "Unb-XB", 20, ACC)
         para(c, cx + 18, cy + 50, lab, "Man-SB", 12.5, 16, MUT, 254)
-    footer(c, 5)
+    footer(c)
 
 def s06(c):
     cover(c, "lightbox.jpg", 710, 0, 570, 720, fade=("left", 1.0, 0.0))
@@ -365,7 +370,7 @@ def s06(c):
         card(c, cx, cy, 290, 88)
         txt(c, cx + 18, cy + 40, p, "Unb-XB", 20, ACC)
         para(c, cx + 18, cy + 50, lab, "Man-SB", 12.5, 16, MUT, 254)
-    footer(c, 6)
+    footer(c)
 
 def s07(c):
     kicker(c, 56, 56, "Мероприятия в салоне")
@@ -375,9 +380,9 @@ def s07(c):
     ], size=38)
     chip(c, 1224 - 140, 52, "Решение C", "acid")
 
-    cover_round(c, "hero-stage.jpg", 56, 212, 596, 286)
+    cover_round(c, "as-tenet-night.jpg", 56, 212, 596, 286)
     shade(c, 56, 448, 596, 50, 0.97)
-    txt(c, 72, 480, "Сцена с каше для LED-экрана — производство и монтаж за 24 часа", "Man-SB", 12.5, DIM)
+    txt(c, 72, 480, "Ночной тест-драйв в салоне: баннер, свет, зона презентации модели", "Man-SB", 12.5, DIM)
 
     items = [
         ("Сцена и каше для экрана", "Комплект «конференция под ключ» — производство и монтаж за 24 часа"),
@@ -393,7 +398,7 @@ def s07(c):
     chip_row(c, 56, 560, ["Конференция под ключ — от 89 000 ₽", "Press-wall — от 22 000 ₽",
                           "Фотозоны — от 22 000 ₽", "Имиджевые фотозоны — от 120 000 ₽"],
              size=13)
-    footer(c, 7)
+    footer(c)
 
 def s08(c):
     kicker(c, 56, 56, "Акции и срочная печать")
@@ -414,15 +419,44 @@ def s08(c):
         txt(c, 76, cy + 34, t, "Unb-XB", 16, INK)
         para(c, 76, cy + 44, b, "Man-SB", 13.5, 19, MUT, 508)
 
-    cover_round(c, "sm-brus-banner-uglovoy.jpg", 624, 206, 600, 344)
+    cover_round(c, "as-haval-day.jpg", 624, 206, 600, 344)
     shade(c, 624, 500, 600, 50, 0.97)
-    txt(c, 640, 532, "Брендированная угловая стойка на скрытом каркасе", "Man-SB", 12.5, DIM)
+    txt(c, 640, 532, "Полотно под акцию: каркас остаётся, печатаем только новую графику", "Man-SB", 12.5, DIM)
 
     chip_row(c, 56, 560, ["Баннеры — от 900 ₽/м²", "Брус-баннер — от 16 500 ₽",
                           "Монтаж и замена полотна — за 24 часа"], size=13)
-    footer(c, 8)
+    footer(c)
 
 def s09(c):
+    """Портфолио: брус-баннеры, которые уже стоят в автосалонах."""
+    kicker(c, 56, 56, "Работы в автосалонах")
+    h2(c, 56, 84, [[("Брус-баннеры ", INK), ("у наших дилеров", ACC)]], size=42)
+    txt(c, 56, 166, "Скрытый деревянный каркас, полотно без складок и бликов — даже под вспышкой "
+        "и со стороны витрины.", "Man-SB", 16, MUT)
+
+    shots = [
+        ("as-omoda-c5.jpg", "OMODA C5"),
+        ("as-haval-f7.jpg", "HAVAL F7"),
+        ("as-kgm-1.jpg", "KGM SsangYong"),
+        ("as-hongqi.jpg", "HONGQI HQ9"),
+        ("as-tenet-night.jpg", "TENET T4"),
+        ("as-baltavtotrade-wide.jpg", "БАЛТАВТОТРЕЙД-М"),
+    ]
+    for i, (img, brand) in enumerate(shots):
+        cx = 56 + (i % 3) * 392
+        cy = 212 + (i // 3) * 200
+        w_, h_ = 376, 184
+        cover_round(c, img, cx, cy, w_, h_, 14)
+        # плашка с брендом
+        c.setFillColor(Color(0.031, 0.031, 0.043, alpha=0.88))
+        c.roundRect(cx + 12, T(cy + h_ - 12), sw_(brand, "Man-B", 13) + 28, 30, 15, stroke=0, fill=1)
+        txt(c, cx + 26, cy + h_ - 32, brand, "Man-B", 13, ACID)
+
+    txt(c, 56, 628, "Форматы: отдельно стоящие конструкции, зоны выдачи, фотозоны с автомобилем, "
+        "оформление тест-драйва и сезонных акций.", "Man-SB", 13.5, MUT)
+    footer(c)
+
+def s10(c):
     cover(c, "photozone.jpg", 0, 0, 1280, 720, focus=(0.5, 0.5), fade=("bottom", 0.15, 0.94))
 
     chip_row(c, 56, 320, ["Кейс", "Дилерская конференция", "2026"], ["acid", "o", "o"])
@@ -435,9 +469,9 @@ def s09(c):
          "Man-M", 20, 29, MUT2, 850)
     chip_row(c, 56, 624, ["Каше для экрана 8×4,5 м", "Сцена: ковролин, раус, трибуна",
                           "Стойка регистрации", "Press-wall"], size=13)
-    footer(c, 9)
+    footer(c)
 
-def s10(c):
+def s11(c):
     kicker(c, 56, 56, "Портфолио")
     h2(c, 56, 84, [[("Сроки, которые ", INK), ("мы уже выдерживали", ACC)]], size=44)
 
@@ -460,9 +494,9 @@ def s10(c):
         chip(c, cx + 20, cy + 210, tag, st, 13, 14, 30)
         txt(c, cx + 20, cy + 274, title, "Unb-XB", 17, INK)
         para(c, cx + 20, cy + 290, body, "Man-SB", 13.5, 19.5, MUT, 336)
-    footer(c, 10)
+    footer(c)
 
-def s11(c):
+def s12(c):
     kicker(c, 56, 56, "Преимущества")
     h2(c, 56, 84, [[("Почему автосалоны ", INK), ("работают с нами", ACC)]], size=44)
 
@@ -482,9 +516,9 @@ def s11(c):
         txt(c, cx + 22, cy + 76, t, "Unb-XB", 15, INK)
         para(c, cx + 22, cy + 88, b, "Man-SB", 13.5, 19, MUT, 334)
 
-    shots = [("studio.jpg", "Съёмки и презентации — наша студия", 520),
-             ("office-branding.jpg", "Объёмные логотипы", 356),
-             ("presswall.jpg", "Пресс-воллы", 356)]
+    shots = [("as-haval-side.jpg", "Скрытый каркас: полотно с торца идеально ровное", 520),
+             ("as-kgm-1.jpg", "Брус-баннеры у дилеров KGM SsangYong", 356),
+             ("as-haval-day2.jpg", "Смена полотна под акцию — каркас остаётся", 356)]
     x = 56
     for img, cap, w_ in shots:
         cover_round(c, img, x, 512, w_, 146, 16)
@@ -493,9 +527,9 @@ def s11(c):
         c.rect(x, T(512 + 146), w_, 34, stroke=0, fill=1)
         txt(c, x + 14, 512 + 146 - 22, cap, "Man-SB", 12.5, DIM)
         x += w_ + 16
-    footer(c, 11)
+    footer(c)
 
-def s12(c):
+def s13(c):
     kicker(c, 56, 56, "Процесс")
     h2(c, 56, 84, [[("Как проходит работа — ", INK), ("6 шагов", ACC)]], size=44)
 
@@ -521,9 +555,9 @@ def s12(c):
 
     chip_row(c, 56, 560, ["КП в течение дня", "Замер в пределах МКАД — бесплатно", "Работаем по всей России"],
              ["acid", "o", "o"], size=13)
-    footer(c, 12)
+    footer(c)
 
-def s13(c):
+def s14(c):
     kicker(c, 56, 56, "Форматы сотрудничества")
     h2(c, 56, 84, [[("Готовые пакеты ", INK), ("для автосалонов", ACC)]], size=44)
 
@@ -533,7 +567,7 @@ def s13(c):
          "от 250 000 ₽", "от 7 дней · срочно от 3 дней", "sm-reception-zone-1.jpg", False),
         ("Пакет B · хит", "acid", "Мероприятие в салоне",
          "Сцена + каше + фотозона + press-wall + стойка регистрации.",
-         "от 89 000 ₽", "производство и монтаж за 24 часа", "hero-stage.jpg", True),
+         "от 89 000 ₽", "производство и монтаж за 24 часа", "as-tenet-night.jpg", True),
         ("Пакет C", "acc", "Фасад и навигация",
          "Световые вывески и буквы + баннеры на фасад + флаги + входная группа.",
          "по замеру", "логотип от 19 500 ₽/м · от 3 дней", "lightbox.jpg", False),
@@ -555,10 +589,10 @@ def s13(c):
     txt(c, 56, 636, "Цены указаны «от» и зависят от материалов, размеров и сложности дизайна. "
         "Точная стоимость фиксируется в коммерческом предложении после замера и не меняется по ходу работ.",
         "Man-SB", 13, MUT)
-    footer(c, 13)
+    footer(c)
 
-def s14(c):
-    cover(c, "office-branding.jpg", -30, 0, 1340, 720, focus=(0.6, 0.5), fade=("right", 0.985, 0.5))
+def s15(c):
+    cover(c, "as-tenet-t8.jpg", -30, 0, 1340, 720, focus=(0.55, 0.5), fade=("right", 0.985, 0.45))
     logo(c, 56, 48, 78)
 
     kicker(c, 56, 250, "Следующий шаг")
@@ -590,8 +624,10 @@ def build():
     c.setAuthor("SM-Production")
     c.setSubject("Презентация для дилерских центров: оперативное решение вопросов по брендингу")
 
-    slides = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s10, s11, s12, s13, s14]
+    slides = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s10, s11, s12, s13, s14, s15]
+    PAGE[0] = 0
     for fn in slides:
+        PAGE[0] += 1
         c.saveState()
         c.scale(SCALE, SCALE)                      # дизайн-система 1280×720
         c.setFillColor(BG); c.rect(0, 0, DW, DH, stroke=0, fill=1)
