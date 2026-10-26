@@ -192,7 +192,6 @@ def page2(c):
         if label:
             dimh(c, 56, 56 + 378, by + bh + 16, label)
 
-    dimh(c, 56, 56 + 378, 244 + 148, None) if False else None
 
     # вертикальный ритм справа
     dimv(c, 244, 380, 1256, "136")
