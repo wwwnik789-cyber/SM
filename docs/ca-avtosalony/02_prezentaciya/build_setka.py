@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Дизайнерская сетка презентации «Брендинг для автосалонов» — PDF-спецификация.
-5 страниц 1280×720: модульная сетка, оверлей на слайде, типографика, цвет, координаты.
+5 страниц 1920×1080 (отрисовка в 1,5× от системы слайда 1280×720):
+модульная сетка, оверлей на слайде, типографика, цвет, координаты.
 
 Запуск:  python3 build_setka.py
 Итог:    SM-Production_Setka.pdf
@@ -19,7 +20,9 @@ FONTS = os.path.join(BASE, "fonts")
 OUT   = os.path.join(BASE, "SM-Production_Setka.pdf")
 SLIDES_PDF = os.path.join(BASE, "SM-Production_Brending-avtosalonov.pdf")
 
-W, H = 1280.0, 720.0
+W, H = 1280.0, 720.0      # система координат макета (в ней записаны все размеры)
+S    = 1.5                # масштаб отрисовки страницы документа
+PW, PH = W * S, H * S     # 1920 × 1080
 BG    = HexColor("#0a0a0d")
 PANEL = HexColor("#101015")
 INK   = HexColor("#f4f2ec")
@@ -86,6 +89,7 @@ def page_head(c, num, title, sub=""):
     txt(c, 56, 96, title, "Unb-XB", 34, INK)
     if sub:
         txt(c, 56, 124, sub, "Man-SB", 14, MUT)
+    txt(c, 1224, 47, "страница 1920 × 1080 · размеры — в системе слайда 1280 × 720", "Man-SB", 10.5, Color(0.6, 0.6, 0.63, alpha=0.75), "r")
 
 # =====================================================================
 def page1(c):
@@ -107,7 +111,7 @@ def page1(c):
 
     # базовые линии 8 px
     for y in range(TOP + 8, BOT, 8):
-        c.setStrokeColor(Color(0.96, 0.95, 0.92, 0.05)); c.setLineWidth(0.4)
+        c.setStrokeColor(Color(0.96, 0.95, 0.92, 0.04)); c.setLineWidth(0.35)
         c.line(L, T(y), R, T(y))
 
     # граница поля
@@ -126,21 +130,21 @@ def page1(c):
     tag(c, 1040, 618, "правое поле 56 px")
 
     # производные
-    txt(c, 56, 648, "ПРОИЗВОДНЫЕ КОЛОНКИ", "Man-B", 10, MUT)
+    txt(c, 56, 636, "ПРОИЗВОДНЫЕ КОЛОНКИ", "Man-B", 10, MUT)
     variants = [("2 колонки", 576, 16, 2), ("3 колонки", 378, 16, 3), ("4 колонки", 280, 16, 4)]
     x0 = 56
     for label, colw, gap, n in variants:
-        txt(c, x0, 674, f"{label} · {n}x{colw} + {gap}", "Man-SB", 11.5, MUT2)
+        txt(c, x0, 660, f"{label} · {n}x{colw} + {gap}", "Man-SB", 11.5, MUT2)
         bx = x0
         total = (colw * n + gap * (n - 1))
         k = 300 / total
         for i in range(n):
             c.setFillColor(Color(216/255, 255/255, 62/255, alpha=0.38))
-            c.rect(bx, T(700), colw * k, 10, stroke=0, fill=1)
+            c.rect(bx, T(684), colw * k, 9, stroke=0, fill=1)
             bx += (colw + gap) * k
         x0 += 400
 
-    txt(c, 56, 714, "Базовый шаг — 8 px: все отступы, высоты строк и радиусы кратны 4 / 8.", "Man-SB", 11, MUT)
+    txt(c, 56, 700, "Базовый шаг — 8 px: все отступы, высоты строк и радиусы кратны 4 / 8.", "Man-SB", 11, MUT)
     c.showPage()
 
 def page2(c):
@@ -154,15 +158,15 @@ def page2(c):
             import pypdfium2 as pdfium
             from PIL import Image
             pdf = pdfium.PdfDocument(SLIDES_PDF)
-            img = pdf[11].render(scale=1360 / 960).to_pil()
+            img = pdf[11].render(scale=(1360 * S) / 960).to_pil()
             # размытие убирает мелкий текст, оставляя композицию
             from PIL import ImageEnhance
-            img = ImageEnhance.Brightness(img).enhance(0.45)
+            img = ImageEnhance.Brightness(img).enhance(0.42)
             img = ImageEnhance.Color(img).enhance(0.55)
-            img = img.filter(ImageFilter.GaussianBlur(3.4))
-            img.save("/tmp/slide_bg.png")
-            c.drawImage("/tmp/slide_bg.png", 150, 0, 980, 551)
-            c.setFillColor(Color(0.039, 0.039, 0.051, alpha=0.72))
+            img = img.filter(ImageFilter.GaussianBlur(3.4 * S))  # радиус в пикселях рендера, а не в единицах макета
+            img.convert("RGB").save("/tmp/slide_bg.jpg", quality=90)
+            c.drawImage("/tmp/slide_bg.jpg", 150, 0, 980, 551)
+            c.setFillColor(Color(0.039, 0.039, 0.051, alpha=0.78))
             c.rect(0, 0, W, H, stroke=0, fill=1)
         except Exception:
             pass
@@ -268,13 +272,13 @@ def page4(c):
 
     # чип кислотный
     c.setFillColor(HexColor("#d8ff3e")); c.roundRect(cx, T(210), 200, 34, 17, stroke=0, fill=1)
-    txt(c, cx + 100, 210 + 35, "кислотный чип", "Man-B", 13, BG, "c")
+    txt(c, cx + 100, 199, "кислотный чип", "Man-B", 13, BG, "c")
     txt(c, cx + 216, 197, "h=36 · r=pill · текст 14 Man-B", "Man-SB", 11, MUT)
 
     # чип контурный
     c.setFillColor(Color(0.08, 0.08, 0.11, alpha=0.85)); c.setStrokeColor(LINE); c.setLineWidth(1)
     c.roundRect(cx, T(262), 200, 34, 17, stroke=1, fill=1)
-    txt(c, cx + 100, 262 + 35, "контурный чип", "Man-B", 13, INK, "c")
+    txt(c, cx + 100, 251, "контурный чип", "Man-B", 13, INK, "c")
     txt(c, cx + 216, 249, "обводка 13% · фон карточки", "Man-SB", 11, MUT)
 
     # карточка
@@ -351,8 +355,8 @@ def page5(c):
 
     txt(c, 56, 470, "ПЕРЕНОС В INDESIGN / FIGMA", "Man-B", 10, MUT)
     steps = [
-        "1. Документ 1280 × 720 px, поля 56 px, 3 колонки по 378 px, gutter 16 px, baseline 8 px.",
-        "2. Стили абзацев: H1 54/64, H2 46/44/38, карточка 18, текст 16/13.5, подпись 12.5, чип 14.",
+        "1. Документ 1280 × 720 px (в Full HD ×1,5 → 1920 × 1080): поля 56 / 84, 3 колонки 378 / 567, gutter 16 / 24, baseline 8 / 12.",
+        "2. Стили абзацев: H1 54/64, H2 46/44/38, карточка 18, текст 16/13.5, подпись 12.5, чип 14. В Full HD: 81 / 69·66·57 / 27 / 24·20 / 19 / 21.",
         "3. Шрифты: Unbounded (400/700/800) и Manrope (400/500/600/700/800) — лежат в папке fonts/.",
         "4. Цвета — как на странице 04; границы rgba(244,242,236,0.13).",
         "5. Все тексты и фото — отдельными фреймами: файл PPTX собран так же, можно копировать блоками.",
@@ -367,11 +371,13 @@ def page5(c):
     c.showPage()
 
 def build():
-    c = canvas.Canvas(OUT, pagesize=(W, H))
+    c = canvas.Canvas(OUT, pagesize=(PW, PH))
     c.setTitle("SM-Production — дизайнерская сетка презентации")
     c.setAuthor("SM-Production")
     c.setSubject("Модульная сетка, типографика, палитра и координаты презентации «Брендинг для автосалонов»")
-    page1(c); page2(c); page3(c); page4(c); page5(c)
+    for page in (page1, page2, page3, page4, page5):
+        c.saveState(); c.scale(S, S)
+        page(c)          # showPage() сам сбрасывает состояние страницы
     c.save()
     print("PDF:", OUT, os.path.getsize(OUT) // 1024, "КБ")
 
