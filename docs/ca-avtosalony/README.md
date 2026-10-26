@@ -24,6 +24,9 @@ python3 build_pdf.py          # нужны: reportlab, pillow
 | `01_koncepciya.md` | Анализ ЦА, боли/триггеры, оффер, план слайдов, открытые вопросы |
 | `02_prezentaciya/SM-Production_Brending-avtosalonov.pdf` | **Готовый PDF для рассылки** |
 | `02_prezentaciya/index.html` | HTML-версия тех же слайдов (быстрый просмотр в браузере) |
+| `02_prezentaciya/SM-Production_Brending-avtosalonov.pptx` | Редактируемая версия для PowerPoint |
+| `02_prezentaciya/SM-Production_Setka.pdf` | **Дизайнерская сетка**: модули, типографика, цвет, координаты |
+| `02_prezentaciya/KAK-PRAVIT.md` | Инструкция по правке PPTX и установке шрифтов |
 | `02_prezentaciya/build_pdf.py` | Генератор PDF (правится текст/цифры → пересборка) |
 | `02_prezentaciya/img/` | Фотоматериалы (реальные фото sm-production.ru) + настоящий логотип |
 | `02_prezentaciya/img/logo-smproduction.png` | **Настоящий логотип SM** (знак-куб + SMPRODUCTION + event branding decor), прозрачный фон |
