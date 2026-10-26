@@ -1,18 +1,49 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getRelated, getService } from "../data/services";
 import { usePageMeta } from "../hooks/usePageMeta";
 import NotFound from "./NotFound";
 import { Accordion, Btn, ArrowLink, SectionHead } from "../components/ui/bits";
 import { Reveal } from "../components/ui/motion";
-import { Check, Clock, MapPin, Spark } from "../components/ui/Icons";
+import { Check, Clock, Factory, MapPin, Ruler, Spark } from "../components/ui/Icons";
 import { fmtMoney, PHONE, PHONE_HREF, TG } from "../lib/format";
 import { useUI } from "../lib/store";
+
+const FACT_ICONS = { clock: Clock, pin: MapPin, spark: Spark, check: Check, factory: Factory, ruler: Ruler };
+
+// Факты под карточкой «Что входит»: по умолчанию — как было, но услуга может переопределить
+const DEFAULT_FACTS = [
+  { icon: "clock", text: "Производство и монтаж за 24 часа" },
+  { icon: "pin", text: "Москва и МО, выездные бригады по РФ" },
+];
+
+// FAQPage-разметка: помогает попасть в расширенную выдачу и в ответы ИИ-поиска
+function useFaqSchema(slug, faq) {
+  useEffect(() => {
+    if (!faq?.length) return;
+    const el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.dataset.faq = slug;
+    el.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+    document.head.appendChild(el);
+    return () => el.remove();
+  }, [slug, faq]);
+}
 
 export default function ServiceDetail() {
   const { slug } = useParams();
   const s = getService(slug);
   usePageMeta(s ? `${s.title} — SM-Production` : "Услуга не найдена", s?.short);
   const { openLead } = useUI();
+  useFaqSchema(slug, s?.faq);
   if (!s) return <NotFound />;
 
   const related = getRelated(s);
@@ -28,7 +59,12 @@ export default function ServiceDetail() {
           <div className="grid items-end gap-10 lg:grid-cols-[1.2fr_1fr]">
             <Reveal>
               <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">
-                {s.category}{s.isNew && <span className="ml-3 rounded-full bg-acid px-2.5 py-1 text-[10px] tracking-widest text-black">Новое</span>}
+                {s.category}
+                {(s.badge || s.isNew) && (
+                  <span className="ml-3 rounded-full bg-acid px-2.5 py-1 text-[10px] tracking-widest text-black">
+                    {s.badge || "Новое"}
+                  </span>
+                )}
               </p>
               <h1 className="display-h mt-4 text-4xl font-black md:text-6xl">{s.title}</h1>
               <p className="mt-6 max-w-xl text-lg text-mut">{s.short}</p>
@@ -45,6 +81,43 @@ export default function ServiceDetail() {
           </div>
         </div>
       </section>
+
+      {s.stats && (
+        <section className="mx-auto max-w-7xl px-5 pt-16">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {s.stats.map((st, i) => (
+              <Reveal key={st.v + st.l} delay={(i % 4) * 0.06}>
+                <div className="h-full rounded-2xl border border-line bg-card px-6 py-6">
+                  <p className="display-h text-3xl font-black text-acid">{st.v}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-mut">{st.l}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {s.deadline && (
+        <section className="mx-auto max-w-7xl px-5 pt-4">
+          <Reveal>
+            <div className="rounded-3xl border border-accent/40 bg-accent/10 p-6 md:p-8">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="font-display text-[11px] uppercase tracking-[0.24em] text-acid">{s.deadline.title}</p>
+                  <p className="mt-2 max-w-3xl leading-relaxed text-ink">{s.deadline.text}</p>
+                </div>
+                {s.deadline.chips && (
+                  <ul className="flex shrink-0 flex-wrap gap-2">
+                    {s.deadline.chips.map((c) => (
+                      <li key={c} className="rounded-full border border-accent/40 bg-bg/60 px-4 py-2 text-xs font-semibold text-ink">{c}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       <section className="mx-auto max-w-7xl px-5 py-20">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
@@ -64,8 +137,14 @@ export default function ServiceDetail() {
                 ))}
               </ul>
               <div className="mt-6 space-y-2 border-t border-line pt-5 text-sm text-mut">
-                <p className="flex items-center gap-2"><Clock size={14} className="text-accent" /> Производство и монтаж за 24 часа</p>
-                <p className="flex items-center gap-2"><MapPin size={14} className="text-accent" /> Москва и МО, выездные бригады по РФ</p>
+                {(s.facts || DEFAULT_FACTS).map((f) => {
+                  const Icon = FACT_ICONS[f.icon] || Check;
+                  return (
+                    <p key={f.text} className="flex items-start gap-2">
+                      <Icon size={14} className="mt-0.5 shrink-0 text-accent" /> {f.text}
+                    </p>
+                  );
+                })}
               </div>
             </div>
           </Reveal>
@@ -184,7 +263,11 @@ export default function ServiceDetail() {
       {s.gallery && (
         <section className="border-y border-line bg-bg2 py-20">
           <div className="mx-auto max-w-7xl px-5">
-            <SectionHead overline="Галерея" title="Примеры работ" />
+            <SectionHead
+              overline="Галерея"
+              title={s.galleryMeta?.title || "Примеры работ"}
+              text={s.galleryMeta?.note}
+            />
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {s.gallery.map((g, i) => (
                 <Reveal key={g.src} delay={(i % 3) * 0.07}>

@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import Header from "./components/layout/Header";
@@ -104,6 +104,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/uslugi" element={<Services />} />
             <Route path="/uslugi/:slug" element={<ServiceDetail />} />
+            {/* старые адреса Tilda: сохраняем ссылки и поисковый вес */}
+            <Route path="/novogodnee-oformlenie" element={<Navigate to="/uslugi/novogodnee-oformlenie" replace />} />
             <Route path="/proizvodstvo" element={<Production />} />
             <Route path="/proizvodstvo/:slug" element={<ProductionDetail />} />
             <Route path="/media" element={<Media />} />

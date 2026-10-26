@@ -33,6 +33,7 @@ export default function Services() {
                 <div className="relative overflow-hidden">
                   <img src={s.image} alt="" loading="lazy" className="h-48 w-full object-cover" />
                   {s.accent && <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1.5 font-display text-[10px] uppercase tracking-widest text-white">Акция</span>}
+                  {s.badge && !s.accent && <span className="absolute left-4 top-4 rounded-full bg-acid px-3 py-1.5 font-display text-[10px] uppercase tracking-widest text-black">{s.badge}</span>}
                   <span className="absolute right-4 top-4 rounded-full bg-black/50 px-3 py-1.5 font-display text-[10px] uppercase tracking-widest text-white backdrop-blur">{s.category}</span>
                 </div>
                 <div className="flex flex-1 flex-col p-6">

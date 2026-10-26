@@ -7,6 +7,7 @@ import { Close, Logo, Menu, Moon, Phone, Search, Sun } from "../ui/Icons";
 import { useLockBody } from "../../hooks/usePageMeta";
 
 const servicesMenu = [
+  ["Новогоднее оформление", "/uslugi/novogodnee-oformlenie"],
   ["Застройка мероприятий", "/uslugi/zastroyka-meropriyatiy"],
   ["Фотозоны на заказ", "/uslugi/fotozony"],
   ["Имиджевые фотозоны", "/uslugi/imidzhevye-fotozony"],

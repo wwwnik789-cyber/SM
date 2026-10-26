@@ -27,7 +27,7 @@ const { UIProvider } = await server.ssrLoadModule("/src/lib/store.jsx");
 const { default: App } = await server.ssrLoadModule("/src/App.jsx");
 
 const routes = [
-  "/", "/uslugi", "/uslugi/fotozony", "/uslugi/akciya-fotozona", "/uslugi/brus-banner", "/uslugi/brendirovanie-ofisov",
+  "/", "/uslugi", "/uslugi/fotozony", "/uslugi/akciya-fotozona", "/uslugi/brus-banner", "/uslugi/brendirovanie-ofisov", "/uslugi/novogodnee-oformlenie", "/novogodnee-oformlenie",
   "/proizvodstvo", "/proizvodstvo/svetovye-vyveski", "/proizvodstvo/brendirovanie-ofisov",
   "/media", "/arenda", "/portfolio", "/portfolio/ctc-kids-vk-fest-2025", "/portfolio/casting-dv-production", "/process", "/o-kompanii", "/team", "/b2b",
   "/blog", "/blog/trendy-oformleniya-meropriyatiy-2026", "/blog/kak-vybrat-stoyku-resepshn",
