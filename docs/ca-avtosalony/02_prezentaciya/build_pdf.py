@@ -22,7 +22,7 @@ FONTS = os.path.join(BASE, "fonts")
 OUT  = os.path.join(BASE, "SM-Production_Brending-avtosalonov.pdf")
 
 DW, DH = 1280.0, 720.0            # дизайн-система
-PW, PH = 960.0, 540.0             # размер страницы PDF (16:9)
+PW, PH = 1920.0, 1080.0           # страница PDF = 1920×1080 px (1 px = 1 pt)
 SCALE = PW / DW
 
 BG   = HexColor("#0a0a0d")
