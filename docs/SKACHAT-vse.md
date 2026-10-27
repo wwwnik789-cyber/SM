@@ -1,5 +1,30 @@
 # Последние файлы — Топотон и фоны (27.10.2026)
 
+## 0а. Haval — оформление дилерского центра (новое, 27.10)
+
+**Одним архивом (9,5 МБ, 11 файлов):**
+https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/SM-Haval-oformlenie-27-10.zip
+
+Обзор девяти кадров:
+https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/preview.jpg
+
+| Позиция | Ссылка |
+|---|---|
+| Общий вид | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/00-hero.jpg |
+| Зона ресепшн | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-01-reception.jpg |
+| Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-02-logotipy.jpg |
+| Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-03-brand-paneli.jpg |
+| Навигация | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-04-navigaciya.jpg |
+| Инфостойки | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-06-info-stoyki.jpg |
+| PressWall | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-07-presswall.jpg |
+| Фотозона | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-08-fotozona.jpg |
+| Фасад | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-09-fasad.jpg |
+
+Бренд-код Haval и состав работ:
+https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/README.md
+
+---
+
 ## 0. Автосалоны — стандартные позиции брендирования (новое, 27.10)
 
 **Одним архивом (9,6 МБ, 12 файлов):**
