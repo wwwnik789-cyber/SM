@@ -191,79 +191,9 @@ def _sample(tex, u, v):
     return (a * (1 - fx) + b * fx) * (1 - fy) + (c * (1 - fx) + d * fx) * fy
 
 
-def _sample(tex, u, v):
-    """Билинейная выборка текстуры (или плоский цвет)."""
-    if tex.ndim == 1:
-        return np.broadcast_to(tex.astype(np.float32), u.shape + (3,))
-    th, tw = tex.shape[:2]
-    x = np.clip(u * (tw - 1), 0, tw - 1)
-    y = np.clip((1.0 - v) * (th - 1), 0, th - 1)
-    x0 = np.floor(x).astype(np.int32)
-    y0 = np.floor(y).astype(np.int32)
-    x1 = np.minimum(x0 + 1, tw - 1)
-    y1 = np.minimum(y0 + 1, th - 1)
-    fx = (x - x0)[..., None]
-    fy = (y - y0)[..., None]
-    a = tex[y0, x0].astype(np.float32)
-    b = tex[y0, x1].astype(np.float32)
-    c = tex[y1, x0].astype(np.float32)
-    d = tex[y1, x1].astype(np.float32)
-    return (a * (1 - fx) + b * fx) * (1 - fy) + (c * (1 - fx) + d * fx) * fy
-
-
-def _raster_quad(q, cam, buf, zbuf, sun, fog_col, fog_start=18.0, fog_amt=0.55):
-    w, h = cam.w, cam.h
-    box = _bbox(cam, q.pts, w, h)
-    if box is None:
-        return
-    x0, x1, y0, y1, p, z = box
-    x0, y0 = max(0, x0), max(0, y0)
-    x1, y1 = min(w, x1), min(h, y1)
-    if x1 <= x0 or y1 <= y0:
-        return
-
-    A, B, C, D = p
-    # два треугольника
-    for tri in ((A, B, C, 0, 1, 2), (A, C, D, 0, 2, 3)):
-        (ax, ay), (bx, by), (cx, cy) = tri[0], tri[1], tri[2]
-        i0, i1, i2 = tri[3], tri[4], tri[5]
-        gx, gy = np.meshgrid(np.arange(x0, x1) + 0.5, np.arange(y0, y1) + 0.5)
-        det = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
-        if abs(det) < 1e-9:
-            continue
-        l0 = ((by - cy) * (gx - cx) + (cx - bx) * (gy - cy)) / det
-        l1 = ((cy - ay) * (gx - cx) + (ax - cx) * (gy - cy)) / det
-        l2 = 1.0 - l0 - l1
-        m = (l0 >= -0.0004) & (l1 >= -0.0004) & (l2 >= -0.0004)
-        if not m.any():
-            continue
-
-        uv = q.uv
-        u = l0 * uv[i0, 0] + l1 * uv[i1, 0] + l2 * uv[i2, 0]
-        v = l0 * uv[i0, 1] + l1 * uv[i1, 1] + l2 * uv[i2, 1]
-        col = _sample(q.tex, u, v)
-
-        # перспективно-корректная глубина
-        zz = 1.0 / (l0 / max(z[i0], 1e-3) + l1 / max(z[i1], 1e-3) + l2 / max(z[i2], 1e-3))
-
-        sub_z = zbuf[y0:y1, x0:x1]
-        take = m & (zz < sub_z)
-        if not take.any():
-            continue
-
-        base = shade(q.normal, col, sun, q.emissive).astype(np.float32) * q.tint
-        # туман по глубине — атмосфера зала
-        fg = np.clip((zz - fog_start) / 24.0, 0, 1) * fog_amt
-        base = base * (1 - fg[..., None]) + np.array(fog_col, np.float32) * fg[..., None]
-
-        sub = buf[y0:y1, x0:x1]
-        sub[take] = base[take]
-        sub_z[take] = zz[take]
-
-
 def render(scene, cam, bg=(0.035, 0.038, 0.05), sun=None, fog_col=(0.075, 0.075, 0.10),
            fog_start=16.0, fog_amt=0.5, glow_spots=(), grain=0.006, shadows=None,
-           lights=None):
+           lights=None, occluders=None):
     """
     scene — список Quad/Box/списки. glow_spots — [(x, y, z, r, color, strength)].
     shadows — callable(wx, wy, z) → множитель, рисует тени от ламелей на полу.
@@ -287,7 +217,7 @@ def render(scene, cam, bg=(0.035, 0.038, 0.05), sun=None, fog_col=(0.075, 0.075,
     for q in quads:
         # тени только на горизонтальные поверхности
         sh = shadows if (shadows is not None and q.normal[2] > 0.7) else None
-        _raster_quad(q, cam, buf, zbuf, sun, fog_col, fog_start, fog_amt, sh, lights)
+        _raster_quad(q, cam, buf, zbuf, sun, fog_col, fog_start, fog_amt, sh, lights, occluders)
 
     if glow_spots:
         yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
@@ -386,7 +316,8 @@ def shade_px(normal, albedo, wp, lights, amb=(0.05, 0.055, 0.075),
     return out
 
 
-def _raster_quad(q, cam, buf, zbuf, sun, fog_col, fog_start=16.0, fog_amt=0.5, shadow=None, lights=None):
+def _raster_quad(q, cam, buf, zbuf, sun, fog_col, fog_start=16.0, fog_amt=0.5, shadow=None,
+                 lights=None, occluders=None):
     """Растеризация одного четырёхугольника с необязательными тенями сквозь сетку."""
     w, h = cam.w, cam.h
     box = _bbox(cam, q.pts, w, h)
@@ -433,6 +364,14 @@ def _raster_quad(q, cam, buf, zbuf, sun, fog_col, fog_start=16.0, fog_amt=0.5, s
             base = base.reshape(hh, ww, 3).astype(np.float32) * q.tint
         else:
             base = shade(q.normal, col, sun, q.emissive).astype(np.float32) * q.tint
+        if occluders and q.normal[2] > 0.7:
+            wx = l0 * q.pts[i0, 0] + l1 * q.pts[i1, 0] + l2 * q.pts[i2, 0]
+            wy = l0 * q.pts[i0, 1] + l1 * q.pts[i1, 1] + l2 * q.pts[i2, 1]
+            soft = np.ones(wx.shape, np.float32)
+            for (ox, oy, rx, ry, st) in occluders:
+                d = ((wx - ox) / max(rx, 1e-3)) ** 2 + ((wy - oy) / max(ry, 1e-3)) ** 2
+                soft = soft * (1.0 - st * np.exp(-d * 1.6))
+            base = base * soft[..., None]
         if shadow is not None:
             # тень от ламельного потолка: вертикальная проекция на пол
             wx = l0 * q.pts[i0, 0] + l1 * q.pts[i1, 0] + l2 * q.pts[i2, 0]

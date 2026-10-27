@@ -199,7 +199,7 @@ def cover(w, h, seed, pair=None, label=True):
     return im
 
 
-def cover_grid(w, h, cols, rows, seed=0, gap_ratio=0.012):
+def cover_grid(w, h, cols, rows, seed=0, gap_ratio=0.012, label=True):
     """Сетка обложек одного размера — текстура для стены/витрины."""
     im = Image.new("RGBA", (w, h), (16, 16, 22, 255))
     gx = int(w * gap_ratio)
@@ -208,7 +208,7 @@ def cover_grid(w, h, cols, rows, seed=0, gap_ratio=0.012):
     ch = (h - gy * (rows + 1)) / rows
     for j in range(rows):
         for i in range(cols):
-            c = cover(int(cw), int(ch), seed + j * cols + i)
+            c = cover(int(cw), int(ch), seed + j * cols + i, label=label)
             im.alpha_composite(c, (int(gx + i * (cw + gx)), int(gy + j * (ch + gy))))
     return im
 
