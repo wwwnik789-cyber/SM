@@ -29,8 +29,8 @@ python3 build_pdf.py          # нужны: reportlab, pillow
 | `02_prezentaciya/KAK-PRAVIT.md` | Инструкция по правке PPTX и установке шрифтов |
 | `02_prezentaciya/build_pdf.py` | Генератор PDF (правится текст/цифры → пересборка) |
 | `02_prezentaciya/img/` | Фотоматериалы (реальные фото sm-production.ru) + настоящий логотип |
-| `03_vizualizacii/` | **9 фотореалистичных кадров по стандартным позициям** (ресепшн, логотипы, бренд-панели, навигация, подвесы, инфостойки, PressWall, фотозона) + `preview.jpg` |
-| `SM-Avtosalony-vizualizacii-27-10.zip` | Архив тех же 9 кадров (9,7 МБ) для письма менеджера |
+| `03_vizualizacii/` | **10 фотореалистичных кадров по стандартным позициям** (ресепшн, логотипы, бренд-панели, навигация, подвесы, инфостойки, PressWall, фотозона, электрозона) + `preview.jpg` |
+| `SM-Avtosalony-vizualizacii-27-10.zip` | Архив тех же 10 кадров (10,3 МБ) для письма менеджера |
 | `02_prezentaciya/img/logo-smproduction.png` | **Настоящий логотип SM** (знак-куб + SMPRODUCTION + event branding decor), прозрачный фон |
 | `02_prezentaciya/img/logo-mark.png` | Только знак-куб — колонтитулы слайдов |
 | `03_pismo-menedzheram.md` | Темы писем, холодное письмо, 2 follow-up, ответы на возражения |

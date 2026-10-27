@@ -2,7 +2,7 @@
 
 ## 0. Автосалоны — стандартные позиции брендирования (новое, 27.10)
 
-**Одним архивом (9,7 МБ, 11 файлов):**
+**Одним архивом (10,3 МБ, 12 файлов):**
 https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/SM-Avtosalony-vizualizacii-27-10.zip
 
 Обзор всех девяти кадров:
@@ -19,6 +19,7 @@ https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualiz
 | Информационные стойки | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-06-info-stoyki.jpg |
 | PressWall на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-07-presswall.jpg |
 | Фотозона | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-08-fotozona.jpg |
+| Зона электромобилей | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-09-elektro.jpg |
 
 Описание позиций, правила и промпт:
 https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/README.md
