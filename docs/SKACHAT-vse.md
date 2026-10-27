@@ -37,6 +37,9 @@ https://github.com/wwwnik789-cyber/SM/raw/4cb06f3/docs/ca-avtosalony/04_haval/RE
 вечерний свет и город в витрине. Логотип Haval в кадрах — из брендбука,
 посажен в перспективу панелей.
 
+**Одним архивом (7,1 МБ, 24 файла):**
+https://github.com/wwwnik789-cyber/SM/raw/4cb06f3/docs/ca-avtosalony/SM-Reklama-Avtosalony-27-10.zip
+
 Обзор шести макетов:
 https://github.com/wwwnik789-cyber/SM/raw/4cb06f3/docs/ca-avtosalony/05_reklama/preview.jpg
 
