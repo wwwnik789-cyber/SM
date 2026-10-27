@@ -35,6 +35,7 @@ python3 build_pdf.py          # нужны: reportlab, pillow
 | `SM-Haval-oformlenie-27-10.zip` | Архив набора Haval (13,3 МБ, 17 файлов: кадры, логотип, фото изделий) для письма дилеру |
 | `02_prezentaciya/img/logo-smproduction.png` | **Настоящий логотип SM** (знак-куб + SMPRODUCTION + event branding decor), прозрачный фон |
 | `02_prezentaciya/img/logo-mark.png` | Только знак-куб — колонтитулы слайдов |
+| `05_reklama/` | **Реклама «Автосалоны» — 6 макетов 16:9 + 6 квадратов 1:1** (лаунж, стойки, навигация, presswall, фасад, ресепшн), тексты и дизайн-система, `preview.jpg`, генератор `build_ads.py` |
 | `03_pismo-menedzheram.md` | Темы писем, холодное письмо, 2 follow-up, ответы на возражения |
 
 ## Правила контента

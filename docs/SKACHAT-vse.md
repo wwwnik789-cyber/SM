@@ -30,6 +30,31 @@ https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/04_haval/RE
 
 ---
 
+## 0б. Реклама «Автосалоны» — 6 макетов (новое, 27.10)
+
+Сделано после разбора фотографий московских салонов: графитовый фриз с крупным
+логотипом, светлый камень, дерево-рейка, лаунж с кофе, подвесная навигация,
+вечерний свет и город в витрине. Логотип Haval в кадрах — из брендбука,
+посажен в перспективу панелей.
+
+Обзор шести макетов:
+https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/preview.jpg
+
+| Макет | 16:9 | Квадрат 1:1 |
+|---|---|---|
+| Клиенту есть где ждать | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/reklama-01-reception.jpg | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/social-01-reception.jpg |
+| Стойки для зала | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/reklama-02-stands.jpg | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/social-02-stands.jpg |
+| Клиент не заблудится | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/reklama-03-navigation.jpg | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/social-03-navigation.jpg |
+| PressWall для выдачи | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/reklama-04-presswall.jpg | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/social-04-presswall.jpg |
+| Ваш бренд на фасаде | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/reklama-05-facade.jpg | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/social-05-facade.jpg |
+| Ресепшн под ключ | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/reklama-06-reception.jpg | https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/social-06-reception.jpg |
+
+Референсы, тексты и как править:
+https://github.com/wwwnik789-cyber/SM/raw/1bf7117/docs/ca-avtosalony/05_reklama/README.md
+
+
+---
+
 ## 0. Автосалоны — стандартные позиции брендирования (новое, 27.10)
 
 **Одним архивом (9,6 МБ, 12 файлов):**
