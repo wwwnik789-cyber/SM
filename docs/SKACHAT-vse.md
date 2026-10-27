@@ -2,32 +2,64 @@
 
 Всё, что сделано в последних задачах. Ссылки — прямые, скачивание начинается сразу.
 
-Ветка: `arena/eb11383d-sm` · коммит: `1a96add`
+Ветка: `arena/eb11383d-sm` · коммит: `32a4080`
 
 ---
 
 ## 1. Topotoon — визуализации стенда 9,00 × 5,04 м
 
-**Одним архивом (14,8 МБ):**
-https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/SM-Topotoon-viz-27-10.zip
+Три набора по одной геометрии. **Основной — А, по презентации клиента.**
 
-Внутри: 7 кадров, вся бренд-графика (лого, маскот, фриз, баннеры, пол),
-исходники генератора и описание кадров.
+### А. По вашей презентации — «японское комбини» (новое, 27.10)
 
-Отдельные файлы, если нужно по одному:
+**Одним архивом (14,2 МБ, 31 файл):**
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-client-27-10.zip
+
+Внутри: 6 кадров, контактный лист, 16 текстур печати и исходники генератора.
+
+Обзор всех шести кадров:
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/preview.jpg
 
 | Кадр | Ссылка |
 |---|---|
-| 01 — общий вид ¾ | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/01-hero.png |
-| 02 — фронт-портал | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/02-front.png |
-| 03 — интерьер от входа | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/03-inside.png |
-| 04 — аниме-лаунж | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/04-lounge.png |
-| 05 — касса и витрина вебтунов | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/05-cashier.png |
-| 06 — будка, гача, кладовая | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/06-booth.png |
-| 07 — план сверху | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/07-plan.png |
+| 01 — общий вид ¾, лаймовый фасад | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/01-hero.png |
+| 02 — фронт 9 м: касса, гондола, «АНИМЕ» | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/02-front.png |
+| 03 — интерьер от входа | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/03-inside.png |
+| 04 — лаунж на пуфах | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/04-lounge.png |
+| 05 — касса и полки с обложками | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/05-cashier.png |
+| 06 — будка, гача, зеркало «МИР ИСТОРИЙ» | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-client/06-booth.png |
+
+Соответствие слайдам презентации, палитра, что добавляется в смету:
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/08_vizualizacii-po-prezentacii.md
+
+### Б. Классическая тёмная серия — 7 кадров
+
+**Одним архивом (14,8 МБ):**
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-viz-27-10.zip
+
+| Кадр | Ссылка |
+|---|---|
+| 01 — общий вид ¾ | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/01-hero.png |
+| 02 — фронт-портал | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/02-front.png |
+| 03 — интерьер от входа | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/03-inside.png |
+| 04 — аниме-лаунж | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/04-lounge.png |
+| 05 — касса и витрина вебтунов | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/05-cashier.png |
+| 06 — будка, гача, кладовая | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/06-booth.png |
+| 07 — план сверху | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d/07-plan.png |
 
 Описание кадров и геометрии:
-https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/06_3d-vizualizacii.md
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/06_3d-vizualizacii.md
+
+### В. Светлая серия — 6 кадров
+
+**Одним архивом (14,0 МБ):**
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-modern-27-10.zip
+
+Обзор:
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders3d-modern/preview.jpg
+
+Кадры по одному — папка `renders3d-modern/`, описание в `07_vizualizacii-sovremennye.md`:
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/07_vizualizacii-sovremennye.md
 
 ---
 
