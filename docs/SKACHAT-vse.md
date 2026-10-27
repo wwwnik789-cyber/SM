@@ -1,8 +1,33 @@
 # Последние файлы — Топотон и фоны (27.10.2026)
 
+## 0. Автосалоны — стандартные позиции брендирования (новое, 27.10)
+
+**Одним архивом (9,7 МБ, 11 файлов):**
+https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/SM-Avtosalony-vizualizacii-27-10.zip
+
+Обзор всех девяти кадров:
+https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/preview.jpg
+
+| Позиция | Ссылка |
+|---|---|
+| Общий вид | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/00-hero.jpg |
+| Зона ресепшн | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-01-reception.jpg |
+| Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-02-logotipy.jpg |
+| Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-03-brand-paneli.jpg |
+| Навигация | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-04-navigaciya.jpg |
+| Подвесы на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-05-podvesy.jpg |
+| Информационные стойки | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-06-info-stoyki.jpg |
+| PressWall на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-07-presswall.jpg |
+| Фотозона | https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/03-08-fotozona.jpg |
+
+Описание позиций, правила и промпт:
+https://github.com/wwwnik789-cyber/SM/raw/f62f7a0/docs/ca-avtosalony/03_vizualizacii/README.md
+
+---
+
 Всё, что сделано в последних задачах. Ссылки — прямые, скачивание начинается сразу.
 
-Ветка: `arena/eb11383d-sm` · коммит: `b637fc9`
+Ветка: `arena/eb11383d-sm` · коммит: `f62f7a0`
 
 ---
 
