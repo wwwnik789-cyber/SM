@@ -82,6 +82,27 @@ def footer(c, num, label='BAK MASTERS · столики для ноутбука'
     c.drawRightString((right_x if right_x else PW - M), 9 * mm, 'стр. %d из %d' % (num, TOTAL))
 
 
+LOG_W, LOG_H = 1658, 868          # пропорции обрезанного логотипа
+
+
+def logo(c, x, top, width=36 * mm, white=False):
+    """рисует логотип, возвращает y под ним"""
+    h = width * LOG_H / LOG_W
+    path = os.path.join(IMG, 'logo-white.png' if white else 'logo-ink.png')
+    c.drawImage(path, x, top - h, width, h, mask='auto')
+    return top - h
+
+
+def page_head(c, x, top, eb, white=False, width=36 * mm, eb_size=9):
+    """логотип + надзаголовок; возвращает y, с которого начинать заголовок"""
+    y = logo(c, x, top, width=width, white=white)
+    y -= 11 * mm
+    c.setFillColor(ACC if not white else (0.36, 0.78, 0.74))
+    c.setFont('M-700', eb_size)
+    c.drawString(x, y, eb.upper())
+    return y - 7 * mm
+
+
 def eyebrow(c, x, y, text):
     c.setFillColor(ACC)
     c.setFont('M-700', 9)
@@ -125,17 +146,21 @@ def main():
     c.setFillAlpha(1)
     c.setStrokeAlpha(1)
 
+    yb = logo(c, M, PH - M - 2 * mm, width=58 * mm, white=True)
+    c.setFillColorRGB(0.72, 0.90, 0.87)
+    c.setFont('M-700', 9.5)
+    c.drawString(M, yb - 9 * mm, 'BAK HOME  ·  КОМБИНИРОВАННАЯ МЕБЕЛЬ ДЛЯ ДОМА')
+
+    yb -= 32 * mm
     c.setFillColorRGB(1, 1, 1)
-    c.setFont('M-600', 10)
-    c.drawString(M, PH - 26 * mm, 'BAK MASTERS  ·  BAK HOME')
-    c.setFont('M-800', 42)
-    c.drawString(M, PH - 50 * mm, 'Столики для ноутбука')
+    c.setFont('M-800', 40)
+    c.drawString(M, yb, 'Столики для ноутбука')
     c.setFont('M-400', 15)
     c.setFillColorRGB(0.94, 0.92, 0.89)
-    c.drawString(M, PH - 64 * mm, 'Дерево, металл и тихое охлаждение')
+    c.drawString(M, yb - 9 * mm, 'Дерево, металл и тихое охлаждение')
     c.setFillColorRGB(0.86, 0.83, 0.79)
     c.setFont('M-400', 11.5)
-    c.drawString(M, PH - 78 * mm, 'Три модели · шесть опций · проводов не видно')
+    c.drawString(M, yb - 20 * mm, 'Три модели · шесть опций · проводов не видно')
 
     # три миниатюры
     thumbs = [('nb-hero.jpg', '4.1  Приставной'), ('nb-nakolennyj.jpg', '4.2  Наколенный'),
@@ -161,8 +186,8 @@ def main():
     cover_image(c, os.path.join(IMG, 'nb-obduv.jpg'), PW * 0.56, 0, PW * 0.44, PH)
 
     x = M
-    eyebrow(c, x, PH - M - 6 * mm, 'задача')
-    y = big_title(c, x, PH - M - 18 * mm, 'Ноутбук греется, и это слышно', size=27, maxw=PW * 0.47)
+    y = page_head(c, x, PH - M, 'задача', width=38 * mm)
+    y = big_title(c, x, y - 3 * mm, 'Ноутбук греется, и это слышно', size=27, maxw=PW * 0.47)
     y -= 2 * mm
     y = text_block(c, x, y, 'На коленях, на диване, на подоконнике — ноутбук всегда стоит там, '
                             'где нет продува. Вентилятор выходит на максимум, корпус горячий, '
@@ -186,7 +211,7 @@ def main():
         c.setFont('M-700', 11.5)
         c.drawString(x + 9 * mm, y, head)
         text_block(c, x + 9 * mm, y - 6.5 * mm, body, size=9.8, color=MUTED, maxw=PW * 0.5 - 9 * mm)
-        y -= 30 * mm
+        y -= 27 * mm
     footer(c, page, right_x=PW * 0.5 - 2 * mm)
     c.showPage()
     page += 1
@@ -199,8 +224,8 @@ def main():
 
     tx = PW * 0.53 + 6 * mm
     tw_ = PW - tx - M
-    eyebrow(c, tx, PH - M - 4 * mm, 'флагман · позиция 4.1')
-    y = big_title(c, tx, PH - M - 15 * mm, 'Приставной столик', size=26, maxw=tw_)
+    y = page_head(c, tx, PH - M, 'флагман · позиция 4.1', width=38 * mm)
+    y = big_title(c, tx, y - 1 * mm, 'Приставной столик', size=26, maxw=tw_)
     y -= 1 * mm
     y = text_block(c, tx, y, 'Встаёт к дивану или креслу: столешница заходит над коленями, '
                             'стойка уходит за сиденье.', size=11, color=MUTED, maxw=tw_)
@@ -235,10 +260,8 @@ def main():
     cover_image(c, os.path.join(IMG, 'nb-obduv.jpg'), PW * 0.42, 0, PW * 0.58, PH)
 
     x = M
-    c.setFillColor(ACC)
-    c.setFont('M-700', 9)
-    c.drawString(x, PH - M - 4 * mm, 'КОНСТРУКЦИЯ ОБДУВА')
-    y = big_title(c, x, PH - M - 16 * mm, 'Свет и воздух идут сквозь дерево',
+    y = page_head(c, x, PH - M, 'конструкция обдува', white=True, width=38 * mm)
+    y = big_title(c, x, y - 1 * mm, 'Свет и воздух идут сквозь дерево',
                   size=24, color=WHITE, maxw=PW * 0.38)
     y -= 4 * mm
     y = text_block(c, x, y, 'Щели фрезерованы в столешнице — это не декор, а канал. '
@@ -270,8 +293,8 @@ def main():
     c.setFillColor(SAND)
     c.rect(0, 0, PW, PH, fill=1, stroke=0)
     cover_image(c, os.path.join(IMG, 'nb-nakolennyj.jpg'), M, M, img_w, PH - 2 * M)
-    eyebrow(c, tx, PH - M - 4 * mm, 'позиция 4.2')
-    y = big_title(c, tx, PH - M - 15 * mm, 'Наколенный столик', size=26, maxw=tw_)
+    y = page_head(c, tx, PH - M, 'позиция 4.2', width=38 * mm)
+    y = big_title(c, tx, y - 1 * mm, 'Наколенный столик', size=26, maxw=tw_)
     y -= 1 * mm
     y = text_block(c, tx, y, 'Диван, кровать, кресло. Складывается за десять секунд '
                             'и уезжает за спинку.', size=11, color=MUTED, maxw=tw_)
@@ -301,8 +324,8 @@ def main():
     c.setFillColor(SAND)
     c.rect(0, 0, PW, PH, fill=1, stroke=0)
     cover_image(c, os.path.join(IMG, 'nb-rabochij.jpg'), M, M, img_w, PH - 2 * M)
-    eyebrow(c, tx, PH - M - 4 * mm, 'позиция 4.3')
-    y = big_title(c, tx, PH - M - 15 * mm, 'Рабочий стол', size=26, maxw=tw_)
+    y = page_head(c, tx, PH - M, 'позиция 4.3', width=38 * mm)
+    y = big_title(c, tx, y - 1 * mm, 'Рабочий стол', size=26, maxw=tw_)
     y -= 1 * mm
     y = text_block(c, tx, y, 'Кабинетный стол, в котором спрятано всё, что обычно '
                             'лежит проводами.', size=11, color=MUTED, maxw=tw_)
@@ -331,11 +354,11 @@ def main():
     # ================= 7. ОПЦИИ С ФОТО =================
     c.setFillColor(SAND)
     c.rect(0, 0, PW, PH, fill=1, stroke=0)
-    eyebrow(c, M, PH - M - 4 * mm, 'опции')
-    big_title(c, M, PH - M - 15 * mm, 'Что добавляют к базе', size=24)
+    y = page_head(c, M, PH - M, 'опции', width=38 * mm)
+    y = big_title(c, M, y - 1 * mm, 'Что добавляют к базе', size=24)
     c.setFillColor(MUTED)
     c.setFont('M-400', 10)
-    c.drawString(M, PH - M - 24 * mm,
+    c.drawString(M, y + 1 * mm,
                  'Опции дают 20–30 % к чеку почти без роста трудозатрат — их стоит предлагать всегда.')
 
     opts = [
@@ -345,8 +368,8 @@ def main():
          '+1 500 ₽'),
     ]
     cw = (PW - 2 * M - 2 * 8 * mm) / 3
-    ch = 62 * mm
-    top = PH - M - 34 * mm
+    ch = 55 * mm
+    top = y - 6 * mm
     for i, (fn, name, desc, price) in enumerate(opts):
         x = M + i * (cw + 8 * mm)
         cover_image(c, os.path.join(IMG, fn), x, top - ch, cw, ch)
@@ -373,8 +396,8 @@ def main():
     # ================= 8. ТАБЛИЦА ОПЦИЙ =================
     c.setFillColor(SAND)
     c.rect(0, 0, PW, PH, fill=1, stroke=0)
-    eyebrow(c, M, PH - M - 4 * mm, 'полный список')
-    big_title(c, M, PH - M - 15 * mm, 'Шесть опций и наценки', size=24)
+    page_head(c, M, PH - M, 'полный список', width=38 * mm)
+    big_title(c, M, PH - M - 38 * mm, 'Шесть опций и наценки', size=24)
 
     rows = [
         ('Опция', 'Что даёт', 'Наценка', 'Кому'),
@@ -385,7 +408,7 @@ def main():
         ('Камень в зоне обдува', 'оникс или травертин вместо дерева', '+18 000 ₽', 'топовая версия'),
         ('Чехол из плотной ткани', 'хранение и перевозка', '+3 500 ₽', 'складной модели 4.2'),
     ]
-    y = PH - M - 28 * mm
+    y = PH - M - 52 * mm
     colx = [M, M + 58 * mm, M + 132 * mm, M + 186 * mm]
     c.setFillColor(SOFT)
     c.rect(M, y, PW - 2 * M, 10 * mm, fill=1, stroke=0)
@@ -426,8 +449,8 @@ def main():
     # ================= 9. СРАВНЕНИЕ =================
     c.setFillColor(SAND)
     c.rect(0, 0, PW, PH, fill=1, stroke=0)
-    eyebrow(c, M, PH - M - 4 * mm, 'сравнение')
-    big_title(c, M, PH - M - 15 * mm, 'Три модели рядом', size=24)
+    page_head(c, M, PH - M, 'сравнение', width=38 * mm)
+    big_title(c, M, PH - M - 38 * mm, 'Три модели рядом', size=24)
 
     cols = [
         ('4.1  Приставной', 'nb-hero.jpg', ['700 × 450 мм', '620–760 мм', '2 × 120 мм', '0–12°',
@@ -438,8 +461,8 @@ def main():
                                                   '38 кг', '85 000–130 000 ₽'], 'кабинет, постоянное место'),
     ]
     cw = (PW - 2 * M - 2 * 7 * mm) / 3
-    top = PH - M - 26 * mm
-    chh = 52 * mm
+    top = PH - M - 48 * mm
+    chh = 46 * mm
     rows_lbl = ['Габариты', 'Высота', 'Вентиляторы', 'Наклон', 'Вес', 'Цена']
     for i, (title, fn, vals, where) in enumerate(cols):
         x = M + i * (cw + 7 * mm)
@@ -463,50 +486,104 @@ def main():
     c.showPage()
     page += 1
 
-    # ================= 10. ФИНАЛ =================
+    # ================= 10. КОНТАКТЫ =================
     c.setFillColor(DARK)
     c.rect(0, 0, PW, PH, fill=1, stroke=0)
-    cover_image(c, os.path.join(IMG, 'nb-hero.jpg'), 0, 0, PW * 0.4, PH)
-    c.setFillColorRGB(0.14, 0.12, 0.10, alpha=0.55)
-    c.rect(0, 0, PW * 0.4, PH, fill=1, stroke=0)
+
+    # фото слева с мягким затемнением
+    cover_image(c, os.path.join(IMG, 'nb-hero.jpg'), 0, 0, PW * 0.36, PH)
+    c.setFillColorRGB(0.09, 0.08, 0.07, alpha=0.62)
+    c.rect(0, 0, PW * 0.36, PH, fill=1, stroke=0)
+    c.setFillAlpha(1)
+    c.setStrokeAlpha(1)
+
+    # мягкая растяжка на стыке фото и фона
+    for i in range(24):
+        a = 0.62 * (1 - i / 23.0)
+        c.setFillColorRGB(0.09, 0.08, 0.07, alpha=a)
+        c.rect(PW * 0.36 + i * 1.1 * mm, 0, 1.4 * mm, PH, fill=1, stroke=0)
     c.setFillAlpha(1)
 
-    x = PW * 0.4 + 10 * mm
-    maxw = PW - x - M
-    c.setFillColor(WHITE)
-    c.setFont('M-800', 28)
-    c.drawString(x, PH - M - 22 * mm, 'Что нужно, чтобы посчитать')
-    c.setFillColor((0.85, 0.82, 0.79))
-    c.setFont('M-400', 11.5)
-    y = PH - M - 34 * mm
-    for line in [
-        '1. Модель и размер: 4.1, 4.2 или 4.3.',
-        '2. Порода дерева и оттенок, если столешница из смолы.',
-        '3. Нужны ли опции: зарядка, подсветка, крючок, камень.',
-        '4. Цвет металла по палитре RAL.',
-        '5. Срок: к какому числу нужен столик.',
-    ]:
-        for part in wrap(line, 11.5, 'M-400', maxw):
-            c.drawString(x, y, part)
-            y -= 7 * mm
-        y -= 1.5 * mm
+    x = PW * 0.36 + 12 * mm
+    right = PW - M
 
-    y -= 5 * mm
-    c.setFillColor(ACC)
-    c.setFont('M-700', 11.5)
-    c.drawString(x, y, 'Расчёт — в течение рабочего дня')
-    y -= 9 * mm
+    # логотип
+    yb = logo(c, x, PH - M - 2 * mm, width=54 * mm, white=True)
+
+    c.setFillColorRGB(0.36, 0.78, 0.74)
+    c.setFont('M-700', 9.5)
+    c.drawString(x, yb - 8 * mm, 'СВЯЗАТЬСЯ')
+
     c.setFillColor(WHITE)
-    c.setFont('M-700', 18)
-    c.drawString(x, y, '+7 (926) 160-91-10')
-    y -= 8 * mm
+    c.setFont('M-800', 31)
+    c.drawString(x, yb - 21 * mm, 'Обсудим ваш столик')
     c.setFillColor((0.80, 0.77, 0.73))
-    c.setFont('M-400', 12)
-    c.drawString(x, y, 'bak.masters@yandex.ru  ·  bakmasters.su')
+    c.setFont('M-400', 11)
+    c.drawString(x, yb - 28.5 * mm, 'Ответим цифрами: стоимость, срок и что технологически возможно.')
+    c.drawString(x, yb - 34 * mm, 'Расчёт — в течение рабочего дня, без брифа на десять страниц.')
 
-    c.setFillColor((0.55, 0.52, 0.48))
-    c.setFont('M-400', 8.5)
-    c.drawString(x, 16 * mm, 'ИП Бабаева Кристина Горхмазовна · ИНН 572501343152')
+    # ---- плашки контактов 2 × 2 ----
+    cards = [
+        ('WHATSAPP', '+7 (926) 160-91-10', 'написать в один тап'),
+        ('ТЕЛЕФОН', '+7 (926) 160-91-10', 'ПН–ПТ, 10:00–18:00'),
+        ('ПОЧТА', 'bak.masters@yandex.ru', 'чертежи, референсы, ТЗ'),
+        ('САЙТ', 'bakmasters.su', 'каталог и другие линейки'),
+    ]
+    gw = right - x
+    qr_w = 36 * mm
+    card_area_w = gw - qr_w - 8 * mm
+    cwid = (card_area_w - 5 * mm) / 2
+    chei = 25 * mm
+    ctop = yb - 45 * mm
+    for i, (label, value, hint) in enumerate(cards):
+        cx = x + (i % 2) * (cwid + 5 * mm)
+        cy = ctop - (i // 2) * (chei + 5 * mm) - chei
+        c.setFillColorRGB(0.155, 0.140, 0.128)
+        c.setStrokeColorRGB(0.30, 0.28, 0.25)
+        c.setLineWidth(0.6)
+        c.roundRect(cx, cy, cwid, chei, 3 * mm, fill=1, stroke=1)
+        c.setFillColorRGB(0.36, 0.78, 0.74)
+        c.setFont('M-700', 7.2)
+        c.drawString(cx + 5 * mm, cy + chei - 7 * mm, label)
+        c.setFillColor(WHITE)
+        c.setFont('M-700', 12.5)
+        c.drawString(cx + 5 * mm, cy + 9.5 * mm, value)
+        c.setFillColor((0.62, 0.59, 0.55))
+        c.setFont('M-400', 7.8)
+        c.drawString(cx + 5 * mm, cy + 4.5 * mm, hint)
+
+    # ---- QR на WhatsApp ----
+    try:
+        import qrcode
+        qr = qrcode.QRCode(box_size=10, border=0)
+        qr.add_data('https://wa.me/79261609110')
+        qr.make(fit=True)
+        qimg = qr.make_image(fill_color='#23201D', back_color='white').convert('RGB')
+        qpath = '/tmp/_qr_wa.png'
+        qimg.save(qpath)
+        qx = right - qr_w
+        qy = ctop - 2 * qr_w - 5 * mm
+        c.setFillColor(WHITE)
+        c.roundRect(qx - 2.5 * mm, qy - 2.5 * mm, qr_w + 5 * mm, qr_w + 5 * mm, 2.5 * mm,
+                    fill=1, stroke=0)
+        c.drawImage(qpath, qx, qy, qr_w, qr_w)
+        c.setFillColor((0.62, 0.59, 0.55))
+        c.setFont('M-400', 7.4)
+        c.drawCentredString(qx + qr_w / 2, qy - 8 * mm, 'Наведите камеру —')
+        c.drawCentredString(qx + qr_w / 2, qy - 12 * mm, 'откроется WhatsApp')
+    except Exception as e:
+        print('QR пропущен:', e)
+
+    # ---- нижняя строка реквизитов ----
+    c.setStrokeColorRGB(0.26, 0.24, 0.22)
+    c.setLineWidth(0.6)
+    c.line(x, 26 * mm, right, 26 * mm)
+    c.setFillColor((0.60, 0.57, 0.53))
+    c.setFont('M-400', 8.2)
+    c.drawString(x, 20 * mm, 'ИП Бабаева Кристина Горхмазовна  ·  ИНН 572501343152  ·  ОГРНИП 322574900004165')
+    c.drawString(x, 15.5 * mm, 'Москва  ·  доставка по России  ·  BAK HOME — комбинированная мебель для дома')
+
+    footer(c, page, right_x=right, dark=True)
     c.showPage()
 
     c.save()
