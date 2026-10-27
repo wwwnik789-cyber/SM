@@ -3,57 +3,57 @@
 ## 0а. Haval — оформление дилерского центра (новое, 27.10)
 
 **Одним архивом (9,5 МБ, 11 файлов):**
-https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/SM-Haval-oformlenie-27-10.zip
+https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/SM-Haval-oformlenie-27-10.zip
 
 Обзор девяти кадров:
-https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/preview.jpg
+https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/preview.jpg
 
 | Позиция | Ссылка |
 |---|---|
-| Общий вид | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/00-hero.jpg |
-| Зона ресепшн | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-01-reception.jpg |
-| Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-02-logotipy.jpg |
-| Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-03-brand-paneli.jpg |
-| Навигация | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-04-navigaciya.jpg |
-| Инфостойки | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-06-info-stoyki.jpg |
-| PressWall | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-07-presswall.jpg |
-| Фотозона | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-08-fotozona.jpg |
-| Фасад | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/04-09-fasad.jpg |
+| Общий вид | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/00-hero.jpg |
+| Зона ресепшн | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-01-reception.jpg |
+| Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-02-logotipy.jpg |
+| Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-03-brand-paneli.jpg |
+| Навигация | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-04-navigaciya.jpg |
+| Инфостойки | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-06-info-stoyki.jpg |
+| PressWall | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-07-presswall.jpg |
+| Фотозона | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-08-fotozona.jpg |
+| Фасад | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-09-fasad.jpg |
 
 Бренд-код Haval и состав работ:
-https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/04_haval/README.md
+https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/README.md
 
 ---
 
 ## 0. Автосалоны — стандартные позиции брендирования (новое, 27.10)
 
 **Одним архивом (9,6 МБ, 12 файлов):**
-https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/SM-Avtosalony-vizualizacii-27-10.zip
+https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/SM-Avtosalony-vizualizacii-27-10.zip
 
 Обзор всех девяти кадров:
-https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/preview.jpg
+https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/preview.jpg
 
 | Позиция | Ссылка |
 |---|---|
-| Общий вид | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/00-hero.jpg |
-| Зона ресепшн | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-01-reception.jpg |
-| Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-02-logotipy.jpg |
-| Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-03-brand-paneli.jpg |
-| Навигация | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-04-navigaciya.jpg |
-| Подвесы на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-05-podvesy.jpg |
-| Информационные стойки | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-06-info-stoyki.jpg |
-| PressWall на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-07-presswall.jpg |
-| Фотозона | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-08-fotozona.jpg |
-| Зона электромобилей | https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/03-09-elektro.jpg |
+| Общий вид | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/00-hero.jpg |
+| Зона ресепшн | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-01-reception.jpg |
+| Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-02-logotipy.jpg |
+| Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-03-brand-paneli.jpg |
+| Навигация | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-04-navigaciya.jpg |
+| Подвесы на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-05-podvesy.jpg |
+| Информационные стойки | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-06-info-stoyki.jpg |
+| PressWall на модельный ряд | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-07-presswall.jpg |
+| Фотозона | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-08-fotozona.jpg |
+| Зона электромобилей | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/03-09-elektro.jpg |
 
 Описание позиций, правила и промпт:
-https://github.com/wwwnik789-cyber/SM/raw/68052b3/docs/ca-avtosalony/03_vizualizacii/README.md
+https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/03_vizualizacii/README.md
 
 ---
 
 Всё, что сделано в последних задачах. Ссылки — прямые, скачивание начинается сразу.
 
-Ветка: `arena/eb11383d-sm` · коммит: `68052b3`
+Ветка: `arena/eb11383d-sm` · коммит: `d8a0c24`
 
 ---
 
