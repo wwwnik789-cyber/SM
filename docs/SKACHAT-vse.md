@@ -59,17 +59,22 @@ https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/05_reklama/
 
 ## 0в. Брендированные кубы — визуализации и фото (новое, 27.10)
 
-Кубы, которые уже стоят у вас в салоне, — 27 визуализаций: базовые сцены Haval,
+Кубы, которые уже стоят у вас в салоне, — 32 визуализации: базовые сцены Haval,
 кубы в разных салонах, **кубы под другие марки** (Chery, Geely, Lada, Jetour),
-**четыре варианта зон аксессуаров** и **пять зон ресепшн**. Плюс три ваши фотографии после обработки: кадрирование, баланс по
+**четыре варианта зон аксессуаров** и **десять зон ресепшн**. Плюс три ваши фотографии после обработки: кадрирование, баланс по
 граням, тени. Надписи и логотипы наложены в перспективу граней, а не «поверх»
 картинки.
 
-**Одним архивом (58,3 МБ, 73 файла):**
-https://github.com/wwwnik789-cyber/SM/raw/59d0a7d/docs/ca-avtosalony/SM-Kuby-27-10.zip
+**Двумя архивами (комплект перевалил за 50 МБ):**
 
-Обзор всех 27 визуализаций:
-https://github.com/wwwnik789-cyber/SM/raw/59d0a7d/docs/ca-avtosalony/06_kuby/preview.jpg
+Основной набор — кубы Haval, другие бренды, аксессуары, фото до/после (43,5 МБ):
+https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/SM-Kuby-osnovnye-27-10.zip
+
+Зоны ресепшн, 10 кадров (11,8 МБ):
+https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/SM-Kuby-resepshn-27-10.zip
+
+Обзор всех 32 визуализаций:
+https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/preview.jpg
 
 Фото до и после обработки:
 https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/preview-foto.jpg
@@ -125,6 +130,11 @@ https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/pre
 | Лофт-сервис, кирпич | https://github.com/wwwnik789-cyber/SM/raw/59d0a7d/docs/ca-avtosalony/06_kuby/vizualizacii/kub-28-reception-loft.jpg |
 | Минимализм, колонна | https://github.com/wwwnik789-cyber/SM/raw/59d0a7d/docs/ca-avtosalony/06_kuby/vizualizacii/kub-29-reception-minimal.jpg |
 | Электромобили, вертикаль | https://github.com/wwwnik789-cyber/SM/raw/59d0a7d/docs/ca-avtosalony/06_kuby/vizualizacii/kub-30-reception-portrait.jpg |
+| Выдача ключей | https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/vizualizacii/kub-31-reception-keys.jpg |
+| Зона ожидания, кубы-столики | https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/vizualizacii/kub-32-reception-waiting.jpg |
+| Бренд-стена, вечер | https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/vizualizacii/kub-33-reception-brandwall.jpg |
+| Угловой ресепшн, компактный салон | https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/vizualizacii/kub-34-reception-corner.jpg |
+| Сервисная приёмка вечером | https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/vizualizacii/kub-35-reception-service-night.jpg |
 
 Протокол пересъёмки и предложения по номенклатуре:
 https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/README.md
