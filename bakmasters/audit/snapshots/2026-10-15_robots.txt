@@ -1,0 +1,19 @@
+# Снимок robots.txt bakmasters.su на 15.10.2026 (до правок)
+User-Agent: *
+Disallow: /page27109783.html
+Disallow: /mistake
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow: /*_escaped_fragment_*
+Disallow:
+
+
+Sitemap: https://bakmasters.su/sitemap.xml
+Sitemap: https://bakmasters.su/sitemap-store.xml
+Host: https://bakmasters.su
