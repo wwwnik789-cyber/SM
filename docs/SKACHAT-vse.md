@@ -59,17 +59,17 @@ https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/05_reklama/
 
 ## 0в. Брендированные кубы — визуализации и фото (новое, 27.10)
 
-Кубы Haval, которые уже стоят у вас в салоне. Собрал 6 визуализаций — как они
-должны выглядеть в кадре (шоурум, фасад, деталь грани, лаунж, производство,
-навигация), и отдельно вытянул три ваши фотографии: кадрирование, баланс по
-граням, тени. Надписи на кубах — «Сделано в России», «Системы помощи водителю»,
-«6 подушек безопасности» и логотип — наложены в перспективу граней.
+Кубы, которые уже стоят у вас в салоне, — 18 визуализаций: базовые сцены Haval,
+кубы в разных салонах и отдельно **кубы под другие марки** (Chery, Geely, Lada,
+Jetour). Плюс три ваши фотографии после обработки: кадрирование, баланс по
+граням, тени. Надписи и логотипы наложены в перспективу граней, а не «поверх»
+картинки.
 
-**Одним архивом (30,9 МБ, 41 файл):**
-https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/SM-Kuby-27-10.zip
+**Одним архивом (48,3 МБ, 61 файл):**
+https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/SM-Kuby-27-10.zip
 
-Обзор всех 14 визуализаций:
-https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/preview.jpg
+Обзор всех 18 визуализаций:
+https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/06_kuby/preview.jpg
 
 Фото до и после обработки:
 https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/preview-foto.jpg
@@ -95,8 +95,17 @@ https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/pre
 | Лофт-сервис | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-13-loft.jpg |
 | Зона выдачи | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-14-delivery.jpg |
 | Детская зона | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-15-family.jpg |
-| Аксессуары | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-16-accessories.jpg |
+| Аксессуары (переснято 27.10, без одежды) | https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/06_kuby/vizualizacii/kub-16-accessories.jpg |
 | Зона электромобилей | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-17-ev.jpg |
+
+Кубы под другие автомобильные бренды:
+
+| Бренд | Ссылка |
+|---|---|
+| Chery | https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/06_kuby/vizualizacii/kub-18-chery.jpg |
+| Geely | https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/06_kuby/vizualizacii/kub-19-geely.jpg |
+| Lada | https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/06_kuby/vizualizacii/kub-20-lada.jpg |
+| Jetour | https://github.com/wwwnik789-cyber/SM/raw/4e4a2bc/docs/ca-avtosalony/06_kuby/vizualizacii/kub-21-jetour.jpg |
 
 Протокол пересъёмки и предложения по номенклатуре:
 https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/README.md
