@@ -65,28 +65,41 @@ https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/05_reklama/
 граням, тени. Надписи на кубах — «Сделано в России», «Системы помощи водителю»,
 «6 подушек безопасности» и логотип — наложены в перспективу граней.
 
-**Одним архивом (16,7 МБ, 23 файла):**
-https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/SM-Kuby-27-10.zip
+**Одним архивом (30,9 МБ, 41 файл):**
+https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/SM-Kuby-27-10.zip
 
-Обзор шести визуализаций:
-https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/preview.jpg
+Обзор всех 14 визуализаций:
+https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/preview.jpg
 
 Фото до и после обработки:
-https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/preview-foto.jpg
+https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/preview-foto.jpg
 
 Визуализации по отдельности:
 
 | Кадр | Ссылка |
 |---|---|
-| Стопка кубов в шоуруме | https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/vizualizacii/kub-06-hero.jpg |
-| Кубы у входа, вечер | https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/vizualizacii/kub-07-facade.jpg |
-| Деталь грани и логотип | https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/vizualizacii/kub-04-detail.jpg |
-| Кубы в зоне ожидания | https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/vizualizacii/kub-05-lounge.jpg |
-| Производство и контроль качества | https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/vizualizacii/kub-08-production.jpg |
-| Кубы-указатели в навигации | https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/vizualizacii/kub-09-navigation.jpg |
+| Стопка кубов в шоуруме | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-06-hero.jpg |
+| Кубы у входа, вечер | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-07-facade.jpg |
+| Деталь грани и логотип | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-04-detail.jpg |
+| Кубы в зоне ожидания | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-05-lounge.jpg |
+| Производство и контроль качества | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-08-production.jpg |
+| Кубы-указатели в навигации | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-09-navigation.jpg |
+
+Кубы в разных салонах:
+
+| Салон | Ссылка |
+|---|---|
+| Премиум, тёмный | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-10-premium-dark.jpg |
+| Минимализм | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-11-minimal.jpg |
+| Кофе-зона | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-12-coffee.jpg |
+| Лофт-сервис | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-13-loft.jpg |
+| Зона выдачи | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-14-delivery.jpg |
+| Детская зона | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-15-family.jpg |
+| Аксессуары | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-16-accessories.jpg |
+| Зона электромобилей | https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/vizualizacii/kub-17-ev.jpg |
 
 Протокол пересъёмки и предложения по номенклатуре:
-https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/06_kuby/README.md
+https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/README.md
 
 
 
