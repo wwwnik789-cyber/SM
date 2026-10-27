@@ -1,11 +1,15 @@
 # Последние файлы — Топотон и фоны (27.10.2026)
 
-## 0а. Haval — оформление дилерского центра (новое, 27.10)
+## 0а. Haval — оформление дилерского центра (версия 2, 27.10)
 
-**Одним архивом (9,5 МБ, 11 файлов):**
+Серия переделана: премиальный светлый шоурум, логотип Haval на всех носителях,
+никаких проводов и удлинителей. Добавлены подвесы и фото ваших акриловых стоек
+с характеристиками.
+
+**Одним архивом (13,3 МБ, 17 файлов):**
 https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/SM-Haval-oformlenie-27-10.zip
 
-Обзор девяти кадров:
+Обзор десяти кадров:
 https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/preview.jpg
 
 | Позиция | Ссылка |
@@ -15,12 +19,13 @@ https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/pr
 | Логотипы с подсветкой | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-02-logotipy.jpg |
 | Бренд-панели | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-03-brand-paneli.jpg |
 | Навигация | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-04-navigaciya.jpg |
+| Подвесы | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-05-podvesy.jpg |
 | Инфостойки | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-06-info-stoyki.jpg |
 | PressWall | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-07-presswall.jpg |
 | Фотозона | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-08-fotozona.jpg |
 | Фасад | https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/04-09-fasad.jpg |
 
-Бренд-код Haval и состав работ:
+Бренд-код Haval, характеристики акриловых стоек и состав работ:
 https://github.com/wwwnik789-cyber/SM/raw/d8a0c24/docs/ca-avtosalony/04_haval/README.md
 
 ---
