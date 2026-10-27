@@ -62,7 +62,11 @@ def para(text, f, color, maxw, x, y, lh=1.55, draw=img):
     return y
 
 
+BLOCKS_MAP = []
+
+
 def section_label(y, num, block, name):
+    BLOCKS_MAP.append({'num': num, 'elem': block, 'name': name, 'y': int(y)})
     f = font(F_S, 15)
     txt = f'БЛОК {num}  ·  {block}  —  {name}'
     tw = d.textlength(txt, font=f)
@@ -375,3 +379,15 @@ y += fh
 arr = img.crop((0, 0, W, y))
 arr.save(os.path.join(HERE, 'MAKET-stranicy.jpg'), 'JPEG', quality=90, optimize=True)
 print('макет:', arr.size)
+
+# карта блоков: начало каждого + итоговая высота (нужна для PDF)
+import json
+flat = []
+for i, b in enumerate(BLOCKS_MAP):
+    nxt = BLOCKS_MAP[i + 1]['y'] if i + 1 < len(BLOCKS_MAP) else arr.height
+    flat.append({'num': b['num'], 'elem': b['elem'], 'name': b['name'],
+                 'y0': b['y'], 'y1': nxt})
+json.dump({'height': arr.height, 'blocks': flat},
+          open(os.path.join(HERE, 'maket-blocks.json'), 'w', encoding='utf-8'),
+          ensure_ascii=False, indent=1)
+print('карта блоков:', len(flat))
