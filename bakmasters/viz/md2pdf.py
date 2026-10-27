@@ -60,8 +60,8 @@ S['h3'] = ParagraphStyle('h3', fontName='M-700', fontSize=12, leading=16,
                          textColor=INK, spaceBefore=12, spaceAfter=6)
 S['h4'] = ParagraphStyle('h4', fontName='M-700', fontSize=10.5, leading=14,
                          textColor=INK, spaceBefore=10, spaceAfter=4)
-S['bullet'] = ParagraphStyle('bullet', parent=S['body'], leftIndent=14,
-                             bulletIndent=2, spaceAfter=3)
+S['bullet'] = ParagraphStyle('bullet', parent=S['body'], leftIndent=16,
+                             bulletIndent=2, spaceAfter=4, leading=14.5)
 S['quote'] = ParagraphStyle('quote', parent=S['body'], leftIndent=10,
                             textColor=MUTED, fontSize=9.5, leading=14.5)
 S['code'] = ParagraphStyle('code', fontName='Mono', fontSize=8.2, leading=11.5,
@@ -235,17 +235,39 @@ def parse(md_text, avail):
             out.append(Spacer(1, 9))
             continue
 
-        # списки
+        # списки (с переносом строк-продолжений, начинающихся с отступа)
+        def _cont(j):
+            """строки-продолжения пункта списка: с отступом и не новый пункт"""
+            parts = []
+            while j < len(lines):
+                nxt = lines[j]
+                if not nxt.strip():
+                    break
+                if not nxt.startswith(('  ', '\t')):
+                    break
+                st = nxt.strip()
+                if re.match(r'^([-*]|\d+\.)\s+', st) or st.startswith(('#', '|', '>', '```')):
+                    break
+                parts.append(st)
+                j += 1
+            return ' '.join(parts), j
+
         if re.match(r'^[-*]\s+', s):
             txt = re.sub(r'^[-*]\s+', '', s)
+            more, i = _cont(i + 1)
+            if more:
+                txt = txt + ' ' + more
             out.append(Paragraph(inline(txt), S['bullet'], bulletText='•'))
-            i += 1
+            i += 0 if more else 1
             continue
         if re.match(r'^\d+\.\s+', s):
             num = re.match(r'^(\d+)\.', s).group(1)
             txt = re.sub(r'^\d+\.\s+', '', s)
+            more, i = _cont(i + 1)
+            if more:
+                txt = txt + ' ' + more
             out.append(Paragraph(inline(txt), S['bullet'], bulletText='%s.' % num))
-            i += 1
+            i += 0 if more else 1
             continue
 
         # абзац (склеиваем до пустой строки)
