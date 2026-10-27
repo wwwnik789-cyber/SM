@@ -109,16 +109,24 @@ def wall_x(x, y0, y1, z0, z1, tex=None, color=(0.5, 0.5, 0.5), emissive=0.0, tin
 
 
 def disc(cx, cy, r, z, seg=28, color=(0.8, 0.8, 0.8), emissive=0.0):
-    """Горизонтальный круг — столешницы, пуфы, капсулы."""
+    """Горизонтальный круг — столешницы, пуфы, капсулы.
+
+    Собирается из кольцевых четырёхугольников (без вырожденных треугольников:
+    растр на них даёт чёрные артефакты) и маленького центрального квадрата.
+    """
     quads = []
+    ri = r * 0.28
     for i in range(seg):
         a0 = 2 * np.pi * i / seg
         a1 = 2 * np.pi * (i + 1) / seg
-        quads.append(Quad([(cx, cy, z),
+        quads.append(Quad([(cx + ri * np.cos(a0), cy + ri * np.sin(a0), z),
                            (cx + r * np.cos(a0), cy + r * np.sin(a0), z),
                            (cx + r * np.cos(a1), cy + r * np.sin(a1), z),
-                           (cx + r * np.cos(a1) * 0.02 + cx * 0.98, cy + r * np.sin(a1) * 0.02, z)],
+                           (cx + ri * np.cos(a1), cy + ri * np.sin(a1), z)],
                           color=color, emissive=emissive))
+    quads.append(Quad([(cx - ri, cy - ri, z), (cx + ri, cy - ri, z),
+                       (cx + ri, cy + ri, z), (cx - ri, cy + ri, z)],
+                      color=color, emissive=emissive))
     return quads
 
 
