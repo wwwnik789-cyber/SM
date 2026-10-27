@@ -65,16 +65,14 @@ https://github.com/wwwnik789-cyber/SM/raw/4bc91f3/docs/ca-avtosalony/05_reklama/
 граням, тени. Надписи и логотипы наложены в перспективу граней, а не «поверх»
 картинки.
 
-**Двумя архивами (комплект перевалил за 50 МБ):**
+**Одним архивом — все файлы (64,2 МБ, 79 файлов):**
+https://github.com/wwwnik789-cyber/SM/raw/13459bb/docs/ca-avtosalony/SM-Kuby-27-10.zip
 
-Основной набор — кубы Haval, другие бренды, аксессуары, фото до/после (43,5 МБ):
-https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/SM-Kuby-osnovnye-27-10.zip
-
-Зоны ресепшн, 10 кадров (11,8 МБ):
-https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/SM-Kuby-resepshn-27-10.zip
+Внутри: 32 визуализации, исходные кадры до брендирования, ваши оригиналы,
+обработанные фото, логотипы брендов, скрипты сборки и оба контактных листа.
 
 Обзор всех 32 визуализаций:
-https://github.com/wwwnik789-cyber/SM/raw/9b8bc59/docs/ca-avtosalony/06_kuby/preview.jpg
+https://github.com/wwwnik789-cyber/SM/raw/13459bb/docs/ca-avtosalony/06_kuby/preview.jpg
 
 Фото до и после обработки:
 https://github.com/wwwnik789-cyber/SM/raw/c84010b/docs/ca-avtosalony/06_kuby/preview-foto.jpg
