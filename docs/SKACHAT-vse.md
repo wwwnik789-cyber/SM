@@ -2,14 +2,14 @@
 
 Всё, что сделано в последних задачах. Ссылки — прямые, скачивание начинается сразу.
 
-Ветка: `arena/eb11383d-sm` · коммит: `95346ea`
+Ветка: `arena/eb11383d-sm` · коммит: `1a96add`
 
 ---
 
 ## 1. Topotoon — визуализации стенда 9,00 × 5,04 м
 
 **Одним архивом (14,8 МБ):**
-https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/SM-Topotoon-viz-27-10.zip
+https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/SM-Topotoon-viz-27-10.zip
 
 Внутри: 7 кадров, вся бренд-графика (лого, маскот, фриз, баннеры, пол),
 исходники генератора и описание кадров.
@@ -18,16 +18,16 @@ https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-co
 
 | Кадр | Ссылка |
 |---|---|
-| 01 — общий вид ¾ | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/01-hero.png |
-| 02 — фронт-портал | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/02-front.png |
-| 03 — интерьер от входа | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/03-inside.png |
-| 04 — аниме-лаунж | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/04-lounge.png |
-| 05 — касса и витрина вебтунов | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/05-cashier.png |
-| 06 — будка, гача, кладовая | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/06-booth.png |
-| 07 — план сверху | https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/renders3d/07-plan.png |
+| 01 — общий вид ¾ | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/01-hero.png |
+| 02 — фронт-портал | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/02-front.png |
+| 03 — интерьер от входа | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/03-inside.png |
+| 04 — аниме-лаунж | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/04-lounge.png |
+| 05 — касса и витрина вебтунов | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/05-cashier.png |
+| 06 — будка, гача, кладовая | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/06-booth.png |
+| 07 — план сверху | https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/renders3d/07-plan.png |
 
 Описание кадров и геометрии:
-https://github.com/wwwnik789-cyber/SM/raw/95346ea/docs/proekty/topotoon-comic-con/06_3d-vizualizacii.md
+https://github.com/wwwnik789-cyber/SM/raw/1a96add/docs/proekty/topotoon-comic-con/06_3d-vizualizacii.md
 
 ---
 
