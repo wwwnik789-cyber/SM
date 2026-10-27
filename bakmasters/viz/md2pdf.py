@@ -258,7 +258,6 @@ def parse(md_text, avail):
             if more:
                 txt = txt + ' ' + more
             out.append(Paragraph(inline(txt), S['bullet'], bulletText='•'))
-            i += 0 if more else 1
             continue
         if re.match(r'^\d+\.\s+', s):
             num = re.match(r'^(\d+)\.', s).group(1)
@@ -267,7 +266,6 @@ def parse(md_text, avail):
             if more:
                 txt = txt + ' ' + more
             out.append(Paragraph(inline(txt), S['bullet'], bulletText='%s.' % num))
-            i += 0 if more else 1
             continue
 
         # абзац (склеиваем до пустой строки)
