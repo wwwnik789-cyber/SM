@@ -137,6 +137,40 @@ def _brand_extra():
     print('навигация готово')
 
 
+
+# --- вторая серия: интерьеры разных автосалонов -----------------------------
+FACES = {
+    'viz-07-premium-dark.jpg|kub-10-premium-dark.jpg': dict(text=['СДЕЛАНО', 'В РОССИИ'],
+        quad=[(531, 721), (676, 670), (760, 910), (616, 961)]),
+    'viz-08-minimal.jpg|kub-11-minimal.jpg': dict(text=['СИСТЕМЫ', 'ПОМОЩИ', 'ВОДИТЕЛЮ'],
+        quad=[(306, 434), (528, 440), (528, 658), (306, 666)]),
+    'viz-09-coffee.jpg|kub-12-coffee.jpg': dict(text=['6 ПОДУШЕК', 'БЕЗОПАСНОСТИ'],
+        quad=[(83, 603), (368, 550), (418, 822), (133, 875)]),
+    'viz-10-loft.jpg|kub-13-loft.jpg': dict(text=['СДЕЛАНО', 'В РОССИИ'],
+        quad=[(268, 745), (452, 752), (452, 962), (268, 955)]),
+    'viz-11-delivery.jpg|kub-14-delivery.jpg': dict(text=['ЭКОНОМИЧНЫЙ', 'ДВИГАТЕЛЬ'],
+        quad=[(362, 655), (627, 660), (624, 986), (362, 983)]),
+    'viz-12-family.jpg|kub-15-family.jpg': dict(text=['СДЕЛАНО', 'В РОССИИ'],
+        quad=[(238, 632), (554, 622), (448, 876), (236, 858)]),
+    'viz-13-accessories.jpg|kub-16-accessories.jpg': dict(text=['HAVAL'], logo=True,
+        quad=[(370, 520), (760, 520), (760, 890), (370, 918)]),
+    'viz-14-ev.jpg|kub-17-ev.jpg': dict(text=['СДЕЛАНО', 'В РОССИИ'],
+        quad=[(708, 556), (918, 556), (912, 903), (706, 893)]),
+}
+
+
+def _brand_second():
+    for fname, spec in FACES.items():
+        im = Image.open(os.path.join(SRC, fname.split('|')[0])).convert('RGB')
+        if spec.get('logo'):
+            im = put_logo(im, spec['quad'], LOGO_B, uc=(0.20, 0.80), vc=(0.40, 0.60))
+        else:
+            im = put_text(im, spec['quad'], spec['text'], size_frac=0.13, pad=(0.11, 0.13))
+        out = fname.split('|')[1]
+        im.save(os.path.join(OUT, out), 'JPEG', quality=94, subsampling=0, optimize=True)
+        print(out, 'готово')
+
+
 if __name__ == '__main__':
     # 02 — деталь: бирюзовая грань с надписью
     im = Image.open(os.path.join(SRC, 'viz-02-detail.jpg')).convert('RGB')
@@ -159,6 +193,7 @@ if __name__ == '__main__':
 
     _brand_hero()
     _brand_extra()
+    _brand_second()
     import glob
     for f in sorted(glob.glob(os.path.join(OUT, '*.jpg'))):
         print(os.path.basename(f), '->', upscale(f))
