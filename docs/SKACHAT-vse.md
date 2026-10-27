@@ -8,9 +8,29 @@
 
 ## 1. Topotoon — визуализации стенда 9,00 × 5,04 м
 
-Три набора по одной геометрии. **Основной — А, по презентации клиента.**
+Четыре набора по одной геометрии. **Основной — А, фотореалистичный.**
 
-### А. По вашей презентации — «японское комбини» (новое, 27.10)
+### А. Фотореалистичные кадры — основной набор (новое, 27.10)
+
+**Одним архивом (9,3 МБ):**
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-photoreal-27-10.zip
+
+Обзор всех шести кадров:
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/preview.jpg
+
+| Кадр | Ссылка |
+|---|---|
+| 01 — общий вид ¾ | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/01-hero.jpg |
+| 02 — фронт 9 м | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/02-front.jpg |
+| 03 — интерьер от входа | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/03-inside.jpg |
+| 04 — лаунж «АНИМЕ» | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/04-lounge.jpg |
+| 05 — касса | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/05-cashier.jpg |
+| 06 — будка, гача, зеркало | https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/renders-ai/06-booth.jpg |
+
+Описание набора и оговорка про обмерность:
+https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/09_vizualizacii-fotoreal.md
+
+### Б. По вашей презентации — «японское комбини» (рендер по чертежу, 27.10)
 
 **Одним архивом (14,2 МБ, 31 файл):**
 https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-client-27-10.zip
@@ -32,7 +52,7 @@ https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-co
 Соответствие слайдам презентации, палитра, что добавляется в смету:
 https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/08_vizualizacii-po-prezentacii.md
 
-### Б. Классическая тёмная серия — 7 кадров
+### В. Классическая тёмная серия — 7 кадров
 
 **Одним архивом (14,8 МБ):**
 https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-viz-27-10.zip
@@ -50,7 +70,7 @@ https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-co
 Описание кадров и геометрии:
 https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/06_3d-vizualizacii.md
 
-### В. Светлая серия — 6 кадров
+### Г. Светлая серия — 6 кадров
 
 **Одним архивом (14,0 МБ):**
 https://github.com/wwwnik789-cyber/SM/raw/32a4080/docs/proekty/topotoon-comic-con/SM-Topotoon-modern-27-10.zip
