@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SM Production — новогоднее оформление: до / после</title>
+<style>
+  :root {
+    --bg: #0a0a0d;
+    --card: #14141c;
+    --ink: #f4f2ec;
+    --mut: #98989f;
+    --line: rgba(244, 242, 236, 0.13);
+    --accent: #ff4d1c;
+    --acid: #d8ff3e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: radial-gradient(1200px 600px at 20% -10%, #1a1a26 0%, var(--bg) 60%) no-repeat, var(--bg);
+    color: var(--ink);
+    font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 20px 80px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px;
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--mut);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acid); }
+  h1 {
+    font-family: "Unbounded", "Manrope", system-ui, sans-serif;
+    font-weight: 800; font-size: clamp(1.9rem, 5vw, 3.4rem); line-height: 1.05;
+    margin: 22px 0 14px; letter-spacing: -.02em;
+  }
+  h1 span { color: var(--accent); }
+  .lead { color: var(--mut); max-width: 62ch; line-height: 1.65; margin: 0 0 8px; font-size: 15px; }
+  .grid { display: grid; gap: 26px; margin-top: 40px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 22px;
+    overflow: hidden; box-shadow: 0 30px 60px -40px #000;
+  }
+  .cmp {
+    position: relative; aspect-ratio: 1200 / 896; overflow: hidden; touch-action: pan-y;
+    --pos: 50%;
+  }
+  .cmp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cmp .after { z-index: 1; }
+  .cmp .before-wrap {
+    position: absolute; inset: 0; z-index: 2;
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+  }
+  .cmp .before-wrap img { position: static; width: 100%; height: 100%; }
+  .cmp .handle {
+    position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 3;
+    width: 2px; background: rgba(255, 255, 255, .85); box-shadow: 0 0 24px rgba(216, 255, 62, .55);
+    transform: translateX(-1px); pointer-events: none;
+  }
+  .cmp .handle::after {
+    content: "↔"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 42px; height: 42px; border-radius: 50%; background: var(--acid); color: #101016;
+    display: grid; place-items: center; font-size: 15px; font-weight: 700;
+  }
+  .cmp input[type="range"] {
+    position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; margin: 0;
+    opacity: 0; cursor: ew-resize; -webkit-appearance: none; background: transparent;
+  }
+  .cmp input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 48px; height: 100%; }
+  .tag {
+    position: absolute; z-index: 5; top: 14px; padding: 6px 12px; border-radius: 999px;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    background: rgba(10, 10, 13, .62); border: 1px solid var(--line);
+    backdrop-filter: blur(10px); color: var(--ink);
+  }
+  .tag.l { left: 14px; }
+  .tag.r { right: 14px; border-color: rgba(216, 255, 62, .5); color: var(--acid); }
+  .body { padding: 22px 24px 26px; }
+  .body h2 {
+    font-family: "Unbounded", "Manrope", system-ui, sans-serif;
+    font-size: 1.05rem; margin: 0 0 14px; font-weight: 700;
+  }
+  .row { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--mut); }
+  .row b { flex: 0 0 92px; color: var(--ink); font-weight: 600; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; padding-top: 3px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { font-size: 11px; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+  footer { margin-top: 44px; color: var(--mut); font-size: 13px; line-height: 1.7; }
+  footer strong { color: var(--ink); }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation: rise .7s cubic-bezier(.2,.65,.25,1) both; }
+    .card:nth-child(2) { animation-delay: .06s }
+    .card:nth-child(3) { animation-delay: .12s }
+    .card:nth-child(4) { animation-delay: .18s }
+    .card:nth-child(5) { animation-delay: .24s }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge"><span class="dot"></span> sm production · new year edition</span>
+  <h1>Новогоднее оформление<br />знакомых фотозон <span>до / после</span></h1>
+  <p class="lead">
+    Мы взяли наши реальные реализованные конструкции и одели их в Новый год: гибкий неон по контурам,
+    иней и снег, еловые гирлянды, хром и зеркальные шары. Потяните шторку на любом кадре, чтобы сравнить.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <div class="cmp">
+        <img class="after" src="sm-ny-petrovax-hex-wall.jpg" alt="Гексагональная стена PeTRoVax в новогоднем оформлении" />
+        <div class="before-wrap"><img src="before/01-petrovax-hex-wall.jpg" alt="Исходная фотозона PeTRoVax" /></div>
+        <div class="handle"></div>
+        <span class="tag l">до</span><span class="tag r">новый год</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: стена PeTRoVax" />
+      </div>
+      <div class="body">
+        <h2>Гексагональная бренд-стена PeTRoVax</h2>
+        <div class="row"><b>Сделали</b><span>Панели в ледяной синий, морозный белый и хром, иней по кромкам, гибкий неон по контурам сот (тёплое золото + холодный лёд), неоновые снежинки внутри ячеек и два кольца-арки за стеной.</span></div>
+        <div class="row"><b>Добавили</b><span>Еловую гирлянду с тёплым светом по низу, подарочные боксы, гирлянду-брошь вверху кадра.</span></div>
+        <div class="chips"><span class="chip">гибкий неон по контуру</span><span class="chip">неоновые фигуры</span><span class="chip">иней</span><span class="chip">гирлянда</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cmp">
+        <img class="after" src="sm-ny-rixos-egypt-lounge.jpg" alt="Лаунж-зона RIXOS в новогоднем оформлении" />
+        <div class="before-wrap"><img src="before/02-rixos-egypt-lounge.jpg" alt="Исходная лаунж-зона RIXOS" /></div>
+        <div class="handle"></div>
+        <span class="tag l">до</span><span class="tag r">новый год</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: лаунж-зона RIXOS" />
+      </div>
+      <div class="body">
+        <h2>Лаунж-зона RIXOS Hotels Egypt</h2>
+        <div class="row"><b>Сделали</b><span>Иней и снежные шапки на рельефах, арка обведена двойным гибким неоном (золото + лёд) со звездой на вершине, светящаяся надпись «2027».</span></div>
+        <div class="row"><b>Добавили</b><span>Серебристо-белую ёлку с хром-шарами, изумрудные и серебряные подушки, неоновые candle-трубки, боксы с золотой лентой, снег у мебели.</span></div>
+        <div class="chips"><span class="chip">двойной контур</span><span class="chip">световая надпись</span><span class="chip">ель 2,2 м</span><span class="chip">текстиль</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cmp">
+        <img class="after" src="sm-ny-digital-awards-star-wall.jpg" alt="Пресс-волл WORKSPACE DIGITAL AWARDS в новогоднем оформлении" />
+        <div class="before-wrap"><img src="before/03-sm-digital-awards-star-wall.jpg" alt="Исходный пресс-волл WORKSPACE DIGITAL AWARDS" /></div>
+        <div class="handle"></div>
+        <span class="tag l">до</span><span class="tag r">новый год</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: пресс-волл Digital Awards" />
+      </div>
+      <div class="body">
+        <h2>Пресс-волл WORKSPACE DIGITAL AWARDS</h2>
+        <div class="row"><b>Сделали</b><span>Морозную фактуру и снежную крошку по чёрному полотну, звезду пересобрали в скульптурный гибкий неон с ледяным контуром, добавили неоновые звёзды разного размера и длинные «аврора»-линии.</span></div>
+        <div class="row"><b>Добавили</b><span>Неоново-еловый венок с гирляндой внизу, хром-боксы, диско-шары, отражения неона на печатном полу.</span></div>
+        <div class="chips"><span class="chip">скульптурный неон</span><span class="chip">аврора-линии</span><span class="chip">венок</span><span class="chip">зеркальные шары</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cmp">
+        <img class="after" src="sm-ny-kosmos-rocket.jpg" alt="Космическая фотозона в новогоднем оформлении" />
+        <div class="before-wrap"><img src="before/04-sm-kosmos-rocket.jpg" alt="Исходная космическая фотозона с ракетой" /></div>
+        <div class="handle"></div>
+        <span class="tag l">до</span><span class="tag r">новый год</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: космическая фотозона" />
+      </div>
+      <div class="body">
+        <h2>Космическая фотозона «Ракета на Луне»</h2>
+        <div class="row"><b>Сделали</b><span>Снег и иней на «лунной» поверхности, обводку ракеты и кратеров неоном (холодный синий + тёплый белый), неоновую комету-дугу по небу, снежинки и звёзды на полотне.</span></div>
+        <div class="row"><b>Добавили</b><span>Парящее неоновое кольцо-планета с «2027», еловую гирлянду с шарами по периметру пола, хром-боксы и зеркальный шар на «луне».</span></div>
+        <div class="chips"><span class="chip">парящий неон</span><span class="chip">комета</span><span class="chip">гирлянда по периметру</span><span class="chip">искусственный снег</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="cmp">
+        <img class="after" src="sm-ny-alice-7-years.jpg" alt="Фиолетовая фотозона с хром-шарами в новогоднем оформлении" />
+        <div class="before-wrap"><img src="before/05-alice-7-years.jpg" alt="Исходная фиолетовая фотозона с хром-шарами" /></div>
+        <div class="handle"></div>
+        <span class="tag l">до</span><span class="tag r">новый год</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: фотозона с хром-шарами" />
+      </div>
+      <div class="body">
+        <h2>Фиолетовая фотозона с хром-каскадом</h2>
+        <div class="row"><b>Сделали</b><span>Морозный градиент и снежинки на печати, сохранён хром-каскад с добавлением ледяных и белых шаров, часть шаров — в неоновых обручах.</span></div>
+        <div class="row"><b>Добавили</b><span>Большую неоновую снежинку и рукописную надпись «2027», неоновые линии по кромке стены и полу, еловую гирлянду, серебряные и фиолетовые боксы, снег на полу.</span></div>
+        <div class="chips"><span class="chip">неоновые обручи</span><span class="chip">рукописный неон</span><span class="chip">контурный свет</span><span class="chip">воздушные шары</span></div>
+      </div>
+    </article>
+  </div>
+
+  <footer>
+    <strong>Гибкий неон (flexible LED neon)</strong> — гнётся по сложным контурам, безопасен в зоне гостей, работает от 12/24 В.
+    Палитра света: тёплое золото 2700–3000 K + ледяной голубой 6000–8000 K.<br />
+    SM Production · event · branding · decor · Москва и Санкт-Петербург
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll(".cmp").forEach((box) => {
+    const range = box.querySelector('input[type="range"]');
+    const set = (v) => box.style.setProperty("--pos", v + "%");
+    range.addEventListener("input", () => set(range.value));
+    // клик/тап по кадру тоже двигает шторку
+    box.addEventListener("click", (e) => {
+      if (e.target === range) return;
+      const r = box.getBoundingClientRect();
+      const v = Math.round(((e.clientX - r.left) / r.width) * 100);
+      range.value = v;
+      set(v);
+    });
+    set(range.value);
+  });
+</script>
+</body>
+</html>
