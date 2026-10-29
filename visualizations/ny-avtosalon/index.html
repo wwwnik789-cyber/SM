@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SM Production — новогодний декор автосалонов</title>
+<style>
+  :root {
+    --bg: #0a0a0d; --bg2: #0f0f14; --card: #14141c; --ink: #f4f2ec; --mut: #98989f;
+    --line: rgba(244, 242, 236, .13); --accent: #ff4d1c; --acid: #d8ff3e;
+    --ice: #7fd4ff; --gold: #ffcf7a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: radial-gradient(1100px 620px at 15% -8%, #18202b 0%, var(--bg) 62%) no-repeat, var(--bg);
+    color: var(--ink); font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased; padding: 44px 20px 90px;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px 16px; font-size: 11px; letter-spacing: .28em;
+    text-transform: uppercase; color: var(--mut);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 12px var(--acid); }
+  h1 {
+    font-family: "Unbounded", "Manrope", system-ui, sans-serif; font-weight: 800;
+    font-size: clamp(1.9rem, 5vw, 3.4rem); line-height: 1.04; letter-spacing: -.02em; margin: 22px 0 16px;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { color: var(--mut); max-width: 66ch; line-height: 1.68; font-size: 15px; margin: 0; }
+
+  .zones { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; }
+  .pill {
+    border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; font-size: 12px;
+    color: var(--ink); background: rgba(255,255,255,.02);
+  }
+  .pill b { color: var(--acid); font-weight: 700; }
+
+  .grid { display: grid; gap: 24px; margin-top: 38px; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .span2 { grid-column: span 2; } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
+    box-shadow: 0 40px 80px -60px #000; display: flex; flex-direction: column;
+  }
+  .shot { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .shot img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 896; object-fit: cover; transition: transform .7s cubic-bezier(.2,.65,.25,1); }
+  .shot:hover img { transform: scale(1.03); }
+  .shot::after {
+    content: "увеличить"; position: absolute; right: 14px; bottom: 14px; font-size: 10px;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+    background: rgba(10,10,13,.6); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 12px; backdrop-filter: blur(8px); opacity: 0; transition: opacity .3s;
+  }
+  .shot:hover::after { opacity: 1; }
+  .body { padding: 22px 24px 26px; }
+  .kicker { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+  h2 { font-family: "Unbounded", "Manrope", system-ui, sans-serif; font-size: 1.06rem; margin: 0 0 14px; font-weight: 700; }
+  .row { display: flex; gap: 14px; margin: 0 0 10px; font-size: 14px; line-height: 1.62; color: var(--mut); }
+  .row b { flex: 0 0 96px; color: var(--ink); font-weight: 600; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding-top: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+  .chip { font-size: 11px; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; color: var(--ink); }
+  .price { margin-top: 16px; font-size: 13px; color: var(--mut); }
+  .price b { color: var(--ice); font-weight: 700; }
+
+  .spec { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 34px; }
+  .spec h2 { font-size: 1.5rem; margin-bottom: 8px; }
+  .spec p { color: var(--mut); font-size: 14px; line-height: 1.7; max-width: 78ch; }
+  table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); font-weight: 600; }
+  td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  td { color: var(--mut); }
+  footer { margin-top: 40px; color: var(--mut); font-size: 13px; line-height: 1.7; }
+  footer strong { color: var(--ink); }
+
+  /* lightbox */
+  .lb {
+    position: fixed; inset: 0; z-index: 50; display: none; place-items: center;
+    background: rgba(5,5,8,.93); padding: 24px; backdrop-filter: blur(6px);
+  }
+  .lb[open] { display: grid; }
+  .lb img { max-width: min(1400px, 96vw); max-height: 86vh; border-radius: 14px; box-shadow: 0 40px 120px #000; }
+  .lb button {
+    position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--line); background: rgba(20,20,28,.8); color: var(--ink);
+    font-size: 20px; cursor: pointer;
+  }
+  .lb .cap { position: absolute; bottom: 18px; left: 24px; right: 24px; text-align: center; color: var(--mut); font-size: 13px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation: rise .7s cubic-bezier(.2,.65,.25,1) both; }
+    .card:nth-child(2) { animation-delay: .07s } .card:nth-child(3) { animation-delay: .14s }
+    .card:nth-child(4) { animation-delay: .21s } .card:nth-child(5) { animation-delay: .28s }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge"><span class="dot"></span> sm production · auto · new year edition</span>
+  <h1>Новогодний декор<br /><em>автосалонов</em> под ключ</h1>
+  <p class="lead">
+    Пять зон дилерского центра — от фасада до зоны выдачи — в единой зимней стилистике:
+    гибкий неон по контурам, морозный иней, ёлки в белых кашпо, хром и зеркальные шары.
+    Комплект собирается как конструктор: можно взять одну зону или весь салон целиком.
+  </p>
+
+  <div class="zones">
+    <span class="pill"><b>01</b> фасад и входная группа</span>
+    <span class="pill"><b>02</b> центральный подиум с автомобилем</span>
+    <span class="pill"><b>03</b> зона выдачи / handover</span>
+    <span class="pill"><b>04</b> клиентский лаунж</span>
+    <span class="pill"><b>05</b> фотозона для соцсетей</span>
+  </div>
+
+  <div class="grid">
+    <article class="card span2">
+      <button class="shot" data-src="sm-ny-avtosalon-facade.jpg" data-cap="Зона 01 · фасад и входная группа">
+        <img src="sm-ny-avtosalon-facade.jpg" alt="Новогодний декор фасада автосалона: неоновая арка входа, световые линии по фризу, неоновые снежинки в витринах, ёлки в подсвеченных кашпо" />
+      </button>
+      <div class="body">
+        <p class="kicker">зона 01 · улица</p>
+        <h2>Фасад и входная группа</h2>
+        <div class="row"><b>Что делаем</b><span>Световые линии гибкого неона по фризу на всю ширину витрины, неоновая арка вокруг входа, крупные скульптурные снежинки холодного голубого в витринах, ёлки в инее с подсветкой изнутри кашпо.</span></div>
+        <div class="row"><b>Зачем</b><span>Самая заметная точка — трафик с трассы и парковки. Ночью салон читается как витрина, а не как «ещё одно здание».</span></div>
+        <div class="chips"><span class="chip">гибкий неон, уличный IP65</span><span class="chip">арка входа</span><span class="chip">ёлки 2,5–3 м</span><span class="chip">монтаж с автовышки</span></div>
+        <p class="price">Ориентир по комплекту: <b>от 480 000 ₽</b> вместе с монтажом и демонтажом</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-avtosalon-showroom-car.jpg" data-cap="Зона 02 · центральный подиум">
+        <img src="sm-ny-avtosalon-showroom-car.jpg" alt="Новогодний декор центрального подиума автосалона: неоновое кольцо над автомобилем, световые линии на стене, снежинки, ёлки в белых кашпо" />
+      </button>
+      <div class="body">
+        <p class="kicker">зона 02 · витрина шоурума</p>
+        <h2>Центральный подиум с автомобилем</h2>
+        <div class="row"><b>Что делаем</b><span>Световой контур по кромке подиума, парящее неоновое кольцо над автомобилем, «воздушные» линии неона по стене и скульптурные снежинки разного размера.</span></div>
+        <div class="row"><b>Зачем</b><span>Автомобиль остаётся главным — декор работает как световая рама и не перекрывает обзор. Идеально для премьер и сезонных акций.</span></div>
+        <div class="chips"><span class="chip">подвесное кольцо</span><span class="chip">неон по подиуму</span><span class="chip">иней на полу</span><span class="chip">хром-шары</span></div>
+        <p class="price">Ориентир по зоне: <b>от 190 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-avtosalon-delivery-zone.jpg" data-cap="Зона 03 · выдача автомобиля">
+        <img src="sm-ny-avtosalon-delivery-zone.jpg" alt="Новогодняя зона выдачи автомобиля: тоннель неоновых арок, неоновая лента-подарок, надпись 2027, ёлка, красная дорожка" />
+      </button>
+      <div class="body">
+        <p class="kicker">зона 03 · handover</p>
+        <h2>Зона выдачи автомобиля</h2>
+        <div class="row"><b>Что делаем</b><span>Тоннель из неоновых арок, неоновая лента-подарок с бантом в масштабе всей зоны, светящаяся надпись «2027», красная дорожка с искусственным снегом и конфетти.</span></div>
+        <div class="row"><b>Зачем</b><span>Клиент забирает машину как подарок — и сам снимает это на видео. Готовый контент для соцсетей дилера без отдельной съёмки.</span></div>
+        <div class="chips"><span class="chip">неон-тоннель</span><span class="chip">световая лента</span><span class="chip">красная дорожка</span><span class="chip">фото-точка для клиента</span></div>
+        <p class="price">Ориентир по зоне: <b>от 240 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-avtosalon-lounge.jpg" data-cap="Зона 04 · клиентский лаунж">
+        <img src="sm-ny-avtosalon-lounge.jpg" alt="Новогодний декор клиентского лаунжа автосалона: белая ёлка с хром-шарами, неоновая снежинка на каменной стене, гирлянда под потолком, подарки на столах" />
+      </button>
+      <div class="body">
+        <p class="kicker">зона 04 · лаунж и ресепшн</p>
+        <h2>Клиентский лаунж</h2>
+        <div class="row"><b>Что делаем</b><span>Ёлка 2,5 м в инее с хромом, серебром и изумрудом, крупная неоновая снежинка на каменной стене, неоновые линии по панелям, гирлянда с тёплыми лампами под потолком.</span></div>
+        <div class="row"><b>Зачем</b><span>Время ожидания в сервисе и при оформлении сделки проходит в атмосфере праздника — это прямо влияет на оценки в опросах NPS.</span></div>
+        <div class="chips"><span class="chip">ёлка 2,5 м</span><span class="chip">неоновая фигура</span><span class="chip">текстиль</span><span class="chip">свечи и боксы</span></div>
+        <p class="price">Ориентир по зоне: <b>от 120 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card span2">
+      <button class="shot" data-src="sm-ny-avtosalon-photozone.jpg" data-cap="Зона 05 · фотозона для соцсетей">
+        <img src="sm-ny-avtosalon-photozone.jpg" alt="Новогодняя фотозона в автосалоне: неоновый автомобильный ключ со снежинками, неоновый контур машины, надпись 2027, ёлочные колонны, зеркальные шары" />
+      </button>
+      <div class="body">
+        <p class="kicker">зона 05 · ugc и соцсети</p>
+        <h2>Фотозона для соцсетей</h2>
+        <div class="row"><b>Что делаем</b><span>Пресс-волл 4×2,5 м с зеркальными и ледяными панелями, неоновый автомобильный ключ со снежинками, неоновый контур автомобиля, надпись «2027», ёлочные колонны по краям.</span></div>
+        <div class="row"><b>Зачем</b><span>Точка, где гости и клиенты сами делают контент с хештегом дилера: тест-драйвы, дни открытых дверей, корпоратив для сотрудников.</span></div>
+        <div class="chips"><span class="chip">пресс-волл 4×2,5</span><span class="chip">неоновый арт-объект</span><span class="chip">зеркальные панели</span><span class="chip">брендирование под дилера</span></div>
+        <p class="price">Ориентир по зоне: <b>от 165 000 ₽</b></p>
+      </div>
+    </article>
+  </div>
+
+  <section class="spec">
+    <h2>Как это устроено в производстве</h2>
+    <p>
+      Все световые элементы — гибкий неон (flexible LED neon) на подложке из ПВХ/акрила: он гнётся по сложным контурам,
+      безопасен в зоне гостей и автомобилей, работает от 12/24 В и не требует высоковольтного драйвера на объекте.
+      Для улицы — версия IP65 в алюминиевом профиле.
+    </p>
+    <table>
+      <thead><tr><th>Элемент</th><th>Где в проекте</th><th>Технология</th></tr></thead>
+      <tbody>
+        <tr><td>Световые линии по фризу</td><td>фасад</td><td>неон IP65 в профиле, крепление на направляющих, скрытая проводка</td></tr>
+        <tr><td>Арка входа</td><td>фасад</td><td>каркас из алюминия + неон, сборные секции для транспортировки</td></tr>
+        <tr><td>Снежинки</td><td>фасад, шоурум, лаунж</td><td>фрезеровка акрила, контурный неон, гравировка, подсветка изнутри</td></tr>
+        <tr><td>Подвесное кольцо</td><td>подиум</td><td>гнутый алюминий + неон, подвес на тросах к существующим точкам</td></tr>
+        <tr><td>Неоновый арт-объект (ключ, машина)</td><td>фотозона</td><td>контур по эскизу, монтаж на подложку пресс-волла</td></tr>
+        <tr><td>Неон-тоннель и лента</td><td>зона выдачи</td><td>сборный каркас, неон по дуге, быстрый монтаж за одну ночь</td></tr>
+        <tr><td>Ёлки и гирлянды</td><td>все зоны</td><td>искусственные ёлки в инее, тёплая гирлянда 2700 K, кашпо с подсветкой</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:20px">
+      Палитра: <b style="color:var(--gold)">тёплое золото 2700–3000 K</b> + <b style="color:var(--ice)">ледяной голубой 6000–8000 K</b>.
+      Такая пара сочетается с любым корпоративным цветом дилера — от синего до красного — и не спорит с фирменным оформлением автомобилей.
+    </p>
+  </section>
+
+  <footer>
+    <strong>SM Production</strong> · event · branding · decor · Москва и Санкт-Петербург<br />
+    Сметы выше — ориентировочные: финальная стоимость зависит от площади зон, количества неоновых погонных метров и доступа на объект.
+  </footer>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр визуализации">
+  <button aria-label="Закрыть">×</button>
+  <img src="" alt="" />
+  <div class="cap"></div>
+</div>
+
+<script>
+  const lb = document.getElementById("lb");
+  const lbImg = lb.querySelector("img");
+  const lbCap = lb.querySelector(".cap");
+  document.querySelectorAll(".shot").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      lbImg.src = btn.dataset.src;
+      lbImg.alt = btn.querySelector("img").alt;
+      lbCap.textContent = btn.dataset.cap || "";
+      lb.setAttribute("open", "");
+    });
+  });
+  const close = () => { lb.removeAttribute("open"); lbImg.src = ""; };
+  lb.querySelector("button").addEventListener("click", close);
+  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+</script>
+</body>
+</html>
