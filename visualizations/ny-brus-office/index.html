@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SM Production — новогоднее оформление офисов</title>
+<style>
+  :root {
+    --bg:#0a0a0d; --card:#14141c; --ink:#f4f2ec; --mut:#98989f; --line:rgba(244,242,236,.13);
+    --accent:#ff4d1c; --acid:#d8ff3e; --ice:#7fd4ff; --gold:#ffcf7a;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:
+      radial-gradient(1000px 560px at 12% -8%, #18222b 0%, transparent 62%),
+      radial-gradient(760px 480px at 90% 2%, #232019 0%, transparent 58%), var(--bg);
+    color:var(--ink); font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased; padding:44px 20px 88px;
+  }
+  .wrap { max-width:1240px; margin:0 auto; }
+  .badge { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--mut); }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--acid); box-shadow:0 0 12px var(--acid); }
+  h1 { font-family:"Unbounded","Manrope",system-ui,sans-serif; font-weight:800; font-size:clamp(1.9rem,5vw,3.3rem); line-height:1.05; letter-spacing:-.02em; margin:22px 0 16px; }
+  h1 em { font-style:normal; color:var(--accent); }
+  .lead { color:var(--mut); max-width:68ch; line-height:1.68; font-size:15px; margin:0; }
+  .zones { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 0; }
+  .pill { border:1px solid var(--line); border-radius:999px; padding:7px 13px; font-size:12px; background:rgba(255,255,255,.02); }
+  .pill b { color:var(--acid); font-weight:700; }
+  .grid { display:grid; gap:24px; margin-top:36px; grid-template-columns:1fr; }
+  @media (min-width:900px) { .grid { grid-template-columns:1fr 1fr; } .span2 { grid-column:span 2; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 40px 80px -60px #000; display:flex; flex-direction:column; }
+  .shot { position:relative; display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
+  .shot img { display:block; width:100%; height:auto; aspect-ratio:1200/896; object-fit:cover; transition:transform .7s cubic-bezier(.2,.65,.25,1); }
+  .shot:hover img { transform:scale(1.03); }
+  .shot::after { content:"увеличить"; position:absolute; right:14px; bottom:14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; background:rgba(10,10,13,.6); border:1px solid var(--line); border-radius:999px; padding:6px 12px; backdrop-filter:blur(8px); opacity:0; transition:opacity .3s; }
+  .shot:hover::after { opacity:1; }
+  .body { padding:22px 24px 26px; }
+  .kicker { font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); margin:0 0 8px; }
+  h2 { font-family:"Unbounded","Manrope",system-ui,sans-serif; font-size:1.06rem; margin:0 0 14px; font-weight:700; }
+  .row { display:flex; gap:14px; margin:0 0 10px; font-size:14px; line-height:1.62; color:var(--mut); }
+  .row b { flex:0 0 96px; color:var(--ink); font-weight:600; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding-top:4px; }
+  .chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:15px; }
+  .chip { font-size:11px; border:1px solid var(--line); border-radius:999px; padding:5px 11px; }
+  .price { margin-top:16px; font-size:13px; color:var(--mut); }
+  .price b { color:var(--ice); font-weight:700; }
+  .spec { margin-top:48px; border-top:1px solid var(--line); padding-top:34px; }
+  .spec h2 { font-size:1.4rem; margin-bottom:10px; }
+  .spec p { color:var(--mut); font-size:14px; line-height:1.72; max-width:80ch; }
+  table { width:100%; border-collapse:collapse; margin-top:16px; font-size:14px; }
+  th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--mut); font-weight:600; }
+  td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+  td { color:var(--mut); }
+  footer { margin-top:40px; color:var(--mut); font-size:13px; line-height:1.7; }
+  footer strong { color:var(--ink); }
+  .lb { position:fixed; inset:0; z-index:50; display:none; place-items:center; background:rgba(5,5,8,.93); padding:24px; backdrop-filter:blur(6px); }
+  .lb[open] { display:grid; }
+  .lb img { max-width:min(1400px,96vw); max-height:86vh; border-radius:14px; box-shadow:0 40px 120px #000; }
+  .lb button { position:absolute; top:18px; right:20px; width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:rgba(20,20,28,.8); color:var(--ink); font-size:20px; cursor:pointer; }
+  .lb .cap { position:absolute; bottom:18px; left:24px; right:24px; text-align:center; color:var(--mut); font-size:13px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation:rise .7s cubic-bezier(.2,.65,.25,1) both; }
+    .card:nth-child(2){animation-delay:.06s} .card:nth-child(3){animation-delay:.12s}
+    .card:nth-child(4){animation-delay:.18s} .card:nth-child(5){animation-delay:.24s}
+  }
+  @keyframes rise { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge"><span class="dot"></span> sm production · brus-banner · new year edition</span>
+  <h1>Брус-баннер — фотозона<br />в офисе, <em>+ гибкий неон</em></h1>
+  <p class="lead">
+    Пять офисных сцен, где основа — наш брус-баннер на скрытом деревянном каркасе: идеально ровное матовое полотно,
+    запечатанный торец 20–30 см, никаких видимых труб и складок. Сверху — гибкий неон на клипсах: контур по кромкам,
+    снежинки, световые надписи. Всё показано так, как будет собрано на объекте.
+  </p>
+
+  <div class="zones">
+    <span class="pill"><b>01</b> welcome-зона 5×3 м</span>
+    <span class="pill"><b>02</b> переговорная 3×2 м</span>
+    <span class="pill"><b>03</b> опенспейс 5×3 м</span>
+    <span class="pill"><b>04</b> ресепшн, угловая L-форма</span>
+    <span class="pill"><b>05</b> брус-колонны 3 шт.</span>
+  </div>
+
+  <div class="grid">
+    <article class="card span2">
+      <button class="shot" data-src="sm-ny-brus-office-welcome-hall.jpg" data-cap="01 · брус-баннер 5×3 м, welcome-зона">
+        <img src="sm-ny-brus-office-welcome-hall.jpg" alt="Брус-баннер 5×3 м с неоновым контуром и снежинкой в welcome-зоне офиса" />
+      </button>
+      <div class="body">
+        <p class="kicker">01 · welcome-зона</p>
+        <h2>Брус-баннер 5×3 м + неоновый контур</h2>
+        <div class="row"><b>Основа</b><span>Брус-баннер 5×3 м, торец 25 см с запечаткой — конструкция читается как монолитный объём. Полотно матовое, без бликов от вспышки, каркас полностью скрыт.</span></div>
+        <div class="row"><b>Неон</b><span>Тёплый контур по верхней и боковым кромкам на прозрачных клипсах, крупная снежинка холодного голубого в правой части полотна, акриловая панель «Happy holidays» на стене рядом.</span></div>
+        <div class="row"><b>Декор</b><span>Ёлка 2 м в чёрном кашпо, боксы, снег у основания. Питание неона уходит в торец — проводов на полу нет.</span></div>
+        <div class="chips"><span class="chip">брус-баннер 5×3</span><span class="chip">торец 25 см</span><span class="chip">неон по контуру</span><span class="chip">снежинка</span></div>
+        <p class="price">Ориентир: <b>от 95 000 ₽</b> с монтажом · 4 часа сборки</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-brus-office-meeting-room.jpg" data-cap="02 · брус-баннер 3×2 м в переговорной">
+        <img src="sm-ny-brus-office-meeting-room.jpg" alt="Брус-баннер 3×2 м изумрудного цвета с неоновой надписью 2027 в переговорной" />
+      </button>
+      <div class="body">
+        <p class="kicker">02 · переговорная</p>
+        <h2>Брус-баннер 3×2 м + неоновая надпись</h2>
+        <div class="row"><b>Основа</b><span>Брус-баннер 3×2 м, изумрудное полотно с золотой зимней графикой, торец 20 см. Встаёт на пол — стену сверлить не нужно.</span></div>
+        <div class="row"><b>Неон</b><span>Световая надпись «2027» тёплым на стене над баннером, тонкий контур по верхней кромке, акриловая снежинка в рамке справа.</span></div>
+        <div class="chips"><span class="chip">брус-баннер 3×2</span><span class="chip">неоновая надпись</span><span class="chip">акрил в рамке</span></div>
+        <p class="price">Ориентир: <b>от 66 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-brus-office-openspace-lounge.jpg" data-cap="03 · брус-баннер 5×3 м в опенспейсе">
+        <img src="sm-ny-brus-office-openspace-lounge.jpg" alt="Брус-баннер 5×3 м в опенспейсе с полным неоновым контуром и двумя снежинками, сотрудники фотографируются" />
+      </button>
+      <div class="body">
+        <p class="kicker">03 · опенспейс</p>
+        <h2>Брус-баннер 5×3 м + полный неоновый периметр</h2>
+        <div class="row"><b>Основа</b><span>Полотно в полночь-синем со снежинками и серебряной геометрией, торец 30 см. Матовая ламинация — вспышка не даёт бликов, кадры чистые.</span></div>
+        <div class="row"><b>Неон</b><span>Контур по всему периметру на клипсах, две снежинки холодного голубого на разной высоте, вертикальная линия на торце.</span></div>
+        <div class="row"><b>Декор</b><span>Две ёлки 1,8 м в белых кашпо, гирлянда с шарами по верхней кромке, боксы, снег; сотрудники фотографируются — готовая UGC-точка.</span></div>
+        <div class="chips"><span class="chip">брус-баннер 5×3</span><span class="chip">периметр неона</span><span class="chip">2 снежинки</span><span class="chip">матовая ламинация</span></div>
+        <p class="price">Ориентир: <b>от 112 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-brus-office-reception-corner.jpg" data-cap="04 · угловой брус-баннер на ресепшн">
+        <img src="sm-ny-brus-office-reception-corner.jpg" alt="Угловой брус-баннер L-формы с неоновым контуром у стойки ресепшн" />
+      </button>
+      <div class="body">
+        <p class="kicker">04 · ресепшн</p>
+        <h2>Угловой брус-баннер L-формы</h2>
+        <div class="row"><b>Основа</b><span>Две сцепленные конструкции 3×3 м и 2×2 м, торец 30 см, запечатка в цвет — получается объёмный «угол» за стойкой, каркас не виден.</span></div>
+        <div class="row"><b>Неон</b><span>Непрерывная линия по верхним кромкам с переходом через угол, золотая снежинка на левом полотне, холодный акцент под столешницей.</span></div>
+        <div class="chips"><span class="chip">L-форма</span><span class="chip">неон через угол</span><span class="chip">золотая снежинка</span><span class="chip">торец 30 см</span></div>
+        <p class="price">Ориентир: <b>от 118 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-brus-office-columns.jpg" data-cap="05 · брус-колонны 2,5 / 2 / 1,5 м">
+        <img src="sm-ny-brus-office-columns.jpg" alt="Три брус-колонны разной высоты с неоновыми контурами и снежинкой в опенспейсе" />
+      </button>
+      <div class="body">
+        <p class="kicker">05 · бренд-зона из колонн</p>
+        <h2>Брус-колонны 2,5 / 2 / 1,5 м</h2>
+        <div class="row"><b>Основа</b><span>Три фигурные колонны на скрытом брусе, торец 30 см, стоят на стальных опорных плитах с регулируемыми ножками — можно ставить в любом опенспейсе.</span></div>
+        <div class="row"><b>Неон</b><span>Контур по фронтальной грани каждой колонны, холодная снежинка на средней, подсветка торца у самой высокой.</span></div>
+        <div class="chips"><span class="chip">3 колонны</span><span class="chip">опорные плиты</span><span class="chip">неон по граням</span><span class="chip">«HAPPY NEW YEAR 2027»</span></div>
+        <p class="price">Ориентир: <b>от 138 000 ₽</b> за комплект</p>
+      </div>
+    </article>
+  </div>
+
+  <section class="spec">
+    <h2>Как брус-баннер ведёт себя в офисе</h2>
+    <p>
+      Брус-баннер — жёсткий щит из строганого бруса, обтянутый матовой баннерной тканью с печатью 1440 dpi. Каркас
+      полностью скрыт, запечатанный торец 20–40 см создаёт эффект объёмной стены. Для офиса это удобно: конструкция
+      стоит на полу и не требует крепления к стенам, а неон монтируется на клипсах к самому полотну — стену не трогаем.
+    </p>
+    <table>
+      <thead><tr><th>Параметр</th><th>Значение</th><th>Что это даёт в офисе</th></tr></thead>
+      <tbody>
+        <tr><td>Каркас</td><td>строганый сосновый брус, скрыт</td><td>никаких труб, скоб и растяжек в кадре — на фото только ваш дизайн</td></tr>
+        <tr><td>Полотно</td><td>баннерная ткань, печать 1440 dpi, матовая ламинация</td><td>без бликов от вспышки, ровная поверхность даже под накамерным светом</td></tr>
+        <tr><td>Торец</td><td>20 / 30 / 40 см, с запечаткой</td><td>стена выглядит монолитной и «дорогой», а не натянутой тканью</td></tr>
+        <tr><td>Размеры</td><td>3×2, 4×3, 5×3, 6×3, фигурные, высота до 5 м</td><td>подходит и в переговорную, и в большой welcome-холл</td></tr>
+        <tr><td>Неон</td><td>гибкий LED-неон, 12/24 В, клипсы, питание в торце</td><td>безопасно рядом с людьми, проводов на полу нет, снимается без следов</td></tr>
+        <tr><td>Монтаж</td><td>2–4 часа, сборка секциями</td><td>монтируем ночью или в выходные — офис утром работает как обычно</td></tr>
+        <tr><td>Повторное использование</td><td>каркас многоразовый, меняется только печать</td><td>к следующему сезону — новый дизайн за 40% бюджета</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:20px">
+      Палитра в серии: <b style="color:var(--gold)">тёплый неон 2700–3000 K</b> по контурам + <b style="color:var(--ice)">ледяной голубой</b>
+      в акцентных снежинках. Фон полотна — тёмно-синий, изумруд, графит: на таких цветах матовая печать выглядит дороже всего
+      и не «съедает» тёплый свет неона.
+    </p>
+  </section>
+
+  <footer>
+    <strong>SM Production</strong> · event · branding · decor · Москва и Санкт-Петербург<br />
+    Ориентиры: изготовление брус-баннера с монтажом + неон и декор. Точная стоимость — после замера площадки и согласования дизайна.
+    Печать под бренд компании и сетку размеров делаем в производстве, срок — от 24 часов.
+  </footer>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр визуализации">
+  <button aria-label="Закрыть">×</button>
+  <img src="" alt="" />
+  <div class="cap"></div>
+</div>
+
+<script>
+  const lb = document.getElementById("lb");
+  const lbImg = lb.querySelector("img");
+  const lbCap = lb.querySelector(".cap");
+  document.querySelectorAll(".shot").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      lbImg.src = btn.dataset.src;
+      lbImg.alt = btn.querySelector("img").alt;
+      lbCap.textContent = btn.dataset.cap || "";
+      lb.setAttribute("open", "");
+    });
+  });
+  const close = () => { lb.removeAttribute("open"); lbImg.src = ""; };
+  lb.querySelector("button").addEventListener("click", close);
+  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+</script>
+</body>
+</html>
