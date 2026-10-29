@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SM Production — новогоднее оформление офисов</title>
+<style>
+  :root {
+    --bg:#0a0a0d; --card:#14141c; --ink:#f4f2ec; --mut:#98989f; --line:rgba(244,242,236,.13);
+    --accent:#ff4d1c; --acid:#d8ff3e; --ice:#7fd4ff; --gold:#ffcf7a;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:
+      radial-gradient(1000px 560px at 12% -8%, #18222b 0%, transparent 62%),
+      radial-gradient(760px 480px at 90% 2%, #232019 0%, transparent 58%), var(--bg);
+    color:var(--ink); font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased; padding:44px 20px 88px;
+  }
+  .wrap { max-width:1240px; margin:0 auto; }
+  .badge { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--mut); }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--acid); box-shadow:0 0 12px var(--acid); }
+  h1 { font-family:"Unbounded","Manrope",system-ui,sans-serif; font-weight:800; font-size:clamp(1.9rem,5vw,3.3rem); line-height:1.05; letter-spacing:-.02em; margin:22px 0 16px; }
+  h1 em { font-style:normal; color:var(--accent); }
+  .lead { color:var(--mut); max-width:68ch; line-height:1.68; font-size:15px; margin:0; }
+  .zones { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 0; }
+  .pill { border:1px solid var(--line); border-radius:999px; padding:7px 13px; font-size:12px; background:rgba(255,255,255,.02); }
+  .pill b { color:var(--acid); font-weight:700; }
+  .grid { display:grid; gap:24px; margin-top:36px; grid-template-columns:1fr; }
+  @media (min-width:900px) { .grid { grid-template-columns:1fr 1fr; } .span2 { grid-column:span 2; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 40px 80px -60px #000; display:flex; flex-direction:column; }
+  .shot { position:relative; display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
+  .shot img { display:block; width:100%; height:auto; aspect-ratio:1200/896; object-fit:cover; transition:transform .7s cubic-bezier(.2,.65,.25,1); }
+  .shot:hover img { transform:scale(1.03); }
+  .shot::after { content:"увеличить"; position:absolute; right:14px; bottom:14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; background:rgba(10,10,13,.6); border:1px solid var(--line); border-radius:999px; padding:6px 12px; backdrop-filter:blur(8px); opacity:0; transition:opacity .3s; }
+  .shot:hover::after { opacity:1; }
+  .body { padding:22px 24px 26px; }
+  .kicker { font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); margin:0 0 8px; }
+  h2 { font-family:"Unbounded","Manrope",system-ui,sans-serif; font-size:1.06rem; margin:0 0 14px; font-weight:700; }
+  .row { display:flex; gap:14px; margin:0 0 10px; font-size:14px; line-height:1.62; color:var(--mut); }
+  .row b { flex:0 0 96px; color:var(--ink); font-weight:600; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding-top:4px; }
+  .chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:15px; }
+  .chip { font-size:11px; border:1px solid var(--line); border-radius:999px; padding:5px 11px; }
+  .price { margin-top:16px; font-size:13px; color:var(--mut); }
+  .price b { color:var(--ice); font-weight:700; }
+  .spec { margin-top:48px; border-top:1px solid var(--line); padding-top:34px; }
+  .spec h2 { font-size:1.4rem; margin-bottom:10px; }
+  .spec p { color:var(--mut); font-size:14px; line-height:1.72; max-width:80ch; }
+  table { width:100%; border-collapse:collapse; margin-top:16px; font-size:14px; }
+  th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--mut); font-weight:600; }
+  td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+  td { color:var(--mut); }
+  footer { margin-top:40px; color:var(--mut); font-size:13px; line-height:1.7; }
+  footer strong { color:var(--ink); }
+  .lb { position:fixed; inset:0; z-index:50; display:none; place-items:center; background:rgba(5,5,8,.93); padding:24px; backdrop-filter:blur(6px); }
+  .lb[open] { display:grid; }
+  .lb img { max-width:min(1400px,96vw); max-height:86vh; border-radius:14px; box-shadow:0 40px 120px #000; }
+  .lb button { position:absolute; top:18px; right:20px; width:44px; height:44px; border-radius:50%; border:1px solid var(--line); background:rgba(20,20,28,.8); color:var(--ink); font-size:20px; cursor:pointer; }
+  .lb .cap { position:absolute; bottom:18px; left:24px; right:24px; text-align:center; color:var(--mut); font-size:13px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { animation:rise .7s cubic-bezier(.2,.65,.25,1) both; }
+    .card:nth-child(2){animation-delay:.06s} .card:nth-child(3){animation-delay:.12s}
+    .card:nth-child(4){animation-delay:.18s} .card:nth-child(5){animation-delay:.24s}
+  }
+  @keyframes rise { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge"><span class="dot"></span> sm production · office · new year edition</span>
+  <h1>Новогоднее оформление<br /><em>офисов</em> и фотозон</h1>
+  <p class="lead">
+    Пять точек офиса, которые видят все — гости, кандидаты, сотрудники: ресепшн, коридор у лифтов, кофе-поинт,
+    фотозона в опенспейсе и зона корпоратива. Всё оборудование из нашего производства: гибкий неон на клипсах,
+    прямоугольные световые короба, подсвеченный акрил с печатью, ёлки с гирляндами. Ничего «парящего» и нарисованного —
+    так это и будет стоять на объекте.
+  </p>
+
+  <div class="zones">
+    <span class="pill"><b>01</b> ресепшн и вход</span>
+    <span class="pill"><b>02</b> коридор / лифтовой холл</span>
+    <span class="pill"><b>03</b> кофе-поинт и лаунж</span>
+    <span class="pill"><b>04</b> фотозона в опенспейсе</span>
+    <span class="pill"><b>05</b> корпоратив в переговорной</span>
+  </div>
+
+  <div class="grid">
+    <article class="card span2">
+      <button class="shot" data-src="sm-ny-office-reception.jpg" data-cap="01 · ресепшн и входная зона">
+        <img src="sm-ny-office-reception.jpg" alt="Новогоднее оформление ресепшн офиса: неоновые линии по реечной стене, ёлки в белых кашпо, светящаяся снежинка в рамке" />
+      </button>
+      <div class="body">
+        <p class="kicker">01 · первое впечатление</p>
+        <h2>Ресепшн и входная зона</h2>
+        <div class="row"><b>Что делаем</b><span>Гибкий неон по горизонтальным линиям реечной стены и по фронту стойки (на клипсах, с убранным питанием), две ёлки 2 м в белых кашпо с тёплой гирляндой и серебром, елово-эвкалиптовая гирлянда по столешнице, снежинка на подсвеченном акриле в тонкой чёрной раме.</span></div>
+        <div class="row"><b>Зачем</b><span>Первое, что видит гость и кандидат. Даёт «дорогое» впечатление без перестановки мебели и ремонта — крепления не портят стену.</span></div>
+        <div class="chips"><span class="chip">неон на клипсах</span><span class="chip">акрил с печатью</span><span class="chip">2 ёлки 2 м</span><span class="chip">гирлянда по стойке</span></div>
+        <p class="price">Ориентир по зоне: <b>от 95 000 ₽</b> · монтаж 1 ночь</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-office-lift-lobby.jpg" data-cap="02 · коридор и лифтовой холл">
+        <img src="sm-ny-office-lift-lobby.jpg" alt="Новогоднее оформление лифтового холла: световые короба на опорах, акриловые панели с печатью, гирлянда над лифтами" />
+      </button>
+      <div class="body">
+        <p class="kicker">02 · проходная зона</p>
+        <h2>Коридор и лифтовой холл</h2>
+        <div class="row"><b>Что делаем</b><span>Три световых короба на опорных плитах с печатью («WINTER GREETINGS», «HAPPY NEW YEAR 2027», «CELEBRATE»), акриловые подсвеченные панели с печатью на бетоне, гирлянда с шарами и шишками над лифтами, две ёлки 1,5 м в чёрных кашпо.</span></div>
+        <div class="row"><b>Зачем</b><span>Самая проходная точка: сотрудники проходят здесь каждый день. Бюджетно и без сверления несущих стен — панели на дюбелях, короба на полу.</span></div>
+        <div class="chips"><span class="chip">короба на плитах</span><span class="chip">акрил с печатью</span><span class="chip">гирлянда над лифтами</span><span class="chip">2 ёлки 1,5 м</span></div>
+        <p class="price">Ориентир по зоне: <b>от 120 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-office-lounge.jpg" data-cap="03 · кофе-поинт и лаунж">
+        <img src="sm-ny-office-lounge.jpg" alt="Новогодний декор кофе-поинта в офисе: ёлка в корзине, гирлянда на кухонных шкафах, светящаяся панель 2027, неоновая снежинка" />
+      </button>
+      <div class="body">
+        <p class="kicker">03 · для сотрудников</p>
+        <h2>Кофе-поинт и лаунж</h2>
+        <div class="row"><b>Что делаем</b><span>Ёлка 2,2 м в плетёной корзине (серебро, крем, тёмно-зелёный) с тёплой гирляндой, еловая гирлянда по верху шкафов, светящаяся панель «2027» в тонкой раме, неоновый контур снежинки на микроцементе, вязаные плюшки на скамье.</span></div>
+        <div class="row"><b>Зачем</b><span>Точка, где люди проводят перерывы: главный источник фото в корпоративных чатах и «сарафанного» эффекта внутри компании.</span></div>
+        <div class="chips"><span class="chip">ёлка 2,2 м</span><span class="chip">световая панель</span><span class="chip">неон на стене</span><span class="chip">текстиль</span></div>
+        <p class="price">Ориентир по зоне: <b>от 75 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="sm-ny-office-photozone.jpg" data-cap="04 · фотозона в опенспейсе">
+        <img src="sm-ny-office-photozone.jpg" alt="Новогодняя фотозона в офисе: пресс-волл из белых панелей, световой короб HAPPY NEW YEAR 2027, неоновые снежинки" />
+      </button>
+      <div class="body">
+        <p class="kicker">04 · ugc сотрудников</p>
+        <h2>Фотозона в опенспейсе</h2>
+        <div class="row"><b>Что делаем</b><span>Пресс-волл 3×2,5 м из белых и серых панелей на стальном каркасе (без крепления к стенам), световой короб «HAPPY NEW YEAR 2027», панель под логотип компании, неоновые снежинки на клипсах, снег и еловые ветки по низу.</span></div>
+        <div class="row"><b>Зачем</b><span>Собирается и разбирается за 2 часа, встаёт в любом опенспейсе и уезжает на следующий этаж или в другой офис компании.</span></div>
+        <div class="chips"><span class="chip">пресс-волл 3×2,5</span><span class="chip">световой короб с текстом</span><span class="chip">каркас без креплений</span><span class="chip">панель под логотип</span></div>
+        <p class="price">Ориентир: <b>от 88 000 ₽</b></p>
+      </div>
+    </article>
+
+    <article class="card span2">
+      <button class="shot" data-src="sm-ny-office-corporate-party.jpg" data-cap="05 · корпоратив в переговорной">
+        <img src="sm-ny-office-corporate-party.jpg" alt="Фотозона корпоратива в переговорной: тёмно-синий пресс-волл, световая полоса, неоновые снежинки, ёлка с золотом, коллеги фотографируются" />
+      </button>
+      <div class="body">
+        <p class="kicker">05 · корпоратив</p>
+        <h2>Корпоратив в переговорной</h2>
+        <div class="row"><b>Что делаем</b><span>Тёмно-синий пресс-волл 4×2,5 м со световой полосой по верху, две стойки-короба на опорных плитах по краям, золотые неоновые снежинки, ёлка 2,2 м с золотом и серебром, подиум с шампанским, кабели в кабель-канале.</span></div>
+        <div class="row"><b>Зачем</b><span>Одна конструкция закрывает и корпоратив, и welcome-зону на весь декабрь: фото с вечера потом живут в презентациях и соцсетях компании.</span></div>
+        <div class="chips"><span class="chip">пресс-волл 4×2,5</span><span class="chip">2 стойки-короба</span><span class="chip">золотой неон</span><span class="chip">подиум с шампанским</span></div>
+        <p class="price">Ориентир: <b>от 165 000 ₽</b></p>
+      </div>
+    </article>
+  </div>
+
+  <section class="spec">
+    <h2>Почему офис — это отдельная логика</h2>
+    <p>
+      В офисе декор живёт месяц и рядом с людьми, которые работают. Поэтому мы не вешаем хрупкое, не перекрываем проходы
+      и эвакуационные пути, не сверлим несущие стены (всё на дюбелях в обшивку или на напольных опорах), убираем кабели
+      в кабель-каналы и ставим блоки питания в опорные плиты. Монтаж — ночью или в выходные, чтобы не мешать работе.
+      Демонтаж и хранение до следующего сезона — в стоимости комплекта.
+    </p>
+    <table>
+      <thead><tr><th>Элемент</th><th>Где</th><th>Что важно в офисе</th></tr></thead>
+      <tbody>
+        <tr><td>Гибкий неон (клипсы)</td><td>ресепшн, кофе-поинт</td><td>12/24 В, без высоковольтных драйверов, крепление в обшивку, снимается без следов</td></tr>
+        <tr><td>Световые короба</td><td>коридор, корпоратив</td><td>профиль 40 мм, опорные плиты с ножками, блок питания внутри — нет проводов на полу</td></tr>
+        <tr><td>Акрил с печатью</td><td>ресепшн, коридор</td><td>подсветка по контуру, печать под бренд компании, лёгкая замена текста и года</td></tr>
+        <tr><td>Пресс-волл на каркасе</td><td>опенспейс, переговорная</td><td>стоит без крепления к стенам, сборка/разборка 2 часа, уезжает в следующий офис</td></tr>
+        <tr><td>Ёлки и гирлянды</td><td>все зоны</td><td>искусственные, в инее, пожаробезопасные, LED 2700–3000 K, хранение до сезона</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <strong>SM Production</strong> · event · branding · decor · Москва и Санкт-Петербург<br />
+    Ориентиры по бюджету зависят от площади зон, количества световых элементов и доступа на объект.
+    Комплект «весь офис» — со скидкой за один выезд монтажников.
+  </footer>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр визуализации">
+  <button aria-label="Закрыть">×</button>
+  <img src="" alt="" />
+  <div class="cap"></div>
+</div>
+
+<script>
+  const lb = document.getElementById("lb");
+  const lbImg = lb.querySelector("img");
+  const lbCap = lb.querySelector(".cap");
+  document.querySelectorAll(".shot").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      lbImg.src = btn.dataset.src;
+      lbImg.alt = btn.querySelector("img").alt;
+      lbCap.textContent = btn.dataset.cap || "";
+      lb.setAttribute("open", "");
+    });
+  });
+  const close = () => { lb.removeAttribute("open"); lbImg.src = ""; };
+  lb.querySelector("button").addEventListener("click", close);
+  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+</script>
+</body>
+</html>
