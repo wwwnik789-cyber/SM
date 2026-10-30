@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SM Production — фотопропсы на заказ: реквизит для фотосессий</title>
+<style>
+  :root {
+    --bg:#0a0a0d; --card:#14141c; --ink:#f4f2ec; --mut:#98989f; --line:rgba(244,242,236,.13);
+    --accent:#ff4d1c; --acid:#d8ff3e; --ice:#7fd4ff;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:
+      radial-gradient(1000px 560px at 10% -8%, #241a22 0%, transparent 62%),
+      radial-gradient(760px 480px at 92% 0%, #1a2129 0%, transparent 58%), var(--bg);
+    color:var(--ink); font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased; padding:44px 20px 88px;
+  }
+  .wrap { max-width:1240px; margin:0 auto; }
+  .badge { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--mut); }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--acid); box-shadow:0 0 12px var(--acid); }
+  h1 { font-family:"Unbounded","Manrope",system-ui,sans-serif; font-weight:800; font-size:clamp(1.9rem,5vw,3.3rem); line-height:1.05; letter-spacing:-.02em; margin:22px 0 16px; }
+  h1 em { font-style:normal; color:var(--accent); }
+  .lead { color:var(--mut); max-width:68ch; line-height:1.68; font-size:15px; margin:0; }
+  .pills { display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 0; }
+  .pill { border:1px solid var(--line); border-radius:999px; padding:7px 13px; font-size:12px; background:rgba(255,255,255,.02); }
+  .pill b { color:var(--acid); font-weight:700; }
+  .grid { display:grid; gap:24px; margin-top:36px; grid-template-columns:1fr; }
+  @media (min-width:900px) { .grid { grid-template-columns:1fr 1fr; } .span2 { grid-column:span 2; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 40px 80px -60px #000; display:flex; flex-direction:column; }
+  .shot { position:relative; display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
+  .shot img { display:block; width:100%; height:auto; aspect-ratio:1200/672; object-fit:cover; transition:transform .7s cubic-bezier(.2,.65,.25,1); }
+  .shot:hover img { transform:scale(1.03); }
+  .shot::after { content:"увеличить"; position:absolute; right:14px; bottom:14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; background:rgba(10,10,13,.6); border:1px solid var(--line); border-radius:999px; padding:6px 12px; backdrop-filter:blur(8px); opacity:0; transition:opacity .3s; }
+  .shot:hover::after { opacity:1; }
+  .body { padding:22px 24px 26px; }
+  .kicker { font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); margin:0 0 8px; }
+  h2 { font-family:"Unbounded","Manrope",system-ui,sans-serif; font-size:1.06rem; margin:0 0 14px; font-weight:700; }
+  .row { display:flex; gap:14px; margin:0 0 10px; font-size:14px; line-height:1.62; color:var(--mut); }
+  .row b { flex:0 0 92px; color:var(--ink); font-weight:600; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding-top:4px; }
+  .chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:15px; }
+  .chip { font-size:11px; border:1px solid var(--line); border-radius:999px; padding:5px 11px; }
+  .price { margin-top:16px; font-size:13px; color:var(--mut); }
+  .price b { color:var(--ice); font-weight:700; }
+  .spec { margin-top:48px; border-top:1px solid var(--line); padding-top:34px; }
+  .spec h2 { font-size:1.4rem; margin-bottom:10px; }
+  .spec p { color:var(--mut); font-size:14px; line-height:1.72; max-width:80ch; }
+  table { width:100%; border-collapse:collapse; margin-top:16px; font-size:14px; }
+  th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mut); font-size:11px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; }
+  td b { color:var(--ice); font-weight:700; }
+  footer { margin-top:44px; color:var(--mut); font-size:13px; line-height:1.7; }
+  a { color:var(--acid); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge"><span class="dot"></span> sm production · фотопропсы</span>
+  <h1>Фотопропсы на заказ: <em>реквизит для фотосессий</em></h1>
+  <p class="lead">Восемь позиций, которые чаще всего заказывают на корпоративы, конференции, свадьбы и детские праздники. Всё делаем на своём производстве: фрезеровка, печать, сборка, держатели и стойки. Ниже — размеры, материалы и ориентиры по цене.</p>
+
+  <div class="pills">
+    <span class="pill"><b>1–2 дня</b> стандартный срок</span>
+    <span class="pill"><b>24 часа</b> срочно</span>
+    <span class="pill"><b>от 900 ₽</b> одна табличка</span>
+    <span class="pill"><b>Москва</b> и Санкт-Петербург</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="card span2">
+      <a class="shot" href="sm-fp-cover-set.jpg" target="_blank"><img src="sm-fp-cover-set.jpg" alt="Набор фотопропсов для мероприятия: гигантская рука, баблы на палочках, хештег" /></a>
+      <div class="body">
+        <p class="kicker">комплект</p>
+        <h2>Набор реквизита «под ключ»</h2>
+        <div class="row"><b>Что входит</b><span>6 баблов, гигантская рука, объёмный хештег с символикой события, 2 держателя в запас, сумка для перевозки.</span></div>
+        <div class="row"><b>Материалы</b><span>ПВХ 8–10 мм, печать 1440 dpi с матовой ламинацией, деревянные палки-держатели с креплением на саморезах.</span></div>
+        <div class="row"><b>Задача</b><span>Один комплект закрывает фотозону на 50–300 гостей: гости берут реквизит сами, ведущий не участвует.</span></div>
+        <div class="chips"><span class="chip">ПВХ 8–10 мм</span><span class="chip">двусторонняя печать</span><span class="chip">матовая ламинация</span><span class="chip">сумка в комплекте</span></div>
+        <p class="price">Стоимость комплекта — <b>от 19 900 ₽</b> · с брендированием под брендбук — <b>от 24 500 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-giant-hand.jpg" target="_blank"><img src="sm-fp-giant-hand.jpg" alt="Гигантская рука — фотопропс из ПВХ 10 мм на деревянной палке" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 01</p>
+        <h2>Гигантская рука</h2>
+        <div class="row"><b>Размер</b><span>600 × 450 мм</span></div>
+        <div class="row"><b>Материал</b><span>ПВХ 10 мм, печать по обеим сторонам, торец закрашен в цвет</span></div>
+        <div class="row"><b>Крепление</b><span>деревянная палка 300 мм, два самореза, без люфта</span></div>
+        <p class="price">от <b>3 900 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-bubbles.jpg" target="_blank"><img src="sm-fp-bubbles.jpg" alt="Баблы на палочке — речевые облачка для фотосессии, набор из шести штук" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 02</p>
+        <h2>Баблы на палочке</h2>
+        <div class="row"><b>Размер</b><span>450 × 300 мм, шесть разных форм в наборе</span></div>
+        <div class="row"><b>Материал</b><span>ПВХ 8 мм, цветной кант, внутреннее поле можно оставить пустым под маркер</span></div>
+        <div class="row"><b>Опция</b><span>меловое покрытие — надпись стирается тряпкой</span></div>
+        <p class="price">одна — от <b>900 ₽</b> · набор 6 шт — от <b>4 900 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-hashtag.jpg" target="_blank"><img src="sm-fp-hashtag.jpg" alt="Объёмный хештег #2027 на стойке — фотопропс для корпоратива" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 03</p>
+        <h2>Объёмный хештег</h2>
+        <div class="row"><b>Размер</b><span>1200 × 450 мм, высота в сборе со стойкой — 900 мм</span></div>
+        <div class="row"><b>Материал</b><span>фанера 12 мм + печатная плёнка, торцы подкрашены</span></div>
+        <div class="row"><b>Стойка</b><span>металлическая, с утяжелённой плитой, регулируемые ножки</span></div>
+        <p class="price">от <b>4 500 ₽</b> · со стойкой — от <b>7 900 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-tantamareska.jpg" target="_blank"><img src="sm-fp-tantamareska.jpg" alt="Тантамареска с двумя окнами для лиц на новогоднем празднике" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 04</p>
+        <h2>Тантамареска</h2>
+        <div class="row"><b>Размер</b><span>2000 × 1500 мм, два окна под лица, диаметр окна 320 мм</span></div>
+        <div class="row"><b>Материал</b><span>ПВХ на деревянной раме, печать с художественной отрисовкой</span></div>
+        <div class="row"><b>Устойчивость</b><span>складная рама-тренога, резиновые пятки, сборка без инструмента</span></div>
+        <p class="price">от <b>12 000 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-instaframe.jpg" target="_blank"><img src="sm-fp-instaframe.jpg" alt="Инстарамка 1200×1200 мм на ножках для фотозоны" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 05</p>
+        <h2>Инстарамка</h2>
+        <div class="row"><b>Размер</b><span>1200 × 1200 мм, окно 1000 × 1000 мм</span></div>
+        <div class="row"><b>Материал</b><span>МДФ с покраской или ПВХ с печатью, съёмная плашка под логотип</span></div>
+        <div class="row"><b>Опоры</b><span>две металлические ноги на плитах, чтобы не падала от ветра и толпы</span></div>
+        <p class="price">от <b>14 500 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-candy-cart.jpg" target="_blank"><img src="sm-fp-candy-cart.jpg" alt="Тележка для кенди-бара — деревянная, с колёсами и полками" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 06</p>
+        <h2>Тележка для кенди-бара</h2>
+        <div class="row"><b>Размер</b><span>1200 × 600 × 900 мм, два колеса и две опоры</span></div>
+        <div class="row"><b>Материал</b><span>фанера 18 мм, покраска, съёмные брендированные борта</span></div>
+        <div class="row"><b>Использование</b><span>кенди-бар, зона welcome, раздача сувениров, фотозона</span></div>
+        <p class="price">от <b>38 000 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-giant-cheque.jpg" target="_blank"><img src="sm-fp-giant-cheque.jpg" alt="Гигантский чек для награждения — реквизит из ПВХ 8 мм" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 07</p>
+        <h2>Гигантский чек и сертификат</h2>
+        <div class="row"><b>Размер</b><span>1000 × 600 мм</span></div>
+        <div class="row"><b>Материал</b><span>ПВХ 8 мм с жёсткой подложкой, ручки для переноски на обороте</span></div>
+        <div class="row"><b>Печать</b><span>поля заполняются под конкретное событие, номинал — по запросу</span></div>
+        <p class="price">от <b>2 900 ₽</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <a class="shot" href="sm-fp-microphone-cubes.jpg" target="_blank"><img src="sm-fp-microphone-cubes.jpg" alt="Кубики для микрофона с брендированием на конференции" loading="lazy" /></a>
+      <div class="body">
+        <p class="kicker">пропс 08</p>
+        <h2>Кубики для микрофона</h2>
+        <div class="row"><b>Размер</b><span>80 × 80 × 80 мм</span></div>
+        <div class="row"><b>Материал</b><span>поролон 25 кг/м³ с печатью по четырём сторонам</span></div>
+        <div class="row"><b>Задача</b><span>логотип в кадре на пресс-подходах и панельных дискуссиях</span></div>
+        <p class="price">от <b>700 ₽</b> за штуку</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="spec">
+    <h2>Что важно знать перед заказом</h2>
+    <p>Фотопропс отличается от декорации тем, что его берут в руки и фотографируют вплотную. Поэтому мы не экономим на крае: торец закрашивается или оклеивается в цвет, а не остаётся белым срезом ПВХ, и не используем глянцевую ламинацию — от вспышки она даёт блик ровно там, где должно быть лицо.</p>
+
+    <table>
+      <tr><th>Параметр</th><th>Что делаем</th><th>Почему</th></tr>
+      <tr><td><b>Толщина</b></td><td>8–10 мм для пропсов в руках, 12 мм для напольных</td><td>5 мм гнётся в руках и «клюёт» на фото</td></tr>
+      <tr><td><b>Печать</b></td><td>1440 dpi, матовая ламинация</td><td>нет бликов от вспышки и софитов</td></tr>
+      <tr><td><b>Торец</b></td><td>закрашивается или оклеивается в цвет</td><td>белый срез выдаёт «самоделку» на крупном плане</td></tr>
+      <tr><td><b>Держатель</b></td><td>дерево, два самореза, без люфта</td><td>пластиковая палка проворачивается в руке</td></tr>
+      <tr><td><b>Стойки</b></td><td>плита с регулируемыми ножками</td><td>лёгкая стойка падает от толчка или ветра</td></tr>
+      <tr><td><b>Повторное использование</b></td><td>сменная печать на тот же ПВХ</td><td>к следующему событию меняется только картинка</td></tr>
+    </table>
+
+    <p style="margin-top:22px">Сроки: стандарт — 1–2 дня после согласования макета, срочно — 24 часа. По Москве доставка в пределах МКАД входит в стоимость, самовывоз с производства — в день готовности. Для агентств — приоритетные слоты и отсрочка платежа по договору.</p>
+    <p>Цены на странице — ориентиры для стандартных размеров, не являются публичной офертой. Точная стоимость — после согласования макета и тиража.</p>
+  </div>
+
+  <footer>
+    SM Production · event · branding · decor<br />
+    Москва и Санкт-Петербург · 8 495 799-00-19 · sm-pro1@yandex.ru
+  </footer>
+</div>
+</body>
+</html>
