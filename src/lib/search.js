@@ -10,6 +10,8 @@ const pages = [
   { title: "Производство под заказ", url: "/proizvodstvo", type: "Страница" },
   { title: "Портфолио", url: "/portfolio", type: "Страница" },
   { title: "Процессы работы", url: "/process", type: "Страница" },
+  { title: "Конструкция брус-баннер", url: "/uslugi/brus-banner", type: "Услуга", hint: "пресс-волл на скрытом деревянном каркасе" },
+  { title: "Брендирование офисов и ресепшн", url: "/uslugi/brendirovanie-ofisov-i-resepshn", type: "Услуга", hint: "стойки ресепшн, объёмные логотипы, навигация" },
   { title: "Калькулятор стоимости", url: "/kalkulyator", type: "Инструмент" },
   { title: "Аренда оборудования", url: "/arenda", type: "Страница" },
   { title: "SM-Media — видеопроизводство", url: "/media", type: "Страница" },

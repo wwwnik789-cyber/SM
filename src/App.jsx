@@ -10,6 +10,8 @@ import { CommandPalette, LeadModal } from "./components/layout/overlays";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
+import BrusBanner from "./pages/BrusBanner";
+import Reception from "./pages/Reception";
 import Production from "./pages/Production";
 import ProductionDetail from "./pages/ProductionDetail";
 import Media from "./pages/Media";
@@ -103,6 +105,8 @@ export default function App() {
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/uslugi" element={<Services />} />
+            <Route path="/uslugi/brus-banner" element={<BrusBanner />} />
+            <Route path="/uslugi/brendirovanie-ofisov-i-resepshn" element={<Reception />} />
             <Route path="/uslugi/:slug" element={<ServiceDetail />} />
             <Route path="/proizvodstvo" element={<Production />} />
             <Route path="/proizvodstvo/:slug" element={<ProductionDetail />} />

@@ -7,7 +7,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 import PageHero from "../components/ui/PageHero";
 
 const groups = [
-  { h: "Основные", links: [["Главная", "/"], ["Услуги", "/uslugi"], ["Производство", "/proizvodstvo"], ["Портфолио", "/portfolio"], ["Процессы", "/process"], ["Калькулятор", "/kalkulyator"], ["Аренда", "/arenda"], ["SM-Media", "/media"], ["Сотрудничество", "/b2b"]] },
+  { h: "Основные", links: [["Главная", "/"], ["Услуги", "/uslugi"], ["Брус-баннер", "/uslugi/brus-banner"], ["Брендирование офисов", "/uslugi/brendirovanie-ofisov-i-resepshn"], ["Производство", "/proizvodstvo"], ["Портфолио", "/portfolio"], ["Процессы", "/process"], ["Калькулятор", "/kalkulyator"], ["Аренда", "/arenda"], ["SM-Media", "/media"], ["Сотрудничество", "/b2b"]] },
   { h: "Компания", links: [["О компании", "/o-kompanii"], ["Команда", "/team"], ["Вакансии", "/vakansii"], ["Блог", "/blog"], ["Отзывы", "/otzyvy"], ["FAQ", "/faq"], ["Материалы", "/materialy"], ["Контакты", "/kontakty"], ["Политика конфиденциальности", "/politika-konfidencialnosti"]] },
 ];
 

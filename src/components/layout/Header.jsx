@@ -14,6 +14,8 @@ const servicesMenu = [
   ["Уличные стенды", "/uslugi/ulichnye-stendy"],
   ["Оформление сцен", "/uslugi/oformlenie-stseny"],
   ["Press-Wall", "/uslugi/press-wall"],
+  ["Брус-баннер", "/uslugi/brus-banner"],
+  ["Брендирование офисов", "/uslugi/brendirovanie-ofisov-i-resepshn"],
   ["Баннеры", "/uslugi/pechat-bannerov"],
 ];
 const companyMenu = [
@@ -94,6 +96,7 @@ export default function Header() {
               <DropLink to="/proizvodstvo">Производство под заказ</DropLink>
               <DropLink to="/proizvodstvo/svetovye-vyveski">Световые вывески</DropLink>
               <DropLink to="/proizvodstvo/obemnye-bukvy">Объёмные буквы</DropLink>
+              <DropLink to="/proizvodstvo/stoyki-resepshn">Стойки ресепшн</DropLink>
               <DropLink to="/materialy">Материалы</DropLink>
             </Drop>
             <NavLink to="/portfolio" className={({ isActive }) => `${nav} ${isActive ? "text-ink" : ""}`}>Портфолио</NavLink>

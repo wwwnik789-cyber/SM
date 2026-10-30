@@ -12,6 +12,8 @@ const cols = [
       ["Выставочные стенды", "/uslugi/vystavochnye-stendy"],
       ["Уличные стенды", "/uslugi/ulichnye-stendy"],
       ["Оформление сцен", "/uslugi/oformlenie-stseny"],
+      ["Брус-баннер", "/uslugi/brus-banner"],
+      ["Брендирование офисов", "/uslugi/brendirovanie-ofisov-i-resepshn"],
       ["Печать баннеров", "/uslugi/pechat-bannerov"],
       ["Все услуги →", "/uslugi"],
     ],
