@@ -97,6 +97,18 @@ ITEMS_CORPORATE = [
      "1300 × 800 мм, ПВХ 12 мм, ПВХ-ножки, сменная QR-панель", "от 14 900 ₽"),
 ]
 
+# четвёртая серия: гастрономические и face-пропсы
+ITEMS_LIFESTYLE = [
+    ("sm-fp5-croissant-pvc.jpg", "Пропс 24", "Гигантский круассан",
+     "700 × 420 мм, ПВХ 10 мм, две прорези-хвата, двусторонняя печать", "от 4 900 ₽"),
+    ("sm-fp5-coffee-cup-pvc.jpg", "Пропс 25", "Стаканчик кофе с брендингом",
+     "750 × 480 мм, ПВХ 10 мм, две прорези в брендированной манжете", "от 5 900 ₽"),
+    ("sm-fp5-glasses-pvc.jpg", "Пропс 26", "Гигантские очки",
+     "Ширина 700 мм, ПВХ 8 мм, прозрачные линзы ПЭТ", "от 3 200 ₽"),
+    ("sm-fp5-lips-pvc.jpg", "Пропс 27", "Гигантские губы",
+     "600 × 330 мм, ПВХ 8 мм, матовая печать, встроенная прорезь-хват", "от 2 600 ₽"),
+]
+
 FOOTER = "SM Production · фотопропсы на заказ · Москва"
 
 EMOJI_RE = re.compile(
@@ -141,8 +153,8 @@ def cover():
             [[Paragraph("Услуга", S["cell"]),
               Paragraph("Изготовление фотопропсов и реквизита для фотосессий в Москве", S["cell"])],
              [Paragraph("Что внутри", S["cell"]),
-              Paragraph("25 визуализаций (23 позиции + 2 обзорных кадра) в трёх сериях · статья для блога с прайсом и FAQ · "
-                        "9 публикаций, включая сценарий видео, план сторис и календарь", S["cell"])],
+              Paragraph("29 визуализаций (27 позиций + 2 обзорных кадра) в четырёх сериях · статья для блога с прайсом и FAQ · "
+                        "10 публикаций, включая сценарий видео, план сторис и календарь", S["cell"])],
              [Paragraph("Сроки", S["cell"]),
               Paragraph("1–2 дня после согласования макета, срочные заказы — от 24 часов", S["cell"])],
              [Paragraph("Цены", S["cell"]),
@@ -170,8 +182,8 @@ def cover():
 
 def gallery(avail_w):
     flow = [Paragraph("Часть 1. Каталог визуализаций", S["h1"]),
-            Paragraph("Три серии: классическая с деревянными держателями, полностью ПВХ без дерева и "
-                      "корпоративный реквизит для открытий, награждений и бренд-контента. Под каждым кадром — "
+            Paragraph("Четыре серии: классическая с деревянными держателями, полностью ПВХ без дерева, "
+                      "корпоративный реквизит и гастрономические/face-пропсы. Под каждым кадром — "
                       "размеры, материалы и ориентир по цене: этого набора характеристик достаточно, чтобы "
                       "ответить на первый запрос клиента.", S["body"]),
             Spacer(1, 2 * mm),
@@ -231,6 +243,31 @@ def gallery(avail_w):
     flow.append(Spacer(1, 3 * mm))
 
     for name, num, title, spec, price in ITEMS_CORPORATE:
+        path = IMG / name
+        img = Image(str(path))
+        w = avail_w
+        h = w * img.imageHeight / img.imageWidth
+        max_h = 84 * mm
+        if h > max_h:
+            h = max_h
+            w = h * img.imageWidth / img.imageHeight
+        img.drawWidth, img.drawHeight = w, h
+
+        cap = Paragraph(
+            f'<font color="#ff4d1c" size="7.6"><b>{num.upper()}</b></font>　'
+            f'<b>{title}</b><br/><font color="#5f6470" size="8.6">{spec}</font><br/>'
+            f'<font color="#0f3460" size="8.8"><b>{price}</b></font>',
+            S["body"])
+        flow.append(KeepTogether([img, Spacer(1, 2.5 * mm), cap, Spacer(1, 6 * mm)]))
+
+    flow.append(PageBreak())
+    flow.append(Paragraph("Серия 4. Гастрономические и face-пропсы", S["h2"]))
+    flow.append(Paragraph(
+        "Четыре позиции для кофе-брейков, ресторанных открытий, фестивалей еды, вечеринок и "
+        "брендированных фотозон. Основа — ПВХ 8–10 мм, хват встроен в само полотно.", S["body"]))
+    flow.append(Spacer(1, 3 * mm))
+
+    for name, num, title, spec, price in ITEMS_LIFESTYLE:
         path = IMG / name
         img = Image(str(path))
         w = avail_w
@@ -316,7 +353,7 @@ def main():
                            "Готова к публикации: /blog/fotoprops-na-zakaz")
     story += md_to_flowables(blog_md, doc.width)
     story += section_break("Часть 3. Серия публикаций в соцсети",
-                           "ВКонтакте, Telegram, Instagram: 9 публикаций, сторис и календарь")
+                           "ВКонтакте, Telegram, Instagram: 10 публикаций, сторис и календарь")
     story += md_to_flowables(smm_md, doc.width)
 
     doc.build(story)
