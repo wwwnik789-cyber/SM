@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- СНИППЕТ 08 · Микроразметка услуги (Service + BreadcrumbList)
+     Куда: блок T123 в самом низу страницы (после футера).
+     Разметку FAQPage добавлять не нужно — её генерирует сниппет 05 автоматически.
+     Проверить результат: https://search.google.com/test/rich-results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Новогоднее оформление мероприятий и офисов",
+  "serviceType": "Новогоднее оформление, фотозоны, бренд-зоны, декор офисов",
+  "provider": {
+    "@type": "Organization",
+    "name": "SM Production",
+    "url": "https://sm-production.ru/",
+    "telephone": "+7-495-799-00-19"
+  },
+  "areaServed": [
+    {"@type": "City", "name": "Москва"},
+    {"@type": "City", "name": "Санкт-Петербург"},
+    {"@type": "Country", "name": "Россия"}
+  ],
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "RUB",
+    "price": "29200",
+    "availability": "https://schema.org/InStock",
+    "url": "https://sm-production.ru/novogodnee-oformlenie"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://sm-production.ru/"},
+    {"@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://sm-production.ru/service"},
+    {"@type": "ListItem", "position": 3, "name": "Новогоднее оформление", "item": "https://sm-production.ru/novogodnee-oformlenie"}
+  ]
+}
+</script>

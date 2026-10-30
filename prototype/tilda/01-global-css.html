@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- СНИППЕТ 01 · Глобальные стили и токены
+     Куда: Настройки сайта → Ещё → HTML-код для вставки внутрь HEAD
+     Либо один раз на странице в блоке T123 (HTML-код), если не хотите менять весь сайт.
+     Все классы с префиксом .ny- — чтобы не задеть штатные стили Tilda. -->
+<style>
+  :root{
+    --ny-ink:#14161a;
+    --ny-mut:#5f6470;
+    --ny-line:#e4e2dd;
+    --ny-soft:#f5f4f1;
+    --ny-accent:#ff4d1c;
+    --ny-navy:#0f3460;
+    --ny-gold:#b8892f;
+    --ny-radius:18px;
+  }
+
+  /* Заголовки в прототипе — Unbounded; в Tilda проще подключить один шрифт */
+  .ny-h1,.ny-h2,.ny-h3{font-family:"Unbounded","Manrope",system-ui,sans-serif; letter-spacing:-.02em; line-height:1.12; color:var(--ny-ink); margin:0}
+  .ny-h1{font-size:clamp(2rem,4.4vw,3.4rem); font-weight:800}
+  .ny-h2{font-size:clamp(1.4rem,2.6vw,2.1rem); font-weight:800}
+  .ny-h3{font-size:1.05rem; font-weight:700}
+  .ny-text{font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ny-ink); font-size:16px; line-height:1.6}
+  .ny-mut{color:var(--ny-mut)}
+  .ny-kicker{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--ny-accent); font-weight:700; margin-bottom:12px}
+  .ny-wrap{max-width:1180px; margin:0 auto; padding:0 22px}
+  .ny-section{padding:64px 0}
+
+  .ny-btn{display:inline-flex; align-items:center; justify-content:center; gap:9px; border-radius:999px;
+    padding:14px 24px; font-weight:800; font-size:15px; text-decoration:none; border:1px solid transparent;
+    transition:transform .2s, box-shadow .2s; font-family:"Manrope",sans-serif}
+  .ny-btn:hover{transform:translateY(-1px)}
+  .ny-btn--primary{background:var(--ny-accent); color:#fff !important; box-shadow:0 10px 24px -12px rgba(255,77,28,.9)}
+  .ny-btn--ghost{background:#fff; border-color:var(--ny-line); color:var(--ny-ink) !important}
+  .ny-btn--sm{padding:10px 18px; font-size:14px}
+
+  @media (max-width:640px){
+    .ny-section{padding:44px 0}
+  }
+</style>

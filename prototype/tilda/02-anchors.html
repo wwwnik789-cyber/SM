@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- СНИППЕТ 02 · Якорное меню (липкое, с пилюлями)
+     Куда: блок T123 (HTML-код) сразу после первого экрана.
+     Важно: у блоков Tilda, к которым ведём, должен быть задан «Якорь» в настройках блока
+     (например: views, works, prices, cases, process, office, faq, lead).
+     Если якорь не нужен — замените href="#views" на id своего блока. -->
+<style>
+  .ny-anchors{position:sticky; top:0; z-index:60; background:#fff; border-bottom:1px solid #e4e2dd;
+    overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .ny-anchors ul{display:flex; gap:8px; list-style:none; margin:0 auto; padding:12px 22px; max-width:1180px}
+  .ny-anchors a{white-space:nowrap; font-size:13.5px; text-decoration:none; color:#5f6470;
+    border:1px solid #e4e2dd; border-radius:999px; padding:8px 14px; display:inline-block;
+    font-family:"Manrope",system-ui,sans-serif; transition:color .2s, border-color .2s}
+  .ny-anchors a:hover{color:#14161a; border-color:#cfccc5}
+  .ny-anchors::-webkit-scrollbar{display:none}
+</style>
+<div class="ny-anchors">
+  <ul>
+    <li><a href="#views">Виды оформления</a></li>
+    <li><a href="#works">Работы «до/после»</a></li>
+    <li><a href="#prices">Цены и сроки</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#process">Как работаем</a></li>
+    <li><a href="#office">Офисы</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#lead">Заявка</a></li>
+  </ul>
+</div>
+<style>
+  /* отступ при переходе по якорю, чтобы заголовок не прятался под липким меню */
+  html{scroll-behavior:smooth; scroll-padding-top:72px}
+</style>

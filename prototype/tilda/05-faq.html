@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- СНИППЕТ 05 · FAQ-аккордеон (нативный <details>, работает без JS)
+     Куда: блок T123 (HTML-код) в секции «Вопросы и ответы».
+     Плюсы: не ломается в Tilda, доступен с клавиатуры, поисковики видят текст сразу.
+     Внизу файла — отдельный скрипт, который сам собирает FAQPage JSON-LD из этих вопросов:
+     разметку не нужно дублировать вручную. -->
+<style>
+  .ny-faq{max-width:860px; font-family:"Manrope",system-ui,sans-serif}
+  .ny-faq details{border:1px solid #e4e2dd; border-radius:14px; background:#fff; margin-bottom:10px}
+  .ny-faq summary{cursor:pointer; padding:16px 46px 16px 18px; font-weight:700; font-size:15px; color:#14161a;
+    position:relative; list-style:none}
+  .ny-faq summary::-webkit-details-marker{display:none}
+  .ny-faq summary::after{content:"+"; position:absolute; right:18px; top:50%; transform:translateY(-50%);
+    font-size:20px; color:#ff4d1c; font-weight:400}
+  .ny-faq details[open] summary::after{content:"–"}
+  .ny-faq .ny-answer{padding:0 18px 18px; color:#5f6470; font-size:14.5px; line-height:1.6}
+</style>
+
+<div class="ny-faq" id="ny-faq">
+
+  <details open>
+    <summary>Сколько стоит новогоднее оформление мероприятия?</summary>
+    <div class="ny-answer">Фотозона 3×2,5 м — от 29 200 ₽, фотозона 4×3 м с гибким неоном — от 45 000 ₽, оформление зоны офиса — от 95 000 ₽, комплект «корпоратив под ключ» — от 189 000 ₽. Итоговая смета зависит от площади, количества световых элементов и доступа на площадку. Присылаем расчёт за 1 час в рабочее время.</div>
+  </details>
+
+  <details>
+    <summary>За сколько дней вы делаете оформление?</summary>
+    <div class="ny-answer">Стандартное производство — 1–3 дня после согласования макета, монтаж — 2–4 часа. Срочные заказы берём от 24 часов. Приём заказов на монтаж в декабре — до 25 декабря.</div>
+  </details>
+
+  <details>
+    <summary>Можно ли заказать только фотозону, без остального оформления?</summary>
+    <div class="ny-answer">Да. Самая частая задача — одна фотозона или бренд-зона. Делаем и отдельные элементы: пресс-волл, арт-объект, неоновую надпись, брус-колонны.</div>
+  </details>
+
+  <details>
+    <summary>Оформляете ли офисы к Новому году?</summary>
+    <div class="ny-answer">Да, это отдельное направление: ресепшн, лифтовой холл, кофе-поинт, опенспейс, переговорные. Работаем без сверления несущих стен, монтаж ночью или в выходные, демонтаж и хранение — в стоимости.</div>
+  </details>
+
+  <details>
+    <summary>Работаете ли вы в Санкт-Петербурге и регионах?</summary>
+    <div class="ny-answer">Производства в Москве и Санкт-Петербурге, монтажные группы выезжают по РФ. Доставка и монтаж рассчитываются отдельно по адресу площадки.</div>
+  </details>
+
+  <details>
+    <summary>Можно ли использовать конструкцию повторно в следующем году?</summary>
+    <div class="ny-answer">Да. Каркас многоразовый, к следующему сезону меняется только печатное полотно — экономия до 40% бюджета. Организуем хранение на складе.</div>
+  </details>
+
+  <details>
+    <summary>Кто делает дизайн и согласовывает макеты?</summary>
+    <div class="ny-answer">Наш дизайнер: готовим макет под ваш брендбук, согласовываем до печати. Все правки на этапе макета — без доплат.</div>
+  </details>
+
+  <details>
+    <summary>Что входит в стоимость?</summary>
+    <div class="ny-answer">Каркас, печать, фурнитура, доставка в пределах МКАД/КАД, монтаж и демонтаж. Дополнительно — декор (ели, гирлянды, неон), аренда света и работа на площадке во время события.</div>
+  </details>
+
+  <details>
+    <summary>Даёте ли документы и гарантию?</summary>
+    <div class="ny-answer">Да: договор со сроками, паспорт конструкции, сертификаты на материалы. За нарушение сроков — ответственность по договору.</div>
+  </details>
+
+  <details>
+    <summary>Можно ли оформить несколько площадок или сеть офисов?</summary>
+    <div class="ny-answer">Да. Для сетей делаем один дизайн-код и тиражируем комплекты: печать под каждый адрес, единый график монтажа. Для постоянных заказчиков — индивидуальные условия оплаты.</div>
+  </details>
+
+</div>
+
+<script>
+/* Автоматически собирает FAQPage JSON-LD из вопросов выше.
+   Дублировать разметку руками не нужно — правьте только текст в блоках <details>. */
+(function () {
+  var box = document.getElementById('ny-faq');
+  if (!box || document.getElementById('ny-faq-ld')) return;
+  var items = [].map.call(box.querySelectorAll('details'), function (d) {
+    var q = d.querySelector('summary');
+    var a = d.querySelector('.ny-answer');
+    if (!q || !a) return null;
+    return {
+      "@type": "Question",
+      "name": q.textContent.trim(),
+      "acceptedAnswer": { "@type": "Answer", "text": a.textContent.trim() }
+    };
+  }).filter(Boolean);
+  if (!items.length) return;
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.id = 'ny-faq-ld';
+  s.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items });
+  document.head.appendChild(s);
+})();
+</script>

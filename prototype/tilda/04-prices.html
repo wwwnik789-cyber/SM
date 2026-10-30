@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- СНИППЕТ 04 · Карточки тарифов с ценами «от»
+     Куда: блок T123 (HTML-код) в секции «Цены и сроки».
+     Альтернатива без кода: штатный блок «Тарифы» — но там хуже с 4 колонками и мобильной вёрсткой. -->
+<style>
+  .ny-prices{display:grid; gap:18px; grid-template-columns:1fr}
+  @media (min-width:700px){ .ny-prices{grid-template-columns:1fr 1fr} }
+  @media (min-width:1060px){ .ny-prices{grid-template-columns:repeat(4,1fr)} }
+  .ny-plan{border:1px solid #e4e2dd; border-radius:16px; padding:20px; background:#fff;
+    display:flex; flex-direction:column; gap:10px; font-family:"Manrope",system-ui,sans-serif}
+  .ny-plan--hot{border-color:#ffb59f; box-shadow:0 18px 40px -30px rgba(255,77,28,.8)}
+  .ny-plan h3{font-family:"Unbounded",system-ui,sans-serif; font-size:15px; margin:0; color:#14161a}
+  .ny-plan .ny-amount{font-family:"Unbounded",system-ui,sans-serif; font-size:1.35rem; color:#14161a}
+  .ny-plan ul{margin:0; padding-left:16px; font-size:13.5px; color:#5f6470}
+  .ny-plan li{margin-bottom:6px}
+  .ny-plan .ny-btn{margin-top:auto}
+  .ny-note{font-size:13px; color:#5f6470; margin-top:14px; font-family:"Manrope",system-ui,sans-serif}
+</style>
+
+<div class="ny-prices">
+
+  <div class="ny-plan">
+    <h3>Фотозона 3×2,5 м</h3>
+    <div class="ny-amount">от 29 200 ₽</div>
+    <ul>
+      <li>брус-каркас со скрытым крепежом</li>
+      <li>печать 1440 dpi</li>
+      <li>монтаж и демонтаж</li>
+    </ul>
+    <a class="ny-btn ny-btn--ghost ny-btn--sm" href="#lead">Рассчитать</a>
+  </div>
+
+  <div class="ny-plan ny-plan--hot">
+    <h3>Фотозона 4×3 м + неон</h3>
+    <div class="ny-amount">от 45 000 ₽</div>
+    <ul>
+      <li>брус-баннер, торец 20–30 см</li>
+      <li>гибкий неон по контуру</li>
+      <li>декор: ели, шары, снег</li>
+    </ul>
+    <a class="ny-btn ny-btn--primary ny-btn--sm" href="#lead">Рассчитать</a>
+  </div>
+
+  <div class="ny-plan">
+    <h3>Офис: зона под ключ</h3>
+    <div class="ny-amount">от 95 000 ₽</div>
+    <ul>
+      <li>ресепшн или опенспейс</li>
+      <li>неон, световые панели, ёлки</li>
+      <li>монтаж ночью, без сверления стен</li>
+    </ul>
+    <a class="ny-btn ny-btn--ghost ny-btn--sm" href="#lead">Рассчитать</a>
+  </div>
+
+  <div class="ny-plan">
+    <h3>Корпоратив под ключ</h3>
+    <div class="ny-amount">от 189 000 ₽</div>
+    <ul>
+      <li>сцена / каше для экрана</li>
+      <li>фотозона + бренд-зона</li>
+      <li>монтаж и сопровождение</li>
+    </ul>
+    <a class="ny-btn ny-btn--ghost ny-btn--sm" href="#lead">Рассчитать</a>
+  </div>
+
+</div>
+
+<p class="ny-note">В стоимость входит: каркас, печать, фурнитура, доставка в пределах МКАД/КАД, монтаж и демонтаж.
+Приём заказов на монтаж — до 25 декабря. Цены — ориентиры, не публичная оферта.</p>

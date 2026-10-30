@@ -1,0 +1,18 @@
+<!doctype html>
+<!-- СНИППЕТ 07 · Блок цифр под первым экраном
+     Куда: блок T123 сразу под обложкой (Cover) — или внутрь Zero Block.
+     Если хочется совсем без кода — в Zero Block это три прямоугольника + три текста. -->
+<style>
+  .ny-stats{display:grid; gap:14px; grid-template-columns:1fr; max-width:1180px; margin:0 auto; padding:26px 22px}
+  @media (min-width:640px){ .ny-stats{grid-template-columns:repeat(3,1fr)} }
+  .ny-stat{background:#fff; border:1px solid #e4e2dd; border-radius:14px; padding:14px 16px;
+    font-family:"Manrope",system-ui,sans-serif}
+  .ny-stat b{display:block; font-family:"Unbounded",system-ui,sans-serif; font-size:1.25rem;
+    letter-spacing:-.02em; color:#14161a; font-weight:800}
+  .ny-stat span{font-size:12.5px; color:#5f6470; line-height:1.35; display:block; margin-top:4px}
+</style>
+<div class="ny-stats">
+  <div class="ny-stat"><b>8 500</b><span>фотозон за 10 лет</span></div>
+  <div class="ny-stat"><b>от 24 ч</b><span>срочное производство</span></div>
+  <div class="ny-stat"><b>90%</b><span>площадок Москвы знаем</span></div>
+</div>

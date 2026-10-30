@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- СНИППЕТ 03 · Слайдер «до/после» (шторка)
+     Куда: блок T123 (HTML-код) в секции «Наши работы».
+     Как добавить новую пару: скопируйте <div class="ny-ba">…</div> целиком
+     и поменяйте два src + подпись. Скрипт обрабатывает все слайдеры на странице. -->
+<style>
+  .ny-ba-grid{display:grid; gap:18px; grid-template-columns:1fr}
+  @media (min-width:820px){ .ny-ba-grid{grid-template-columns:1fr 1fr} }
+  .ny-ba{position:relative; border-radius:16px; overflow:hidden; aspect-ratio:1200/896; background:#111; --pos:50%; cursor:ew-resize}
+  .ny-ba img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+  .ny-ba .ny-before{position:absolute; inset:0; clip-path:inset(0 calc(100% - var(--pos)) 0 0); z-index:2}
+  .ny-ba .ny-handle{position:absolute; top:0; bottom:0; left:var(--pos); width:2px; background:#fff; z-index:3;
+    box-shadow:0 0 18px rgba(0,0,0,.45)}
+  .ny-ba .ny-handle::after{content:"↔"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:40px; height:40px; border-radius:50%; background:#fff; color:#111; display:grid; place-items:center;
+    font-weight:800; font-size:15px; font-family:"Manrope",sans-serif}
+  .ny-ba input[type="range"]{position:absolute; inset:0; z-index:4; width:100%; height:100%; margin:0;
+    opacity:0; cursor:ew-resize; -webkit-appearance:none}
+  .ny-ba .ny-tag{position:absolute; z-index:5; top:12px; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    background:rgba(10,10,13,.66); color:#fff; border-radius:999px; padding:6px 11px;
+    backdrop-filter:blur(6px); font-family:"Manrope",sans-serif}
+  .ny-ba .ny-tag--l{left:12px}
+  .ny-ba .ny-tag--r{right:12px; color:#d8ff3e}
+  .ny-ba-cap{font-size:13px; color:#5f6470; margin-top:8px; font-family:"Manrope",sans-serif}
+</style>
+
+<div class="ny-ba-grid">
+
+  <div>
+    <div class="ny-ba">
+      <!-- «после» — верхний слой -->
+      <img src="https://static.tildacdn.com/ПОСЛЕ-1.jpg" alt="Фотозона THE OSCARS в новогоднем оформлении с неоном по киноплёнке" loading="lazy">
+      <!-- «до» — обрезается по позиции шторки -->
+      <div class="ny-before"><img src="https://static.tildacdn.com/ДО-1.jpg" alt="Фотозона THE OSCARS до новогоднего оформления" loading="lazy"></div>
+      <div class="ny-handle"></div>
+      <span class="ny-tag ny-tag--l">до</span><span class="ny-tag ny-tag--r">новый год</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: THE OSCARS">
+    </div>
+    <p class="ny-ba-cap">THE OSCARS — пресс-волл с киноплёнкой и красной дорожкой</p>
+  </div>
+
+  <div>
+    <div class="ny-ba">
+      <img src="https://static.tildacdn.com/ПОСЛЕ-2.jpg" alt="Бренд-стена PORSCHE и Ferrari в новогоднем оформлении" loading="lazy">
+      <div class="ny-before"><img src="https://static.tildacdn.com/ДО-2.jpg" alt="Бренд-стена PORSCHE и Ferrari до новогоднего оформления" loading="lazy"></div>
+      <div class="ny-handle"></div>
+      <span class="ny-tag ny-tag--l">до</span><span class="ny-tag ny-tag--r">новый год</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Сравнение до и после: PORSCHE и Ferrari">
+    </div>
+    <p class="ny-ba-cap">PORSCHE / Ferrari — бренд-стена автодилера</p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  function init() {
+    document.querySelectorAll('.ny-ba').forEach(function (box) {
+      if (box.dataset.nyInit) return;
+      box.dataset.nyInit = '1';
+      var range = box.querySelector('input[type="range"]');
+      if (!range) return;
+      var set = function (v) { box.style.setProperty('--pos', v + '%'); };
+      range.addEventListener('input', function () { set(range.value); });
+      box.addEventListener('click', function (e) {
+        if (e.target === range) return;
+        var r = box.getBoundingClientRect();
+        var v = Math.round(((e.clientX - r.left) / r.width) * 100);
+        range.value = v; set(v);
+      });
+      set(range.value);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
