@@ -1,0 +1,55 @@
+User-agent: *
+Disallow: /my/
+Disallow: /thumb/*/d/fgs16_*
+Disallow: /d/fgs16_*
+Disallow: /thumb/*/d/tpl25_*
+Disallow: /d/tpl25_*
+Disallow: /thumb/*/d/stp25_*
+Disallow: /d/stp25_*
+Sitemap: https://gribfarm.ru/sitemap.6110219.xml.gz
+
+User-Agent: Yandex
+Allow: /
+Disallow: /my/
+Disallow: /thumb/*/d/fgs16_*
+Disallow: /d/fgs16_*
+Disallow: /thumb/*/d/tpl25_*
+Disallow: /d/tpl25_*
+Disallow: /thumb/*/d/stp25_*
+Disallow: /d/stp25_*
+Host: https://gribfarm.ru
+Sitemap: https://gribfarm.ru/sitemap.6110219.xml.gz
+
+User-agent: msnbot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SBarkrowler
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# --- снято 02.11.2026, https://gribfarm.ru/robots.txt ---
+# Комментарий к снимку:
+# 1) Директива Host устарела — Яндекс не обрабатывает Host с марта 2018,
+#    склейка зеркал идёт через 301-редирект. Не ошибка, но «мусор» в файле.
+# 2) Sitemap отдаётся как .xml.gz — это валидно, но в Вебмастере стоит
+#    проверить, что он реально читается (не все парсеры умеют gz).
+# 3) Закрыты от SEO-ботов Ahrefs/Semrush/MJ12/Dot — ок, но это же мешает
+#    снимать конкурентную аналитику по своему сайту сторонними сервисами.
+# 4) Нет отдельного блока для Googlebot — формально покрывается User-agent: *.

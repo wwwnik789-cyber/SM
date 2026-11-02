@@ -1,0 +1,24 @@
+User-Agent: *
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow:
+
+
+Sitemap: http://gribfarmprices.tilda.ws/sitemap.xml
+
+# --- снято 02.11.2026, https://gribfarmprices.tilda.ws/robots.txt ---
+# Комментарий к снимку:
+# 1) Файл — стандартный тильдовский, генерируется платформой.
+# 2) Sitemap указан по http:// — при заходе по https это не критично,
+#    но Яндекс Вебмастер лучше видит https-вариант.
+# 3) ВАЖНО для рекламы: домен .tilda.ws — это бесплатный поддомен Tilda.
+#    - Нельзя подключить собственную аналитику в полном объёме
+#      (на бесплатных проектах Tilda ограничивает вставку кодов).
+#    - Модерация Директа относится к «доменам-конструкторам» настороженно.
+#    - Для рекламных кампаний нужен собственный домен (см. чек-лист P0).
