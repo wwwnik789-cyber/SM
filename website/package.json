@@ -1,0 +1,29 @@
+{
+  "name": "sm-production-website",
+  "private": true,
+  "version": "3.0.0",
+  "type": "module",
+  "description": "Новая SEO-ориентированная версия сайта SM Production",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/generate-sitemap.mjs && vite build && node scripts/prerender.mjs && node scripts/seo-validate.mjs",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "lint": "echo \"no linter configured\"",
+    "smoke": "node scripts/smoke.mjs",
+    "seo:validate": "node scripts/seo-validate.mjs",
+    "build:client": "vite build",
+    "seo:sitemap": "node scripts/generate-sitemap.mjs"
+  },
+  "dependencies": {
+    "motion": "^12.23.12",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@vitejs/plugin-react": "^5.0.2",
+    "tailwindcss": "^4.1.13",
+    "vite": "^7.1.5"
+  }
+}

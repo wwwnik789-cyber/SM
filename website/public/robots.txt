@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Host: sm-production.ru
+Sitemap: https://sm-production.ru/sitemap.xml
