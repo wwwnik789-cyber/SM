@@ -1,0 +1,48 @@
+{
+  "slug": "roll-up-joker-brus-banner-sravnenie",
+  "canonical": "https://sm-production.ru/blog/roll-up-joker-brus-banner-sravnenie",
+  "title": "Roll-Up, Джокер или брус-баннер: что выбрать",
+  "h1": "Roll-Up, Джокер или брус-баннер: что выбрать для мероприятия",
+  "description": "Сравниваем Roll-Up, баннер на системе Джокер и брус-баннер: внешний вид, монтаж, формы, стоимость, повторное использование и качество фона для фото.",
+  "ogImage": "images/01-cover.jpg",
+  "category": "Гид по конструкциям",
+  "author": "SM Production",
+  "datePublished": "2026-11-03",
+  "dateModified": "2026-11-03",
+  "keywords": [
+    "Roll-Up или пресс-волл",
+    "баннер на системе Джокер",
+    "брус-баннер",
+    "сравнение рекламных конструкций",
+    "фон для мероприятия",
+    "пресс-волл для фотозоны"
+  ],
+  "imageAlt": {
+    "01-cover.jpg": "Сравнение Roll-Up, баннера на системе Джокер и брус-баннера для мероприятия",
+    "02-rollup.jpg": "Мобильная конструкция Roll-Up с алюминиевым основанием",
+    "03-joker.jpg": "Баннер на открытом трубчатом каркасе системы Джокер",
+    "04-brus-banner.jpg": "Брус-баннер со скрытым каркасом и оформленными торцами",
+    "05-comparison.jpg": "Таблица сравнения Roll-Up, Джокера и брус-баннера"
+  },
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Roll-Up, Джокер или брус-баннер: что выбрать для мероприятия",
+    "description": "Сравнение трёх конструкций для мероприятий по внешнему виду, монтажу, стоимости, повторному использованию и качеству фона для фото.",
+    "datePublished": "2026-11-03",
+    "dateModified": "2026-11-03",
+    "inLanguage": "ru-RU",
+    "image": "https://sm-production.ru/media/blog/roll-up-joker-brus-banner/01-cover.jpg",
+    "author": {
+      "@type": "Organization",
+      "name": "SM Production",
+      "url": "https://sm-production.ru"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SM Production",
+      "url": "https://sm-production.ru"
+    },
+    "mainEntityOfPage": "https://sm-production.ru/blog/roll-up-joker-brus-banner-sravnenie"
+  }
+}
