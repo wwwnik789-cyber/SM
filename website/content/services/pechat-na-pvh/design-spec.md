@@ -43,7 +43,15 @@
 
 - `pvh-branding-hero.jpg` — основной ассортимент и производство;
 - `pvh-rostovaya-figura.jpg` — контурная ростовая фигура и опора;
-- `pvh-navigation.jpg` — напольная, настенная и подвесная навигация.
+- `pvh-navigation.jpg` — напольная, настенная и подвесная навигация;
+- `pvh-pos-retail.jpg` — POS-материалы и настольные дисплеи;
+- `pvh-event-decor.jpg` — многослойная бренд-зона;
+- `pvh-thickness-samples.jpg` — образцы материала разной толщины;
+- `pvh-uv-printing.jpg` — прямая печать на листе;
+- `pvh-film-application.jpg` — накатка печатной плёнки;
+- `pvh-design-studio.jpg` — подготовка дизайна и линии реза;
+- `pvh-cnc-cutting.jpg` — контурная фрезеровка;
+- `pvh-installation.jpg` — монтаж на дистанционные держатели.
 
 ## Формы
 

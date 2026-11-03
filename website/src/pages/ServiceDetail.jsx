@@ -138,18 +138,25 @@ export default function ServiceDetail() {
             <div className="mt-10 grid gap-5 md:grid-cols-2">
               {s.sections.map((section, index) => (
                 <Reveal key={section.h} delay={(index % 2) * 0.07}>
-                  <article className="h-full rounded-3xl border border-line bg-card p-7 md:p-8">
-                    <h3 className="display-h text-xl font-bold">{section.h}</h3>
-                    {section.p && <p className="mt-4 leading-relaxed text-mut">{section.p}</p>}
-                    {section.list && (
-                      <ul className="mt-5 space-y-3">
-                        {section.list.map((item) => (
-                          <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-ink/85">
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" />{item}
-                          </li>
-                        ))}
-                      </ul>
+                  <article className="img-zoom h-full overflow-hidden rounded-3xl border border-line bg-card">
+                    {section.image && (
+                      <div className="overflow-hidden">
+                        <img src={section.image} alt={section.alt || ""} loading="lazy" className="h-64 w-full object-cover" />
+                      </div>
                     )}
+                    <div className="p-7 md:p-8">
+                      <h3 className="display-h text-xl font-bold">{section.h}</h3>
+                      {section.p && <p className="mt-4 leading-relaxed text-mut">{section.p}</p>}
+                      {section.list && (
+                        <ul className="mt-5 space-y-3">
+                          {section.list.map((item) => (
+                            <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-ink/85">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" />{item}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                   </article>
                 </Reveal>
               ))}
@@ -167,10 +174,17 @@ export default function ServiceDetail() {
           <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {s.process.map((step, index) => (
               <Reveal key={step.title} delay={(index % 3) * 0.06}>
-                <li className="h-full rounded-3xl border border-line bg-card p-6">
-                  <span className="font-display text-xs text-accent">{String(index + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-4 font-display text-lg font-bold">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mut">{step.text}</p>
+                <li className="img-zoom h-full overflow-hidden rounded-3xl border border-line bg-card">
+                  {step.image && (
+                    <div className="overflow-hidden">
+                      <img src={step.image} alt={step.alt || ""} loading="lazy" className="h-44 w-full object-cover" />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <span className="font-display text-xs text-accent">{String(index + 1).padStart(2, "0")}</span>
+                    <h3 className="mt-4 font-display text-lg font-bold">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-mut">{step.text}</p>
+                  </div>
                 </li>
               </Reveal>
             ))}
