@@ -1,0 +1,40 @@
+{
+  "slug": "pechat-na-pvh",
+  "canonical": "https://sm-production.ru/uslugi/pechat-na-pvh",
+  "title": "Печать на ПВХ в Москве: фигуры и навигация | SM Production",
+  "h1": "Печать на ПВХ и изделия из ПВХ",
+  "description": "УФ-печать и изготовление изделий из ПВХ: ростовые фигуры, навигация, брендированные панели и POS-материалы. Дизайн, контурная резка, доставка и монтаж.",
+  "ogImage": "images/pvh-branding-hero.jpg",
+  "keywords": [
+    "печать на ПВХ",
+    "УФ-печать на ПВХ",
+    "ростовые фигуры из ПВХ",
+    "навигация из ПВХ",
+    "брендирование ПВХ",
+    "изделия из ПВХ на заказ",
+    "дизайн рекламных материалов"
+  ],
+  "imageAlt": {
+    "pvh-branding-hero.jpg": "Брендированные панели, навигация и рекламные изделия из листового ПВХ",
+    "pvh-rostovaya-figura.jpg": "Ростовая фигура из ПВХ с контурной резкой и напольной опорой",
+    "pvh-navigation.jpg": "Напольная и настенная навигация из ПВХ для мероприятия"
+  },
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Печать на ПВХ и изделия из ПВХ",
+    "description": "Дизайн, УФ-печать, контурная резка и изготовление ростовых фигур, навигации, брендированных панелей и POS-материалов из ПВХ.",
+    "url": "https://sm-production.ru/uslugi/pechat-na-pvh",
+    "image": "https://sm-production.ru/media/pvh-branding-hero.jpg",
+    "provider": {
+      "@type": "Organization",
+      "name": "SM Production",
+      "url": "https://sm-production.ru"
+    },
+    "areaServed": [
+      "Москва",
+      "Московская область",
+      "Россия"
+    ]
+  }
+}

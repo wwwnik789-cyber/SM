@@ -278,6 +278,16 @@ export function buildStructuredData(meta) {
       provider: { "@id": `${SITE.url}/#organization` },
       areaServed: ["Москва", "Московская область", "Россия"],
     });
+    if (meta.entity.faq?.length) {
+      graph.push({
+        "@type": "FAQPage",
+        mainEntity: meta.entity.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      });
+    }
   }
   if (meta.kind === "article") {
     graph.push({
