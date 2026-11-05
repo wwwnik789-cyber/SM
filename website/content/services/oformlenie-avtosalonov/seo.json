@@ -1,0 +1,43 @@
+{
+  "slug": "oformlenie-avtosalonov",
+  "canonical": "https://sm-production.ru/uslugi/oformlenie-avtosalonov",
+  "title": "Оформление автосалонов и дилерских центров | SM Production",
+  "h1": "Оформление автосалонов и дилерских центров",
+  "description": "Брендинг автосалонов: ресепшн, зоны выдачи, POS, навигация, фасады и оформление презентаций автомобилей. Дизайн, производство и монтаж.",
+  "ogImage": "images/dealer-branding-hero.jpg",
+  "keywords": [
+    "оформление автосалона",
+    "брендинг автосалонов",
+    "оформление дилерского центра",
+    "POS материалы для автосалона",
+    "зона выдачи автомобиля",
+    "презентация новой модели автомобиля",
+    "навигация для дилерского центра"
+  ],
+  "imageAlt": {
+    "dealer-branding-hero.jpg": "Концепция комплексного оформления автомобильного дилерского центра",
+    "dealer-reception-delivery.jpg": "Концепция ресепшн и зоны выдачи автомобиля в дилерском центре",
+    "dealer-seasonal-pos.jpg": "Концепция сезонного оформления автосалона POS-материалами",
+    "dealer-model-launch.jpg": "Концепция презентации новой модели автомобиля в салоне",
+    "dealer-facade-navigation.jpg": "Концепция фасада и наружной навигации дилерского центра",
+    "dealer-night-installation.jpg": "Монтаж рекламных конструкций в автосалоне вне клиентского потока"
+  },
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Оформление автосалонов и дилерских центров",
+    "description": "Дизайн, производство и монтаж оформления для автомобильных дилерских центров: интерьер, POS, навигация, фасад и презентации моделей.",
+    "url": "https://sm-production.ru/uslugi/oformlenie-avtosalonov",
+    "image": "https://sm-production.ru/media/dealer-branding-hero.jpg",
+    "provider": {
+      "@type": "Organization",
+      "name": "SM Production",
+      "url": "https://sm-production.ru"
+    },
+    "areaServed": [
+      "Москва",
+      "Московская область",
+      "Россия"
+    ]
+  }
+}

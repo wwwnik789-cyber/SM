@@ -63,11 +63,11 @@ export default function ServiceDetail() {
           </nav>
           <div className="grid items-end gap-10 lg:grid-cols-[1.2fr_1fr]">
             <Reveal>
-              <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">{group?.title}</p>
+              <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">{s.eyebrow || group?.title}</p>
               <h1 className="display-h mt-4 text-4xl font-black md:text-6xl">{s.title}</h1>
               <p className="mt-6 max-w-xl text-lg text-mut">{s.short}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Btn onClick={() => openLead(s.title)}>Получить расчёт</Btn>
+                <Btn onClick={() => openLead(s.title)}>{s.primaryCta || "Получить расчёт"}</Btn>
                 <Btn to="/kalkulyator" variant="ghost">Рассчитать стоимость</Btn>
               </div>
             </Reveal>
