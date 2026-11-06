@@ -8,7 +8,7 @@ import { ArrowRight, Check, Close, Search, Spark } from "../ui/Icons";
 import { Btn } from "../ui/bits";
 
 /* ---------------- Заявка (multi-step lead form) ---------------- */
-const TOPICS = ["Фотозона", "Стенд", "Сцена / каше", "Баннеры / печать", "Световая вывеска", "Аренда", "Другое"];
+const TOPICS = ["Фотозона", "Стенд", "Сцена / каше", "Баннеры / печать", "Оформление автосалона", "Световая вывеска", "Аренда", "Другое"];
 const BUDGETS = ["до 100 тыс ₽", "100–300 тыс ₽", "300 тыс – 1 млн ₽", "1 млн+ ₽", "Пока не знаю"];
 
 export function LeadModal() {
@@ -28,7 +28,7 @@ export function LeadModal() {
       setStep(0);
       setDone(false);
       setErr("");
-      if (leadTopic) setTopic(leadTopic);
+      setTopic(leadTopic || "");
     }
   }, [leadOpen, leadTopic]);
 
@@ -41,7 +41,7 @@ export function LeadModal() {
       leads.push({ topic, date, budget, name, phone, at: new Date().toISOString() });
       localStorage.setItem("sm-leads", JSON.stringify(leads));
       setDone(true);
-      notify("Заявка отправлена — свяжемся в течение 15 минут");
+      notify("Заявка отправлена — свяжемся с вами в рабочее время");
       return;
     }
     setErr("");
@@ -71,7 +71,7 @@ export function LeadModal() {
                   <Check size={26} />
                 </motion.span>
                 <h3 className="display-h mt-6 text-2xl font-bold">Заявка улетела!</h3>
-                <p className="mt-3 text-mut">Личный руководитель проектов свяжется с вами в течение 15 минут в рабочее время. Мы на связи 24/7.</p>
+                <p className="mt-3 text-mut">Менеджер получит данные заявки и свяжется с вами в рабочее время, чтобы уточнить задачу и следующий шаг.</p>
                 <Btn onClick={() => setLeadOpen(false)} className="mt-7">Отлично</Btn>
               </div>
             ) : (
@@ -103,7 +103,7 @@ export function LeadModal() {
                   {step === 1 && (
                     <div className="space-y-4">
                       <label className="block">
-                        <span className="mb-2 block text-sm font-semibold text-mut">Дата мероприятия (если известна)</span>
+                        <span className="mb-2 block text-sm font-semibold text-mut">{topic === "Оформление автосалона" ? "Желаемая дата готовности (если известна)" : "Дата мероприятия (если известна)"}</span>
                         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className={input} />
                       </label>
                       <div>

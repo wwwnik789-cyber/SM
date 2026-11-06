@@ -10,6 +10,7 @@ import { CommandPalette, LeadModal } from "./components/layout/overlays";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
+import Dealerships from "./pages/Dealerships";
 import Production from "./pages/Production";
 import ProductionDetail from "./pages/ProductionDetail";
 import Media from "./pages/Media";
@@ -105,6 +106,7 @@ export default function App() {
             <Route path="/uslugi" element={<Services />} />
             <Route path="/uslugi/brand-wall" element={<Navigate replace to="/uslugi/press-wall" />} />
             <Route path="/uslugi/akciya-fotozona" element={<Navigate replace to="/uslugi/fotozony" />} />
+            <Route path="/uslugi/oformlenie-avtosalonov" element={<Dealerships />} />
             <Route path="/uslugi/:slug" element={<ServiceDetail />} />
             <Route path="/proizvodstvo" element={<Production />} />
             <Route path="/proizvodstvo/:slug" element={<ProductionDetail />} />
