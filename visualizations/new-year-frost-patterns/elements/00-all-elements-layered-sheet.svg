@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1200mm" height="900mm" viewBox="0 0 1200 900">
+<title>Frost collection layered production sheet</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT"><g transform="translate(0 0)">
+<polygon points="150.00,27.00 166.31,89.15 211.50,43.48 194.55,105.45 256.52,88.50 210.85,133.69 273.00,150.00 210.85,166.31 256.52,211.50 194.55,194.55 211.50,256.52 166.31,210.85 150.00,273.00 133.69,210.85 88.50,256.52 105.45,194.55 43.48,211.50 89.15,166.31 27.00,150.00 89.15,133.69 43.48,88.50 105.45,105.45 88.50,43.48 133.69,89.15" fill="url(#blueGradient)" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+<g transform="translate(150 150)"><g transform="rotate(0.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(60.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(120.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(180.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(240.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(300.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g></g>
+<polygon points="150.00,99.00 163.00,127.48 194.17,124.50 176.00,150.00 194.17,175.50 163.00,172.52 150.00,201.00 137.00,172.52 105.83,175.50 124.00,150.00 105.83,124.50 137.00,127.48" fill="url(#iceGradient)" stroke="#B9CFDE" stroke-width="3"/>
+<circle cx="150" cy="150" r="17" fill="#0B3566"/><circle cx="150" cy="150" r="7" fill="#FFFFFF"/></g><g transform="translate(300 0)">
+<circle cx="150" cy="150" r="120" fill="url(#iceGradient)" stroke="#0B3566" stroke-width="5"/>
+<circle cx="150" cy="150" r="100" fill="none" stroke="#1769AA" stroke-width="3" stroke-dasharray="2 8"/>
+<g transform="translate(150 150)"><g transform="rotate(22.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(67.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(112.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(157.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(202.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(247.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(292.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(337.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g></g>
+<circle cx="150" cy="150" r="36" fill="#FFFFFF" stroke="#B9CFDE" stroke-width="3"/>
+<polygon points="150.00,124.00 154.59,138.91 168.38,131.62 161.09,145.41 176.00,150.00 161.09,154.59 168.38,168.38 154.59,161.09 150.00,176.00 145.41,161.09 131.62,168.38 138.91,154.59 124.00,150.00 138.91,145.41 131.62,131.62 145.41,138.91" fill="#1769AA"/></g><g transform="translate(600 0)">
+<polygon points="173.80,30.34 174.87,89.95 217.78,48.56 195.96,104.04 251.44,82.22 210.05,125.13 269.66,126.20 215.00,150.00 269.66,173.80 210.05,174.87 251.44,217.78 195.96,195.96 217.78,251.44 174.87,210.05 173.80,269.66 150.00,215.00 126.20,269.66 125.13,210.05 82.22,251.44 104.04,195.96 48.56,217.78 89.95,174.87 30.34,173.80 85.00,150.00 30.34,126.20 89.95,125.13 48.56,82.22 104.04,104.04 82.22,48.56 125.13,89.95 126.20,30.34 150.00,85.00" fill="url(#silverGradient)" stroke="#071B3A" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="150.00,56.00 168.37,105.65 216.47,83.53 194.35,131.63 244.00,150.00 194.35,168.37 216.47,216.47 168.37,194.35 150.00,244.00 131.63,194.35 83.53,216.47 105.65,168.37 56.00,150.00 105.65,131.63 83.53,83.53 131.63,105.65" fill="#0B3566" stroke="#FFFFFF" stroke-width="4"/>
+<path d="M150 150 L150.00 62.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L212.23 87.77" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L238.00 150.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L212.23 212.23" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L150.00 238.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L87.77 212.23" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L62.00 150.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L87.77 87.77" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/>
+<circle cx="150" cy="150" r="30" fill="url(#glassGradient)" stroke="#FFFFFF" stroke-width="3"/></g><g transform="translate(900 0)">
+<g transform="translate(150 145) scale(1)">
+  <path d="M0 -112 L-42 -52 H-22 L-69 9 H-38 L-96 80 H96 L38 9 H69 L22 -52 H42 Z" fill="url(#blueGradient)" stroke="#B9CFDE" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M0 -101 L-28 -52 H0 Z M0 -44 L-45 8 H0 Z M0 17 L-63 72 H0 Z" fill="#8EDCF8" opacity=".34"/>
+  <path d="M-55 -14 Q0 13 55 -14 M-72 38 Q0 68 72 38" fill="none" stroke="#FFFFFF" stroke-width="4" opacity=".86"/>
+  <circle cx="-30" cy="-30" r="5" fill="#FFFFFF"/><circle cx="29" cy="8" r="5" fill="#8EDCF8"/><circle cx="-42" cy="42" r="6" fill="#DDF6FF"/><circle cx="46" cy="50" r="5" fill="#FFFFFF"/>
+  <polygon points="0.00,-134.00 3.53,-125.85 12.36,-125.02 5.71,-119.15 7.64,-110.48 0.00,-115.00 -7.64,-110.48 -5.71,-119.15 -12.36,-125.02 -3.53,-125.85" fill="url(#silverGradient)"/>
+  <rect x="-14" y="80" width="28" height="25" rx="3" fill="#071B3A"/>
+</g></g><g transform="translate(0 300)">
+<g transform="translate(150 145) scale(1)">
+  <path d="M0 -114 Q-10 -78 -43 -49 H-22 Q-30 -14 -70 16 H-38 Q-47 50 -91 82 H91 Q47 50 38 16 H70 Q30 -14 22 -49 H43 Q10 -78 0 -114 Z" fill="url(#iceGradient)" stroke="#1769AA" stroke-width="5"/>
+  <path d="M-38 -42 Q0 -20 38 -42 M-62 19 Q0 47 62 19 M-75 59 Q0 82 75 59" fill="none" stroke="#0B3566" stroke-width="3.5" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <path d="M0 -96 V68" stroke="#FFFFFF" stroke-width="3" opacity=".55"/>
+  <polygon points="0.00,-134.00 2.10,-127.08 8.49,-130.49 5.08,-124.10 12.00,-122.00 5.08,-119.90 8.49,-113.51 2.10,-116.92 0.00,-110.00 -2.10,-116.92 -8.49,-113.51 -5.08,-119.90 -12.00,-122.00 -5.08,-124.10 -8.49,-130.49 -2.10,-127.08" fill="#B9CFDE"/>
+  <rect x="-13" y="82" width="26" height="23" rx="3" fill="#1769AA"/>
+</g></g><g transform="translate(300 300)">
+<g transform="translate(150 145) scale(1)">
+  <polygon points="0,-111 -50,-42 50,-42" fill="#DDF6FF" stroke="#0B3566" stroke-width="4"/>
+  <polygon points="0,-70 -73,11 73,11" fill="#8EDCF8" stroke="#1769AA" stroke-width="4"/>
+  <polygon points="0,-23 -96,82 96,82" fill="#0B3566" stroke="#B9CFDE" stroke-width="4"/>
+  <path d="M-38 -40 L0 -70 L38 -40 M-55 9 L0 -23 L55 9 M-74 76 L0 16 L74 76" fill="none" stroke="#FFFFFF" stroke-width="4" opacity=".78"/>
+  <circle cx="0" cy="-57" r="5" fill="#FFFFFF"/><circle cx="-34" cy="-1" r="6" fill="#FFFFFF"/><circle cx="39" cy="44" r="6" fill="#8EDCF8"/>
+  <polygon points="0.00,-133.00 2.75,-125.76 10.39,-127.00 5.50,-121.00 10.39,-115.00 2.75,-116.24 0.00,-109.00 -2.75,-116.24 -10.39,-115.00 -5.50,-121.00 -10.39,-127.00 -2.75,-125.76" fill="#FFFFFF" stroke="#B9CFDE" stroke-width="2"/>
+  <rect x="-14" y="82" width="28" height="25" rx="3" fill="#071B3A"/>
+</g></g><g transform="translate(600 300)">
+<g transform="translate(150 156) scale(0.94)">
+  <path d="M-16 -101 V-114 Q-16 -128 0 -128 Q16 -128 16 -114 V-101" fill="none" stroke="#B9CFDE" stroke-width="6"/>
+  <rect x="-24" y="-104" width="48" height="21" rx="5" fill="url(#silverGradient)"/>
+  <circle cx="0" cy="0" r="88" fill="url(#glassGradient)" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M-70 -46 L0 0 L70 -46 M-82 12 L0 0 L82 12 M-59 62 L0 0 L59 62" fill="none" stroke="#DDF6FF" stroke-width="4" opacity=".66"/>
+  <circle cx="-37" cy="-46" r="14" fill="#FFFFFF" opacity=".22"/>
+  <circle cx="0" cy="0" r="26" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".65"/>
+</g></g><g transform="translate(900 300)">
+<g transform="translate(150 156) scale(0.91)">
+  <path d="M-14 -111 V-124 Q-14 -137 0 -137 Q14 -137 14 -124 V-111" fill="none" stroke="#B9CFDE" stroke-width="6"/>
+  <rect x="-22" y="-113" width="44" height="20" rx="5" fill="url(#silverGradient)"/>
+  <path d="M0 -95 C57 -95 68 -55 50 -12 C37 22 25 62 0 102 C-25 62 -37 22 -50 -12 C-68 -55 -57 -95 0 -95 Z" fill="url(#iceGradient)" stroke="#0B3566" stroke-width="5"/>
+  <path d="M0 -86 V87 M-43 -35 L0 -10 L43 -35 M-34 20 L0 4 L34 20" fill="none" stroke="#1769AA" stroke-width="4" opacity=".72"/>
+  <path d="M-22 -77 Q0 -91 22 -77" fill="none" stroke="#FFFFFF" stroke-width="5" opacity=".78"/>
+</g></g><g transform="translate(0 600)">
+<g transform="translate(150 158) scale(0.92)">
+  <path d="M0 -129 Q-15 -129 -15 -114 V-102" fill="none" stroke="#B9CFDE" stroke-width="6"/>
+  <path d="M0 -104 L78 -20 L0 99 L-78 -20 Z" fill="url(#blueGradient)" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M0 -91 L0 82 M-66 -20 H66 M0 -91 L-66 -20 L0 82 L66 -20 Z" fill="none" stroke="#8EDCF8" stroke-width="4" opacity=".75"/>
+  <path d="M0 -91 L-27 -20 L0 82 L27 -20 Z" fill="#FFFFFF" opacity=".18"/>
+</g></g><g transform="translate(300 600)">
+<g transform="translate(150 151) scale(0.94)">
+  <polygon points="0.00,-101.00 17.99,-42.42 72.12,-71.12 43.42,-16.99 102.00,1.00 43.42,18.99 72.12,73.12 17.99,44.42 0.00,103.00 -17.99,44.42 -72.12,73.12 -43.42,18.99 -102.00,1.00 -43.42,-16.99 -72.12,-71.12 -17.99,-42.42" fill="url(#iceGradient)" stroke="#0B3566" stroke-width="6" stroke-linejoin="round"/>
+  <polygon points="0.00,-67.00 11.86,-27.64 48.08,-47.08 28.64,-10.86 68.00,1.00 28.64,12.86 48.08,49.08 11.86,29.64 0.00,69.00 -11.86,29.64 -48.08,49.08 -28.64,12.86 -68.00,1.00 -28.64,-10.86 -48.08,-47.08 -11.86,-27.64" fill="url(#blueGradient)" stroke="#FFFFFF" stroke-width="3"/>
+  <path d="M0 1 L0.00 -61.00" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L43.84 -42.84" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L62.00 1.00" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L43.84 44.84" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L0.00 63.00" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L-43.84 44.84" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L-62.00 1.00" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/><path d="M0 1 L-43.84 -42.84" stroke="#DDF6FF" stroke-width="2.5" opacity="0.64"/>
+  <circle cx="0" cy="1" r="18" fill="#FFFFFF" opacity=".72"/>
+</g></g><g transform="translate(600 600)">
+<g transform="translate(150 154) scale(0.96)">
+  <path d="M-20 -91 Q0 -119 20 -91" fill="none" stroke="#B9CFDE" stroke-width="8"/>
+  <path d="M0 -89 C-44 -89 -59 -52 -58 4 C-57 39 -73 58 -82 67 H82 C73 58 57 39 58 4 C59 -52 44 -89 0 -89 Z" fill="url(#blueGradient)" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M-64 29 Q0 51 64 29" fill="none" stroke="#8EDCF8" stroke-width="7"/>
+  <path d="M-40 -55 L0 4 L40 -55 M0 -80 V49" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".48"/>
+  <circle cx="0" cy="76" r="16" fill="url(#silverGradient)"/>
+</g></g><g transform="translate(900 600)">
+<g transform="translate(150 148) scale(0.92)">
+  <circle cx="0" cy="-10" r="84" fill="url(#glassGradient)" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M-66 57 H66 L81 96 H-81 Z" fill="url(#silverGradient)" stroke="#0B3566" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M0 -61 L-22 -28 H-10 L-35 5 H-17 L-48 42 H48 L17 5 H35 L10 -28 H22 Z" fill="#071B3A" stroke="#DDF6FF" stroke-width="3"/>
+  <circle cx="-48" cy="-42" r="5" fill="#FFFFFF"/><circle cx="43" cy="-28" r="4" fill="#FFFFFF"/><circle cx="-25" cy="15" r="4" fill="#FFFFFF"/><circle cx="34" cy="24" r="5" fill="#FFFFFF"/>
+  <path d="M-60 70 H60" stroke="#FFFFFF" stroke-width="4" opacity=".72"/>
+</g></g></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><g transform="translate(0 0)"><polygon points="150.00,24.00 166.82,87.21 213.00,40.88 195.96,104.04 259.12,87.00 212.79,133.18 276.00,150.00 212.79,166.82 259.12,213.00 195.96,195.96 213.00,259.12 166.82,212.79 150.00,276.00 133.18,212.79 87.00,259.12 104.04,195.96 40.88,213.00 87.21,166.82 24.00,150.00 87.21,133.18 40.88,87.00 104.04,104.04 87.00,40.88 133.18,87.21"/></g><g transform="translate(300 0)"><circle cx="150" cy="150" r="123"/></g><g transform="translate(600 0)"><polygon points="174.39,27.40 175.64,88.10 219.45,46.07 197.38,102.62 253.93,80.55 211.90,124.36 272.60,125.61 217.00,150.00 272.60,174.39 211.90,175.64 253.93,219.45 197.38,197.38 219.45,253.93 175.64,211.90 174.39,272.60 150.00,217.00 125.61,272.60 124.36,211.90 80.55,253.93 102.62,197.38 46.07,219.45 88.10,175.64 27.40,174.39 83.00,150.00 27.40,125.61 88.10,124.36 46.07,80.55 102.62,102.62 80.55,46.07 124.36,88.10 125.61,27.40 150.00,83.00"/></g><g transform="translate(900 0)"><path d="M150 22 L108 82 H128 L81 143 H112 L54 214 H136 V255 H164 V214 H246 L188 143 H219 L172 82 H192 Z"/></g><g transform="translate(0 300)"><path d="M150 20 Q140 56 107 85 H128 Q120 120 80 150 H112 Q103 184 59 216 H136 V255 H164 V216 H241 Q197 184 188 150 H220 Q180 120 172 85 H193 Q160 56 150 20 Z"/></g><g transform="translate(300 300)"><path d="M150 20 L100 89 H119 L77 160 H101 L54 232 H136 V257 H164 V232 H246 L199 160 H223 L181 89 H200 Z"/></g><g transform="translate(600 300)"><path d="M134 51 V37 Q134 23 150 23 Q166 23 166 37 V51 H174 V67 A92 92 0 1 1 126 67 V51 Z"/></g><g transform="translate(900 300)"><path d="M136 42 V29 Q136 16 150 16 Q164 16 164 29 V42 H172 V60 C229 60 240 100 222 143 C209 177 197 217 150 257 C103 217 91 177 78 143 C60 100 71 60 128 60 V42 Z"/></g><g transform="translate(0 600)"><path d="M150 21 Q135 21 135 36 V48 L72 130 L150 249 L228 130 L165 48 V36 Q165 21 150 21 Z"/></g><g transform="translate(300 600)"><polygon points="150.00,45.00 169.13,104.81 224.95,76.05 196.19,131.87 256.00,151.00 196.19,170.13 224.95,225.95 169.13,197.19 150.00,257.00 130.87,197.19 75.05,225.95 103.81,170.13 44.00,151.00 103.81,131.87 75.05,76.05 130.87,104.81"/></g><g transform="translate(600 600)"><path d="M130 60 Q150 32 170 60 C214 60 229 97 228 153 C227 188 243 207 252 216 H169 Q166 236 150 236 Q134 236 131 216 H48 C57 207 73 188 72 153 C71 97 86 60 130 60 Z"/></g><g transform="translate(900 600)"><path d="M150 54 A88 88 0 0 1 218 198 L231 246 H69 L82 198 A88 88 0 0 1 150 54 Z"/></g></g>
+</svg>

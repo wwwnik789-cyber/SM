@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>03-snowflake-arctic-compass</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<polygon points="173.80,30.34 174.87,89.95 217.78,48.56 195.96,104.04 251.44,82.22 210.05,125.13 269.66,126.20 215.00,150.00 269.66,173.80 210.05,174.87 251.44,217.78 195.96,195.96 217.78,251.44 174.87,210.05 173.80,269.66 150.00,215.00 126.20,269.66 125.13,210.05 82.22,251.44 104.04,195.96 48.56,217.78 89.95,174.87 30.34,173.80 85.00,150.00 30.34,126.20 89.95,125.13 48.56,82.22 104.04,104.04 82.22,48.56 125.13,89.95 126.20,30.34 150.00,85.00" fill="url(#silverGradient)" stroke="#071B3A" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="150.00,56.00 168.37,105.65 216.47,83.53 194.35,131.63 244.00,150.00 194.35,168.37 216.47,216.47 168.37,194.35 150.00,244.00 131.63,194.35 83.53,216.47 105.65,168.37 56.00,150.00 105.65,131.63 83.53,83.53 131.63,105.65" fill="#0B3566" stroke="#FFFFFF" stroke-width="4"/>
+<path d="M150 150 L150.00 62.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L212.23 87.77" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L238.00 150.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L212.23 212.23" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L150.00 238.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L87.77 212.23" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L62.00 150.00" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/><path d="M150 150 L87.77 87.77" stroke="#8EDCF8" stroke-width="2.5" opacity="0.78"/>
+<circle cx="150" cy="150" r="30" fill="url(#glassGradient)" stroke="#FFFFFF" stroke-width="3"/></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><polygon points="174.39,27.40 175.64,88.10 219.45,46.07 197.38,102.62 253.93,80.55 211.90,124.36 272.60,125.61 217.00,150.00 272.60,174.39 211.90,175.64 253.93,219.45 197.38,197.38 219.45,253.93 175.64,211.90 174.39,272.60 150.00,217.00 125.61,272.60 124.36,211.90 80.55,253.93 102.62,197.38 46.07,219.45 88.10,175.64 27.40,174.39 83.00,150.00 27.40,125.61 88.10,124.36 46.07,80.55 102.62,102.62 80.55,46.07 124.36,88.10 125.61,27.40 150.00,83.00"/></g>
+</svg>

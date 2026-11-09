@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>01-snowflake-crystal-crown</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<polygon points="150.00,27.00 166.31,89.15 211.50,43.48 194.55,105.45 256.52,88.50 210.85,133.69 273.00,150.00 210.85,166.31 256.52,211.50 194.55,194.55 211.50,256.52 166.31,210.85 150.00,273.00 133.69,210.85 88.50,256.52 105.45,194.55 43.48,211.50 89.15,166.31 27.00,150.00 89.15,133.69 43.48,88.50 105.45,105.45 88.50,43.48 133.69,89.15" fill="url(#blueGradient)" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+<g transform="translate(150 150)"><g transform="rotate(0.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(60.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(120.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(180.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(240.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g><g transform="rotate(300.0)">
+<g fill="none" stroke="#DDF6FF" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+  <path d="M0 0 V-96"/>
+  <path d="M0 -41.28 L-19.20 -59.52 M0 -41.28 L19.20 -59.52"/>
+  <path d="M0 -65.28 L-16.32 -79.68 M0 -65.28 L16.32 -79.68"/>
+  <path d="M0 -83.52 L-9.60 -91.20 M0 -83.52 L9.60 -91.20"/>
+</g></g></g>
+<polygon points="150.00,99.00 163.00,127.48 194.17,124.50 176.00,150.00 194.17,175.50 163.00,172.52 150.00,201.00 137.00,172.52 105.83,175.50 124.00,150.00 105.83,124.50 137.00,127.48" fill="url(#iceGradient)" stroke="#B9CFDE" stroke-width="3"/>
+<circle cx="150" cy="150" r="17" fill="#0B3566"/><circle cx="150" cy="150" r="7" fill="#FFFFFF"/></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><polygon points="150.00,24.00 166.82,87.21 213.00,40.88 195.96,104.04 259.12,87.00 212.79,133.18 276.00,150.00 212.79,166.82 259.12,213.00 195.96,195.96 213.00,259.12 166.82,212.79 150.00,276.00 133.18,212.79 87.00,259.12 104.04,195.96 40.88,213.00 87.21,166.82 24.00,150.00 87.21,133.18 40.88,87.00 104.04,104.04 87.00,40.88 133.18,87.21"/></g>
+</svg>

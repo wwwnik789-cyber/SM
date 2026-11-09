@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>02-snowflake-frost-lace</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<circle cx="150" cy="150" r="120" fill="url(#iceGradient)" stroke="#0B3566" stroke-width="5"/>
+<circle cx="150" cy="150" r="100" fill="none" stroke="#1769AA" stroke-width="3" stroke-dasharray="2 8"/>
+<g transform="translate(150 150)"><g transform="rotate(22.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(67.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(112.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(157.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(202.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(247.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(292.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g><g transform="rotate(337.5)">
+<g fill="none" stroke="#0B3566" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+  <path d="M0 0 V-88"/>
+  <path d="M0 -37.84 L-17.60 -54.56 M0 -37.84 L17.60 -54.56"/>
+  <path d="M0 -59.84 L-14.96 -73.04 M0 -59.84 L14.96 -73.04"/>
+  <path d="M0 -76.56 L-8.80 -83.60 M0 -76.56 L8.80 -83.60"/>
+</g></g></g>
+<circle cx="150" cy="150" r="36" fill="#FFFFFF" stroke="#B9CFDE" stroke-width="3"/>
+<polygon points="150.00,124.00 154.59,138.91 168.38,131.62 161.09,145.41 176.00,150.00 161.09,154.59 168.38,168.38 154.59,161.09 150.00,176.00 145.41,161.09 131.62,168.38 138.91,154.59 124.00,150.00 138.91,145.41 131.62,131.62 145.41,138.91" fill="#1769AA"/></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><circle cx="150" cy="150" r="123"/></g>
+</svg>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>06-tree-snow-facets</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<g transform="translate(150 145) scale(1)">
+  <polygon points="0,-111 -50,-42 50,-42" fill="#DDF6FF" stroke="#0B3566" stroke-width="4"/>
+  <polygon points="0,-70 -73,11 73,11" fill="#8EDCF8" stroke="#1769AA" stroke-width="4"/>
+  <polygon points="0,-23 -96,82 96,82" fill="#0B3566" stroke="#B9CFDE" stroke-width="4"/>
+  <path d="M-38 -40 L0 -70 L38 -40 M-55 9 L0 -23 L55 9 M-74 76 L0 16 L74 76" fill="none" stroke="#FFFFFF" stroke-width="4" opacity=".78"/>
+  <circle cx="0" cy="-57" r="5" fill="#FFFFFF"/><circle cx="-34" cy="-1" r="6" fill="#FFFFFF"/><circle cx="39" cy="44" r="6" fill="#8EDCF8"/>
+  <polygon points="0.00,-133.00 2.75,-125.76 10.39,-127.00 5.50,-121.00 10.39,-115.00 2.75,-116.24 0.00,-109.00 -2.75,-116.24 -10.39,-115.00 -5.50,-121.00 -10.39,-127.00 -2.75,-125.76" fill="#FFFFFF" stroke="#B9CFDE" stroke-width="2"/>
+  <rect x="-14" y="82" width="28" height="25" rx="3" fill="#071B3A"/>
+</g></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><path d="M150 20 L100 89 H119 L77 160 H101 L54 232 H136 V257 H164 V232 H246 L199 160 H223 L181 89 H200 Z"/></g>
+</svg>

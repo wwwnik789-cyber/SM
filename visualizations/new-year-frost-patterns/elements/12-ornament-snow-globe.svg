@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>12-ornament-snow-globe</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<g transform="translate(150 148) scale(0.92)">
+  <circle cx="0" cy="-10" r="84" fill="url(#glassGradient)" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M-66 57 H66 L81 96 H-81 Z" fill="url(#silverGradient)" stroke="#0B3566" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M0 -61 L-22 -28 H-10 L-35 5 H-17 L-48 42 H48 L17 5 H35 L10 -28 H22 Z" fill="#071B3A" stroke="#DDF6FF" stroke-width="3"/>
+  <circle cx="-48" cy="-42" r="5" fill="#FFFFFF"/><circle cx="43" cy="-28" r="4" fill="#FFFFFF"/><circle cx="-25" cy="15" r="4" fill="#FFFFFF"/><circle cx="34" cy="24" r="5" fill="#FFFFFF"/>
+  <path d="M-60 70 H60" stroke="#FFFFFF" stroke-width="4" opacity=".72"/>
+</g></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><path d="M150 54 A88 88 0 0 1 218 198 L231 246 H69 L82 198 A88 88 0 0 1 150 54 Z"/></g>
+</svg>

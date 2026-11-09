@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>07-ornament-glass-sphere</title>
+
+<defs>
+  <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2E91D1"/><stop offset="0.52" stop-color="#1769AA"/><stop offset="1" stop-color="#0B3566"/>
+  </linearGradient>
+  <linearGradient id="iceGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDF6FF"/><stop offset="1" stop-color="#8EDCF8"/>
+  </linearGradient>
+  <linearGradient id="silverGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#B9CFDE"/><stop offset="1" stop-color="#6D8FA8"/>
+  </linearGradient>
+  <radialGradient id="glassGradient" cx="35%" cy="28%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.28" stop-color="#8EDCF8"/><stop offset="0.72" stop-color="#2E91D1"/><stop offset="1" stop-color="#0B3566"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<g transform="translate(150 156) scale(0.94)">
+  <path d="M-16 -101 V-114 Q-16 -128 0 -128 Q16 -128 16 -114 V-101" fill="none" stroke="#B9CFDE" stroke-width="6"/>
+  <rect x="-24" y="-104" width="48" height="21" rx="5" fill="url(#silverGradient)"/>
+  <circle cx="0" cy="0" r="88" fill="url(#glassGradient)" stroke="#FFFFFF" stroke-width="5"/>
+  <path d="M-70 -46 L0 0 L70 -46 M-82 12 L0 0 L82 12 M-59 62 L0 0 L59 62" fill="none" stroke="#DDF6FF" stroke-width="4" opacity=".66"/>
+  <circle cx="-37" cy="-46" r="14" fill="#FFFFFF" opacity=".22"/>
+  <circle cx="0" cy="0" r="26" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".65"/>
+</g></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><path d="M134 51 V37 Q134 23 150 23 Q166 23 166 37 V51 H174 V67 A92 92 0 1 1 126 67 V51 Z"/></g>
+</svg>
