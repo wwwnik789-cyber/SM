@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="70mm" height="70mm" viewBox="0 0 300 300">
+<title>pixel-orb</title>
+
+<defs>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#35E7FF"/><stop offset="0.38" stop-color="#18A8FF"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gViolet" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F02DFF"/><stop offset="0.48" stop-color="#7747FF"/><stop offset="1" stop-color="#092A5E"/>
+  </linearGradient>
+  <linearGradient id="gMidnight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#092A5E"/><stop offset="0.52" stop-color="#06152F"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gIce" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDFBFF"/><stop offset="1" stop-color="#35E7FF"/>
+  </linearGradient>
+  <radialGradient id="gOrb" cx="34%" cy="27%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.22" stop-color="#35E7FF"/><stop offset="0.63" stop-color="#7747FF"/><stop offset="1" stop-color="#06152F"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<defs><clipPath id="clip01"><path d="M130 48 V34 Q130 16 150 16 Q170 16 170 34 V48 C225 58 258 104 258 162 C258 225 210 274 150 274 C90 274 42 225 42 162 C42 104 75 58 130 48 Z"/></clipPath></defs>
+<g clip-path="url(#clip01)">
+  <path d="M130 48 V34 Q130 16 150 16 Q170 16 170 34 V48 C225 58 258 104 258 162 C258 225 210 274 150 274 C90 274 42 225 42 162 C42 104 75 58 130 48 Z" fill="url(#gBlue)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(-18 150 150)">
+  <path d="M-30 71 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 208.5 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 98.3 H88 L112 122.3 H206 L230 98.3 H282"/>
+  <path d="M35 216.8 H92 L118 190.8 H187 L212 215.8 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="98.3" r="5"/><circle cx="206" cy="122.3" r="5"/>
+  <circle cx="92" cy="216.8" r="5"/><circle cx="212" cy="215.8" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <g fill="#FFFFFF" opacity=".82"><rect x="112" y="113" width="28" height="28"/><rect x="145" y="80" width="28" height="28"/><rect x="145" y="146" width="28" height="28"/><rect x="178" y="113" width="28" height="28"/><rect x="112" y="179" width="28" height="28"/></g>
+</g>
+<circle cx="150" cy="31" r="13.714" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3mm" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><path d="M130 48 V34 Q130 16 150 16 Q170 16 170 34 V48 C225 58 258 104 258 162 C258 225 210 274 150 274 C90 274 42 225 42 162 C42 104 75 58 130 48 Z"/><circle cx="150" cy="31" r="10.714" data-purpose="hanging-hole"/></g>
+</svg>

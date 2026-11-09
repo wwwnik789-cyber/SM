@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="80mm" height="80mm" viewBox="0 0 300 300">
+<title>circuit-star</title>
+
+<defs>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#35E7FF"/><stop offset="0.38" stop-color="#18A8FF"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gViolet" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F02DFF"/><stop offset="0.48" stop-color="#7747FF"/><stop offset="1" stop-color="#092A5E"/>
+  </linearGradient>
+  <linearGradient id="gMidnight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#092A5E"/><stop offset="0.52" stop-color="#06152F"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gIce" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDFBFF"/><stop offset="1" stop-color="#35E7FF"/>
+  </linearGradient>
+  <radialGradient id="gOrb" cx="34%" cy="27%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.22" stop-color="#35E7FF"/><stop offset="0.63" stop-color="#7747FF"/><stop offset="1" stop-color="#06152F"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<defs><clipPath id="clip02"><polygon points="150.00,30.00 184.09,111.08 271.74,118.45 205.16,175.92 225.24,261.55 150.00,216.00 74.76,261.55 94.84,175.92 28.26,118.45 115.91,111.08"/></clipPath></defs>
+<g clip-path="url(#clip02)">
+  <polygon points="150.00,30.00 184.09,111.08 271.74,118.45 205.16,175.92 225.24,261.55 150.00,216.00 74.76,261.55 94.84,175.92 28.26,118.45 115.91,111.08" fill="url(#gViolet)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(-1 150 150)">
+  <path d="M-30 84 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 202.0 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 102.7 H88 L112 126.7 H206 L230 102.7 H282"/>
+  <path d="M35 213.5 H92 L118 187.5 H187 L212 212.5 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="102.7" r="5"/><circle cx="206" cy="126.7" r="5"/>
+  <circle cx="92" cy="213.5" r="5"/><circle cx="212" cy="212.5" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <polygon points="150.00,82.00 169.98,130.49 222.28,134.51 182.34,168.51 194.67,219.49 150.00,192.00 105.33,219.49 117.66,168.51 77.72,134.51 130.02,130.49" fill="none" stroke="#FFFFFF" stroke-width="6"/><polygon points="150.00,115.00 161.76,141.82 190.90,144.71 169.02,164.18 175.27,192.79 150.00,178.00 124.73,192.79 130.98,164.18 109.10,144.71 138.24,141.82" fill="#35E7FF" opacity=".5"/>
+</g>
+<circle cx="150" cy="54" r="12.375" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3mm" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><polygon points="150.00,30.00 184.09,111.08 271.74,118.45 205.16,175.92 225.24,261.55 150.00,216.00 74.76,261.55 94.84,175.92 28.26,118.45 115.91,111.08"/><circle cx="150" cy="54" r="9.375" data-purpose="hanging-hole"/></g>
+</svg>

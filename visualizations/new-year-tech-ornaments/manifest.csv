@@ -1,0 +1,21 @@
+index,file,name_ru,artboard_mm,hanging_hole_mm,layers,logo
+1,01-pixel-orb.svg,Пиксельный шар,70x70,5,PRINT + CutContour,none
+2,02-circuit-star.svg,Звезда-схема,80x80,5,PRINT + CutContour,none
+3,03-neon-candy-cane.svg,Неоновый леденец,90x90,5,PRINT + CutContour,none
+4,04-launch-rocket.svg,Ракета,100x100,5,PRINT + CutContour,none
+5,05-orbit-satellite.svg,Спутник,110x110,5,PRINT + CutContour,none
+6,06-friendly-robot.svg,Робот,120x120,5,PRINT + CutContour,none
+7,07-cyber-gamepad.svg,Геймпад,130x130,6,PRINT + CutContour,none
+8,08-digital-snowflake.svg,Цифровая снежинка,140x140,6,PRINT + CutContour,none
+9,09-circuit-tree.svg,Ёлка-схема,150x150,6,PRINT + CutContour,none
+10,10-neon-mitten.svg,Неоновая варежка,160x160,6,PRINT + CutContour,none
+11,11-data-stocking.svg,Носок с сеткой,175x175,7,PRINT + CutContour,none
+12,12-signal-bell.svg,Сигнальный колокол,190x190,7,PRINT + CutContour,none
+13,13-crystal-diamond.svg,Кристалл,210x210,7,PRINT + CutContour,none
+14,14-network-hexagon.svg,Сетевой шестиугольник,230x230,8,PRINT + CutContour,none
+15,15-electric-comet.svg,Электрическая комета,250x250,8,PRINT + CutContour,none
+16,16-audio-headphones.svg,Наушники,270x270,8,PRINT + CutContour,none
+17,17-smart-gift.svg,Умный подарок,290x290,9,PRINT + CutContour,none
+18,18-future-house.svg,Дом будущего,310x310,9,PRINT + CutContour,none
+19,19-orbit-planet.svg,Орбитальная планета,330x330,9,PRINT + CutContour,none
+20,20-digital-snow-globe.svg,Цифровой снежный шар,350x350,10,PRINT + CutContour,none

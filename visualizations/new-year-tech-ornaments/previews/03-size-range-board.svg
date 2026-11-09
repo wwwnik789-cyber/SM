@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1200px" height="675px" viewBox="0 0 1200 675">
+<title>Size range preview</title>
+
+<defs>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#35E7FF"/><stop offset="0.38" stop-color="#18A8FF"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gViolet" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F02DFF"/><stop offset="0.48" stop-color="#7747FF"/><stop offset="1" stop-color="#092A5E"/>
+  </linearGradient>
+  <linearGradient id="gMidnight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#092A5E"/><stop offset="0.52" stop-color="#06152F"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gIce" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDFBFF"/><stop offset="1" stop-color="#35E7FF"/>
+  </linearGradient>
+  <radialGradient id="gOrb" cx="34%" cy="27%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.22" stop-color="#35E7FF"/><stop offset="0.63" stop-color="#7747FF"/><stop offset="1" stop-color="#06152F"/>
+  </radialGradient>
+</defs>
+
+<rect width="1200" height="675" fill="#06152F"/><text x="42" y="62" font-family="DejaVu Sans,sans-serif" font-size="31" font-weight="700" fill="#FFFFFF">ДИАПАЗОН РАЗМЕРОВ · 70–350 ММ</text><text x="42" y="94" font-family="DejaVu Sans,sans-serif" font-size="16" fill="#35E7FF">ЧЕТЫРЕ КОНТРОЛЬНЫЕ ФОРМЫ ПОКАЗАНЫ В ЕДИНОМ МАСШТАБЕ</text><line x1="42" y1="542" x2="1158" y2="542" stroke="#21466F" stroke-width="2"/><g transform="translate(65 477.50) scale(0.175000)">
+<defs><clipPath id="clip01"><path d="M130 48 V34 Q130 16 150 16 Q170 16 170 34 V48 C225 58 258 104 258 162 C258 225 210 274 150 274 C90 274 42 225 42 162 C42 104 75 58 130 48 Z"/></clipPath></defs>
+<g clip-path="url(#clip01)">
+  <path d="M130 48 V34 Q130 16 150 16 Q170 16 170 34 V48 C225 58 258 104 258 162 C258 225 210 274 150 274 C90 274 42 225 42 162 C42 104 75 58 130 48 Z" fill="url(#gBlue)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(-18 150 150)">
+  <path d="M-30 71 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 208.5 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 98.3 H88 L112 122.3 H206 L230 98.3 H282"/>
+  <path d="M35 216.8 H92 L118 190.8 H187 L212 215.8 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="98.3" r="5"/><circle cx="206" cy="122.3" r="5"/>
+  <circle cx="92" cy="216.8" r="5"/><circle cx="212" cy="215.8" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <g fill="#FFFFFF" opacity=".82"><rect x="112" y="113" width="28" height="28"/><rect x="145" y="80" width="28" height="28"/><rect x="145" y="146" width="28" height="28"/><rect x="178" y="113" width="28" height="28"/><rect x="112" y="179" width="28" height="28"/></g>
+</g>
+<circle cx="150" cy="31" r="13.714" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><line x1="65" y1="542" x2="117.5" y2="542" stroke="#35E7FF" stroke-width="2"/><text x="91.25" y="573" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">70 мм</text><g transform="translate(220 417.50) scale(0.375000)">
+<defs><clipPath id="clip09"><path d="M150 20 L110 72 H127 L85 128 H108 L58 194 H126 V224 H112 V278 H188 V224 H174 L242 194 L192 128 H215 L173 72 H190 Z"/></clipPath></defs>
+<g clip-path="url(#clip09)">
+  <path d="M150 20 L110 72 H127 L85 128 H108 L58 194 H126 V224 H112 V278 H188 V224 H174 L242 194 L192 128 H215 L173 72 H190 Z" fill="url(#gMidnight)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(-22 150 150)">
+  <path d="M-30 91 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 198.5 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 105.0 H88 L112 129.0 H206 L230 105.0 H282"/>
+  <path d="M35 211.8 H92 L118 185.8 H187 L212 210.8 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="105.0" r="5"/><circle cx="206" cy="129.0" r="5"/>
+  <circle cx="92" cy="211.8" r="5"/><circle cx="212" cy="210.8" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <path d="M150 66 V232 M150 100 L110 132 M150 124 L190 151 M150 166 L105 202 M150 190 L196 218" fill="none" stroke="#FFFFFF" stroke-width="6"/><g fill="#35E7FF"><circle cx="110" cy="132" r="8"/><circle cx="190" cy="151" r="8"/><circle cx="105" cy="202" r="8"/><circle cx="196" cy="218" r="8"/></g>
+</g>
+<circle cx="150" cy="48" r="9.000" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><line x1="220" y1="542" x2="332.5" y2="542" stroke="#35E7FF" stroke-width="2"/><text x="276.25" y="573" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">150 мм</text><g transform="translate(480 342.50) scale(0.625000)">
+<defs><clipPath id="clip15"><path d="M130 34 V24 Q130 10 146 10 Q162 10 162 24 V34 C206 43 235 78 236 121 C237 149 226 174 207 193 L268 238 L226 242 L248 276 L185 228 C165 239 143 244 120 239 L58 275 L81 236 L32 232 L93 193 C68 170 56 139 62 105 C68 65 94 42 130 34 Z"/></clipPath></defs>
+<g clip-path="url(#clip15)">
+  <path d="M130 34 V24 Q130 10 146 10 Q162 10 162 24 V34 C206 43 235 78 236 121 C237 149 226 174 207 193 L268 238 L226 242 L248 276 L185 228 C165 239 143 244 120 239 L58 275 L81 236 L32 232 L93 193 C68 170 56 139 62 105 C68 65 94 42 130 34 Z" fill="url(#gViolet)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(10 150 150)">
+  <path d="M-30 85 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 201.5 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 103.0 H88 L112 127.0 H206 L230 103.0 H282"/>
+  <path d="M35 213.2 H92 L118 187.2 H187 L212 212.2 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="103.0" r="5"/><circle cx="206" cy="127.0" r="5"/>
+  <circle cx="92" cy="213.2" r="5"/><circle cx="212" cy="212.2" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <circle cx="143" cy="122" r="56" fill="none" stroke="#FFFFFF" stroke-width="7"/><circle cx="143" cy="122" r="28" fill="#35E7FF" opacity=".5"/><path d="M95 178 L50 217 M119 197 L85 239 M152 204 L135 250" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+</g>
+<circle cx="146" cy="25" r="7.800" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><line x1="480" y1="542" x2="667.5" y2="542" stroke="#35E7FF" stroke-width="2"/><text x="573.75" y="573" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">250 мм</text><g transform="translate(805 267.50) scale(0.875000)">
+<defs><clipPath id="clip20"><path d="M132 48 V31 Q132 14 150 14 Q168 14 168 31 V48 C223 57 258 101 258 159 C258 201 239 231 216 249 L231 284 H69 L84 249 C61 231 42 201 42 159 C42 101 77 57 132 48 Z"/></clipPath></defs>
+<g clip-path="url(#clip20)">
+  <path d="M132 48 V31 Q132 14 150 14 Q168 14 168 31 V48 C223 57 258 101 258 159 C258 201 239 231 216 249 L231 284 H69 L84 249 C61 231 42 201 42 159 C42 101 77 57 132 48 Z" fill="url(#gMidnight)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(25 150 150)">
+  <path d="M-30 66 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 211.0 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 96.7 H88 L112 120.7 H206 L230 96.7 H282"/>
+  <path d="M35 218.0 H92 L118 192.0 H187 L212 217.0 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="96.7" r="5"/><circle cx="206" cy="120.7" r="5"/>
+  <circle cx="92" cy="218.0" r="5"/><circle cx="212" cy="217.0" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <path d="M91 194 Q150 225 209 194" fill="none" stroke="#FFFFFF" stroke-width="6"/><path d="M150 87 L120 132 H135 L103 174 H197 L165 132 H180 Z" fill="none" stroke="#35E7FF" stroke-width="6"/><path d="M94 244 H206" stroke="#FFFFFF" stroke-width="8"/><g fill="#FFFFFF"><circle cx="97" cy="108" r="6"/><circle cx="207" cy="130" r="5"/><circle cx="82" cy="167" r="5"/></g>
+</g>
+<circle cx="150" cy="31" r="7.286" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><line x1="805" y1="542" x2="1067.5" y2="542" stroke="#35E7FF" stroke-width="2"/><text x="936.25" y="573" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">350 мм</text><text x="42" y="625" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#A9C9DE">Соотношение размеров сохранено. Артборд каждого производственного SVG задан в миллиметрах.</text>
+</svg>

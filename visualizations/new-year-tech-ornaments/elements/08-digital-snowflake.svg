@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="140mm" height="140mm" viewBox="0 0 300 300">
+<title>digital-snowflake</title>
+
+<defs>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#35E7FF"/><stop offset="0.38" stop-color="#18A8FF"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gViolet" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F02DFF"/><stop offset="0.48" stop-color="#7747FF"/><stop offset="1" stop-color="#092A5E"/>
+  </linearGradient>
+  <linearGradient id="gMidnight" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#092A5E"/><stop offset="0.52" stop-color="#06152F"/><stop offset="1" stop-color="#075BFF"/>
+  </linearGradient>
+  <linearGradient id="gIce" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.48" stop-color="#DDFBFF"/><stop offset="1" stop-color="#35E7FF"/>
+  </linearGradient>
+  <radialGradient id="gOrb" cx="34%" cy="27%" r="78%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.22" stop-color="#35E7FF"/><stop offset="0.63" stop-color="#7747FF"/><stop offset="1" stop-color="#06152F"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT">
+<defs><clipPath id="clip08"><polygon points="150.00,20.00 169.67,76.59 215.00,37.42 203.74,96.26 262.58,85.00 223.41,130.33 280.00,150.00 223.41,169.67 262.58,215.00 203.74,203.74 215.00,262.58 169.67,223.41 150.00,280.00 130.33,223.41 85.00,262.58 96.26,203.74 37.42,215.00 76.59,169.67 20.00,150.00 76.59,130.33 37.42,85.00 96.26,96.26 85.00,37.42 130.33,76.59"/></clipPath></defs>
+<g clip-path="url(#clip08)">
+  <polygon points="150.00,20.00 169.67,76.59 215.00,37.42 203.74,96.26 262.58,85.00 223.41,130.33 280.00,150.00 223.41,169.67 262.58,215.00 203.74,203.74 215.00,262.58 169.67,223.41 150.00,280.00 130.33,223.41 85.00,262.58 96.26,203.74 37.42,215.00 76.59,169.67 20.00,150.00 76.59,130.33 37.42,85.00 96.26,96.26 85.00,37.42 130.33,76.59" fill="url(#gIce)" stroke="#DDFBFF" stroke-width="4.5" stroke-linejoin="round"/>
+
+<g transform="rotate(31 150 150)">
+  <path d="M-30 78 L105 18 L342 92 L212 150 Z" fill="#FFFFFF" opacity=".10"/>
+  <path d="M-18 205.0 L112 158 L329 232 L185 292 Z" fill="#35E7FF" opacity=".12"/>
+</g>
+<g fill="none" stroke="#DDFBFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+  <path d="M24 100.7 H88 L112 124.7 H206 L230 100.7 H282"/>
+  <path d="M35 215.0 H92 L118 189.0 H187 L212 214.0 H272"/>
+</g>
+<g fill="#35E7FF" stroke="#FFFFFF" stroke-width="1.2">
+  <circle cx="88" cy="100.7" r="5"/><circle cx="206" cy="124.7" r="5"/>
+  <circle cx="92" cy="215.0" r="5"/><circle cx="212" cy="214.0" r="5"/>
+</g>
+<path d="M42 151 H258" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 9" opacity=".46"/>
+
+  <g fill="none" stroke="#092A5E" stroke-width="6" stroke-linecap="round"><path d="M150 73 V227 M83 112 L217 188 M83 188 L217 112"/><path d="M150 92 L132 110 M150 92 L168 110 M150 208 L132 190 M150 208 L168 190"/></g><circle cx="150" cy="150" r="20" fill="#7747FF"/>
+</g>
+<circle cx="150" cy="46" r="9.429" fill="#06152F" stroke="#DDFBFF" stroke-width="2.5"/>
+</g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3mm" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><polygon points="150.00,20.00 169.67,76.59 215.00,37.42 203.74,96.26 262.58,85.00 223.41,130.33 280.00,150.00 223.41,169.67 262.58,215.00 203.74,203.74 215.00,262.58 169.67,223.41 150.00,280.00 130.33,223.41 85.00,262.58 96.26,203.74 37.42,215.00 76.59,169.67 20.00,150.00 76.59,130.33 37.42,85.00 96.26,96.26 85.00,37.42 130.33,76.59"/><circle cx="150" cy="46" r="6.429" data-purpose="hanging-hole"/></g>
+</svg>
