@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>09-ornament-diamond cut contour</title>
+
+<g id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" vector-effect="non-scaling-stroke" stroke-linejoin="round"><path d="M150 20 Q135 20 135 35 V46 L75 130 L150 246 L225 130 L165 46 V35 Q165 20 150 20 Z"/></g>
+</svg>

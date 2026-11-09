@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>01-snowflake-classic cut contour</title>
+
+<g id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" vector-effect="non-scaling-stroke" stroke-linejoin="round"><polygon points="150.00,24.00 167.08,86.25 213.00,40.88 196.67,103.33 259.12,87.00 213.75,132.92 276.00,150.00 213.75,167.08 259.12,213.00 196.67,196.67 213.00,259.12 167.08,213.75 150.00,276.00 132.92,213.75 87.00,259.12 103.33,196.67 40.88,213.00 86.25,167.08 24.00,150.00 86.25,132.92 40.88,87.00 103.33,103.33 87.00,40.88 132.92,86.25"/></g>
+</svg>

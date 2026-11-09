@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>07-ornament-round cut contour</title>
+
+<g id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" vector-effect="non-scaling-stroke" stroke-linejoin="round"><path d="M133 52 V38 Q133 24 150 24 Q167 24 167 38 V52 H174 V67 A91 91 0 1 1 126 67 V52 Z"/></g>
+</svg>

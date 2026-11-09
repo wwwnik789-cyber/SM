@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>05-tree-ribbon cut contour</title>
+
+<g id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3" vector-effect="non-scaling-stroke" stroke-linejoin="round"><path d="M150 22 Q142 57 103 88 H130 Q121 120 80 149 H115 Q107 179 59 211 H136 V253 H164 V211 H241 Q193 179 185 149 H220 Q179 120 170 88 H197 Q158 57 150 22 Z"/></g>
+</svg>

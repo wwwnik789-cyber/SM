@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>02-snowflake-crystal</title>
+
+<defs>
+  <linearGradient id="redGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#DC4A4A"/><stop offset="0.55" stop-color="#B3262D"/><stop offset="1" stop-color="#731A24"/>
+  </linearGradient>
+  <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2C6B55"/><stop offset="0.55" stop-color="#17483A"/><stop offset="1" stop-color="#0B2F27"/>
+  </linearGradient>
+  <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF0B5"/><stop offset="0.45" stop-color="#D6B45B"/><stop offset="1" stop-color="#9F7630"/>
+  </linearGradient>
+</defs>
+
+
+<g id="PRINT">
+  <polygon points="173.61,31.32 176.79,85.33 217.22,49.39 199.50,100.50 250.61,82.78 214.67,123.21 268.68,126.39 220.00,150.00 268.68,173.61 214.67,176.79 250.61,217.22 199.50,199.50 217.22,250.61 176.79,214.67 173.61,268.68 150.00,220.00 126.39,268.68 123.21,214.67 82.78,250.61 100.50,199.50 49.39,217.22 85.33,176.79 31.32,173.61 80.00,150.00 31.32,126.39 85.33,123.21 49.39,82.78 100.50,100.50 82.78,49.39 123.21,85.33 126.39,31.32 150.00,80.00" fill="url(#greenGradient)" stroke="#F1D98E" stroke-width="5" stroke-linejoin="round"/>
+  <g transform="translate(150 150)"><g transform="rotate(22.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(67.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(112.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(157.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(202.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(247.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(292.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g><g transform="rotate(337.5)">
+<g fill="none" stroke="#FFF8E9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.94">
+  <path d="M0 0 V-91"/>
+  <path d="M0 -43.68 L-18.20 -60.06 M0 -43.68 L18.20 -60.06"/>
+  <path d="M0 -66.43 L-14.56 -78.26 M0 -66.43 L14.56 -78.26"/>
+  <circle cx="0" cy="-91" r="2.79" fill="#FFF8E9" stroke="none"/>
+</g></g></g>
+  <circle cx="150" cy="150" r="31" fill="#D6B45B"/>
+
+<g class="sm-monogram" transform="translate(150 150) scale(0.62)" fill="#0B2F27" opacity="0.58">
+  <path d="M-28 -14 H-8 V-8 H-21 Q-24 -8 -24 -5 Q-24 -2 -21 -2 H-14 Q-7 -2 -7 6 Q-7 14 -15 14 H-28 V8 H-16 Q-12 8 -12 5 Q-12 2 -16 2 H-22 Q-30 2 -30 -6 Q-30 -14 -22 -14 Z"/>
+  <path d="M0 14 V-14 H6 L14 -2 L22 -14 H28 V14 H22 V-5 L14 6 L6 -5 V14 Z"/>
+</g>
+</g>
+</svg>

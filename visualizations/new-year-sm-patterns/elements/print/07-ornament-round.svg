@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300mm" height="300mm" viewBox="0 0 300 300">
+<title>07-ornament-round</title>
+
+<defs>
+  <linearGradient id="redGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#DC4A4A"/><stop offset="0.55" stop-color="#B3262D"/><stop offset="1" stop-color="#731A24"/>
+  </linearGradient>
+  <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2C6B55"/><stop offset="0.55" stop-color="#17483A"/><stop offset="1" stop-color="#0B2F27"/>
+  </linearGradient>
+  <linearGradient id="goldGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFF0B5"/><stop offset="0.45" stop-color="#D6B45B"/><stop offset="1" stop-color="#9F7630"/>
+  </linearGradient>
+</defs>
+
+<g id="PRINT">
+<g transform="translate(150 155) scale(0.94)">
+  <path d="M-17 -98 V-112 Q-17 -126 0 -126 Q17 -126 17 -112 V-98" fill="none" stroke="#D6B45B" stroke-width="6"/>
+  <rect x="-24" y="-102" width="48" height="21" rx="6" fill="url(#goldGradient)"/>
+  <circle cx="0" cy="0" r="87" fill="url(#redGradient)" stroke="#F1D98E" stroke-width="5"/>
+  <path d="M-76 -22 Q0 23 76 -22 M-76 27 Q0 -13 76 27" fill="none" stroke="#D6B45B" stroke-width="7" opacity="0.9"/>
+  <circle cx="-42" cy="-48" r="12" fill="#FFFFFF" opacity="0.18"/>
+
+<g class="sm-monogram" transform="translate(0 7) scale(1.05)" fill="#FFF8E9" opacity="0.52">
+  <path d="M-28 -14 H-8 V-8 H-21 Q-24 -8 -24 -5 Q-24 -2 -21 -2 H-14 Q-7 -2 -7 6 Q-7 14 -15 14 H-28 V8 H-16 Q-12 8 -12 5 Q-12 2 -16 2 H-22 Q-30 2 -30 -6 Q-30 -14 -22 -14 Z"/>
+  <path d="M0 14 V-14 H6 L14 -2 L22 -14 H28 V14 H22 V-5 L14 6 L6 -5 V14 Z"/>
+</g>
+</g></g>
+</svg>
