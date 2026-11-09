@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="6000mm" height="2000mm" viewBox="0 0 6000 2000">
+  <title>SM Production blue technology wide banner background 6000x2000 mm</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#04142e"/>
+      <stop offset="0.28" stop-color="#082c55"/>
+      <stop offset="0.50" stop-color="#0a315d"/>
+      <stop offset="0.72" stop-color="#082849"/>
+      <stop offset="1" stop-color="#031126"/>
+    </linearGradient>
+    <radialGradient id="leftGlow" cx="0" cy="0.5" r="0.78">
+      <stop offset="0" stop-color="#2fb9ef" stop-opacity="0.42"/>
+      <stop offset="0.38" stop-color="#167bbb" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0b2c54" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rightGlow" cx="1" cy="0.5" r="0.78">
+      <stop offset="0" stop-color="#87e7ff" stop-opacity="0.34"/>
+      <stop offset="0.38" stop-color="#207fb7" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0b2c54" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="centerCalm" cx="0.5" cy="0.5" r="0.62">
+      <stop offset="0" stop-color="#0a2b51" stop-opacity="0.98"/>
+      <stop offset="0.58" stop-color="#0a2b51" stop-opacity="0.91"/>
+      <stop offset="1" stop-color="#0a2b51" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cyanLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8ceaff" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="#8ceaff" stop-opacity="0.62"/>
+      <stop offset="0.5" stop-color="#dffaff" stop-opacity="0.92"/>
+      <stop offset="0.8" stop-color="#56cfff" stop-opacity="0.54"/>
+      <stop offset="1" stop-color="#56cfff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="leftShard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3abbea" stop-opacity="0.52"/>
+      <stop offset="0.52" stop-color="#176da9" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#0a315d" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="rightShard" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9f3ff" stop-opacity="0.44"/>
+      <stop offset="0.52" stop-color="#2e91d1" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#0a315d" stop-opacity="0.03"/>
+    </linearGradient>
+    <pattern id="dotGrid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="4.2" fill="#dffaff" opacity="0.52"/>
+    </pattern>
+    <pattern id="microGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M120 0H0V120" fill="none" stroke="#8edcf8" stroke-width="2" opacity="0.23"/>
+    </pattern>
+    <clipPath id="leftClip"><rect x="0" y="0" width="1880" height="2000"/></clipPath>
+    <clipPath id="rightClip"><rect x="4120" y="0" width="1880" height="2000"/></clipPath>
+  </defs>
+
+  <g inkscape:groupmode="layer" inkscape:label="BACKGROUND" id="BACKGROUND">
+    <rect width="6000" height="2000" fill="url(#bg)"/>
+    <rect width="2300" height="2000" fill="url(#leftGlow)"/>
+    <rect x="3700" width="2300" height="2000" fill="url(#rightGlow)"/>
+    <rect x="45" y="45" width="5910" height="1910" rx="36" fill="none" stroke="#a9efff" stroke-width="5" opacity="0.20"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="TECH GRAPHICS" id="TECH_GRAPHICS">
+    <!-- Left crystalline architecture -->
+    <g clip-path="url(#leftClip)">
+      <polygon points="0,0 1760,0 1120,270 520,520 0,690" fill="url(#leftShard)"/>
+      <polygon points="0,0 1080,0 610,410 0,870" fill="#61d4ff" opacity="0.13"/>
+      <polygon points="0,310 740,130 1390,0 830,560 0,1030" fill="none" stroke="#8de9ff" stroke-width="7" opacity="0.38"/>
+      <polygon points="0,760 480,530 1060,270 700,850 0,1270" fill="#0874b7" opacity="0.20"/>
+      <polygon points="0,2000 1780,2000 1190,1690 520,1460 0,1320" fill="url(#leftShard)"/>
+      <polygon points="0,2000 1110,2000 630,1610 0,1150" fill="#37bce9" opacity="0.11"/>
+      <polygon points="0,1690 760,1880 1390,2000 820,1445 0,1000" fill="none" stroke="#66d9ff" stroke-width="7" opacity="0.30"/>
+
+      <rect x="70" y="240" width="1050" height="530" fill="url(#dotGrid)" opacity="0.34" transform="skewX(-14)"/>
+      <rect x="-180" y="1290" width="1250" height="490" fill="url(#dotGrid)" opacity="0.23" transform="skewX(12)"/>
+
+      <g fill="none" stroke="#baf3ff" stroke-width="5" opacity="0.46">
+        <path d="M80 1040 L310 870 L620 925 L850 710 L1180 760 L1540 500"/>
+        <path d="M0 1180 L290 1060 L510 1135 L780 980 L1110 1035 L1550 850"/>
+        <path d="M90 1360 L350 1260 L610 1330 L850 1180 L1190 1240 L1530 1110"/>
+      </g>
+      <g fill="#dffaff">
+        <circle cx="310" cy="870" r="13"/><circle cx="620" cy="925" r="9"/><circle cx="850" cy="710" r="15"/><circle cx="1180" cy="760" r="10"/>
+        <circle cx="290" cy="1060" r="10"/><circle cx="510" cy="1135" r="13"/><circle cx="780" cy="980" r="9"/><circle cx="1110" cy="1035" r="12"/>
+        <circle cx="350" cy="1260" r="8"/><circle cx="610" cy="1330" r="12"/><circle cx="850" cy="1180" r="9"/><circle cx="1190" cy="1240" r="13"/>
+      </g>
+
+      <g fill="none" stroke="#72dcff" opacity="0.34">
+        <circle cx="220" cy="1000" r="370" stroke-width="6"/>
+        <circle cx="220" cy="1000" r="510" stroke-width="4" stroke-dasharray="24 30"/>
+        <circle cx="220" cy="1000" r="650" stroke-width="3" stroke-dasharray="6 24"/>
+      </g>
+    </g>
+
+    <!-- Right crystalline architecture -->
+    <g clip-path="url(#rightClip)">
+      <polygon points="6000,0 4240,0 4880,270 5480,520 6000,690" fill="url(#rightShard)"/>
+      <polygon points="6000,0 4920,0 5390,410 6000,870" fill="#9feaff" opacity="0.11"/>
+      <polygon points="6000,310 5260,130 4610,0 5170,560 6000,1030" fill="none" stroke="#a8efff" stroke-width="7" opacity="0.34"/>
+      <polygon points="6000,760 5520,530 4940,270 5300,850 6000,1270" fill="#1683bc" opacity="0.18"/>
+      <polygon points="6000,2000 4220,2000 4810,1690 5480,1460 6000,1320" fill="url(#rightShard)"/>
+      <polygon points="6000,2000 4890,2000 5370,1610 6000,1150" fill="#7fdfff" opacity="0.10"/>
+      <polygon points="6000,1690 5240,1880 4610,2000 5180,1445 6000,1000" fill="none" stroke="#8ee7ff" stroke-width="7" opacity="0.28"/>
+
+      <rect x="4880" y="240" width="1050" height="530" fill="url(#dotGrid)" opacity="0.30" transform="skewX(14)"/>
+      <rect x="5050" y="1290" width="1250" height="490" fill="url(#dotGrid)" opacity="0.20" transform="skewX(-12)"/>
+
+      <g fill="none" stroke="#c9f7ff" stroke-width="5" opacity="0.42">
+        <path d="M5920 1040 L5690 870 L5380 925 L5150 710 L4820 760 L4460 500"/>
+        <path d="M6000 1180 L5710 1060 L5490 1135 L5220 980 L4890 1035 L4450 850"/>
+        <path d="M5910 1360 L5650 1260 L5390 1330 L5150 1180 L4810 1240 L4470 1110"/>
+      </g>
+      <g fill="#e7fbff">
+        <circle cx="5690" cy="870" r="13"/><circle cx="5380" cy="925" r="9"/><circle cx="5150" cy="710" r="15"/><circle cx="4820" cy="760" r="10"/>
+        <circle cx="5710" cy="1060" r="10"/><circle cx="5490" cy="1135" r="13"/><circle cx="5220" cy="980" r="9"/><circle cx="4890" cy="1035" r="12"/>
+        <circle cx="5650" cy="1260" r="8"/><circle cx="5390" cy="1330" r="12"/><circle cx="5150" cy="1180" r="9"/><circle cx="4810" cy="1240" r="13"/>
+      </g>
+
+      <g fill="none" stroke="#9deaff" opacity="0.30">
+        <circle cx="5780" cy="1000" r="370" stroke-width="6"/>
+        <circle cx="5780" cy="1000" r="510" stroke-width="4" stroke-dasharray="24 30"/>
+        <circle cx="5780" cy="1000" r="650" stroke-width="3" stroke-dasharray="6 24"/>
+      </g>
+    </g>
+
+    <!-- Long directional bands -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M260 330 C1150 510 1500 640 2090 820" stroke="#68d9ff" stroke-width="16" opacity="0.18"/>
+      <path d="M180 390 C1040 560 1450 690 2110 870" stroke="#d5f9ff" stroke-width="4" opacity="0.44"/>
+      <path d="M5740 330 C4850 510 4500 640 3910 820" stroke="#87e7ff" stroke-width="16" opacity="0.16"/>
+      <path d="M5820 390 C4960 560 4550 690 3890 870" stroke="#e5fcff" stroke-width="4" opacity="0.40"/>
+      <path d="M240 1650 C1110 1490 1510 1360 2110 1180" stroke="#4fc7f4" stroke-width="15" opacity="0.14"/>
+      <path d="M5760 1650 C4890 1490 4490 1360 3890 1180" stroke="#79def8" stroke-width="15" opacity="0.13"/>
+    </g>
+
+    <!-- Perspective grid below the logo zone -->
+    <g opacity="0.16" stroke="#7adfff" fill="none">
+      <path d="M3000 1210 L300 2000 M3000 1210 L950 2000 M3000 1210 L1600 2000 M3000 1210 L2250 2000 M3000 1210 L3750 2000 M3000 1210 L4400 2000 M3000 1210 L5050 2000 M3000 1210 L5700 2000" stroke-width="4"/>
+      <path d="M1220 1780 H4780 M1550 1645 H4450 M1810 1540 H4190 M2020 1455 H3980 M2190 1385 H3810 M2340 1325 H3660 M2470 1275 H3530" stroke-width="3"/>
+    </g>
+
+    <!-- Calm central field reserved for the logo -->
+    <ellipse cx="3000" cy="1000" rx="1430" ry="790" fill="url(#centerCalm)"/>
+
+    <!-- Subtle central registration structure -->
+    <g fill="none" stroke="url(#cyanLine)" opacity="0.28">
+      <path d="M1680 690 H4320" stroke-width="4"/>
+      <path d="M1500 1310 H4500" stroke-width="4"/>
+      <path d="M2100 520 H3900" stroke-width="2" stroke-dasharray="10 22"/>
+      <path d="M2100 1480 H3900" stroke-width="2" stroke-dasharray="10 22"/>
+    </g>
+    <g fill="#c8f7ff" opacity="0.36">
+      <circle cx="1880" cy="690" r="8"/><circle cx="4120" cy="690" r="8"/>
+      <circle cx="1760" cy="1310" r="8"/><circle cx="4240" cy="1310" r="8"/>
+    </g>
+
+    <!-- Edge framing accents -->
+    <g fill="none" stroke="#bdf5ff" opacity="0.42">
+      <path d="M110 150 H720 L800 230" stroke-width="6"/>
+      <path d="M5890 150 H5280 L5200 230" stroke-width="6"/>
+      <path d="M110 1850 H720 L800 1770" stroke-width="6"/>
+      <path d="M5890 1850 H5280 L5200 1770" stroke-width="6"/>
+    </g>
+    <g fill="#86e4ff" opacity="0.72">
+      <circle cx="110" cy="150" r="10"/><circle cx="5890" cy="150" r="10"/>
+      <circle cx="110" cy="1850" r="10"/><circle cx="5890" cy="1850" r="10"/>
+    </g>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="GUIDES — DO NOT PRINT" id="GUIDES" style="display:none">
+    <rect x="0" y="0" width="6000" height="2000" fill="none" stroke="#ff00ff" stroke-width="8"/>
+    <rect x="1950" y="450" width="2100" height="1100" rx="60" fill="none" stroke="#00ff66" stroke-width="8" stroke-dasharray="30 20"/>
+  </g>
+</svg>
