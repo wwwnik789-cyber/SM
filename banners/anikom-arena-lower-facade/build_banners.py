@@ -11,6 +11,10 @@ from pathlib import Path
 import resvg_py
 import vtracer
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from reportlab.graphics import renderPS
+from reportlab.graphics.shapes import Circle, Drawing, Path as RLPath, Polygon, Rect
+from reportlab.lib.colors import HexColor
+from svgpathtools import CubicBezier, Line, QuadraticBezier, parse_path
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
@@ -31,6 +35,7 @@ BANNERS = [
         "height": 1000,
         "svg": "anikom-arena-lower-left-2800x1000.svg",
         "svgz": "anikom-arena-lower-left-2800x1000.svgz",
+        "eps": "anikom-arena-lower-left-2800x1000.eps",
         "preview": "preview-left-1400x500.png",
         "preview_size": (1400, 500),
         "photo_box": (199, 563, 322, 607),
@@ -42,6 +47,7 @@ BANNERS = [
         "height": 1000,
         "svg": "anikom-arena-lower-right-4000x1000.svg",
         "svgz": "anikom-arena-lower-right-4000x1000.svgz",
+        "eps": "anikom-arena-lower-right-4000x1000.eps",
         "preview": "preview-right-1600x400.png",
         "preview_size": (1600, 400),
         "photo_box": (1218, 550, 1536, 629),
@@ -149,6 +155,105 @@ def render_svg(svg_path: Path, output_path: Path, size: tuple[int, int]) -> None
         exact.save(output_path, optimize=True)
 
 
+MM_TO_PT = 72 / 25.4
+
+
+def blend_hex(background: str, foreground: str, alpha: float) -> str:
+    bg = tuple(int(background[i:i + 2], 16) for i in (1, 3, 5))
+    fg = tuple(int(foreground[i:i + 2], 16) for i in (1, 3, 5))
+    mixed = tuple(round(bg[i] * (1 - alpha) + fg[i] * alpha) for i in range(3))
+    return "#" + "".join(f"{value:02X}" for value in mixed)
+
+
+def parsed_logo(paths: str):
+    """Return traced logo paths together with their local translations."""
+    result = []
+    for attrs in re.findall(r"<path\b([^>]*)/>", paths):
+        d_match = re.search(r'd="([^"]+)"', attrs)
+        if not d_match:
+            continue
+        transform = re.search(r'transform="translate\(([^, )]+)[, ]+([^ )]+)\)"', attrs)
+        tx, ty = (float(transform.group(1)), float(transform.group(2))) if transform else (0.0, 0.0)
+        result.append((parse_path(d_match.group(1)), tx, ty))
+    if not result:
+        raise RuntimeError("No vector paths available for EPS output")
+    return result
+
+
+def add_logo_to_drawing(drawing: Drawing, logo, banner_height: float, x: float, y: float, w: float, h: float, color: str) -> None:
+    """Place the traced logo as native PostScript paths."""
+    view_x, view_y, view_w, view_h = 25.0, 174.0, 836.0, 823.0
+    scale = min(w / view_w, h / view_h)
+    offset_x = x + (w - view_w * scale) / 2 - view_x * scale
+    offset_y = y + (h - view_h * scale) / 2 - view_y * scale
+
+    def point(value: complex, tx: float, ty: float) -> tuple[float, float]:
+        px = (offset_x + (value.real + tx) * scale) * MM_TO_PT
+        py = (banner_height - (offset_y + (value.imag + ty) * scale)) * MM_TO_PT
+        return px, py
+
+    for vector_path, tx, ty in logo:
+        shape = RLPath()
+        for subpath in vector_path.continuous_subpaths():
+            if not subpath:
+                continue
+            shape.moveTo(*point(subpath[0].start, tx, ty))
+            for segment in subpath:
+                if isinstance(segment, Line):
+                    shape.lineTo(*point(segment.end, tx, ty))
+                elif isinstance(segment, CubicBezier):
+                    c1 = point(segment.control1, tx, ty)
+                    c2 = point(segment.control2, tx, ty)
+                    end = point(segment.end, tx, ty)
+                    shape.curveTo(c1[0], c1[1], c2[0], c2[1], end[0], end[1])
+                elif isinstance(segment, QuadraticBezier):
+                    c1_svg = segment.start + (segment.control - segment.start) * (2 / 3)
+                    c2_svg = segment.end + (segment.control - segment.end) * (2 / 3)
+                    c1 = point(c1_svg, tx, ty)
+                    c2 = point(c2_svg, tx, ty)
+                    end = point(segment.end, tx, ty)
+                    shape.curveTo(c1[0], c1[1], c2[0], c2[1], end[0], end[1])
+                else:
+                    for step in range(1, 13):
+                        shape.lineTo(*point(segment.point(step / 12), tx, ty))
+            if subpath.isclosed():
+                shape.closePath()
+        shape.fillColor = HexColor(color)
+        shape.strokeColor = None
+        shape.fillMode = 0
+        drawing.add(shape)
+
+
+def build_eps(item: dict, paths: str) -> None:
+    """Create a production-friendly EPS that browsers download instead of displaying."""
+    width = float(item["width"])
+    height = float(item["height"])
+    drawing = Drawing(width * MM_TO_PT, height * MM_TO_PT)
+    drawing.add(Rect(0, 0, width * MM_TO_PT, height * MM_TO_PT, fillColor=HexColor(NAVY), strokeColor=None))
+
+    left_color = blend_hex(NAVY, RED, 0.17)
+    right_color = blend_hex(NAVY, RED, 0.11)
+    drawing.add(Polygon([0, height * MM_TO_PT, 430 * MM_TO_PT, height * MM_TO_PT, 700 * MM_TO_PT, 0, 0, 0], fillColor=HexColor(left_color), strokeColor=None))
+    drawing.add(Polygon([width * MM_TO_PT, height * MM_TO_PT, (width - 430) * MM_TO_PT, height * MM_TO_PT, (width - 700) * MM_TO_PT, 0, width * MM_TO_PT, 0], fillColor=HexColor(right_color), strokeColor=None))
+    drawing.add(Rect(12 * MM_TO_PT, 12 * MM_TO_PT, (width - 24) * MM_TO_PT, (height - 24) * MM_TO_PT, fillColor=None, strokeColor=HexColor(RED), strokeWidth=24 * MM_TO_PT))
+
+    logo = parsed_logo(paths)
+    grid_x = 55
+    col = 0
+    while grid_x <= width - 235:
+        for row, grid_y in enumerate((70, 405, 740)):
+            opacity = 0.34 if (row + col) % 2 == 0 else 0.23
+            add_logo_to_drawing(drawing, logo, height, grid_x, grid_y, 190, 187, blend_hex(NAVY, WHITE, opacity))
+        grid_x += 335
+        col += 1
+
+    center = width / 2
+    drawing.add(Circle(center * MM_TO_PT, (height - 500) * MM_TO_PT, 455 * MM_TO_PT, fillColor=HexColor(NAVY_LIGHT), strokeColor=None))
+    drawing.add(Circle(center * MM_TO_PT, (height - 500) * MM_TO_PT, 425 * MM_TO_PT, fillColor=None, strokeColor=HexColor(RED), strokeWidth=16 * MM_TO_PT))
+    add_logo_to_drawing(drawing, logo, height, center - 355, 150, 710, 700, WHITE)
+    renderPS.drawToFile(drawing, str(ROOT / item["eps"]), fmt="EPS")
+
+
 def build_files() -> None:
     paths = trace_logo_paths()
     for item in BANNERS:
@@ -157,6 +262,7 @@ def build_files() -> None:
         preview_path = ROOT / item["preview"]
         svg_path.write_text(make_svg(item["width"], item["height"], paths), encoding="utf-8")
         svgz_path.write_bytes(gzip.compress(svg_path.read_bytes(), compresslevel=9, mtime=0))
+        build_eps(item, paths)
         render_svg(svg_path, preview_path, item["preview_size"])
 
 
@@ -205,6 +311,9 @@ def validate() -> None:
         assert f'viewBox="0 0 {item["width"]} {item["height"]}"' in text
         assert "<image" not in text and "<text" not in text
         assert gzip.decompress(svgz_path.read_bytes()) == svg_path.read_bytes()
+        eps = (ROOT / item["eps"]).read_bytes()
+        assert eps.startswith(b"%!PS-Adobe") and b"%%BoundingBox:" in eps
+        assert b"colorimage" not in eps and b"/ImageType" not in eps
         with Image.open(ROOT / item["preview"]) as preview:
             assert preview.size == item["preview_size"]
     with Image.open(ROOT / "placement-preview.jpg") as mockup:
