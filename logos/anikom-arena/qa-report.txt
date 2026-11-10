@@ -6,9 +6,10 @@ Vector visible alpha bounds: (25, 176, 861, 995)
 Tight vector canvas: 836 × 823
 Vector paths: 61
 Source/vector connected components: 61 / 61
-Mean component-center drift: 0.621 px
+Mean component-center drift: 0.624 px
 Maximum component-center drift: 0.824 px
-Mean white-area ratio: 0.972
+Mean white-area ratio: 0.989
+Main-word projected cap-height range: 146.06–146.12 px
 Typography: rebuilt as clean Montserrat outlines
 Custom bracket marks: 4 oversampled spline outlines
 Embedded raster images: none

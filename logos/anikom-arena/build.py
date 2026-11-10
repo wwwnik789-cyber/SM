@@ -239,6 +239,47 @@ class LogoBuilder:
             }
         )
 
+    def add_main_word_component(
+        self,
+        component: int,
+        character: str,
+        scale_x: float,
+        scale_y: float,
+        angle: float,
+    ) -> None:
+        """Place one main-word glyph with a shared cap height and angle.
+
+        The source artwork uses condensed main lettering. Horizontal scale is
+        measured per glyph to preserve its source width, while every letter
+        shares one vertical scale, weight and angle. This prevents a narrow
+        glyph such as Е from being enlarged to compensate for its area.
+        """
+        _, _, _, _, font_cx, font_cy = self.rendered_glyph(750, character)
+        target_cx, target_cy = self.centroids[component]
+        radians = math.radians(angle)
+        cosine = math.cos(radians)
+        sine = math.sin(radians)
+        translate_x = target_cx - (
+            cosine * scale_x * font_cx - sine * scale_y * font_cy
+        )
+        translate_y = target_cy - (
+            sine * scale_x * font_cx + cosine * scale_y * font_cy
+        )
+        # Font paths are Y-up. Horizontal/vertical scaling is applied before
+        # rotation, then the Y axis is flipped into SVG screen coordinates.
+        matrix = (
+            f"matrix({cosine * scale_x:.7f} {sine * scale_x:.7f} "
+            f"{sine * scale_y:.7f} {-cosine * scale_y:.7f} "
+            f"{translate_x:.4f} {translate_y:.4f})"
+        )
+        self.objects["main-word"].append(
+            {
+                "d": self.glyph_path(750, character),
+                "transform": matrix,
+                "data-source-component": str(component),
+            }
+        )
+
     def trace_custom_marks(self) -> None:
         selected = np.isin(self.labels, list(CUSTOM_MARK_COMPONENTS)).astype(np.uint8)
         # Include the original antialiasing just outside the thresholded components.
@@ -297,15 +338,23 @@ class LogoBuilder:
                 "outer-ring", component, character, 800, angle, 5
             )
 
-        main_weights = {"А": 750, "Р": 700, "Е": 600, "Н": 750}
+        # One coherent typographic system for АРЕНА: common weight, cap height
+        # and angle. Only horizontal condensation differs to match the measured
+        # width of each source glyph without changing its height.
+        main_scale_x = {
+            34: 0.13806,
+            33: 0.14184,
+            29: 0.16461,
+            22: 0.15441,
+            19: 0.14846,
+        }
         for component, character in MAIN_WORD:
-            self.add_text_component(
-                "main-word",
+            self.add_main_word_component(
                 component,
                 character,
-                main_weights[character],
-                -28.5,
-                6,
+                main_scale_x[component],
+                scale_y=0.20732,
+                angle=-27.25064,
             )
         for component, character in UPPER_LINE:
             self.add_text_component(
@@ -386,7 +435,7 @@ def component_metrics(source_alpha: np.ndarray, vector_alpha: np.ndarray):
     _, _, source_stats, source_centers = cv2.connectedComponentsWithStats(
         (source_alpha >= 128).astype(np.uint8), 8
     )
-    vector_count, _, vector_stats, vector_centers = cv2.connectedComponentsWithStats(
+    vector_count, vector_labels, vector_stats, vector_centers = cv2.connectedComponentsWithStats(
         (vector_alpha >= 128).astype(np.uint8), 8
     )
     if vector_count - 1 != 61:
@@ -395,6 +444,7 @@ def component_metrics(source_alpha: np.ndarray, vector_alpha: np.ndarray):
     available = set(range(1, vector_count))
     distances: list[float] = []
     area_ratios: list[float] = []
+    matches: dict[int, int] = {}
     for source_index, source_center in enumerate(source_centers[1:], start=1):
         distance, vector_index = min(
             (
@@ -404,6 +454,7 @@ def component_metrics(source_alpha: np.ndarray, vector_alpha: np.ndarray):
             for index in available
         )
         available.remove(vector_index)
+        matches[source_index] = vector_index
         distances.append(distance)
         area_ratios.append(
             float(
@@ -411,7 +462,7 @@ def component_metrics(source_alpha: np.ndarray, vector_alpha: np.ndarray):
                 / source_stats[source_index, cv2.CC_STAT_AREA]
             )
         )
-    return distances, area_ratios
+    return distances, area_ratios, matches, vector_labels
 
 
 def main() -> None:
@@ -446,9 +497,24 @@ def main() -> None:
         builder.source_image.height,
     )
     vector_alpha = np.array(vector_native.getchannel("A"))
-    distances, area_ratios = component_metrics(builder.source_alpha, vector_alpha)
+    distances, area_ratios, matches, vector_labels = component_metrics(
+        builder.source_alpha, vector_alpha
+    )
     if max(distances) > 1.5:
         raise RuntimeError(f"Component alignment outside tolerance: {max(distances):.3f}px")
+
+    # Confirm that every letter in АРЕНА has exactly the same projected cap
+    # height after rotation. This specifically guards against an oversized Е.
+    angle = math.radians(27.25064)
+    cosine, sine = math.cos(angle), math.sin(angle)
+    main_cap_heights: list[float] = []
+    for source_component, _ in MAIN_WORD:
+        vector_component = matches[source_component]
+        y_points, x_points = np.where(vector_labels == vector_component)
+        projected_y = sine * x_points + cosine * y_points
+        main_cap_heights.append(float(projected_y.max() - projected_y.min() + 1))
+    if max(main_cap_heights) - min(main_cap_heights) > 0.2:
+        raise RuntimeError(f"Main-word cap heights are inconsistent: {main_cap_heights}")
 
     preview_width = 1200
     preview_height = round(preview_width * builder.source_image.height / builder.source_image.width)
@@ -473,6 +539,10 @@ def main() -> None:
                 f"Mean component-center drift: {np.mean(distances):.3f} px",
                 f"Maximum component-center drift: {max(distances):.3f} px",
                 f"Mean white-area ratio: {np.mean(area_ratios):.3f}",
+                (
+                    "Main-word projected cap-height range: "
+                    f"{min(main_cap_heights):.2f}–{max(main_cap_heights):.2f} px"
+                ),
                 "Typography: rebuilt as clean Montserrat outlines",
                 "Custom bracket marks: 4 oversampled spline outlines",
                 "Embedded raster images: none",
