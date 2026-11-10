@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1200mm" height="1200mm" viewBox="0 0 1200 1200">
+<title>Candy cartoon Christmas ornaments — 16-piece production sheet</title>
+
+<defs>
+  <linearGradient id="gCookie" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F6BC71"/><stop offset="1" stop-color="#D9904F"/>
+  </linearGradient>
+  <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FF7D86"/><stop offset="1" stop-color="#F04465"/>
+  </linearGradient>
+  <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFC1E3"/><stop offset="1" stop-color="#FF8BCB"/>
+  </linearGradient>
+  <linearGradient id="gMint" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#B9FFE1"/><stop offset="1" stop-color="#66E3B4"/>
+  </linearGradient>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#9DDCFF"/><stop offset="1" stop-color="#4A8DFF"/>
+  </linearGradient>
+  <linearGradient id="gPurple" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#D3B3FF"/><stop offset="1" stop-color="#8F62E8"/>
+  </linearGradient>
+  <radialGradient id="gCream" cx="35%" cy="28%" r="80%">
+    <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF5DE"/>
+  </radialGradient>
+</defs>
+
+<g inkscape:groupmode="layer" inkscape:label="PRINT" id="PRINT"><g id="toy-01-gingerbread" inkscape:label="01 Пряничный человечек" transform="translate(0 0)">
+<defs><clipPath id="candyClip01"><path d="M150 26 C122 26 108 44 109 66 C110 82 119 92 128 98 L106 110 L67 88 Q51 80 42 95 Q34 111 50 122 L100 153 L94 186 L70 238 Q62 255 77 264 Q93 273 104 257 L137 215 H163 L196 257 Q207 273 223 264 Q238 255 230 238 L206 186 L200 153 L250 122 Q266 111 258 95 Q249 80 233 88 L194 110 L172 98 Q190 86 191 66 C192 44 178 26 150 26 Z"/></clipPath></defs>
+<path d="M150 26 C122 26 108 44 109 66 C110 82 119 92 128 98 L106 110 L67 88 Q51 80 42 95 Q34 111 50 122 L100 153 L94 186 L70 238 Q62 255 77 264 Q93 273 104 257 L137 215 H163 L196 257 Q207 273 223 264 Q238 255 230 238 L206 186 L200 153 L250 122 Q266 111 258 95 Q249 80 233 88 L194 110 L172 98 Q190 86 191 66 C192 44 178 26 150 26 Z" fill="url(#gCookie)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip01)">
+
+
+<g>
+  <ellipse cx="124.58" cy="113.12" rx="12.30" ry="6.56" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="175.42" cy="113.12" rx="12.30" ry="6.56" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="129.50" cy="95.90" rx="6.56" ry="9.02" fill="#38234C"/>
+  <ellipse cx="170.50" cy="95.90" rx="6.56" ry="9.02" fill="#38234C"/>
+  <circle cx="131.96" cy="92.62" r="2.30" fill="#FFFFFF"/>
+  <circle cx="172.96" cy="92.62" r="2.30" fill="#FFFFFF"/>
+  <path d="M135.24 116.40 Q150.00 130.34 164.76 116.40" fill="none" stroke="#38234C" stroke-width="4.10" stroke-linecap="round"/>
+</g>
+<path d="M106 151 Q150 176 194 151" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+<path d="M86 112 L68 101 M214 112 L232 101 M100 214 L86 245 M200 214 L214 245" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+<circle cx="150" cy="176" r="9" fill="#F04465"/><circle cx="150" cy="204" r="9" fill="#66E3B4"/>
+<ellipse cx="127" cy="54" rx="22.5" ry="6.5" fill="#FFFFFF" opacity=".48" transform="rotate(-25 127 54)"/>
+</g>
+<circle cx="150" cy="52" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-02-candy-cane" inkscape:label="02 Леденец" transform="translate(300 0)">
+<defs><clipPath id="candyClip02"><path d="M80 270 V110 C80 58 111 28 155 28 C202 28 231 62 231 105 C231 139 214 161 190 181 L156 143 C173 129 183 119 183 103 C183 84 171 72 154 72 C135 72 123 87 123 110 V270 Z"/></clipPath></defs>
+<path d="M80 270 V110 C80 58 111 28 155 28 C202 28 231 62 231 105 C231 139 214 161 190 181 L156 143 C173 129 183 119 183 103 C183 84 171 72 154 72 C135 72 123 87 123 110 V270 Z" fill="url(#gRed)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip02)">
+
+<g stroke="#FFFFFF" stroke-width="17" opacity=".88">
+  <path d="M93 106 L122 121 M89 151 L122 166 M90 198 L122 213"/>
+  <path d="M150 52 L174 78 M190 65 L211 91 M171 139 L196 160"/>
+</g>
+
+<g>
+  <ellipse cx="83.78" cy="195.92" rx="9.30" ry="4.96" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="122.22" cy="195.92" rx="9.30" ry="4.96" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="87.50" cy="182.90" rx="4.96" ry="6.82" fill="#38234C"/>
+  <ellipse cx="118.50" cy="182.90" rx="4.96" ry="6.82" fill="#38234C"/>
+  <circle cx="89.36" cy="180.42" r="1.74" fill="#FFFFFF"/>
+  <circle cx="120.36" cy="180.42" r="1.74" fill="#FFFFFF"/>
+  <path d="M91.84 198.40 Q103.00 208.94 114.16 198.40" fill="none" stroke="#38234C" stroke-width="3.10" stroke-linecap="round"/>
+</g>
+<ellipse cx="133" cy="52" rx="20.0" ry="6.0" fill="#FFFFFF" opacity=".48" transform="rotate(-30 133 52)"/>
+</g>
+<circle cx="155" cy="52" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-03-snowman" inkscape:label="03 Снеговик" transform="translate(600 0)">
+<defs><clipPath id="candyClip03"><path d="M120 46 V18 H180 V46 H198 V75 H179 C198 88 210 108 210 130 C210 150 202 166 189 178 C216 193 232 219 232 247 C232 267 216 278 196 278 H104 C84 278 68 267 68 247 C68 219 84 193 111 178 C98 166 90 150 90 130 C90 108 102 88 121 75 H102 V46 Z"/></clipPath></defs>
+<path d="M120 46 V18 H180 V46 H198 V75 H179 C198 88 210 108 210 130 C210 150 202 166 189 178 C216 193 232 219 232 247 C232 267 216 278 196 278 H104 C84 278 68 267 68 247 C68 219 84 193 111 178 C98 166 90 150 90 130 C90 108 102 88 121 75 H102 V46 Z" fill="url(#gBlue)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip03)">
+
+<ellipse cx="150" cy="132" rx="57" ry="53" fill="url(#gCream)" stroke="#FFFFFF" stroke-width="6"/>
+<path d="M103 79 H197" stroke="#38234C" stroke-width="9" stroke-linecap="round"/>
+<path d="M118 191 Q150 209 182 191" fill="none" stroke="#66E3B4" stroke-width="12"/>
+
+<g>
+  <ellipse cx="126.75" cy="140.00" rx="11.25" ry="6.00" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="173.25" cy="140.00" rx="11.25" ry="6.00" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="131.25" cy="124.25" rx="6.00" ry="8.25" fill="#38234C"/>
+  <ellipse cx="168.75" cy="124.25" rx="6.00" ry="8.25" fill="#38234C"/>
+  <circle cx="133.50" cy="121.25" r="2.10" fill="#FFFFFF"/>
+  <circle cx="171.00" cy="121.25" r="2.10" fill="#FFFFFF"/>
+  <path d="M136.50 143.00 Q150.00 155.75 163.50 143.00" fill="none" stroke="#38234C" stroke-width="3.75" stroke-linecap="round"/>
+</g>
+<circle cx="150" cy="150" r="7" fill="#FF6F61"/>
+<circle cx="109" cy="224" r="7" fill="#FFFFFF" opacity=".65"/><circle cx="189" cy="241" r="6" fill="#FFFFFF" opacity=".65"/>
+</g>
+<circle cx="150" cy="33" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-04-santa" inkscape:label="04 Санта" transform="translate(900 0)">
+<defs><clipPath id="candyClip04"><path d="M50 80 C50 62 64 49 82 49 C95 26 120 15 151 20 C190 25 221 48 232 82 C252 85 264 102 260 119 C257 135 243 144 227 143 C231 158 229 176 222 191 C233 206 238 225 233 244 C228 268 207 282 183 276 L150 266 L117 276 C93 282 72 268 67 244 C62 225 67 206 78 191 C71 176 69 158 73 143 C57 144 43 135 40 119 C36 102 48 85 68 82 Z"/></clipPath></defs>
+<path d="M50 80 C50 62 64 49 82 49 C95 26 120 15 151 20 C190 25 221 48 232 82 C252 85 264 102 260 119 C257 135 243 144 227 143 C231 158 229 176 222 191 C233 206 238 225 233 244 C228 268 207 282 183 276 L150 266 L117 276 C93 282 72 268 67 244 C62 225 67 206 78 191 C71 176 69 158 73 143 C57 144 43 135 40 119 C36 102 48 85 68 82 Z" fill="url(#gRed)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip04)">
+
+<path d="M76 84 Q150 42 228 91 L219 127 Q150 102 81 130 Z" fill="#F04465" stroke="#FFFFFF" stroke-width="7"/>
+<ellipse cx="150" cy="147" rx="67" ry="61" fill="#FFD1B3"/>
+<path d="M88 174 Q150 241 212 174 Q211 248 150 266 Q89 248 88 174 Z" fill="url(#gCream)"/>
+
+<g>
+  <ellipse cx="127.68" cy="154.52" rx="10.80" ry="5.76" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="172.32" cy="154.52" rx="10.80" ry="5.76" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="132.00" cy="139.40" rx="5.76" ry="7.92" fill="#38234C"/>
+  <ellipse cx="168.00" cy="139.40" rx="5.76" ry="7.92" fill="#38234C"/>
+  <circle cx="134.16" cy="136.52" r="2.02" fill="#FFFFFF"/>
+  <circle cx="170.16" cy="136.52" r="2.02" fill="#FFFFFF"/>
+  <path d="M137.04 157.40 Q150.00 169.64 162.96 157.40" fill="none" stroke="#38234C" stroke-width="3.60" stroke-linecap="round"/>
+</g>
+<ellipse cx="150" cy="169" rx="10" ry="7" fill="#FF6F61"/>
+<circle cx="231" cy="102" r="19" fill="#FFFFFF"/><ellipse cx="112" cy="66" rx="26.0" ry="7.0" fill="#FFFFFF" opacity=".48" transform="rotate(-20 112 66)"/>
+</g>
+<circle cx="150" cy="45" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-05-reindeer" inkscape:label="05 Олень" transform="translate(0 300)">
+<defs><clipPath id="candyClip05"><path d="M130 62 V46 L105 21 L96 31 L111 52 L82 37 L73 51 L104 72 C83 92 72 121 76 153 C80 194 105 233 150 267 C195 233 220 194 224 153 C228 121 217 92 196 72 L227 51 L218 37 L189 52 L204 31 L195 21 L170 46 V62 Z"/></clipPath></defs>
+<path d="M130 62 V46 L105 21 L96 31 L111 52 L82 37 L73 51 L104 72 C83 92 72 121 76 153 C80 194 105 233 150 267 C195 233 220 194 224 153 C228 121 217 92 196 72 L227 51 L218 37 L189 52 L204 31 L195 21 L170 46 V62 Z" fill="url(#gCookie)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip05)">
+
+<ellipse cx="150" cy="140" rx="71" ry="76" fill="#E79C52"/>
+<path d="M104 90 L86 60 M196 90 L214 60" stroke="#B96A38" stroke-width="13" stroke-linecap="round"/>
+<ellipse cx="150" cy="177" rx="48" ry="39" fill="#F6C985"/>
+
+<g>
+  <ellipse cx="126.75" cy="151.00" rx="11.25" ry="6.00" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="173.25" cy="151.00" rx="11.25" ry="6.00" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="131.25" cy="135.25" rx="6.00" ry="8.25" fill="#38234C"/>
+  <ellipse cx="168.75" cy="135.25" rx="6.00" ry="8.25" fill="#38234C"/>
+  <circle cx="133.50" cy="132.25" r="2.10" fill="#FFFFFF"/>
+  <circle cx="171.00" cy="132.25" r="2.10" fill="#FFFFFF"/>
+  <path d="M136.50 154.00 Q150.00 166.75 163.50 154.00" fill="none" stroke="#38234C" stroke-width="3.75" stroke-linecap="round"/>
+</g>
+<ellipse cx="150" cy="168" rx="15" ry="11" fill="#F04465"/>
+<path d="M135 190 Q150 202 165 190" fill="none" stroke="#38234C" stroke-width="5"/>
+<circle cx="108" cy="118" r="7" fill="#FFF5DE"/><circle cx="192" cy="118" r="7" fill="#FFF5DE"/>
+</g>
+<circle cx="150" cy="57" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-06-penguin" inkscape:label="06 Пингвин" transform="translate(300 300)">
+<defs><clipPath id="candyClip06"><path d="M132 54 V34 Q132 18 150 18 Q168 18 168 34 V54 C210 62 231 111 225 166 L258 194 L232 228 L207 211 C194 251 174 278 150 278 C126 278 106 251 93 211 L68 228 L42 194 L75 166 C69 111 90 62 132 54 Z"/></clipPath></defs>
+<path d="M132 54 V34 Q132 18 150 18 Q168 18 168 34 V54 C210 62 231 111 225 166 L258 194 L232 228 L207 211 C194 251 174 278 150 278 C126 278 106 251 93 211 L68 228 L42 194 L75 166 C69 111 90 62 132 54 Z" fill="url(#gPurple)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip06)">
+
+<ellipse cx="150" cy="157" rx="69" ry="104" fill="#38234C"/>
+<ellipse cx="150" cy="172" rx="48" ry="70" fill="url(#gCream)"/>
+<path d="M93 186 L64 203 M207 186 L236 203" stroke="#8F62E8" stroke-width="18" stroke-linecap="round"/>
+<path d="M116 256 L91 270 M184 256 L209 270" stroke="#FFD84D" stroke-width="14" stroke-linecap="round"/>
+
+<g>
+  <ellipse cx="127.68" cy="165.52" rx="10.80" ry="5.76" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="172.32" cy="165.52" rx="10.80" ry="5.76" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="132.00" cy="150.40" rx="5.76" ry="7.92" fill="#38234C"/>
+  <ellipse cx="168.00" cy="150.40" rx="5.76" ry="7.92" fill="#38234C"/>
+  <circle cx="134.16" cy="147.52" r="2.02" fill="#FFFFFF"/>
+  <circle cx="170.16" cy="147.52" r="2.02" fill="#FFFFFF"/>
+  <path d="M137.04 168.40 Q150.00 180.64 162.96 168.40" fill="none" stroke="#38234C" stroke-width="3.60" stroke-linecap="round"/>
+</g>
+<path d="M140 175 L150 185 L160 175" fill="#FFD84D" stroke="#FFD84D" stroke-width="5"/>
+<ellipse cx="126" cy="78" rx="22.5" ry="6.0" fill="#FFFFFF" opacity=".48" transform="rotate(-28 126 78)"/>
+</g>
+<circle cx="150" cy="35" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-07-christmas-tree" inkscape:label="07 Ёлка" transform="translate(600 300)">
+<defs><clipPath id="candyClip07"><path d="M150 22 L110 76 H127 L84 132 H108 L55 201 H126 V225 H112 V278 H188 V225 H174 L245 201 L192 132 H216 L173 76 H190 Z"/></clipPath></defs>
+<path d="M150 22 L110 76 H127 L84 132 H108 L55 201 H126 V225 H112 V278 H188 V225 H174 L245 201 L192 132 H216 L173 76 H190 Z" fill="url(#gMint)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip07)">
+
+<path d="M150 63 L119 111 H135 L98 158 H121 L79 207 H221 L179 158 H202 L165 111 H181 Z" fill="#42C996" stroke="#FFFFFF" stroke-width="6"/>
+<path d="M112 124 Q150 141 188 124 M94 176 Q150 197 206 176" fill="none" stroke="#FF8BCB" stroke-width="9" stroke-linecap="round"/>
+<circle cx="128" cy="104" r="8" fill="#FFD84D"/><circle cx="177" cy="150" r="8" fill="#F04465"/><circle cx="122" cy="184" r="8" fill="#4A8DFF"/>
+
+<g>
+  <ellipse cx="130.16" cy="197.24" rx="9.60" ry="5.12" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="169.84" cy="197.24" rx="9.60" ry="5.12" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="134.00" cy="183.80" rx="5.12" ry="7.04" fill="#38234C"/>
+  <ellipse cx="166.00" cy="183.80" rx="5.12" ry="7.04" fill="#38234C"/>
+  <circle cx="135.92" cy="181.24" r="1.79" fill="#FFFFFF"/>
+  <circle cx="167.92" cy="181.24" r="1.79" fill="#FFFFFF"/>
+  <path d="M138.48 199.80 Q150.00 210.68 161.52 199.80" fill="none" stroke="#38234C" stroke-width="3.20" stroke-linecap="round"/>
+</g>
+<polygon points="150.00,35.00 154.70,46.53 167.12,47.44 157.61,55.47 160.58,67.56 150.00,61.00 139.42,67.56 142.39,55.47 132.88,47.44 145.30,46.53" fill="#FFD84D"/>
+</g>
+<circle cx="150" cy="49" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-08-gift" inkscape:label="08 Подарок" transform="translate(900 300)">
+<defs><clipPath id="candyClip08"><path d="M150 62 C119 34 95 34 85 53 C73 76 91 96 126 97 H54 V276 H246 V97 H174 C209 96 227 76 215 53 C205 34 181 34 150 62 Z"/></clipPath></defs>
+<path d="M150 62 C119 34 95 34 85 53 C73 76 91 96 126 97 H54 V276 H246 V97 H174 C209 96 227 76 215 53 C205 34 181 34 150 62 Z" fill="url(#gBlue)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip08)">
+
+<rect x="59" y="101" width="182" height="170" rx="18" fill="url(#gBlue)"/>
+<path d="M150 101 V271 M59 160 H241" stroke="#FFFFFF" stroke-width="15"/>
+<path d="M150 95 C119 64 92 59 86 75 C81 92 107 104 150 101 C193 104 219 92 214 75 C208 59 181 64 150 95 Z" fill="#FF8BCB" stroke="#FFFFFF" stroke-width="6"/>
+
+<g>
+  <ellipse cx="87.02" cy="216.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="122.98" cy="216.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="90.50" cy="204.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <ellipse cx="119.50" cy="204.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <circle cx="92.24" cy="201.78" r="1.62" fill="#FFFFFF"/>
+  <circle cx="121.24" cy="201.78" r="1.62" fill="#FFFFFF"/>
+  <path d="M94.56 218.60 Q105.00 228.46 115.44 218.60" fill="none" stroke="#38234C" stroke-width="2.90" stroke-linecap="round"/>
+</g>
+<circle cx="199" cy="210" r="12" fill="#FFD84D"/><circle cx="219" cy="190" r="9" fill="#66E3B4"/><ellipse cx="98" cy="123" rx="19.0" ry="6.0" fill="#FFFFFF" opacity=".48" transform="rotate(-20 98 123)"/>
+</g>
+<circle cx="150" cy="76" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-09-cupcake" inkscape:label="09 Капкейк" transform="translate(0 600)">
+<defs><clipPath id="candyClip09"><path d="M82 144 C56 139 50 119 64 102 C75 88 92 88 104 94 C105 71 124 54 148 58 C169 39 206 50 210 79 C232 83 244 100 238 120 C233 137 218 145 200 144 L224 262 H76 L100 144 Z"/></clipPath></defs>
+<path d="M82 144 C56 139 50 119 64 102 C75 88 92 88 104 94 C105 71 124 54 148 58 C169 39 206 50 210 79 C232 83 244 100 238 120 C233 137 218 145 200 144 L224 262 H76 L100 144 Z" fill="url(#gPink)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip09)">
+
+<path d="M81 145 H219 L204 255 H96 Z" fill="url(#gPurple)" stroke="#FFFFFF" stroke-width="6"/>
+<path d="M76 139 C54 126 58 105 76 98 C89 92 101 99 106 108 C107 84 126 68 149 70 C169 51 200 61 204 85 C225 88 237 104 232 121 C228 137 212 144 195 139 Z" fill="url(#gPink)"/>
+<rect x="97" y="104.5" width="16" height="5" rx="2.5" fill="#F04465" transform="rotate(-25 105 107)"/><rect x="134" y="85.5" width="16" height="5" rx="2.5" fill="#23BDD2" transform="rotate(18 142 88)"/><rect x="176" y="106.5" width="16" height="5" rx="2.5" fill="#FFD84D" transform="rotate(-15 184 109)"/><rect x="83" y="142.5" width="16" height="5" rx="2.5" fill="#8F62E8" transform="rotate(28 91 145)"/><rect x="150" y="139.5" width="16" height="5" rx="2.5" fill="#FFFFFF" transform="rotate(-30 158 142)"/><rect x="197" y="150.5" width="16" height="5" rx="2.5" fill="#66E3B4" transform="rotate(22 205 153)"/><rect x="111" y="181.5" width="16" height="5" rx="2.5" fill="#FFD84D" transform="rotate(12 119 184)"/><rect x="173" y="189.5" width="16" height="5" rx="2.5" fill="#F04465" transform="rotate(-18 181 192)"/>
+
+<g>
+  <ellipse cx="128.92" cy="197.88" rx="10.20" ry="5.44" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="171.08" cy="197.88" rx="10.20" ry="5.44" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="133.00" cy="183.60" rx="5.44" ry="7.48" fill="#38234C"/>
+  <ellipse cx="167.00" cy="183.60" rx="5.44" ry="7.48" fill="#38234C"/>
+  <circle cx="135.04" cy="180.88" r="1.90" fill="#FFFFFF"/>
+  <circle cx="169.04" cy="180.88" r="1.90" fill="#FFFFFF"/>
+  <path d="M137.76 200.60 Q150.00 212.16 162.24 200.60" fill="none" stroke="#38234C" stroke-width="3.40" stroke-linecap="round"/>
+</g>
+<circle cx="150" cy="69" r="13" fill="#F04465"/><ellipse cx="123" cy="92" rx="21.5" ry="6.5" fill="#FFFFFF" opacity=".48" transform="rotate(-24 123 92)"/>
+</g>
+<circle cx="150" cy="77" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-10-lollipop" inkscape:label="10 Леденец на палочке" transform="translate(300 600)">
+<defs><clipPath id="candyClip10"><path d="M132 38 V25 Q132 12 150 12 Q168 12 168 25 V38 C214 47 242 75 242 118 C242 163 214 197 174 208 V278 H126 V208 C86 197 58 163 58 118 C58 75 86 47 132 38 Z"/></clipPath></defs>
+<path d="M132 38 V25 Q132 12 150 12 Q168 12 168 25 V38 C214 47 242 75 242 118 C242 163 214 197 174 208 V278 H126 V208 C86 197 58 163 58 118 C58 75 86 47 132 38 Z" fill="url(#gPurple)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip10)">
+
+<circle cx="150" cy="117" r="83" fill="url(#gPurple)"/>
+<path d="M99 67 Q150 104 201 67 M79 110 Q150 151 221 110 M92 161 Q150 190 208 161" fill="none" stroke="#FFFFFF" stroke-width="11" opacity=".82"/>
+<rect x="132" y="196" width="36" height="82" rx="16" fill="#66E3B4"/>
+
+<g>
+  <ellipse cx="128.30" cy="138.20" rx="10.50" ry="5.60" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="171.70" cy="138.20" rx="10.50" ry="5.60" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="132.50" cy="123.50" rx="5.60" ry="7.70" fill="#38234C"/>
+  <ellipse cx="167.50" cy="123.50" rx="5.60" ry="7.70" fill="#38234C"/>
+  <circle cx="134.60" cy="120.70" r="1.96" fill="#FFFFFF"/>
+  <circle cx="169.60" cy="120.70" r="1.96" fill="#FFFFFF"/>
+  <path d="M137.40 141.00 Q150.00 152.90 162.60 141.00" fill="none" stroke="#38234C" stroke-width="3.50" stroke-linecap="round"/>
+</g>
+<ellipse cx="116" cy="72" rx="25.0" ry="8.0" fill="#FFFFFF" opacity=".48" transform="rotate(-25 116 72)"/>
+</g>
+<circle cx="150" cy="46" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-11-mitten" inkscape:label="11 Варежка" transform="translate(600 600)">
+<defs><clipPath id="candyClip11"><path d="M118 48 V31 Q118 15 136 15 Q154 15 154 31 V85 L174 55 Q190 42 205 55 Q219 68 208 84 L180 118 V225 Q180 272 132 276 Q79 280 58 233 L31 173 Q24 156 39 146 Q55 135 68 150 L88 176 V48 Z"/></clipPath></defs>
+<path d="M118 48 V31 Q118 15 136 15 Q154 15 154 31 V85 L174 55 Q190 42 205 55 Q219 68 208 84 L180 118 V225 Q180 272 132 276 Q79 280 58 233 L31 173 Q24 156 39 146 Q55 135 68 150 L88 176 V48 Z" fill="url(#gPink)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip11)">
+
+<path d="M91 61 H154 V91 L178 67 Q190 57 200 66 Q211 76 202 88 L178 116 V226 Q178 261 142 267 Q103 274 86 239 L55 174 Q49 162 59 156 Q70 149 80 161 L96 181 Z" fill="url(#gPink)"/>
+<path d="M93 77 H152" stroke="#FFFFFF" stroke-width="12"/>
+<circle cx="121" cy="127" r="12" fill="#FFD84D"/><circle cx="145" cy="157" r="10" fill="#66E3B4"/>
+
+<g>
+  <ellipse cx="110.02" cy="211.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="145.98" cy="211.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="113.50" cy="199.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <ellipse cx="142.50" cy="199.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <circle cx="115.24" cy="196.78" r="1.62" fill="#FFFFFF"/>
+  <circle cx="144.24" cy="196.78" r="1.62" fill="#FFFFFF"/>
+  <path d="M117.56 213.60 Q128.00 223.46 138.44 213.60" fill="none" stroke="#38234C" stroke-width="2.90" stroke-linecap="round"/>
+</g>
+<ellipse cx="111" cy="91" rx="19.0" ry="5.5" fill="#FFFFFF" opacity=".48" transform="rotate(-20 111 91)"/>
+</g>
+<circle cx="136" cy="32" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-12-stocking" inkscape:label="12 Носок" transform="translate(900 600)">
+<defs><clipPath id="candyClip12"><path d="M100 60 V17 Q100 5 112 5 H188 Q200 5 200 17 V60 H184 V168 Q184 204 214 221 Q248 240 235 266 Q224 286 196 278 L146 263 Q98 249 98 199 V60 Z"/></clipPath></defs>
+<path d="M100 60 V17 Q100 5 112 5 H188 Q200 5 200 17 V60 H184 V168 Q184 204 214 221 Q248 240 235 266 Q224 286 196 278 L146 263 Q98 249 98 199 V60 Z" fill="url(#gRed)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip12)">
+
+<path d="M101 59 H199 V105 H184 V171 Q184 205 214 222 Q239 236 229 257 Q220 274 198 268 L148 253 Q105 240 105 198 V105 H101 Z" fill="url(#gRed)"/>
+<path d="M104 82 H196" stroke="#FFFFFF" stroke-width="17"/>
+<path d="M116 139 H183 M120 171 H181" stroke="#66E3B4" stroke-width="8" stroke-linecap="round"/>
+
+<g>
+  <ellipse cx="135.02" cy="227.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="170.98" cy="227.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="138.50" cy="215.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <ellipse cx="167.50" cy="215.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <circle cx="140.24" cy="212.78" r="1.62" fill="#FFFFFF"/>
+  <circle cx="169.24" cy="212.78" r="1.62" fill="#FFFFFF"/>
+  <path d="M142.56 229.60 Q153.00 239.46 163.44 229.60" fill="none" stroke="#38234C" stroke-width="2.90" stroke-linecap="round"/>
+</g>
+<ellipse cx="127" cy="114" rx="22.5" ry="6.0" fill="#FFFFFF" opacity=".48" transform="rotate(-22 127 114)"/>
+</g>
+<circle cx="150" cy="34" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-13-snow-globe" inkscape:label="13 Снежный шар" transform="translate(0 900)">
+<defs><clipPath id="candyClip13"><path d="M132 48 V31 Q132 14 150 14 Q168 14 168 31 V48 C223 57 258 101 258 159 C258 201 239 231 216 249 L231 284 H69 L84 249 C61 231 42 201 42 159 C42 101 77 57 132 48 Z"/></clipPath></defs>
+<path d="M132 48 V31 Q132 14 150 14 Q168 14 168 31 V48 C223 57 258 101 258 159 C258 201 239 231 216 249 L231 284 H69 L84 249 C61 231 42 201 42 159 C42 101 77 57 132 48 Z" fill="url(#gBlue)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip13)">
+
+<circle cx="150" cy="153" r="99" fill="#8EE8FF" opacity=".72" stroke="#FFFFFF" stroke-width="7"/>
+<path d="M82 246 H218 L229 280 H71 Z" fill="url(#gPurple)" stroke="#FFFFFF" stroke-width="6"/>
+<path d="M150 97 L124 136 H137 L105 177 H195 L163 136 H176 Z" fill="#66E3B4" stroke="#FFFFFF" stroke-width="5"/>
+<circle cx="112" cy="111" r="6" fill="#FFFFFF"/><circle cx="194" cy="137" r="5" fill="#FFFFFF"/><circle cx="92" cy="174" r="5" fill="#FFFFFF"/>
+
+<g>
+  <ellipse cx="132.02" cy="214.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="167.98" cy="214.28" rx="8.70" ry="4.64" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="135.50" cy="202.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <ellipse cx="164.50" cy="202.10" rx="4.64" ry="6.38" fill="#38234C"/>
+  <circle cx="137.24" cy="199.78" r="1.62" fill="#FFFFFF"/>
+  <circle cx="166.24" cy="199.78" r="1.62" fill="#FFFFFF"/>
+  <path d="M139.56 216.60 Q150.00 226.46 160.44 216.60" fill="none" stroke="#38234C" stroke-width="2.90" stroke-linecap="round"/>
+</g>
+<ellipse cx="112" cy="86" rx="23.0" ry="7.0" fill="#FFFFFF" opacity=".48" transform="rotate(-24 112 86)"/>
+</g>
+<circle cx="150" cy="31" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-14-smiling-star" inkscape:label="14 Улыбающаяся звезда" transform="translate(300 900)">
+<defs><clipPath id="candyClip14"><polygon points="150.00,27.00 185.27,108.46 273.64,116.83 207.06,175.54 226.41,262.17 150.00,217.00 73.59,262.17 92.94,175.54 26.36,116.83 114.73,108.46"/></clipPath></defs>
+<polygon points="150.00,27.00 185.27,108.46 273.64,116.83 207.06,175.54 226.41,262.17 150.00,217.00 73.59,262.17 92.94,175.54 26.36,116.83 114.73,108.46" fill="url(#gMint)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip14)">
+
+<polygon points="150.00,34.00 182.92,111.70 266.98,118.99 203.26,174.30 222.30,256.51 150.00,213.00 77.70,256.51 96.74,174.30 33.02,118.99 117.08,111.70" fill="url(#gMint)"/>
+
+<g>
+  <ellipse cx="123.65" cy="173.60" rx="12.75" ry="6.80" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="176.35" cy="173.60" rx="12.75" ry="6.80" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="128.75" cy="155.75" rx="6.80" ry="9.35" fill="#38234C"/>
+  <ellipse cx="171.25" cy="155.75" rx="6.80" ry="9.35" fill="#38234C"/>
+  <circle cx="131.30" cy="152.35" r="2.38" fill="#FFFFFF"/>
+  <circle cx="173.80" cy="152.35" r="2.38" fill="#FFFFFF"/>
+  <path d="M134.70 177.00 Q150.00 191.45 165.30 177.00" fill="none" stroke="#38234C" stroke-width="4.25" stroke-linecap="round"/>
+</g>
+<circle cx="104" cy="126" r="8" fill="#FFD84D"/><circle cx="198" cy="121" r="8" fill="#FF8BCB"/>
+<ellipse cx="117" cy="80" rx="26.0" ry="7.0" fill="#FFFFFF" opacity=".48" transform="rotate(-22 117 80)"/>
+</g>
+<circle cx="150" cy="57" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-15-cocoa-mug" inkscape:label="15 Какао" transform="translate(600 900)">
+<defs><clipPath id="candyClip15"><path d="M130 55 V37 Q130 20 150 20 Q170 20 170 37 V55 C195 61 215 83 214 110 H229 Q267 110 267 160 Q267 210 229 210 H214 V242 Q214 270 186 270 H96 Q68 270 68 242 V110 H86 C85 83 105 61 130 55 Z"/></clipPath></defs>
+<path d="M130 55 V37 Q130 20 150 20 Q170 20 170 37 V55 C195 61 215 83 214 110 H229 Q267 110 267 160 Q267 210 229 210 H214 V242 Q214 270 186 270 H96 Q68 270 68 242 V110 H86 C85 83 105 61 130 55 Z" fill="url(#gPink)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip15)">
+
+<path d="M74 114 H215 V242 Q215 267 190 267 H99 Q74 267 74 242 Z" fill="url(#gPink)"/>
+<path d="M213 139 H232 Q258 139 258 174 Q258 209 232 209 H214" fill="none" stroke="#8F62E8" stroke-width="17"/>
+<path d="M104 104 Q92 81 116 67 Q111 42 137 35 Q150 18 165 35 Q191 42 184 67 Q209 82 196 104 Z" fill="url(#gCream)"/>
+<circle cx="121" cy="79" r="10" fill="#FFFFFF"/><circle cx="154" cy="62" r="10" fill="#FFFFFF"/><circle cx="181" cy="84" r="9" fill="#FFFFFF"/>
+
+<g>
+  <ellipse cx="123.30" cy="199.20" rx="10.50" ry="5.60" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="166.70" cy="199.20" rx="10.50" ry="5.60" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="127.50" cy="184.50" rx="5.60" ry="7.70" fill="#38234C"/>
+  <ellipse cx="162.50" cy="184.50" rx="5.60" ry="7.70" fill="#38234C"/>
+  <circle cx="129.60" cy="181.70" r="1.96" fill="#FFFFFF"/>
+  <circle cx="164.60" cy="181.70" r="1.96" fill="#FFFFFF"/>
+  <path d="M132.40 202.00 Q145.00 213.90 157.60 202.00" fill="none" stroke="#38234C" stroke-width="3.50" stroke-linecap="round"/>
+</g>
+<ellipse cx="106" cy="130" rx="22.5" ry="6.5" fill="#FFFFFF" opacity=".48" transform="rotate(-20 106 130)"/>
+</g>
+<circle cx="150" cy="42" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g><g id="toy-16-jingle-bell" inkscape:label="16 Колокольчик" transform="translate(900 900)">
+<defs><clipPath id="candyClip16"><path d="M130 53 V34 Q130 16 150 16 Q170 16 170 34 V53 C213 61 229 102 228 159 C228 194 244 218 259 232 H178 Q172 271 150 271 Q128 271 122 232 H41 C56 218 72 194 72 159 C71 102 87 61 130 53 Z"/></clipPath></defs>
+<path d="M130 53 V34 Q130 16 150 16 Q170 16 170 34 V53 C213 61 229 102 228 159 C228 194 244 218 259 232 H178 Q172 271 150 271 Q128 271 122 232 H41 C56 218 72 194 72 159 C71 102 87 61 130 53 Z" fill="url(#gRed)" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g clip-path="url(#candyClip16)">
+
+<path d="M150 54 C107 54 89 92 90 151 C91 190 73 215 59 228 H241 C227 215 209 190 210 151 C211 92 193 54 150 54 Z" fill="url(#gRed)"/>
+<path d="M76 203 Q150 231 224 203" fill="none" stroke="#FFFFFF" stroke-width="13"/>
+<circle cx="150" cy="242" r="24" fill="#FFD84D" stroke="#FFFFFF" stroke-width="6"/>
+
+<g>
+  <ellipse cx="126.44" cy="153.16" rx="11.40" ry="6.08" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="173.56" cy="153.16" rx="11.40" ry="6.08" fill="#FF8BCB" opacity=".58"/>
+  <ellipse cx="131.00" cy="137.20" rx="6.08" ry="8.36" fill="#38234C"/>
+  <ellipse cx="169.00" cy="137.20" rx="6.08" ry="8.36" fill="#38234C"/>
+  <circle cx="133.28" cy="134.16" r="2.13" fill="#FFFFFF"/>
+  <circle cx="171.28" cy="134.16" r="2.13" fill="#FFFFFF"/>
+  <path d="M136.32 156.20 Q150.00 169.12 163.68 156.20" fill="none" stroke="#38234C" stroke-width="3.80" stroke-linecap="round"/>
+</g>
+<path d="M102 108 Q150 83 198 108" fill="none" stroke="#FF8BCB" stroke-width="8"/>
+<ellipse cx="118" cy="78" rx="22.0" ry="6.0" fill="#FFFFFF" opacity=".48" transform="rotate(-23 118 78)"/>
+</g>
+<circle cx="150" cy="33" r="7" fill="#38234C" stroke="#FFFFFF" stroke-width="3"/>
+</g></g><g inkscape:groupmode="layer" inkscape:label="CutContour" id="CutContour" fill="none" stroke="#FF00FF" stroke-width="0.3mm" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" data-spot-color="CutContour"><g id="cut-01-gingerbread" transform="translate(0 0)"><path d="M150 26 C122 26 108 44 109 66 C110 82 119 92 128 98 L106 110 L67 88 Q51 80 42 95 Q34 111 50 122 L100 153 L94 186 L70 238 Q62 255 77 264 Q93 273 104 257 L137 215 H163 L196 257 Q207 273 223 264 Q238 255 230 238 L206 186 L200 153 L250 122 Q266 111 258 95 Q249 80 233 88 L194 110 L172 98 Q190 86 191 66 C192 44 178 26 150 26 Z"/><circle cx="150" cy="52" r="4" data-purpose="hanging-hole"/></g><g id="cut-02-candy-cane" transform="translate(300 0)"><path d="M80 270 V110 C80 58 111 28 155 28 C202 28 231 62 231 105 C231 139 214 161 190 181 L156 143 C173 129 183 119 183 103 C183 84 171 72 154 72 C135 72 123 87 123 110 V270 Z"/><circle cx="155" cy="52" r="4" data-purpose="hanging-hole"/></g><g id="cut-03-snowman" transform="translate(600 0)"><path d="M120 46 V18 H180 V46 H198 V75 H179 C198 88 210 108 210 130 C210 150 202 166 189 178 C216 193 232 219 232 247 C232 267 216 278 196 278 H104 C84 278 68 267 68 247 C68 219 84 193 111 178 C98 166 90 150 90 130 C90 108 102 88 121 75 H102 V46 Z"/><circle cx="150" cy="33" r="4" data-purpose="hanging-hole"/></g><g id="cut-04-santa" transform="translate(900 0)"><path d="M50 80 C50 62 64 49 82 49 C95 26 120 15 151 20 C190 25 221 48 232 82 C252 85 264 102 260 119 C257 135 243 144 227 143 C231 158 229 176 222 191 C233 206 238 225 233 244 C228 268 207 282 183 276 L150 266 L117 276 C93 282 72 268 67 244 C62 225 67 206 78 191 C71 176 69 158 73 143 C57 144 43 135 40 119 C36 102 48 85 68 82 Z"/><circle cx="150" cy="45" r="4" data-purpose="hanging-hole"/></g><g id="cut-05-reindeer" transform="translate(0 300)"><path d="M130 62 V46 L105 21 L96 31 L111 52 L82 37 L73 51 L104 72 C83 92 72 121 76 153 C80 194 105 233 150 267 C195 233 220 194 224 153 C228 121 217 92 196 72 L227 51 L218 37 L189 52 L204 31 L195 21 L170 46 V62 Z"/><circle cx="150" cy="57" r="4" data-purpose="hanging-hole"/></g><g id="cut-06-penguin" transform="translate(300 300)"><path d="M132 54 V34 Q132 18 150 18 Q168 18 168 34 V54 C210 62 231 111 225 166 L258 194 L232 228 L207 211 C194 251 174 278 150 278 C126 278 106 251 93 211 L68 228 L42 194 L75 166 C69 111 90 62 132 54 Z"/><circle cx="150" cy="35" r="4" data-purpose="hanging-hole"/></g><g id="cut-07-christmas-tree" transform="translate(600 300)"><path d="M150 22 L110 76 H127 L84 132 H108 L55 201 H126 V225 H112 V278 H188 V225 H174 L245 201 L192 132 H216 L173 76 H190 Z"/><circle cx="150" cy="49" r="4" data-purpose="hanging-hole"/></g><g id="cut-08-gift" transform="translate(900 300)"><path d="M150 62 C119 34 95 34 85 53 C73 76 91 96 126 97 H54 V276 H246 V97 H174 C209 96 227 76 215 53 C205 34 181 34 150 62 Z"/><circle cx="150" cy="76" r="4" data-purpose="hanging-hole"/></g><g id="cut-09-cupcake" transform="translate(0 600)"><path d="M82 144 C56 139 50 119 64 102 C75 88 92 88 104 94 C105 71 124 54 148 58 C169 39 206 50 210 79 C232 83 244 100 238 120 C233 137 218 145 200 144 L224 262 H76 L100 144 Z"/><circle cx="150" cy="77" r="4" data-purpose="hanging-hole"/></g><g id="cut-10-lollipop" transform="translate(300 600)"><path d="M132 38 V25 Q132 12 150 12 Q168 12 168 25 V38 C214 47 242 75 242 118 C242 163 214 197 174 208 V278 H126 V208 C86 197 58 163 58 118 C58 75 86 47 132 38 Z"/><circle cx="150" cy="46" r="4" data-purpose="hanging-hole"/></g><g id="cut-11-mitten" transform="translate(600 600)"><path d="M118 48 V31 Q118 15 136 15 Q154 15 154 31 V85 L174 55 Q190 42 205 55 Q219 68 208 84 L180 118 V225 Q180 272 132 276 Q79 280 58 233 L31 173 Q24 156 39 146 Q55 135 68 150 L88 176 V48 Z"/><circle cx="136" cy="32" r="4" data-purpose="hanging-hole"/></g><g id="cut-12-stocking" transform="translate(900 600)"><path d="M100 60 V17 Q100 5 112 5 H188 Q200 5 200 17 V60 H184 V168 Q184 204 214 221 Q248 240 235 266 Q224 286 196 278 L146 263 Q98 249 98 199 V60 Z"/><circle cx="150" cy="34" r="4" data-purpose="hanging-hole"/></g><g id="cut-13-snow-globe" transform="translate(0 900)"><path d="M132 48 V31 Q132 14 150 14 Q168 14 168 31 V48 C223 57 258 101 258 159 C258 201 239 231 216 249 L231 284 H69 L84 249 C61 231 42 201 42 159 C42 101 77 57 132 48 Z"/><circle cx="150" cy="31" r="4" data-purpose="hanging-hole"/></g><g id="cut-14-smiling-star" transform="translate(300 900)"><polygon points="150.00,27.00 185.27,108.46 273.64,116.83 207.06,175.54 226.41,262.17 150.00,217.00 73.59,262.17 92.94,175.54 26.36,116.83 114.73,108.46"/><circle cx="150" cy="57" r="4" data-purpose="hanging-hole"/></g><g id="cut-15-cocoa-mug" transform="translate(600 900)"><path d="M130 55 V37 Q130 20 150 20 Q170 20 170 37 V55 C195 61 215 83 214 110 H229 Q267 110 267 160 Q267 210 229 210 H214 V242 Q214 270 186 270 H96 Q68 270 68 242 V110 H86 C85 83 105 61 130 55 Z"/><circle cx="150" cy="42" r="4" data-purpose="hanging-hole"/></g><g id="cut-16-jingle-bell" transform="translate(900 900)"><path d="M130 53 V34 Q130 16 150 16 Q170 16 170 34 V53 C213 61 229 102 228 159 C228 194 244 218 259 232 H178 Q172 271 150 271 Q128 271 122 232 H41 C56 218 72 194 72 159 C71 102 87 61 130 53 Z"/><circle cx="150" cy="33" r="4" data-purpose="hanging-hole"/></g></g>
+</svg>
