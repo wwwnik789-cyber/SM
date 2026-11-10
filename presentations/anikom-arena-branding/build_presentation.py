@@ -23,7 +23,7 @@ OUTPUT = ROOT / "Anikom-Arena-branding-concept.pdf"
 PREVIEW = ROOT / "presentation-preview.jpg"
 
 PAGE_W, PAGE_H = 960, 540
-TOTAL_SLIDES = 9
+TOTAL_SLIDES = 11
 
 NAVY = HexColor("#091A2B")
 NAVY_2 = HexColor("#102B45")
@@ -210,11 +210,10 @@ def slide_01(c: canvas.Canvas) -> None:
     c.setFillColor(RED)
     c.setFont(FONT_BOLD, 29)
     c.drawString(240, 285, "АНИКОМ АРЕНЫ")
-    paragraph(c, "Телебашня • плоские каркасы • пресс-воллы\nГотовые макеты и схема размещения", 240, 247, 520, 15, 21, MIST, FONT)
+    paragraph(c, "Телебашня • плоские каркасы • пресс-воллы\nГотовые эскизы и схема размещения", 240, 247, 520, 15, 21, MIST, FONT)
     c.setFillColor(STEEL)
     c.setFont(FONT, 9)
-    c.drawString(58, 35, "КОНЦЕПТ ДЛЯ ОБСУЖДЕНИЯ И ПОСЛЕДУЮЩИХ ОБМЕРОВ")
-    sm_logo(c, 810, 18, 98, 80)
+    c.drawString(58, 35, "ПРЕДЛОЖЕНИЕ ДЛЯ ОБСУЖДЕНИЯ И ПОСЛЕДУЮЩИХ ОБМЕРОВ")
 
 
 def slide_02(c: canvas.Canvas) -> None:
@@ -222,10 +221,10 @@ def slide_02(c: canvas.Canvas) -> None:
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
     title(c, "01 • СОСТАВ ПРЕДЛОЖЕНИЯ", "Что именно предлагаем изготовить")
     data = [
-        (58, "01", "1 БАННЕР", "ТЕЛЕБАШНЯ", "Макет, фотопривязка и подготовка полотна после обмера."),
+        (58, "01", "1 БАННЕР", "ТЕЛЕБАШНЯ", "Эскиз, вид на месте и подготовка полотна после обмера."),
         (270, "02", "4 ЗОНЫ", "ПЛОСКИЕ КАРКАСЫ", "Балконная лента, два нижних модуля и центральный вход."),
-        (482, "03", "2 ШТУКИ", "ПРЕСС-ВОЛЛЫ", "Партнёрский и match-day, рекомендуемый формат 3000×2500 мм."),
-        (694, "04", "1 ОПЦИЯ", "ФОТОЗОНА 5×3 М", "Скрытый каркас, сменное полотно и расчёт утяжеления."),
+        (482, "03", "2 ШТУКИ", "ПРЕСС-ВОЛЛЫ", "Партнёрский и матчевый фон размером 3000×2500 мм."),
+        (694, "04", "1 ВАРИАНТ", "ФОТОЗОНА 5×3 М", "Скрытый каркас, сменное полотно и расчёт утяжеления."),
     ]
     for x, num, qty, head, body in data:
         card(c, x, 128, 190, 273, WHITE, HexColor("#D4DEE6"), 17)
@@ -246,22 +245,22 @@ def slide_02(c: canvas.Canvas) -> None:
     card(c, 58, 66, 826, 42, NAVY, None, 12)
     c.setFillColor(WHITE)
     c.setFont(FONT_BOLD, 11)
-    c.drawCentredString(471, 81, "ПРЕДВАРИТЕЛЬНО: 8 НОСИТЕЛЕЙ / 4 ТИПА КОНСТРУКЦИЙ / 1 СИСТЕМА МАКЕТОВ")
+    c.drawCentredString(471, 81, "ПРЕДВАРИТЕЛЬНО: 8 НОСИТЕЛЕЙ / 4 ТИПА КОНСТРУКЦИЙ / ЕДИНЫЙ ВНЕШНИЙ ВИД")
     footer(c, 2)
 
 
 def slide_03(c: canvas.Canvas) -> None:
     c.setFillColor(WHITE)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "02 • ПРИВЯЗКА", "Места для баннеров на плоских каркасах", size=27)
-    photo(c, CONCEPTS / "flat-frame-placement-map.jpg", 58, 91, 596, 326, "СХЕМА НА ГЛАВНОЙ ТРИБУНЕ", .5)
+    title(c, "02 • СХЕМА РАЗМЕЩЕНИЯ", "Где устанавливаются все носители", size=27)
+    photo(c, CONCEPTS / "flat-frame-placement-map.jpg", 58, 91, 596, 326, "ГЛАВНАЯ ТРИБУНА", .5)
     card(c, 675, 91, 227, 326, NAVY, None, 16)
     rows = [
-        ("F1", "Балконная лента", "1 длинный модуль"),
-        ("F2", "Нижний левый", "1 модуль"),
-        ("F3", "Нижний правый", "1 модуль"),
-        ("F4", "Центральный вход", "1 модуль / вывеска"),
-        ("T1", "Телебашня", "1 фронтальный баннер"),
+        ("К1", "Балконная линия", "несколько секций"),
+        ("К2", "Нижний левый", "одна рамка"),
+        ("К3", "Нижний правый", "одна рамка"),
+        ("К4", "Центральный вход", "одна рамка"),
+        ("Б1", "Телебашня", "одно полотно"),
     ]
     y = 379
     for code, place, count in rows:
@@ -278,122 +277,186 @@ def slide_03(c: canvas.Canvas) -> None:
         y -= 53
     c.setFillColor(Color(1, 1, 1, alpha=.1))
     c.roundRect(692, 108, 193, 54, 11, stroke=0, fill=1)
-    paragraph(c, "Все размеры — только после обмера существующих ограждений.", 705, 141, 166, 8.5, 12, MIST, FONT)
+    paragraph(c, "Размеры, деление рамок и точки крепления уточняются на месте.", 705, 143, 166, 8.5, 12, MIST, FONT)
     footer(c, 3)
 
 
 def slide_04(c: canvas.Canvas) -> None:
-    c.setFillColor(NAVY)
+    c.setFillColor(MIST)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "03 • T1", "Баннер для телебашни", dark=True)
-    photo(c, CONCEPTS / "tower-banner-mockup.jpg", 58, 77, 434, 350, "ФОТОПРИВЯЗКА", .53)
-    card(c, 515, 253, 387, 174, NAVY_2, Color(1, 1, 1, alpha=.14), 14)
-    draw_image_contain(c, CONCEPTS / "tower-banner-artwork.png", 528, 266, 361, 148)
+    title(c, "03 • УСТРОЙСТВО РАМКИ", "Полотно зажато по всему краю", size=27)
+    card(c, 58, 105, 244, 314, NAVY, None, 16)
     c.setFillColor(RED)
-    c.rect(515, 232, 42, 5, stroke=0, fill=1)
+    c.rect(76, 384, 34, 4, stroke=0, fill=1)
     c.setFillColor(WHITE)
     c.setFont(FONT_BOLD, 12)
-    c.drawString(570, 228, "РЕКОМЕНДУЕМАЯ КОМПЛЕКТАЦИЯ")
-    bullets(c, [
-        "Матовый banner frontlit 440–510 г/м², полноцветная UV/latex печать",
-        "Натяжение на плоский каркас; кромка и люверсы — после выбора узла",
-        "Для открытой ветровой зоны вместо frontlit рассмотреть mesh",
-        "Размер, стыки и отступы уточнить по фронтальной панели башни",
-    ], 525, 201, 365, 10, MIST, RED, 13, 5)
-    c.setFillColor(Color(1, 1, 1, alpha=.09))
-    c.roundRect(515, 70, 387, 38, 10, stroke=0, fill=1)
-    c.setFillColor(STEEL)
-    c.setFont(FONT_BOLD, 9)
-    c.drawString(532, 84, "К ВЫЕЗДУ: ШИРИНА × ВЫСОТА, ТОЧКИ КРЕПЛЕНИЯ, ВЕТРОВАЯ ЗОНА")
-    footer(c, 4, dark=True)
+    c.drawString(122, 380, "ЧЕТЫРЕ ЧАСТИ")
+    parts = [
+        ("1", "Печатное полотно", "плотная баннерная ткань с запасом по краям"),
+        ("2", "Прижимные планки", "удерживают край по всему периметру"),
+        ("3", "Плоская рамка", "металлическая основа по размеру зоны"),
+        ("4", "Скрытые зажимы", "крепят рамку к существующему ограждению"),
+    ]
+    y = 343
+    for num, head, body in parts:
+        c.setFillColor(RED)
+        c.circle(83, y + 2, 12, stroke=0, fill=1)
+        c.setFillColor(WHITE)
+        c.setFont(FONT_BOLD, 9)
+        c.drawCentredString(83, y - 1, num)
+        c.setFont(FONT_BOLD, 9.5)
+        c.drawString(105, y + 5, head)
+        paragraph(c, body, 105, y - 10, 172, 8.3, 11, STEEL, FONT)
+        y -= 65
+    card(c, 322, 105, 580, 314, WHITE, HexColor("#D3DDE5"), 14)
+    draw_image_contain(c, CONCEPTS / "flat-frame-construction.png", 333, 116, 558, 292)
+    c.setFillColor(RED)
+    c.setFont(FONT_BOLD, 10)
+    c.drawCentredString(480, 73, "ЛИЦЕВАЯ СТОРОНА — РОВНАЯ")
+    c.setFillColor(INK)
+    c.drawCentredString(714, 73, "НЕТ ВИДИМЫХ ШНУРОВ И ОТВЕРСТИЙ")
+    footer(c, 4)
 
 
 def slide_05(c: canvas.Canvas) -> None:
-    c.setFillColor(MIST)
+    c.setFillColor(NAVY)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "04 • P1 / P2", "Два дополнительных пресс-волла")
-    card(c, 58, 106, 405, 304, WHITE, HexColor("#D4DEE6"), 15)
-    draw_image_contain(c, CONCEPTS / "presswall-partner-3000x2500.png", 71, 176, 379, 222)
-    c.setFillColor(NAVY)
-    c.setFont(FONT_BOLD, 13)
-    c.drawString(76, 148, "P1 • ПАРТНЁРСКИЙ • 3000×2500 ММ")
-    paragraph(c, "Повторяемый модуль логотипа арены + сменные блоки партнёров.", 76, 128, 350, 9.5, 13, SLATE, FONT)
-    card(c, 479, 106, 405, 304, WHITE, HexColor("#D4DEE6"), 15)
-    draw_image_contain(c, CONCEPTS / "presswall-matchday-3000x2500.png", 492, 176, 379, 222)
-    c.setFillColor(NAVY)
-    c.setFont(FONT_BOLD, 13)
-    c.drawString(497, 148, "P2 • MATCH-DAY • 3000×2500 ММ")
-    paragraph(c, "Центральный знак, зона команд и крупная надпись для интервью.", 497, 128, 350, 9.5, 13, SLATE, FONT)
-    card(c, 58, 58, 826, 32, NAVY, None, 9)
+    title(c, "04 • К1", "Балконная линия: деление по стойкам", dark=True, size=27)
+    photo(c, ASSETS / "stand-close.jpg", 500, 199, 402, 222, "МЕСТО УСТАНОВКИ", .5)
+    card(c, 58, 199, 414, 222, NAVY_2, Color(1, 1, 1, alpha=.13), 15)
+    paragraph(c, "Длинная полоса собирается из отдельных рамок. Границы рамок совпадают со стойками ограждения, поэтому вся линия выглядит цельной.", 78, 384, 372, 12, 17, WHITE, FONT_BOLD)
+    bullets(c, [
+        "каждая рамка крепится за ограждением скрытыми зажимами",
+        "рисунок продолжается с одной секции на другую",
+        "стыки полотен находятся на осях стоек",
+        "проход и верх ограждения остаются свободными",
+    ], 78, 305, 365, 9.5, MIST, RED, 13, 5)
+    card(c, 58, 72, 844, 103, NAVY_2, Color(1, 1, 1, alpha=.13), 13)
+    draw_image_contain(c, CONCEPTS / "flat-frame-banner-1.png", 76, 87, 480, 73)
     c.setFillColor(WHITE)
-    c.setFont(FONT_BOLD, 9)
-    c.drawCentredString(471, 69, "ПОЛОТНО BLACKOUT / ТРУБНЫЙ ИЛИ СКРЫТЫЙ КАРКАС / СМЕННАЯ ПЕЧАТЬ БЕЗ ЗАМЕНЫ ОСНОВЫ")
-    footer(c, 5)
+    c.setFont(FONT_BOLD, 10.5)
+    c.drawString(584, 144, "ПЕРЕД ИЗГОТОВЛЕНИЕМ")
+    paragraph(c, "Замеряем общую длину, высоту, шаг стоек и расстояние до прохода. После этого назначаем размер каждой рамки и место каждого зажима.", 584, 122, 292, 9, 12, STEEL, FONT)
+    footer(c, 5, dark=True)
 
 
 def slide_06(c: canvas.Canvas) -> None:
     c.setFillColor(WHITE)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "05 • P3", "Дополнительная фотозона 5000×3000 мм")
-    card(c, 58, 107, 574, 301, NAVY, None, 15)
-    draw_image_contain(c, CONCEPTS / "photozone-hero-5000x3000.png", 70, 119, 550, 277)
-    photo(c, ASSETS / "press-wall.jpg", 654, 214, 248, 194, "СУЩЕСТВУЮЩАЯ ТОЧКА", .5)
-    card(c, 654, 107, 248, 92, NAVY, None, 13)
+    title(c, "05 • К2–К4", "Нижние модули и центральный вход", size=27)
+    card(c, 58, 108, 404, 305, NAVY, None, 15)
+    c.setFillColor(RED)
+    c.roundRect(76, 374, 132, 24, 7, stroke=0, fill=1)
     c.setFillColor(WHITE)
-    c.setFont(FONT_BOLD, 11)
-    c.drawString(670, 174, "КОМПЛЕКТАЦИЯ")
+    c.setFont(FONT_BOLD, 9)
+    c.drawCentredString(142, 382, "К2–К3 • 2 ШТУКИ")
+    draw_image_contain(c, CONCEPTS / "flat-frame-banner-2.png", 76, 272, 368, 82)
+    paragraph(c, "Два одинаковых прямоугольных модуля", 76, 246, 356, 12, 15, WHITE, FONT_BOLD)
     bullets(c, [
-        "скрытый каркас глубиной до 500 мм",
-        "сменное полотно",
-        "утяжеление по расчёту",
-    ], 670, 152, 210, 9, MIST, RED, 11, 3)
-    paragraph(c, "Назначение: награждение, командное фото, презентация партнёров и мяча.", 58, 82, 560, 10, 14, SLATE, FONT)
+        "рамка повторяет границы секции",
+        "полотно зажато планками по всему краю",
+        "зажимы расположены с обратной стороны",
+        "обе части печатаются по одному размеру",
+    ], 76, 213, 350, 9.5, MIST, RED, 13, 5)
+
+    card(c, 498, 108, 404, 305, HexColor("#F0F4F7"), HexColor("#D3DDE5"), 15)
+    c.setFillColor(RED)
+    c.roundRect(516, 374, 116, 24, 7, stroke=0, fill=1)
+    c.setFillColor(WHITE)
+    c.setFont(FONT_BOLD, 9)
+    c.drawCentredString(574, 382, "К4 • 1 ШТУКА")
+    draw_image_contain(c, CONCEPTS / "flat-frame-banner-3.png", 516, 272, 368, 82)
+    paragraph(c, "Горизонтальный носитель над входом", 516, 246, 356, 12, 15, INK, FONT_BOLD)
+    bullets(c, [
+        "рамка не перекрывает проход и указатели",
+        "рисунок центрируется относительно входа",
+        "крепление выполняется к существующим стойкам",
+        "высота уточняется после проверки на месте",
+    ], 516, 213, 350, 9.5, SLATE, RED, 13, 5)
+    c.setFillColor(RED)
+    c.setFont(FONT_BOLD, 10)
+    c.drawCentredString(480, 73, "ДЛЯ К2–К4 ПРИМЕНЯЕТСЯ ОДИН ПРИНЦИП: ПЛАНКИ ПО КРАЮ И СКРЫТЫЕ ЗАЖИМЫ")
     footer(c, 6)
 
 
 def slide_07(c: canvas.Canvas) -> None:
     c.setFillColor(NAVY)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "06 • F1–F4", "Три типа полотен для плоских каркасов", dark=True)
-    items = [
-        (CONCEPTS / "flat-frame-banner-1.png", "ПОСТОЯННАЯ ФИРМЕННАЯ ЛЕНТА", "логотип арены, без дат и партнёров"),
-        (CONCEPTS / "flat-frame-banner-2.png", "ПАРТНЁРСКАЯ ЛИНИЯ", "сменные логотипы на сезон или турнир"),
-        (CONCEPTS / "flat-frame-banner-3.png", "СОБЫТИЙНОЕ ПОЛОТНО", "турнир, расписание, счёт, навигация"),
-    ]
-    y = 330
-    for path, head, sub in items:
-        card(c, 58, y, 570, 85, NAVY_2, Color(1, 1, 1, alpha=.12), 11)
-        draw_image_contain(c, path, 69, y + 10, 548, 65)
-        c.setFillColor(WHITE)
-        c.setFont(FONT_BOLD, 11)
-        c.drawString(654, y + 48, head)
-        c.setFillColor(STEEL)
-        c.setFont(FONT, 9)
-        c.drawString(654, y + 28, sub)
-        y -= 105
-    card(c, 648, 83, 254, 116, NAVY_2, Color(1, 1, 1, alpha=.12), 13)
+    title(c, "06 • Б1", "Баннер для телебашни", dark=True)
+    photo(c, CONCEPTS / "tower-banner-mockup.jpg", 58, 77, 434, 350, "ВИД НА МЕСТЕ", .53)
+    card(c, 515, 253, 387, 174, NAVY_2, Color(1, 1, 1, alpha=.14), 14)
+    draw_image_contain(c, CONCEPTS / "tower-banner-artwork.png", 528, 266, 361, 148)
     c.setFillColor(RED)
-    c.rect(664, 170, 34, 4, stroke=0, fill=1)
+    c.rect(515, 232, 42, 5, stroke=0, fill=1)
     c.setFillColor(WHITE)
-    c.setFont(FONT_BOLD, 11)
-    c.drawString(710, 166, "ПРОИЗВОДСТВО")
+    c.setFont(FONT_BOLD, 12)
+    c.drawString(570, 228, "КАК ИЗГОТАВЛИВАЕМ")
     bullets(c, [
-        "баннер или mesh по ветровой зоне",
-        "плоский окрашенный каркас",
-        "сменное полотно на шнуровке",
-    ], 664, 142, 220, 9, MIST, RED, 11, 3)
+        "плотная матовая баннерная ткань",
+        "печать красками, устойчивыми к солнцу и осадкам",
+        "край полотна зажат планками на плоской рамке",
+        "размер, стыки и крепления — после обмера панели",
+    ], 525, 201, 365, 10, MIST, RED, 13, 5)
+    c.setFillColor(Color(1, 1, 1, alpha=.09))
+    c.roundRect(515, 70, 387, 38, 10, stroke=0, fill=1)
+    c.setFillColor(STEEL)
+    c.setFont(FONT_BOLD, 8.5)
+    c.drawString(532, 84, "НА МЕСТЕ: ШИРИНА, ВЫСОТА, ОПОРА, ДОСТУП И ВЕТРОВАЯ НАГРУЗКА")
     footer(c, 7, dark=True)
 
 
 def slide_08(c: canvas.Canvas) -> None:
     c.setFillColor(MIST)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "07 • РЕАЛИЗОВАНО SM PRODUCTION", "Примеры наших работ")
+    title(c, "07 • Ф1–Ф2", "Два дополнительных пресс-волла")
+    card(c, 58, 106, 405, 304, WHITE, HexColor("#D4DEE6"), 15)
+    draw_image_contain(c, CONCEPTS / "presswall-partner-3000x2500.png", 71, 176, 379, 222)
+    c.setFillColor(NAVY)
+    c.setFont(FONT_BOLD, 13)
+    c.drawString(76, 148, "Ф1 • ПАРТНЁРСКИЙ • 3000×2500 ММ")
+    paragraph(c, "Повторяемый знак арены и сменные места для партнёров.", 76, 128, 350, 9.5, 13, SLATE, FONT)
+    card(c, 479, 106, 405, 304, WHITE, HexColor("#D4DEE6"), 15)
+    draw_image_contain(c, CONCEPTS / "presswall-matchday-3000x2500.png", 492, 176, 379, 222)
+    c.setFillColor(NAVY)
+    c.setFont(FONT_BOLD, 13)
+    c.drawString(497, 148, "Ф2 • МАТЧЕВЫЙ • 3000×2500 ММ")
+    paragraph(c, "Крупный знак, места команд и чистый фон для интервью.", 497, 128, 350, 9.5, 13, SLATE, FONT)
+    card(c, 58, 58, 826, 32, NAVY, None, 9)
+    c.setFillColor(WHITE)
+    c.setFont(FONT_BOLD, 9)
+    c.drawCentredString(471, 69, "НЕПРОСВЕЧИВАЮЩЕЕ ПОЛОТНО • РАЗБОРНАЯ ОСНОВА • СМЕННАЯ ПЕЧАТЬ")
+    footer(c, 8)
+
+
+def slide_09(c: canvas.Canvas) -> None:
+    c.setFillColor(WHITE)
+    c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
+    title(c, "08 • Ф3 • ДОПОЛНИТЕЛЬНЫЙ ВАРИАНТ", "Фотозона 5000×3000 мм")
+    card(c, 58, 107, 574, 301, NAVY, None, 15)
+    draw_image_contain(c, CONCEPTS / "photozone-hero-5000x3000.png", 70, 119, 550, 277)
+    photo(c, ASSETS / "reception-branding.jpg", 654, 214, 248, 194, "ФИРМЕННЫЙ СТИЛЬ НА АРЕНЕ", .5)
+    card(c, 654, 107, 248, 92, NAVY, None, 13)
+    c.setFillColor(WHITE)
+    c.setFont(FONT_BOLD, 11)
+    c.drawString(670, 174, "СОСТАВ")
+    bullets(c, [
+        "закрытая основа глубиной до 500 мм",
+        "сменное полотно",
+        "груз по расчёту",
+    ], 670, 152, 210, 9, MIST, RED, 11, 3)
+    paragraph(c, "Для награждения, командного фото, представления партнёров и мяча.", 58, 82, 560, 10, 14, SLATE, FONT)
+    footer(c, 9)
+
+
+def slide_10(c: canvas.Canvas) -> None:
+    c.setFillColor(MIST)
+    c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
+    title(c, "09 • ВЫПОЛНЕННЫЕ ПРОЕКТЫ", "Примеры наших работ")
     examples = [
-        (ASSETS / "our-work-hidden-frame.jpg", 58, 249, "СКРЫТЫЙ КАРКАС 5×3 М", "Полотно + утяжеление"),
+        (ASSETS / "our-work-hidden-frame.jpg", 58, 249, "ЗАКРЫТАЯ ОСНОВА 5×3 М", "Полотно и рассчитанный груз"),
         (ASSETS / "our-work-flat-frames.jpg", 482, 249, "ПЛОСКИЕ КАРКАСЫ", "Информационные панели"),
         (ASSETS / "our-work-photozone.jpg", 58, 66, "СПОРТИВНАЯ ФОТОЗОНА", "Объёмный декор и искусственный газон"),
-        (ASSETS / "our-work-navigation.jpg", 482, 66, "МОБИЛЬНАЯ НАВИГАЦИЯ", "Указатели на устойчивых основаниях"),
+        (ASSETS / "our-work-navigation.jpg", 482, 66, "ПЕРЕНОСНЫЕ УКАЗАТЕЛИ", "Устойчивые основания"),
     ]
     for path, x, y, head, sub in examples:
         card(c, x, y, 402, 164, WHITE, HexColor("#D3DDE5"), 13)
@@ -404,7 +467,7 @@ def slide_08(c: canvas.Canvas) -> None:
         c.setFont(FONT_BOLD, 11)
         c.drawString(x + 244, y + 96, head)
         paragraph(c, sub, x + 244, y + 70, 140, 9.5, 13, SLATE, FONT)
-    footer(c, 8)
+    footer(c, 10)
 
 
 def table_cell(c: canvas.Canvas, x: float, y: float, w: float, h: float, text: str, font_size=8.5, bold=False, fill=None, color=INK) -> None:
@@ -416,31 +479,31 @@ def table_cell(c: canvas.Canvas, x: float, y: float, w: float, h: float, text: s
     paragraph(c, text, x + 7, y + h - 14, w - 14, font_size, font_size * 1.25, color, FONT_BOLD if bold else FONT)
 
 
-def slide_09(c: canvas.Canvas) -> None:
+def slide_11(c: canvas.Canvas) -> None:
     c.setFillColor(WHITE)
     c.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
-    title(c, "08 • КОМПЛЕКТАЦИЯ", "Предварительная ведомость и данные для расчёта", size=26)
-    x0, y0 = 58, 111
-    widths = [48, 230, 48, 112, 142]
-    headers = ["ID", "НОСИТЕЛЬ", "КОЛ.", "РАЗМЕР", "МАТЕРИАЛ / ОСНОВА"]
+    title(c, "10 • ИТОГОВЫЙ СОСТАВ", "Что войдёт в расчёт после обмера", size=26)
+    x0 = 58
+    widths = [52, 216, 48, 106, 158]
+    headers = ["КОД", "НОСИТЕЛЬ", "КОЛ.", "РАЗМЕР", "РЕШЕНИЕ"]
     xx = x0
     for w, head in zip(widths, headers):
         table_cell(c, xx, 370, w, 34, head, 8, True, NAVY, WHITE)
         xx += w
     rows = [
-        ("T1", "Баннер телебашни", "1", "по обмеру", "frontlit / mesh + каркас"),
-        ("F1", "Балконная лента", "1", "по обмеру", "баннер / mesh"),
-        ("F2–F3", "Нижние модули", "2", "по обмеру", "баннер + плоский каркас"),
-        ("F4", "Центральный вход", "1", "по обмеру", "баннер или листовой носитель"),
-        ("P1–P2", "Доп. пресс-воллы", "2", "3000×2500", "blackout + сборный каркас"),
-        ("P3", "Hero photozone", "опция", "5000×3000", "скрытый каркас + балласт"),
+        ("Б1", "Баннер телебашни", "1", "по обмеру", "полотно, планки, рамка"),
+        ("К1", "Балконная линия", "1", "по обмеру", "секционные плоские рамки"),
+        ("К2–К3", "Нижние модули", "2", "по обмеру", "полотно, планки, рамка"),
+        ("К4", "Центральный вход", "1", "по обмеру", "плоская рамка"),
+        ("Ф1–Ф2", "Доп. пресс-воллы", "2", "3000×2500", "полотно и разборная основа"),
+        ("Ф3", "Доп. фотозона", "1", "5000×3000", "закрытая основа и груз"),
     ]
     y = 331
     for ridx, row in enumerate(rows):
         xx = x0
         fill = HexColor("#F3F6F8") if ridx % 2 == 0 else WHITE
         for w, value in zip(widths, row):
-            table_cell(c, xx, y, w, 39, value, 8.2, ridx == 0 and False, fill, INK)
+            table_cell(c, xx, y, w, 39, value, 8.2, False, fill, INK)
             xx += w
         y -= 39
     card(c, 658, 111, 244, 293, NAVY, None, 16)
@@ -448,19 +511,19 @@ def slide_09(c: canvas.Canvas) -> None:
     c.rect(676, 367, 34, 4, stroke=0, fill=1)
     c.setFillColor(WHITE)
     c.setFont(FONT_BOLD, 12)
-    c.drawString(722, 363, "ДЛЯ ТОЧНОЙ СМЕТЫ")
+    c.drawString(722, 363, "ЧТО НУЖНО ЗАМЕРИТЬ")
     bullets(c, [
-        "обмеры всех пяти зон",
-        "допустимые точки крепления",
-        "информация по ветровой нагрузке",
-        "логотипы партнёров в векторе",
-        "даты ближайших матчей и событий",
-        "требования к монтажному времени",
+        "ширину и высоту всех зон",
+        "шаг стоек ограждения",
+        "доступные места для зажимов",
+        "расстояние до проходов",
+        "условия на открытом воздухе",
+        "время для установки",
     ], 676, 330, 202, 10, MIST, RED, 13, 5)
     c.setFillColor(Color(1, 1, 1, alpha=.1))
     c.roundRect(674, 139, 212, 54, 10, stroke=0, fill=1)
-    paragraph(c, "После обмеров: финальные макеты, техспецификация и смета.", 688, 171, 184, 9, 12, WHITE, FONT_BOLD)
-    footer(c, 9)
+    paragraph(c, "После обмера: точные размеры, рабочие макеты и стоимость.", 688, 171, 184, 9, 12, WHITE, FONT_BOLD)
+    footer(c, 11)
 
 
 def build_pdf() -> None:
@@ -469,8 +532,8 @@ def build_pdf() -> None:
     c.setTitle("Аником Арена — конкретные решения по оформлению")
     c.setAuthor("SM Production")
     c.setSubject("Телебашня, плоские каркасы, пресс-воллы и примеры работ")
-    c.setCreator("SM Production / Arena.ai")
-    for slide in (slide_01, slide_02, slide_03, slide_04, slide_05, slide_06, slide_07, slide_08, slide_09):
+    c.setCreator("SM Production")
+    for slide in (slide_01, slide_02, slide_03, slide_04, slide_05, slide_06, slide_07, slide_08, slide_09, slide_10, slide_11):
         slide(c)
         c.showPage()
     c.save()
@@ -483,7 +546,8 @@ def build_preview() -> None:
         pix = page.get_pixmap(matrix=pymupdf.Matrix(.52, .52), alpha=False)
         im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
         thumbs.append(ImageOps.fit(im, (480, 270), Image.Resampling.LANCZOS))
-    sheet = Image.new("RGB", (1440, 3 * 310), "#D7DEE5")
+    rows = (len(thumbs) + 2) // 3
+    sheet = Image.new("RGB", (1440, rows * 310), "#D7DEE5")
     fnt = ImageFont.truetype(str(FONTS / "DejaVuSans-Bold.ttf"), 16)
     draw = ImageDraw.Draw(sheet)
     for idx, thumb in enumerate(thumbs):

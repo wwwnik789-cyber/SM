@@ -75,7 +75,7 @@ def tower_artwork() -> Image.Image:
     pitch(d, (1060, 95, 1740, 905), fill=(246, 248, 250, 58), width=5)
     paste_logo(im, (80, 90, 670, 820))
     d.rounded_rectangle((820, 132, 1710, 230), radius=25, fill=NAVY_3, outline=STEEL, width=2)
-    d.text((865, 180), "МЕДИА-БАШНЯ", font=font(68, True), fill=WHITE, anchor="lm")
+    d.text((865, 180), "ТЕЛЕБАШНЯ", font=font(68, True), fill=WHITE, anchor="lm")
     d.rectangle((865, 278, 1090, 292), fill=RED)
     d.text((865, 350), "МАТЧ", font=font(84, True), fill=WHITE)
     d.text((865, 446), "ТРАНСЛЯЦИЯ", font=font(84, True), fill=WHITE)
@@ -134,7 +134,7 @@ def matchday_presswall() -> Image.Image:
     d.polygon([(960, 0), (1200, 0), (1200, h), (690, h)], fill=(217, 75, 67, 70))
     d.ellipse((305, 120, 895, 710), outline=(246, 248, 250, 32), width=6)
     paste_logo(im, (372, 125, 456, 610))
-    centered(d, (600, 770), "MATCH DAY", font(58, True), WHITE)
+    centered(d, (600, 770), "ДЕНЬ МАТЧА", font(52, True), WHITE)
     centered(d, (600, 830), "АНИКОМ АРЕНА", font(27, True), MIST)
     for x, label in ((90, "КОМАНДА 01"), (900, "КОМАНДА 02")):
         d.rounded_rectangle((x, 770, x + 210, 885), radius=20, outline=(246, 248, 250, 150), width=4)
@@ -154,7 +154,7 @@ def hero_photozone() -> Image.Image:
     d.text((75, 795), "ФОТОЗОНА • НАГРАЖДЕНИЕ • ПАРТНЁРЫ", font=font(27, True), fill=MIST)
     for idx, x in enumerate((1120, 1250, 1380), 1):
         d.rounded_rectangle((x, 745, x + 95, 815), radius=12, outline=(246, 248, 250, 120), width=3)
-        centered(d, (x + 48, 780), f"P{idx}", font(18, True), WHITE)
+        centered(d, (x + 48, 780), f"П{idx}", font(18, True), WHITE)
     return im
 
 
@@ -180,7 +180,7 @@ def long_banner(variant: int) -> Image.Image:
         pitch(d, (30, 20, 1770, 340), fill=(246, 248, 250, 30), width=3)
         d.rectangle((0, 0, 500, h), fill=RED)
         d.text((55, 88), "ТУРНИР", font=font(63, True), fill=WHITE)
-        d.text((55, 175), "MATCH DAY", font=font(45, True), fill=WHITE)
+        d.text((55, 175), "ДЕНЬ МАТЧА", font=font(39, True), fill=WHITE)
         d.text((610, 75), "РАСПИСАНИЕ • СЧЁТ • ПАРТНЁРЫ", font=font(37, True), fill=WHITE)
         d.text((610, 145), "СМЕННОЕ ПОЛОТНО ДЛЯ СОБЫТИЯ", font=font(24), fill=MIST)
         paste_logo(im, (1410, 25, 260, 310))
@@ -191,10 +191,10 @@ def placement_map() -> Image.Image:
     base = Image.open(ASSETS / "stand-close.jpg").convert("RGBA")
     d = ImageDraw.Draw(base, "RGBA")
     zones = [
-        ((235, 742, 1965, 865), "F1", "БАЛКОННАЯ ЛЕНТА"),
-        ((228, 1110, 915, 1215), "F2", "НИЖНИЙ ЛЕВЫЙ МОДУЛЬ"),
-        ((1265, 1110, 1960, 1215), "F3", "НИЖНИЙ ПРАВЫЙ МОДУЛЬ"),
-        ((770, 530, 1435, 640), "F4", "ЦЕНТРАЛЬНЫЙ ВХОД"),
+        ((235, 742, 1965, 865), "К1", "БАЛКОННАЯ ЛЕНТА"),
+        ((228, 1110, 915, 1215), "К2", "НИЖНИЙ ЛЕВЫЙ МОДУЛЬ"),
+        ((1265, 1110, 1960, 1215), "К3", "НИЖНИЙ ПРАВЫЙ МОДУЛЬ"),
+        ((770, 530, 1435, 640), "К4", "ЦЕНТРАЛЬНЫЙ ВХОД"),
     ]
     for box, code, label in zones:
         d.rounded_rectangle(box, radius=14, fill=(9, 26, 43, 190), outline=RED, width=7)
@@ -204,6 +204,54 @@ def placement_map() -> Image.Image:
         d.rounded_rectangle((x0 + 85, y0 - 40, min(x1, x0 + 500), y0 + 25), radius=14, fill=(9, 26, 43, 220))
         d.text((x0 + 110, y0 - 22), label, font=font(20, True), fill=WHITE)
     return base.convert("RGB")
+
+
+def flat_frame_construction() -> Image.Image:
+    """Simple front and side diagrams of a frame with clamping strips."""
+    w, h = 1600, 900
+    im = Image.new("RGBA", (w, h), MIST)
+    d = ImageDraw.Draw(im, "RGBA")
+    d.text((70, 54), "ПЛОСКИЙ КАРКАС: КАК КРЕПИТСЯ ПОЛОТНО", font=font(46, True), fill=NAVY)
+    d.text((70, 117), "Все крепления закрыты. На лицевой стороне нет шнуров и отверстий.", font=font(24), fill="#5E7081")
+
+    # Front view.
+    d.rounded_rectangle((70, 190, 840, 690), radius=22, fill=WHITE, outline="#B7C4CE", width=4)
+    d.text((105, 220), "ВИД СПЕРЕДИ", font=font(24, True), fill=NAVY)
+    d.rounded_rectangle((155, 300, 750, 615), radius=8, fill=NAVY_2, outline=RED, width=12)
+    paste_logo(im, (285, 325, 335, 270), 245)
+    d.line((155, 270, 155, 640), fill=NAVY, width=18)
+    d.line((750, 270, 750, 640), fill=NAVY, width=18)
+    d.line((140, 300, 765, 300), fill=NAVY, width=18)
+    d.line((140, 615, 765, 615), fill=NAVY, width=18)
+    d.rounded_rectangle((110, 665, 420, 720), radius=15, fill=RED)
+    centered(d, (265, 692), "РОВНАЯ ПОВЕРХНОСТЬ", font(18, True), WHITE)
+
+    # Side section.
+    d.rounded_rectangle((875, 190, 1530, 690), radius=22, fill=WHITE, outline="#B7C4CE", width=4)
+    d.text((910, 220), "ВИД СБОКУ", font=font(24, True), fill=NAVY)
+    d.rectangle((1010, 300, 1032, 610), fill=RED)
+    d.rectangle((1032, 287, 1070, 623), fill=NAVY_3)
+    d.rectangle((1070, 315, 1140, 595), fill=NAVY)
+    d.rectangle((1140, 350, 1184, 560), fill=STEEL)
+    d.rectangle((1184, 380, 1220, 530), fill="#4A5B68")
+    d.line((1220, 455, 1440, 455), fill=NAVY, width=20)
+    d.line((1325, 365, 1325, 545), fill=NAVY, width=20)
+    d.arc((1270, 395, 1380, 515), start=270, end=90, fill=RED, width=10)
+
+    labels = [
+        ((1018, 285), (1280, 275), "1  ПЕЧАТНОЕ ПОЛОТНО"),
+        ((1050, 320), (1280, 335), "2  ПРИЖИМНАЯ ПЛАНКА"),
+        ((1105, 365), (1280, 395), "3  МЕТАЛЛИЧЕСКИЙ КАРКАС"),
+        ((1325, 455), (1280, 575), "4  ЗАЖИМ К ОГРАЖДЕНИЮ"),
+    ]
+    for start, end, label in labels:
+        d.line((start[0], start[1], end[0], end[1]), fill=RED, width=4)
+        d.ellipse((end[0] - 6, end[1] - 6, end[0] + 6, end[1] + 6), fill=RED)
+        d.text((end[0] + 14, end[1] - 13), label, font=font(18, True), fill=NAVY)
+
+    d.rounded_rectangle((70, 775, 1530, 845), radius=20, fill=NAVY)
+    centered(d, (800, 810), "ПОЛОТНО ЗАЖИМАЕТСЯ ПО КРАЮ • КАРКАС КРЕПИТСЯ К СУЩЕСТВУЮЩЕМУ ОГРАЖДЕНИЮ", font(22, True), WHITE)
+    return im.convert("RGB")
 
 
 def build() -> None:
@@ -216,6 +264,7 @@ def build() -> None:
     for idx in range(1, 4):
         long_banner(idx).save(OUT / f"flat-frame-banner-{idx}.png", optimize=True)
     placement_map().save(OUT / "flat-frame-placement-map.jpg", quality=91, optimize=True, progressive=True)
+    flat_frame_construction().save(OUT / "flat-frame-construction.png", optimize=True)
     for path in sorted(OUT.iterdir()):
         print(path.name, path.stat().st_size)
 
