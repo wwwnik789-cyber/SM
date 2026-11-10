@@ -2,6 +2,7 @@
 """Build a print-size vector banner for the Anikom Arena TV tower."""
 from __future__ import annotations
 
+import gzip
 import re
 import tempfile
 from pathlib import Path
@@ -14,6 +15,7 @@ ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[1]
 SOURCE_LOGO = REPO / "presentations" / "anikom-arena-branding" / "assets" / "anikom-arena-logo.png"
 SVG_OUT = ROOT / "anikom-arena-tv-tower-banner-4000x4000.svg"
+SVGZ_OUT = ROOT / "anikom-arena-tv-tower-banner-4000x4000.svgz"
 PREVIEW_OUT = ROOT / "preview-1200x1200.png"
 
 FINAL_MM = 4000
@@ -117,7 +119,8 @@ def build_svg() -> None:
 
 
 def render_outputs() -> None:
-    """Render only a small approval preview; the production SVG stays vector."""
+    """Build a compressed SVG for downloading and a small approval preview."""
+    SVGZ_OUT.write_bytes(gzip.compress(SVG_OUT.read_bytes(), compresslevel=9, mtime=0))
     preview = resvg_py.svg_to_bytes(
         svg_path=str(SVG_OUT),
         width=1200,
@@ -135,6 +138,7 @@ def validate() -> None:
     assert "<text" not in text
     assert text.count("<path") >= 2
     assert text.count('href="#arena-logo"') == 50
+    assert gzip.decompress(SVGZ_OUT.read_bytes()) == SVG_OUT.read_bytes()
     with Image.open(PREVIEW_OUT) as preview:
         assert preview.size == (1200, 1200)
 
@@ -144,6 +148,7 @@ def main() -> None:
     render_outputs()
     validate()
     print(SVG_OUT)
+    print(SVGZ_OUT)
     print(PREVIEW_OUT)
 
 
