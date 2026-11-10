@@ -1,0 +1,2 @@
+lead_id,created_at,source,campaign,manager,company_or_agency,contact_storage_reference,event_date,venue,project_summary,brief_received,estimate_due_at,status,next_action,next_action_at,loss_reason,notes
+EXAMPLE-001,2026-10-30 10:00,yandex,SM_B2B_MSK_SEARCH_PARTNER_2026,Менеджер 1,ПРИМЕР,CRM-0001,2026-12-15,Москва,Фотозона и навигация,yes,2026-10-31 18:00,estimate_in_progress,Отправить смету,2026-10-31 18:00,,Строку удалить перед началом работы

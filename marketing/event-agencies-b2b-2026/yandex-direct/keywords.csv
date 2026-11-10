@@ -1,0 +1,62 @@
+campaign_id,group_id,cluster,keyword,intent,priority,landing
+S1,G01,Партнёр для агентства,производство для ивент агентств,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,подрядчик для ивент агентства,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,производственный подрядчик для мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,технический подрядчик для мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,event производство москва,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,ивент производство москва,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,производственный партнер для агентства,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,подрядчик по оформлению мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,подрядчик на мероприятие москва,hot,1,https://sm-production.ru/b2b
+S1,G01,Партнёр для агентства,изготовление конструкций для мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,производство оформления мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,оформление мероприятий под ключ москва,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,производство декораций для мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,изготовление декораций для мероприятий москва,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,изготовление оформления для мероприятия,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,брендирование мероприятий москва,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,оформление event площадки,hot,1,https://sm-production.ru/b2b
+S1,G02,Производство под ключ,оформление и монтаж мероприятий,hot,1,https://sm-production.ru/b2b
+S1,G03,Застройка площадки,застройка мероприятий москва,hot,1,https://sm-production.ru/b2b
+S1,G03,Застройка площадки,застройка event площадки,hot,1,https://sm-production.ru/b2b
+S1,G03,Застройка площадки,оформление площадки для мероприятия,hot,1,https://sm-production.ru/b2b
+S1,G03,Застройка площадки,декорирование площадки для мероприятия,commercial,2,https://sm-production.ru/b2b
+S1,G03,Застройка площадки,монтаж декораций на мероприятие,hot,1,https://sm-production.ru/b2b
+S1,G03,Застройка площадки,изготовление сценических декораций москва,commercial,2,https://sm-production.ru/b2b
+S2,G04,Фотозоны,изготовление фотозон для мероприятий,hot,1,https://sm-production.ru/b2b#services
+S2,G04,Фотозоны,производство фотозон москва,hot,1,https://sm-production.ru/b2b#services
+S2,G04,Фотозоны,фотозона под ключ москва,hot,1,https://sm-production.ru/b2b#services
+S2,G04,Фотозоны,брендированная фотозона изготовление,hot,1,https://sm-production.ru/b2b#services
+S2,G04,Фотозоны,фотозона для корпоративного мероприятия,commercial,2,https://sm-production.ru/b2b#services
+S2,G04,Фотозоны,изготовить фотозону по макету,hot,1,https://sm-production.ru/b2b#services
+S2,G05,Пресс-воллы,пресс волл изготовление москва,hot,1,https://sm-production.ru/b2b#services
+S2,G05,Пресс-воллы,пресс волл с монтажом москва,hot,1,https://sm-production.ru/b2b#services
+S2,G05,Пресс-воллы,press wall изготовление москва,hot,1,https://sm-production.ru/b2b#services
+S2,G05,Пресс-воллы,бренд волл изготовление,hot,1,https://sm-production.ru/b2b#services
+S2,G05,Пресс-воллы,пресс волл для мероприятия,commercial,2,https://sm-production.ru/b2b#services
+S2,G05,Пресс-воллы,пресс волл изготовление и монтаж,hot,1,https://sm-production.ru/b2b#services
+S2,G06,Навигация и регистрация,навигация для мероприятий изготовление,hot,1,https://sm-production.ru/b2b#services
+S2,G06,Навигация и регистрация,указатели для мероприятия изготовление,commercial,2,https://sm-production.ru/b2b#services
+S2,G06,Навигация и регистрация,оформление зоны регистрации мероприятия,commercial,2,https://sm-production.ru/b2b#services
+S2,G06,Навигация и регистрация,брендирование зоны регистрации,commercial,2,https://sm-production.ru/b2b#services
+S2,G06,Навигация и регистрация,информационные стенды для мероприятия,commercial,2,https://sm-production.ru/b2b#services
+S2,G07,Выставки и конференции,изготовление стендов для мероприятий,hot,1,https://sm-production.ru/b2b#services
+S2,G07,Выставки и конференции,выставочные конструкции на заказ москва,hot,1,https://sm-production.ru/b2b#services
+S2,G07,Выставки и конференции,оформление конференции москва,commercial,2,https://sm-production.ru/b2b#services
+S2,G07,Выставки и конференции,оформление выставочного пространства,commercial,2,https://sm-production.ru/b2b#services
+S2,G07,Выставки и конференции,брендирование выставочного стенда,commercial,2,https://sm-production.ru/b2b#services
+S2,G07,Выставки и конференции,изготовление конструкций для выставки,hot,1,https://sm-production.ru/b2b#services
+S2,G08,Печать и брендирование,широкоформатная печать для мероприятий,hot,1,https://sm-production.ru/b2b#services
+S2,G08,Печать и брендирование,печать баннеров для мероприятия москва,commercial,2,https://sm-production.ru/b2b#services
+S2,G08,Печать и брендирование,печать декораций для мероприятия,commercial,2,https://sm-production.ru/b2b#services
+S2,G08,Печать и брендирование,брендирование конструкций для мероприятия,hot,1,https://sm-production.ru/b2b#services
+S2,G08,Печать и брендирование,оформление сцены баннерами,commercial,2,https://sm-production.ru/b2b#services
+S2,G09,Срочное производство,срочное изготовление фотозоны москва,hot,1,https://sm-production.ru/b2b#brief
+S2,G09,Срочное производство,срочная печать для мероприятия,hot,1,https://sm-production.ru/b2b#brief
+S2,G09,Срочное производство,срочное изготовление пресс волла,hot,1,https://sm-production.ru/b2b#brief
+S2,G09,Срочное производство,срочное оформление мероприятия москва,hot,1,https://sm-production.ru/b2b#brief
+S2,G10,Монтаж,монтаж конструкций для мероприятий,hot,1,https://sm-production.ru/b2b#services
+S2,G10,Монтаж,монтаж оформления мероприятия москва,hot,1,https://sm-production.ru/b2b#services
+S2,G10,Монтаж,ночной монтаж декораций москва,commercial,2,https://sm-production.ru/b2b#services
+S2,G10,Монтаж,монтаж и демонтаж фотозоны,commercial,2,https://sm-production.ru/b2b#services
+S2,G10,Монтаж,монтаж рекламных конструкций на мероприятии,commercial,2,https://sm-production.ru/b2b#services

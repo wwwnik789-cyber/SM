@@ -1,0 +1,5 @@
+campaign_id,campaign_name,placement,monthly_budget_rub,priority,primary_goal,audience_or_intent,landing,schedule,launch_rule
+S1,SM_B2B_MSK_SEARCH_PARTNER_2026,search,72000,1,b2b_form_submit,Ищут производственного подрядчика или партнера для мероприятия,https://sm-production.ru/b2b,08:00-22:00 ежедневно,Запуск в первый день
+S2,SM_B2B_MSK_SEARCH_SERVICES_2026,search,30000,2,b2b_form_submit,Ищут конкретное производство или оформление для мероприятия,https://sm-production.ru/b2b,08:00-22:00 ежедневно,Запуск в первый день
+N1,SM_B2B_MSK_RSYA_RETARGET_2026,network,12000,3,b2b_form_submit,Посетители B2B портфолио и производства без отправленной формы,https://sm-production.ru/b2b,08:00-23:00 ежедневно,Включить после накопления аудитории
+R1,SM_B2B_MSK_RESERVE_2026,reserve,6000,4,qualified,Резерв на работающие группы и новые точные запросы,https://sm-production.ru/b2b,по решению,Не тратить до первой еженедельной проверки
