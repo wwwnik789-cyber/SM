@@ -21,6 +21,14 @@ def check_url(value: str) -> None:
 
 
 def main() -> None:
+    for relative in (
+        "roles-and-ownership.md",
+        "amocrm-setup.md",
+        "presentation-adaptation-brief.md",
+        "source/SM-Production-dealership-reference.pdf",
+    ):
+        assert (ROOT / relative).is_file(), relative
+
     required = [
         "campaign-structure.csv",
         "keywords.csv",
