@@ -1,15 +1,17 @@
-ANIKOM ARENA vector logo QA
-================================
+ANIKOM ARENA clean vector reconstruction QA
+============================================
 Source canvas: 880 × 1184 px
 Source visible alpha bounds: (25, 174, 861, 997)
+Vector visible alpha bounds: (25, 176, 861, 995)
 Tight vector canvas: 836 × 823
 Vector paths: 61
-Threshold-mask IoU at source resolution: 0.965910
-Threshold-mask mismatched pixels: 4301
-Mean alpha error (0–255): 1.095694
-Rendered vector alpha bounds: (26, 175, 860, 996)
+Source/vector connected components: 61 / 61
+Mean component-center drift: 0.621 px
+Maximum component-center drift: 0.824 px
+Mean white-area ratio: 0.972
+Typography: rebuilt as clean Montserrat outlines
+Custom bracket marks: 4 oversampled spline outlines
 Embedded raster images: none
-Text/font dependencies: none
+Live text/font dependencies: none
 Background: transparent
 Artwork fill: #FFFFFF
-Distorting transforms: none (path-local translations only)
