@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build a premium automotive New Year ornament sheet with editable client-logo zones."""
+"""Build a restrained premium automotive New Year ornament sheet.
+
+Revision 2 replaces the earlier icon-like treatment with precise automotive
+silhouettes, thin metallic detailing, deep red and evergreen fields, and
+architectural fir-tree motifs. Client artwork is intentionally not included.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -10,35 +15,48 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "dealership-new-year-ornaments-16.svg"
 
-MIDNIGHT = "#061523"
-NAVY = "#0B2544"
-GRAPHITE = "#1F2D3D"
-STEEL = "#64788E"
-SILVER = "#C7D4DF"
-ICE = "#EAF8FF"
-WHITE = "#FFFFFF"
-BLUE = "#1F6FE5"
-CYAN = "#67D8FF"
-GOLD = "#C7AA6A"
-RED = "#A82A43"
+INK = "#101820"
+GRAPHITE = "#26323B"
+CHARCOAL = "#182229"
+GREEN_DARK = "#082C24"
+GREEN = "#0C4A36"
+GREEN_LIGHT = "#2E6B4D"
+BURGUNDY = "#651725"
+RED_DARK = "#831B2A"
+RED = "#B82132"
+RED_LIGHT = "#D74A52"
+SILVER_DARK = "#7E898D"
+SILVER = "#C5CCCA"
+PEARL = "#EDF0EB"
+IVORY = "#F5F0E5"
+GOLD_DARK = "#8A6B34"
+GOLD = "#C4A15D"
+GOLD_LIGHT = "#E2C982"
+ICE = "#DCE9E5"
 CUT = "#FF00FF"
 
 DEFS = f"""
 <defs>
-  <linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="{GRAPHITE}"/><stop offset="0.52" stop-color="{NAVY}"/><stop offset="1" stop-color="{MIDNIGHT}"/>
+  <linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="{GREEN_LIGHT}"/><stop offset="0.48" stop-color="{GREEN}"/><stop offset="1" stop-color="{GREEN_DARK}"/>
   </linearGradient>
-  <linearGradient id="gSteel" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="{WHITE}"/><stop offset="0.46" stop-color="{SILVER}"/><stop offset="1" stop-color="{STEEL}"/>
+  <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="{RED_LIGHT}"/><stop offset="0.45" stop-color="{RED}"/><stop offset="1" stop-color="{BURGUNDY}"/>
   </linearGradient>
-  <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="{CYAN}"/><stop offset="0.45" stop-color="{BLUE}"/><stop offset="1" stop-color="{NAVY}"/>
+  <linearGradient id="gBurgundy" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="{RED_DARK}"/><stop offset="1" stop-color="{BURGUNDY}"/>
+  </linearGradient>
+  <linearGradient id="gGraphite" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#3C4A52"/><stop offset="0.48" stop-color="{GRAPHITE}"/><stop offset="1" stop-color="{INK}"/>
+  </linearGradient>
+  <linearGradient id="gSilver" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="{IVORY}"/><stop offset="0.32" stop-color="{SILVER}"/><stop offset="0.62" stop-color="{PEARL}"/><stop offset="1" stop-color="{SILVER_DARK}"/>
   </linearGradient>
   <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#F1DCA3"/><stop offset="0.5" stop-color="{GOLD}"/><stop offset="1" stop-color="#8F7445"/>
+    <stop offset="0" stop-color="{GOLD_LIGHT}"/><stop offset="0.52" stop-color="{GOLD}"/><stop offset="1" stop-color="{GOLD_DARK}"/>
   </linearGradient>
-  <radialGradient id="gIce" cx="35%" cy="28%" r="78%">
-    <stop offset="0" stop-color="{WHITE}"/><stop offset="0.55" stop-color="{ICE}"/><stop offset="1" stop-color="{CYAN}"/>
+  <radialGradient id="gGlass" cx="34%" cy="22%" r="82%">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity=".88"/><stop offset="0.38" stop-color="{ICE}" stop-opacity=".62"/><stop offset="1" stop-color="#668A82" stop-opacity=".30"/>
   </radialGradient>
 </defs>
 """
@@ -76,8 +94,8 @@ def star_points(cx: float, cy: float, outer: float, inner: float, count: int = 5
     return " ".join(points)
 
 
-def snowflake(cx: float, cy: float, radius: float, color: str = WHITE, width: float = 3.2, opacity: float = .8) -> str:
-    arm = f'<path d="M0 0 V-{radius} M0 -{radius*.48:.2f} L-{radius*.20:.2f} -{radius*.67:.2f} M0 -{radius*.48:.2f} L{radius*.20:.2f} -{radius*.67:.2f}"/>'
+def snowflake(cx: float, cy: float, radius: float, color: str = IVORY, width: float = 1.5, opacity: float = .7) -> str:
+    arm = f'<path d="M0 0 V-{radius} M0 -{radius*.48:.2f} L-{radius*.18:.2f} -{radius*.64:.2f} M0 -{radius*.48:.2f} L{radius*.18:.2f} -{radius*.64:.2f}"/>'
     return (
         f'<g transform="translate({cx} {cy})" fill="none" stroke="{color}" stroke-width="{width}" stroke-linecap="round" opacity="{opacity}">'
         + "".join(f'<g transform="rotate({i*60})">{arm}</g>' for i in range(6))
@@ -85,50 +103,76 @@ def snowflake(cx: float, cy: float, radius: float, color: str = WHITE, width: fl
     )
 
 
-def winter_dots() -> str:
+def fir_tree(x: float, y: float, scale: float = 1.0, fill: str = GREEN_DARK, accent: str = GOLD) -> str:
     return f'''
-<g fill="{WHITE}" opacity=".76">
-  <circle cx="72" cy="82" r="4"/><circle cx="230" cy="94" r="5"/><circle cx="56" cy="174" r="3.5"/>
-  <circle cx="241" cy="198" r="4"/><circle cx="102" cy="244" r="3"/><circle cx="204" cy="250" r="3.5"/>
+<g transform="translate({x} {y}) scale({scale})">
+  <path d="M0 -56 L-20 -25 H-11 L-32 8 H-20 L-46 48 H46 L20 8 H32 L11 -25 H20 Z" fill="{fill}"/>
+  <path d="M0 -48 V44" stroke="{accent}" stroke-width="2" opacity=".65"/>
+  <path d="M-16 -23 H16 M-27 7 H27 M-39 39 H39" stroke="{accent}" stroke-width="1.5" opacity=".5"/>
+  <rect x="-5" y="48" width="10" height="14" fill="{GOLD_DARK}"/>
 </g>'''
 
 
+def fir_branch(x: float, y: float, angle: float = 0, scale: float = 1.0) -> str:
+    needles: list[str] = []
+    for i in range(7):
+        px = 9 + i * 12
+        length = 18 - i * 1.25
+        needles.append(f'<path d="M{px} 0 l{-length*.62:.2f} {-length:.2f} M{px} 0 l{-length*.28:.2f} {length:.2f}"/>')
+    return f'''
+<g transform="translate({x} {y}) rotate({angle}) scale({scale})" fill="none" stroke="{GREEN_LIGHT}" stroke-width="3" stroke-linecap="round">
+  <path d="M0 0 C28 -2 56 1 88 0" stroke="{GOLD_DARK}" stroke-width="2"/>
+  {''.join(needles)}
+  <circle cx="27" cy="-11" r="4" fill="{RED}" stroke="none"/><circle cx="54" cy="12" r="3.5" fill="{RED_LIGHT}" stroke="none"/>
+</g>'''
+
+
+def sparkle_field() -> str:
+    return f'''
+<g fill="{IVORY}" opacity=".72">
+  <circle cx="71" cy="83" r="2.2"/><circle cx="229" cy="99" r="2.8"/><circle cx="59" cy="183" r="1.8"/>
+  <circle cx="239" cy="201" r="2.1"/><circle cx="111" cy="247" r="1.7"/><circle cx="204" cy="244" r="2"/>
+</g>'''
+
+
+# Closed technical outlines. Forms remain manufacturable while the visual language is
+# intentionally quieter than the first revision: finer borders and cleaner geometry.
 OUTERS = [
-    '<path d="M132 44 V28 Q132 12 150 12 Q168 12 168 28 V44 C199 50 218 75 228 115 L252 122 Q268 125 268 143 V205 Q268 225 248 225 H235 V258 H194 V232 H106 V258 H65 V225 H52 Q32 225 32 205 V143 Q32 125 48 122 L72 115 C82 75 101 50 132 44 Z"/>',
-    '<path d="M132 53 V34 Q132 16 150 16 Q168 16 168 34 V53 H198 L232 100 H260 Q276 100 276 118 V208 Q276 227 257 227 H239 Q233 260 202 260 Q171 260 165 227 H116 Q110 260 79 260 Q48 260 42 227 H27 Q18 227 18 208 V133 Q18 117 33 112 L75 100 L101 70 Q113 53 132 53 Z"/>',
-    '<path d="M132 55 V36 Q132 18 150 18 Q168 18 168 36 V55 H184 L224 96 L265 112 Q280 118 280 137 V207 Q280 229 258 229 H241 Q234 260 204 260 Q174 260 167 229 H112 Q105 260 75 260 Q45 260 38 229 H24 Q16 229 16 211 V150 Q16 129 36 120 L78 105 L111 68 Q121 55 132 55 Z"/>',
-    '<path d="M132 45 V29 Q132 13 150 13 Q168 13 168 29 V45 C220 54 255 95 255 151 C255 217 208 270 150 270 C92 270 45 217 45 151 C45 95 80 54 132 45 Z"/>',
-    '<path d="M128 40 V27 Q128 11 146 11 Q164 11 164 27 V40 C205 48 226 78 226 119 V226 Q226 270 182 278 H112 Q68 270 68 226 V119 Q68 78 109 48 Z"/>',
-    '<path d="M130 44 V29 Q130 13 148 13 Q166 13 166 29 V44 C120 52 86 83 76 125 C67 165 84 202 119 222 L168 270 H202 V239 H229 V212 H258 V181 H216 L176 141 C182 97 160 59 130 44 Z"/>',
-    '<path d="M132 44 V28 Q132 12 150 12 Q168 12 168 28 V44 C224 53 263 99 263 158 C263 224 213 274 150 274 C87 274 37 224 37 158 C37 99 76 53 132 44 Z"/>',
-    '<path d="M132 44 V28 Q132 12 150 12 Q168 12 168 28 V44 C224 53 263 99 263 158 C263 224 213 274 150 274 C87 274 37 224 37 158 C37 99 76 53 132 44 Z"/>',
-    '<path d="M130 47 V29 Q130 13 150 13 Q170 13 170 29 V47 H239 Q263 47 263 71 V247 Q263 271 239 271 H61 Q37 271 37 247 V71 Q37 47 61 47 Z"/>',
-    '<path d="M132 44 V28 Q132 12 150 12 Q168 12 168 28 V44 C224 53 263 99 263 158 C263 224 213 274 150 274 C87 274 37 224 37 158 C37 99 76 53 132 44 Z"/>',
-    '<path d="M150 72 C119 42 96 42 84 61 C72 82 89 103 123 104 L102 119 C77 91 50 84 38 101 Q24 121 43 136 L70 155 C57 173 50 195 52 218 Q54 242 77 242 H223 Q246 242 248 218 C250 195 243 173 230 155 L257 136 Q276 121 262 101 Q250 84 223 91 L198 119 L177 104 C211 103 228 82 216 61 C204 42 181 42 150 72 Z"/>',
-    '<path d="M150 60 C119 32 95 32 85 51 C73 74 91 94 126 95 H54 V276 H246 V95 H174 C209 94 227 74 215 51 C205 32 181 32 150 60 Z"/>',
-    '<path d="M132 42 V27 Q132 11 150 11 Q168 11 168 27 V42 L261 123 V274 H39 V123 Z"/>',
-    '<path d="M132 47 V30 Q132 13 150 13 Q168 13 168 30 V47 C222 57 257 101 257 159 C257 202 238 232 215 250 L230 283 H70 L85 250 C62 232 43 202 43 159 C43 101 78 57 132 47 Z"/>',
-    '<path d="M132 43 V28 Q132 12 150 12 Q168 12 168 28 V43 L247 82 V178 Q247 235 150 280 Q53 235 53 178 V82 Z"/>',
-    '<path d="M132 45 V29 Q132 13 150 13 Q168 13 168 29 V45 C222 54 257 96 257 153 C257 219 210 271 150 271 C90 271 43 219 43 153 C43 96 78 54 132 45 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M136 51 V34 Q136 18 150 18 Q164 18 164 34 V51 H198 L231 94 H260 Q276 94 276 111 V215 Q276 231 260 231 H239 Q232 261 204 261 Q176 261 169 231 H113 Q106 261 78 261 Q50 261 43 231 H25 Q18 231 18 214 V131 Q18 115 34 109 L72 96 L102 65 Q116 51 136 51 Z"/>',
+    '<path d="M136 54 V36 Q136 20 150 20 Q164 20 164 36 V54 H183 L224 95 L263 111 Q280 118 280 136 V210 Q280 230 260 230 H240 Q233 260 204 260 Q175 260 168 230 H111 Q104 260 75 260 Q46 260 39 230 H23 Q16 230 16 212 V149 Q16 130 35 120 L77 104 L112 66 Q122 54 136 54 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M134 40 V27 Q134 13 148 13 Q162 13 162 27 V40 C201 47 224 75 224 116 V228 Q224 264 188 276 H108 Q72 264 72 228 V116 Q72 75 111 47 Z"/>',
+    '<path d="M133 43 V29 Q133 15 147 15 Q161 15 161 29 V43 C120 50 89 80 79 121 C70 157 83 194 116 216 L171 270 H203 V241 H230 V214 H259 V184 H218 L177 143 C184 100 163 59 133 43 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M135 46 V29 Q135 15 150 15 Q165 15 165 29 V46 H239 Q262 46 262 69 V247 Q262 270 239 270 H61 Q38 270 38 247 V69 Q38 46 61 46 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
+    '<path d="M136 42 V28 Q136 14 150 14 Q164 14 164 28 V42 L260 120 V272 H40 V120 Z"/>',
+    '<path d="M136 46 V30 Q136 15 150 15 Q164 15 164 30 V46 C218 54 257 99 257 158 C257 201 238 230 216 248 L230 282 H70 L84 248 C62 230 43 201 43 158 C43 99 82 54 136 46 Z"/>',
+    '<path d="M136 39 V27 Q136 13 150 13 Q164 13 164 27 V39 L181 61 H169 L204 104 H188 L228 155 H207 L252 215 H175 V273 H125 V215 H48 L93 155 H72 L112 104 H96 L131 61 H119 Z"/>',
+    '<path d="M136 43 V28 Q136 14 150 14 Q164 14 164 28 V43 C218 50 259 96 259 157 C259 222 211 270 150 270 C89 270 41 222 41 157 C41 96 82 50 136 43 Z"/>',
 ]
 
 SPECS = [
-    ("sedan-front", "Седан — вид спереди", 150, 29, "gNavy"),
-    ("suv-side", "SUV — профиль", 150, 35, "gSteel"),
-    ("sport-coupe", "Спорткупе", 150, 37, "gNavy"),
-    ("electric-crossover", "Электрокроссовер", 150, 30, "gBlue"),
-    ("key-fob", "Брелок ключа", 146, 28, "gNavy"),
-    ("classic-key", "Ключ", 148, 30, "gSteel"),
-    ("alloy-wheel", "Легкосплавный диск", 150, 29, "gNavy"),
-    ("winter-tire", "Колесо", 150, 29, "gSteel"),
-    ("speedometer", "Приборная панель", 150, 29, "gNavy"),
-    ("steering-wheel", "Рулевое колесо", 150, 29, "gBlue"),
-    ("delivery-car", "Выдача автомобиля", 150, 84, "gNavy"),
-    ("gift-and-key", "Подарок и ключ", 150, 74, "gBlue"),
-    ("showroom", "Фасад автосалона", 150, 28, "gNavy"),
-    ("car-snow-globe", "Снежный шар с автомобилем", 150, 30, "gBlue"),
-    ("route-shield", "Маршрутный шильд", 150, 29, "gNavy"),
-    ("tread-bauble", "Шар с протектором", 150, 30, "gSteel"),
+    ("sedan-medallion", "Премиальный седан и еловые ветви", 150, 29, "gGreen"),
+    ("suv-winter-forest", "SUV в зимнем хвойном пейзаже", 150, 35, "gGreen"),
+    ("grand-tourer", "Спортивное купе", 150, 37, "gBurgundy"),
+    ("electric-crossover", "Электрокроссовер", 150, 29, "gGraphite"),
+    ("key-fob", "Премиальный брелок", 148, 28, "gBurgundy"),
+    ("classic-key", "Автомобильный ключ", 147, 30, "gGreen"),
+    ("alloy-wheel", "Легкосплавный диск", 150, 29, "gGraphite"),
+    ("winter-tire", "Зимнее колесо и хвоя", 150, 29, "gGreen"),
+    ("instrument-cluster", "Приборная панель", 150, 29, "gGraphite"),
+    ("steering-wreath", "Руль в хвойном венке", 150, 29, "gGreen"),
+    ("delivery-car", "Выдача автомобиля", 150, 29, "gBurgundy"),
+    ("gift-key-medallion", "Ключ и подарочная лента", 150, 29, "gGreen"),
+    ("showroom", "Фасад автосалона с ёлками", 150, 29, "gGraphite"),
+    ("car-snow-globe", "Снежный шар с автомобилем и ёлкой", 150, 30, "gGreen"),
+    ("fir-route", "Ёлка с автомобильным маршрутом", 150, 28, "gGreen"),
+    ("tread-bauble", "Шар с протектором и еловой ветвью", 150, 29, "gBurgundy"),
 ]
 
 ORNAMENTS = [
@@ -137,151 +181,201 @@ ORNAMENTS = [
 ]
 
 
-def car_front() -> str:
+def sedan_front() -> str:
     return f'''
-<path d="M83 119 Q96 72 150 65 Q204 72 217 119" fill="none" stroke="{ICE}" stroke-width="7"/>
-<path d="M87 122 H213 L225 198 H75 Z" fill="url(#gSteel)" stroke="{WHITE}" stroke-width="5"/>
-<path d="M108 92 H192 L207 122 H93 Z" fill="{NAVY}"/>
-<path d="M92 151 H126 M174 151 H208" stroke="{CYAN}" stroke-width="10" stroke-linecap="round"/>
-<path d="M109 180 H191" stroke="{GRAPHITE}" stroke-width="12" stroke-linecap="round"/>
-<path d="M92 217 V244 M208 217 V244" stroke="{GRAPHITE}" stroke-width="16"/>
-{snowflake(55,90,19,CYAN,2.5,.55)}{snowflake(238,83,14,WHITE,2.2,.45)}'''
+<path d="M87 145 C92 106 111 82 150 76 C189 82 208 106 213 145" fill="none" stroke="{SILVER}" stroke-width="4"/>
+<path d="M91 140 H209 L220 205 H80 Z" fill="url(#gSilver)" stroke="{INK}" stroke-width="3"/>
+<path d="M111 96 H189 L202 137 H98 Z" fill="{CHARCOAL}" stroke="{SILVER_DARK}" stroke-width="2"/>
+<path d="M91 158 H121 M179 158 H209" stroke="{IVORY}" stroke-width="6" stroke-linecap="round"/>
+<path d="M106 178 H194 L187 199 H113 Z" fill="{INK}"/>
+<path d="M118 182 H182 M116 188 H184 M115 194 H185" stroke="{SILVER_DARK}" stroke-width="1.5"/>
+<path d="M94 207 V229 M206 207 V229" stroke="{INK}" stroke-width="12"/>
+'''
 
 
-def car_side(sport: bool = False) -> str:
-    roof = "M76 113 L112 73 H178 L218 112" if not sport else "M72 119 L118 80 H182 L226 117"
-    body = "M34 121 H236 L260 143 V206 H36 L20 187 V145 Z" if not sport else "M29 126 H243 L270 144 V204 H30 L16 187 V150 Z"
+def vehicle_side(body: str = "url(#gSilver)", sport: bool = False) -> str:
+    if sport:
+        body_path = "M35 168 C51 151 71 145 96 140 L124 104 C132 94 143 89 158 89 H185 C199 91 211 103 224 126 L253 143 C264 149 271 159 271 176 V196 H31 V180 C31 175 32 171 35 168 Z"
+        glass = "M108 137 L132 106 H160 L184 137 Z M166 106 H183 C193 108 204 118 214 137 H190 Z"
+    else:
+        body_path = "M28 164 C41 150 64 144 91 140 L116 99 C122 90 133 85 147 85 H190 C203 87 214 97 227 128 L258 144 C269 149 275 159 275 174 V201 H23 V178 C23 172 25 167 28 164 Z"
+        glass = "M102 137 L124 100 H150 V137 Z M157 100 H187 C197 103 207 113 217 137 H157 Z"
     return f'''
-<path d="{roof}" fill="none" stroke="{ICE}" stroke-width="8" stroke-linejoin="round"/>
-<path d="{body}" fill="url(#gBlue)" stroke="{WHITE}" stroke-width="5" stroke-linejoin="round"/>
-<path d="M107 84 H174 L203 117 H80 Z" fill="{NAVY}" opacity=".92"/>
-<circle cx="80" cy="210" r="29" fill="{GRAPHITE}" stroke="{SILVER}" stroke-width="7"/><circle cx="202" cy="210" r="29" fill="{GRAPHITE}" stroke="{SILVER}" stroke-width="7"/>
-<circle cx="80" cy="210" r="10" fill="{CYAN}"/><circle cx="202" cy="210" r="10" fill="{CYAN}"/>
-<path d="M42 150 H76 M229 150 H259" stroke="{CYAN}" stroke-width="9" stroke-linecap="round"/>
-<path d="M22 178 H260" stroke="{WHITE}" stroke-width="3" opacity=".58"/>
-{snowflake(54,76,14,WHITE,2.3,.5)}'''
+<path d="{body_path}" fill="{body}" stroke="{INK}" stroke-width="3" stroke-linejoin="round"/>
+<path d="{glass}" fill="{CHARCOAL}" stroke="{SILVER_DARK}" stroke-width="2"/>
+<path d="M36 171 H72 M232 155 H262" stroke="{IVORY}" stroke-width="5" stroke-linecap="round"/>
+<path d="M52 184 H247" stroke="{GOLD}" stroke-width="2" opacity=".85"/>
+<circle cx="81" cy="202" r="27" fill="{INK}" stroke="{SILVER}" stroke-width="5"/><circle cx="81" cy="202" r="10" fill="{GRAPHITE}" stroke="{GOLD}" stroke-width="2"/>
+<circle cx="215" cy="202" r="27" fill="{INK}" stroke="{SILVER}" stroke-width="5"/><circle cx="215" cy="202" r="10" fill="{GRAPHITE}" stroke="{GOLD}" stroke-width="2"/>
+'''
 
 
 def ornament_art(index: int) -> str:
     art = {
-        1: car_front(),
-        2: car_side(False),
-        3: car_side(True),
+        1: f'''
+<circle cx="150" cy="157" r="101" fill="url(#gGreen)"/>
+<circle cx="150" cy="157" r="91" fill="none" stroke="{GOLD}" stroke-width="2" opacity=".8"/>
+{fir_branch(48,110,68,.75)}{fir_branch(252,111,112,.75)}
+{sedan_front()}
+<path d="M65 230 Q150 250 235 230" fill="none" stroke="{GOLD}" stroke-width="2"/>
+{snowflake(213,77,11,IVORY,1.2,.6)}''',
+        2: f'''
+<path d="M22 127 H274 V224 H22 Z" fill="{GREEN_DARK}"/>
+{fir_tree(51,130,.62,GREEN_LIGHT,GOLD_DARK)}{fir_tree(244,129,.72,GREEN_DARK,GOLD)}
+<path d="M21 208 Q90 186 151 205 T276 204 V235 H18 Z" fill="{IVORY}" opacity=".9"/>
+{vehicle_side('url(#gSilver)', False)}
+<path d="M35 175 H265" stroke="{RED}" stroke-width="3"/>
+{snowflake(67,76,10,IVORY,1.2,.65)}{snowflake(227,83,8,IVORY,1.1,.55)}''',
+        3: f'''
+<path d="M18 119 H280 V224 H18 Z" fill="{BURGUNDY}"/>
+<path d="M20 210 Q112 190 280 201 V232 H18 Z" fill="{GREEN_DARK}"/>
+{vehicle_side('url(#gRed)', True)}
+<path d="M54 73 H246" stroke="{GOLD}" stroke-width="2" opacity=".75"/>
+<path d="M73 67 H227" stroke="{IVORY}" stroke-width="1" opacity=".5"/>
+{snowflake(51,95,10,IVORY,1.2,.55)}''',
         4: f'''
-<circle cx="150" cy="153" r="94" fill="url(#gNavy)" stroke="{ICE}" stroke-width="5"/>
-<path d="M71 178 Q94 133 154 126 Q209 129 230 171 L218 205 H81 Z" fill="url(#gSteel)" stroke="{WHITE}" stroke-width="5"/>
-<path d="M103 139 H180 L204 170 H85 Z" fill="{NAVY}"/>
-<circle cx="105" cy="204" r="20" fill="{GRAPHITE}" stroke="{CYAN}" stroke-width="5"/><circle cx="202" cy="204" r="20" fill="{GRAPHITE}" stroke="{CYAN}" stroke-width="5"/>
-<path d="M69 114 C46 106 43 78 62 68 C80 58 99 70 98 88 C97 103 82 111 69 114 Z M62 68 L46 48" fill="none" stroke="{CYAN}" stroke-width="7" stroke-linecap="round"/>
-<path d="M43 43 H55 V55" fill="none" stroke="{CYAN}" stroke-width="5"/>
-{winter_dots()}''',
+<circle cx="150" cy="157" r="101" fill="url(#gGraphite)"/>
+<circle cx="150" cy="157" r="91" fill="none" stroke="{GOLD}" stroke-width="2"/>
+<path d="M57 192 C66 164 92 148 122 144 L145 114 H184 L211 146 C228 150 242 160 247 180 L238 204 H64 Z" fill="url(#gSilver)" stroke="{INK}" stroke-width="3"/>
+<path d="M135 141 L151 119 H181 L198 144 Z" fill="{GREEN_DARK}"/>
+<circle cx="101" cy="203" r="20" fill="{INK}" stroke="{SILVER}" stroke-width="4"/><circle cx="207" cy="203" r="20" fill="{INK}" stroke="{SILVER}" stroke-width="4"/>
+<path d="M74 178 H104 M218 174 H241" stroke="{IVORY}" stroke-width="5" stroke-linecap="round"/>
+<path d="M54 126 C31 116 34 86 54 79 C74 72 90 89 83 107 C78 120 66 125 54 126 Z M51 79 L38 61" fill="none" stroke="{RED}" stroke-width="4" stroke-linecap="round"/>
+<path d="M35 57 H45 V68" fill="none" stroke="{GOLD}" stroke-width="3"/>
+{fir_tree(218,96,.38,GREEN,GOLD)}''',
         5: f'''
-<rect x="82" y="70" width="136" height="183" rx="48" fill="url(#gNavy)" stroke="{WHITE}" stroke-width="6"/>
-<path d="M103 111 H197 M103 141 H197 M103 213 H197" stroke="{SILVER}" stroke-width="5" stroke-linecap="round"/>
-<circle cx="112" cy="126" r="8" fill="{CYAN}"/><circle cx="188" cy="126" r="8" fill="{GOLD}"/>
-<path d="M115 238 Q150 254 185 238" fill="none" stroke="{CYAN}" stroke-width="5"/>
-{snowflake(150,181,24,ICE,3,.55)}''',
+<rect x="84" y="62" width="128" height="196" rx="42" fill="url(#gGraphite)" stroke="{GOLD}" stroke-width="3"/>
+<rect x="94" y="74" width="108" height="172" rx="34" fill="{BURGUNDY}" stroke="{RED_LIGHT}" stroke-width="2"/>
+<path d="M111 112 H185 M111 136 H185" stroke="{SILVER}" stroke-width="3" stroke-linecap="round"/>
+<circle cx="117" cy="124" r="5" fill="{GREEN_LIGHT}"/><circle cx="179" cy="124" r="5" fill="{RED_LIGHT}"/>
+<path d="M117 219 Q148 235 179 219" fill="none" stroke="{GOLD}" stroke-width="2"/>
+{fir_branch(102,189,-9,.52)}
+''',
         6: f'''
-<circle cx="119" cy="116" r="59" fill="url(#gNavy)" stroke="{WHITE}" stroke-width="6"/>
-<circle cx="119" cy="116" r="24" fill="none" stroke="{CYAN}" stroke-width="6"/>
-<path d="M157 146 L220 209 H250 V235 H223 V258 H196 L128 190" fill="url(#gSteel)" stroke="{WHITE}" stroke-width="6" stroke-linejoin="round"/>
-<path d="M174 169 L203 198 M195 154 L220 179" stroke="{BLUE}" stroke-width="5"/>
-{snowflake(81,80,14,WHITE,2.4,.52)}''',
+<circle cx="119" cy="116" r="56" fill="url(#gGraphite)" stroke="{GOLD}" stroke-width="3"/>
+<circle cx="119" cy="116" r="29" fill="{GREEN_DARK}" stroke="{SILVER}" stroke-width="3"/>
+<circle cx="119" cy="116" r="13" fill="{BURGUNDY}"/>
+<path d="M157 146 L220 209 H251 V235 H224 V258 H198 L129 190 Z" fill="url(#gSilver)" stroke="{INK}" stroke-width="3" stroke-linejoin="round"/>
+<path d="M171 166 L203 198 M191 150 L219 178" stroke="{RED}" stroke-width="3"/>
+{fir_branch(62,67,12,.5)}''',
         7: f'''
-<circle cx="150" cy="158" r="103" fill="{GRAPHITE}" stroke="{WHITE}" stroke-width="7"/>
-<circle cx="150" cy="158" r="82" fill="url(#gSteel)" stroke="{CYAN}" stroke-width="4"/>
-<g fill="{NAVY}" stroke="{ICE}" stroke-width="3">
-  <path d="M150 157 L132 82 L150 67 L168 82 Z"/><path d="M150 157 L217 114 L233 130 L210 160 Z"/>
-  <path d="M150 157 L196 218 L181 236 L149 184 Z"/><path d="M150 157 L103 218 L83 207 L123 169 Z"/>
-  <path d="M150 157 L74 126 L81 104 L134 137 Z"/>
+<circle cx="150" cy="157" r="101" fill="{INK}" stroke="{GOLD}" stroke-width="3"/>
+<circle cx="150" cy="157" r="84" fill="url(#gSilver)" stroke="{SILVER_DARK}" stroke-width="2"/>
+<circle cx="150" cy="157" r="69" fill="{GRAPHITE}"/>
+<g fill="url(#gSilver)" stroke="{INK}" stroke-width="2">
+  <path d="M150 157 L137 84 Q150 74 163 84 Z"/><path d="M150 157 L213 113 Q226 121 226 137 Z"/>
+  <path d="M150 157 L202 211 Q195 226 179 231 Z"/><path d="M150 157 L104 220 Q88 216 80 201 Z"/>
+  <path d="M150 157 L76 130 Q76 114 89 103 Z"/>
 </g>
-<circle cx="150" cy="158" r="35" fill="{GRAPHITE}" stroke="{WHITE}" stroke-width="5"/>
-{snowflake(229,74,13,CYAN,2,.48)}''',
+<circle cx="150" cy="157" r="36" fill="{INK}" stroke="{GOLD}" stroke-width="3"/>
+<circle cx="150" cy="157" r="22" fill="{GREEN_DARK}"/>
+<g fill="{SILVER}"><circle cx="150" cy="124" r="3"/><circle cx="181" cy="147" r="3"/><circle cx="169" cy="184" r="3"/><circle cx="131" cy="184" r="3"/><circle cx="119" cy="147" r="3"/></g>''',
         8: f'''
-<circle cx="150" cy="158" r="104" fill="{GRAPHITE}" stroke="{WHITE}" stroke-width="7"/>
-<path d="M93 77 L112 101 M126 60 L136 92 M174 60 L164 92 M207 77 L188 101 M225 118 L194 129 M225 198 L194 187 M93 239 L112 215 M207 239 L188 215" stroke="{SILVER}" stroke-width="7" stroke-linecap="round"/>
-<circle cx="150" cy="158" r="74" fill="url(#gSteel)" stroke="{CYAN}" stroke-width="5"/>
-<path d="M150 92 V224 M84 158 H216 M103 111 L197 205 M197 111 L103 205" stroke="{NAVY}" stroke-width="8"/>
-<circle cx="150" cy="158" r="33" fill="{GRAPHITE}"/>
-{winter_dots()}''',
+<circle cx="150" cy="157" r="101" fill="url(#gGreen)" stroke="{GOLD}" stroke-width="3"/>
+<circle cx="150" cy="157" r="84" fill="{INK}" stroke="{SILVER}" stroke-width="4"/>
+<path d="M91 87 L110 109 M121 67 L134 98 M179 67 L166 98 M209 87 L190 109 M232 124 L199 134 M232 190 L199 180 M91 228 L112 207 M209 228 L188 207" stroke="{SILVER}" stroke-width="6" stroke-linecap="round"/>
+<circle cx="150" cy="157" r="62" fill="url(#gGraphite)" stroke="{GOLD}" stroke-width="2"/>
+<path d="M150 100 V214 M93 157 H207 M110 117 L190 197 M190 117 L110 197" stroke="{SILVER_DARK}" stroke-width="5"/>
+<circle cx="150" cy="157" r="29" fill="{GREEN_DARK}"/>
+{fir_branch(66,68,15,.54)}''',
         9: f'''
-<rect x="54" y="66" width="192" height="185" rx="25" fill="url(#gNavy)" stroke="{WHITE}" stroke-width="6"/>
-<path d="M79 177 A71 71 0 0 1 221 177" fill="none" stroke="{SILVER}" stroke-width="13"/>
-<path d="M86 177 A64 64 0 0 1 101 137 M115 119 A64 64 0 0 1 150 109 M174 114 A64 64 0 0 1 205 141" fill="none" stroke="{CYAN}" stroke-width="6"/>
-<path d="M150 177 L196 128" stroke="{GOLD}" stroke-width="7" stroke-linecap="round"/>
-<circle cx="150" cy="177" r="13" fill="{WHITE}"/>
-{snowflake(83,86,14,WHITE,2,.45)}''',
+<rect x="52" y="64" width="196" height="190" rx="22" fill="url(#gGraphite)" stroke="{GOLD}" stroke-width="3"/>
+<path d="M76 184 A74 74 0 0 1 224 184" fill="none" stroke="{SILVER_DARK}" stroke-width="12"/>
+<path d="M83 184 A67 67 0 0 1 100 139 M117 119 A67 67 0 0 1 151 112 M180 119 A67 67 0 0 1 211 151" fill="none" stroke="{GREEN_LIGHT}" stroke-width="4"/>
+<path d="M150 184 L202 128" stroke="{RED_LIGHT}" stroke-width="5" stroke-linecap="round"/>
+<circle cx="150" cy="184" r="10" fill="{GOLD}"/>
+<g stroke="{IVORY}" stroke-width="2"><path d="M86 181 l10 -1"/><path d="M102 139 l8 6"/><path d="M132 118 l2 10"/><path d="M169 118 l-2 10"/><path d="M200 138 l-8 7"/><path d="M215 181 l-10 -1"/></g>
+{snowflake(82,87,10,IVORY,1.2,.5)}''',
         10: f'''
-<circle cx="150" cy="158" r="102" fill="{GRAPHITE}" stroke="{WHITE}" stroke-width="7"/>
-<circle cx="150" cy="158" r="75" fill="none" stroke="{SILVER}" stroke-width="17"/>
-<path d="M150 159 L103 105 M150 159 L197 105 M150 159 V226" stroke="{SILVER}" stroke-width="17" stroke-linecap="round"/>
-<circle cx="150" cy="159" r="39" fill="{NAVY}" stroke="{CYAN}" stroke-width="6"/>
-<path d="M114 239 Q150 251 186 239" fill="none" stroke="{CYAN}" stroke-width="4"/>
-{snowflake(225,82,14,WHITE,2.2,.44)}''',
+<circle cx="150" cy="157" r="101" fill="url(#gGreen)"/>
+<circle cx="150" cy="157" r="90" fill="none" stroke="{GOLD}" stroke-width="2"/>
+<g fill="none" stroke="{GREEN_LIGHT}" stroke-width="11" stroke-linecap="round" stroke-dasharray="14 7"><circle cx="150" cy="157" r="80"/></g>
+<g fill="{RED}"><circle cx="92" cy="105" r="4"/><circle cx="204" cy="112" r="4"/><circle cx="80" cy="183" r="4"/><circle cx="215" cy="184" r="4"/></g>
+<circle cx="150" cy="157" r="67" fill="{INK}" stroke="{SILVER}" stroke-width="10"/>
+<path d="M150 158 L108 111 M150 158 L192 111 M150 158 V218" stroke="{SILVER}" stroke-width="10" stroke-linecap="round"/>
+<circle cx="150" cy="158" r="35" fill="{GREEN_DARK}" stroke="{GOLD}" stroke-width="3"/>
+''',
         11: f'''
-<path d="M79 135 Q95 86 150 78 Q205 86 221 135" fill="none" stroke="{ICE}" stroke-width="7"/>
-<path d="M83 137 H217 L229 216 H71 Z" fill="url(#gSteel)" stroke="{WHITE}" stroke-width="5"/>
-<path d="M103 104 H197 L209 138 H91 Z" fill="{NAVY}"/>
-<path d="M96 166 H126 M174 166 H204" stroke="{CYAN}" stroke-width="9" stroke-linecap="round"/>
-<path d="M150 111 C119 76 91 72 83 90 C76 108 105 122 150 113 C195 122 224 108 217 90 C209 72 181 76 150 111 Z" fill="{RED}" stroke="{WHITE}" stroke-width="5"/>
-<path d="M93 224 V249 M207 224 V249" stroke="{GRAPHITE}" stroke-width="15"/>
-{snowflake(56,84,15,WHITE,2.3,.5)}''',
+<circle cx="150" cy="157" r="101" fill="url(#gBurgundy)"/>
+<circle cx="150" cy="157" r="91" fill="none" stroke="{GOLD}" stroke-width="2"/>
+{fir_branch(44,105,66,.67)}{fir_branch(255,106,114,.67)}
+{sedan_front()}
+<path d="M150 94 C129 72 106 68 98 82 C91 96 114 107 150 100 C186 107 209 96 202 82 C194 68 171 72 150 94 Z" fill="{RED}" stroke="{GOLD_LIGHT}" stroke-width="2"/>
+<path d="M145 98 L132 133 L150 124 L168 133 L155 98" fill="{RED_DARK}"/>
+''',
         12: f'''
-<rect x="59" y="101" width="182" height="170" rx="18" fill="url(#gBlue)" stroke="{WHITE}" stroke-width="6"/>
-<path d="M150 101 V271 M59 160 H241" stroke="{GOLD}" stroke-width="15"/>
-<path d="M150 95 C119 64 92 59 86 75 C81 92 107 104 150 101 C193 104 219 92 214 75 C208 59 181 64 150 95 Z" fill="url(#gGold)" stroke="{WHITE}" stroke-width="5"/>
-<path d="M103 202 C77 181 79 153 101 145 C122 137 140 153 137 173 L180 216" fill="none" stroke="{ICE}" stroke-width="10"/>
-<circle cx="103" cy="164" r="16" fill="{NAVY}" stroke="{WHITE}" stroke-width="5"/>
-{snowflake(208,219,18,WHITE,2.5,.5)}''',
+<circle cx="150" cy="157" r="101" fill="url(#gGreen)"/>
+<circle cx="150" cy="157" r="91" fill="none" stroke="{GOLD}" stroke-width="2"/>
+<path d="M74 54 H95 V260 H74 Z M205 54 H226 V260 H205 Z" fill="{BURGUNDY}" opacity=".94"/>
+<path d="M46 145 H254 V168 H46 Z" fill="{RED_DARK}" opacity=".94"/>
+<circle cx="114" cy="126" r="38" fill="url(#gGraphite)" stroke="{GOLD}" stroke-width="3"/>
+<circle cx="114" cy="126" r="16" fill="none" stroke="{SILVER}" stroke-width="4"/>
+<path d="M139 151 L197 209 H225 V229 H204 V249 H181 L126 193" fill="url(#gSilver)" stroke="{INK}" stroke-width="3"/>
+<path d="M171 180 L202 210" stroke="{RED}" stroke-width="3"/>
+{fir_branch(79,82,-8,.48)}''',
         13: f'''
-<path d="M54 129 L150 49 L246 129 V266 H54 Z" fill="url(#gNavy)" stroke="{WHITE}" stroke-width="6"/>
-<rect x="78" y="139" width="144" height="102" rx="8" fill="{GRAPHITE}" stroke="{SILVER}" stroke-width="5"/>
-<path d="M126 139 V241 M174 139 V241" stroke="{CYAN}" stroke-width="4"/>
-<path d="M62 129 Q150 102 238 129" fill="none" stroke="{ICE}" stroke-width="9"/>
-<path d="M91 222 Q109 184 150 180 Q191 184 209 222" fill="none" stroke="{WHITE}" stroke-width="5"/>
-<path d="M111 190 H189" stroke="{SILVER}" stroke-width="5"/>
-{winter_dots()}''',
+<path d="M52 127 L150 48 L248 127 V268 H52 Z" fill="url(#gGraphite)"/>
+<path d="M62 130 L150 61 L238 130" fill="none" stroke="{GOLD}" stroke-width="3"/>
+<rect x="75" y="138" width="150" height="105" rx="4" fill="{CHARCOAL}" stroke="{SILVER_DARK}" stroke-width="2"/>
+<path d="M125 138 V243 M175 138 V243" stroke="{GREEN_LIGHT}" stroke-width="3"/>
+<path d="M80 216 Q101 183 149 180 Q198 183 220 216" fill="none" stroke="{SILVER}" stroke-width="3"/>
+<path d="M103 193 H195" stroke="{SILVER_DARK}" stroke-width="2"/>
+{fir_tree(61,211,.42,GREEN,GOLD)}{fir_tree(239,211,.42,GREEN,GOLD)}
+<path d="M65 251 H235" stroke="{RED}" stroke-width="4"/>
+''',
         14: f'''
-<circle cx="150" cy="157" r="99" fill="#A7E7FF" opacity=".68" stroke="{WHITE}" stroke-width="7"/>
-<path d="M80 246 H220 L231 281 H69 Z" fill="url(#gNavy)" stroke="{WHITE}" stroke-width="6"/>
-<path d="M79 197 Q103 156 151 151 Q201 155 224 196 L213 222 H88 Z" fill="url(#gSteel)" stroke="{WHITE}" stroke-width="5"/>
-<circle cx="112" cy="219" r="17" fill="{GRAPHITE}"/><circle cx="196" cy="219" r="17" fill="{GRAPHITE}"/>
-<path d="M104 170 H186 L207 198 H84 Z" fill="{NAVY}"/>
-<circle cx="91" cy="99" r="6" fill="{WHITE}"/><circle cx="205" cy="119" r="5" fill="{WHITE}"/><circle cx="72" cy="157" r="4" fill="{WHITE}"/>''',
+<circle cx="150" cy="157" r="99" fill="url(#gGlass)" stroke="{GOLD}" stroke-width="3"/>
+<path d="M80 244 H220 L231 281 H69 Z" fill="url(#gGraphite)" stroke="{GOLD}" stroke-width="3"/>
+{fir_tree(100,174,.68,GREEN_DARK,GOLD)}
+<path d="M94 203 C106 181 125 171 153 168 L172 145 H200 L220 172 C232 176 240 184 243 198 L236 218 H96 Z" fill="url(#gSilver)" stroke="{INK}" stroke-width="3"/>
+<path d="M159 166 L178 148 H197 L211 170 Z" fill="{CHARCOAL}"/>
+<circle cx="127" cy="216" r="15" fill="{INK}"/><circle cx="210" cy="216" r="15" fill="{INK}"/>
+<g fill="{IVORY}"><circle cx="77" cy="112" r="3"/><circle cx="193" cy="89" r="3"/><circle cx="222" cy="132" r="2.4"/><circle cx="132" cy="105" r="2"/></g>
+''',
         15: f'''
-<path d="M74 94 L150 59 L226 94 V178 Q226 222 150 258 Q74 222 74 178 Z" fill="url(#gNavy)" stroke="{WHITE}" stroke-width="6"/>
-<path d="M98 132 H130 L151 112 L174 151 H205" fill="none" stroke="{CYAN}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="98" cy="132" r="8" fill="{WHITE}"/><circle cx="205" cy="151" r="8" fill="{GOLD}"/>
-<path d="M97 204 H203" stroke="{SILVER}" stroke-width="5" stroke-dasharray="5 8"/>
-{snowflake(205,91,14,WHITE,2.2,.45)}''',
+<path d="M150 43 L177 78 H165 L199 120 H183 L222 168 H203 L244 217 H174 V268 H126 V217 H56 L97 168 H78 L117 120 H101 L135 78 H123 Z" fill="url(#gGreen)"/>
+<path d="M150 52 V260" stroke="{GOLD}" stroke-width="2" opacity=".6"/>
+<path d="M112 105 H188 M92 154 H208 M68 208 H232" stroke="{GOLD}" stroke-width="2" opacity=".55"/>
+<path d="M86 184 C104 166 124 158 148 158 H181 C197 159 211 168 224 184" fill="none" stroke="{SILVER}" stroke-width="5"/>
+<path d="M83 189 H227" stroke="{RED}" stroke-width="4"/>
+<circle cx="102" cy="190" r="12" fill="{INK}" stroke="{SILVER}" stroke-width="3"/><circle cx="210" cy="190" r="12" fill="{INK}" stroke="{SILVER}" stroke-width="3"/>
+<path d="M92 135 C119 120 164 113 205 126" fill="none" stroke="{IVORY}" stroke-width="2" stroke-dasharray="5 6"/>
+<circle cx="92" cy="135" r="5" fill="{RED}"/><circle cx="205" cy="126" r="5" fill="{GOLD}"/>
+<polygon points="{star_points(150,72,13,5.5)}" fill="{GOLD_LIGHT}"/>
+''',
         16: f'''
-<circle cx="150" cy="157" r="105" fill="url(#gSteel)" stroke="{WHITE}" stroke-width="7"/>
-<path d="M76 84 L101 112 M114 59 L128 96 M164 57 L153 96 M209 81 L185 112 M231 126 L194 140 M229 190 L194 179 M82 224 L108 201 M207 229 L184 204" stroke="{NAVY}" stroke-width="10" stroke-linecap="round"/>
-<path d="M92 73 L114 99 M187 67 L166 99 M73 161 H108 M192 159 H227 M103 236 L122 208 M181 237 L163 207" stroke="{BLUE}" stroke-width="5" stroke-linecap="round"/>
-<circle cx="150" cy="157" r="48" fill="{NAVY}" stroke="{CYAN}" stroke-width="5"/>
-{snowflake(150,157,27,WHITE,3,.52)}''',
+<circle cx="150" cy="157" r="101" fill="url(#gBurgundy)"/>
+<circle cx="150" cy="157" r="91" fill="none" stroke="{GOLD}" stroke-width="2"/>
+<g stroke="{GRAPHITE}" stroke-width="9" stroke-linecap="round" opacity=".88">
+  <path d="M74 84 L105 116 M110 62 L128 104 M171 59 L154 104 M214 82 L184 116 M235 126 L195 141 M231 191 L194 178 M83 226 L111 199 M207 230 L183 201"/>
+</g>
+{fir_branch(62,78,14,.72)}
+<circle cx="150" cy="164" r="49" fill="{GREEN_DARK}" stroke="{GOLD}" stroke-width="3"/>
+<path d="M126 186 L150 125 L174 186" fill="none" stroke="{SILVER}" stroke-width="3"/>
+<path d="M135 163 H165 M130 176 H170" stroke="{RED_LIGHT}" stroke-width="3"/>
+''',
     }
     return art[index]
 
 
 def logo_zone(index: int) -> str:
     zones = {
-        1: '<rect x="117" y="194" width="66" height="25" rx="5"/>',
-        2: '<rect x="127" y="139" width="68" height="31" rx="6"/>',
-        3: '<rect x="126" y="142" width="70" height="30" rx="6"/>',
-        4: '<rect x="125" y="174" width="64" height="28" rx="6"/>',
-        5: '<path d="M150 151 L185 169 V209 Q185 228 150 244 Q115 228 115 209 V169 Z"/>',
-        6: '<circle cx="119" cy="116" r="26"/>',
-        7: '<circle cx="150" cy="158" r="25"/>',
-        8: '<circle cx="150" cy="158" r="25"/>',
-        9: '<rect x="113" y="195" width="74" height="34" rx="8"/>',
-        10: '<circle cx="150" cy="159" r="28"/>',
-        11: '<rect x="117" y="190" width="66" height="25" rx="5"/>',
-        12: '<rect x="172" y="196" width="51" height="38" rx="6" transform="rotate(-12 197.5 215)"/>',
-        13: '<rect x="93" y="103" width="114" height="26" rx="5"/>',
-        14: '<rect x="106" y="252" width="88" height="22" rx="5"/>',
-        15: '<rect x="102" y="160" width="96" height="39" rx="10"/>',
-        16: '<rect x="111" y="139" width="78" height="38" rx="9"/>',
+        1: '<rect x="116" y="202" width="68" height="25" rx="4"/>',
+        2: '<rect x="126" y="153" width="72" height="29" rx="4"/>',
+        3: '<rect x="126" y="149" width="72" height="29" rx="4"/>',
+        4: '<rect x="118" y="183" width="68" height="25" rx="4"/>',
+        5: '<path d="M148 153 L181 170 V207 Q181 224 148 240 Q115 224 115 207 V170 Z"/>',
+        6: '<circle cx="119" cy="116" r="23"/>',
+        7: '<circle cx="150" cy="157" r="20"/>',
+        8: '<circle cx="150" cy="157" r="22"/>',
+        9: '<rect x="111" y="205" width="78" height="31" rx="5"/>',
+        10: '<circle cx="150" cy="158" r="25"/>',
+        11: '<rect x="116" y="202" width="68" height="25" rx="4"/>',
+        12: '<rect x="170" y="200" width="54" height="34" rx="4" transform="rotate(-10 197 217)"/>',
+        13: '<rect x="91" y="102" width="118" height="25" rx="4"/>',
+        14: '<rect x="105" y="251" width="90" height="22" rx="4"/>',
+        15: '<rect x="111" y="218" width="78" height="32" rx="5"/>',
+        16: '<rect x="112" y="147" width="76" height="34" rx="6"/>',
     }
     return zones[index]
 
@@ -289,13 +383,13 @@ def logo_zone(index: int) -> str:
 def print_body(ornament: Ornament) -> str:
     outer = style_shape(
         ornament.outer,
-        f'fill="url(#{ornament.gradient})" stroke="{WHITE}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"',
+        f'fill="url(#{ornament.gradient})" stroke="{GOLD}" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"',
     )
     return f'''
 <defs><clipPath id="{ornament.clip_id}">{ornament.outer}</clipPath></defs>
 {outer}
 <g clip-path="url(#{ornament.clip_id})">{ornament_art(ornament.index)}</g>
-<circle cx="{ornament.hole_x}" cy="{ornament.hole_y}" r="7" fill="{MIDNIGHT}" stroke="{WHITE}" stroke-width="3"/>
+<circle cx="{ornament.hole_x}" cy="{ornament.hole_y}" r="7" fill="{GREEN_DARK}" stroke="{GOLD_LIGHT}" stroke-width="2"/>
 '''
 
 
@@ -314,7 +408,7 @@ for idx, ornament in enumerate(ORNAMENTS):
         f'<g id="ornament-{ornament.index:02d}-{ornament.slug}" inkscape:label="{ornament.index:02d} {ornament.name_ru}" transform="{transform}">{print_body(ornament)}</g>'
     )
     logo_groups.append(
-        f'<g id="logo-zone-{ornament.index:02d}" data-client-logo-zone="true" transform="{transform}" fill="{WHITE}" stroke="{STEEL}" stroke-width="2.5">{logo_zone(ornament.index)}</g>'
+        f'<g id="logo-zone-{ornament.index:02d}" data-client-logo-zone="true" transform="{transform}" fill="{IVORY}" stroke="{GOLD}" stroke-width="1.8">{logo_zone(ornament.index)}</g>'
     )
     cut_groups.append(
         f'<g id="cut-{ornament.index:02d}-{ornament.slug}" transform="{transform}">{cut_geometry(ornament)}</g>'
@@ -328,7 +422,7 @@ layers = (
 
 svg = clean(f'''<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1200mm" height="1200mm" viewBox="0 0 1200 1200">
-<title>Premium automotive New Year ornaments — 16-piece dealership sheet</title>
+<title>Premium automotive New Year ornaments — red and evergreen revision — 16-piece dealership sheet</title>
 {DEFS}
 {layers}
 </svg>''')
