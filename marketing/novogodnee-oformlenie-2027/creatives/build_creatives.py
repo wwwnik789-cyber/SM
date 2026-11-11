@@ -28,8 +28,8 @@ SCENES = [
         "image": "lobby.jpg",
         "kicker": "СЕЗОН 2027",
         "title": "Новогоднее оформление офиса",
-        "sub": "Производство, монтаж 24/7.\nСмета за 1 рабочий день.",
-        "price": "от 65 000 ₽",
+        "sub": "Эскиз, печать, каркас, монтаж.\nРабота по брендбуку.",
+        "promise": "Расчёт за 1 рабочий день",
         "note": "Москва и Московская область",
     },
     {
@@ -37,27 +37,27 @@ SCENES = [
         "image": "photozone.jpg",
         "kicker": "ФОТОЗОНЫ",
         "title": "Фотозона к Новому году",
-        "sub": "Скрытый каркас, свет, декор.\nПаспорт декорации.",
-        "price": "от 90 000 ₽",
-        "note": "Монтаж за 7 дней",
+        "sub": "Скрытый каркас и ровное полотно.\nСвет и объёмный декор.",
+        "promise": "Монтаж за 7 дней",
+        "note": "Паспорт декорации и документы",
     },
     {
         "slug": "03-corporate",
         "image": "corporate.jpg",
         "kicker": "КОРПОРАТИВЫ",
         "title": "Оформление новогоднего события",
-        "sub": "Сцена, фотозона, навигация.\nМонтаж в ночное окно.",
-        "price": "от 180 000 ₽",
-        "note": "Дежурство технической группы",
+        "sub": "Сцена, фотозона и навигация.\nДежурство технической группы.",
+        "promise": "Монтаж в ночное окно",
+        "note": "Москва и Московская область",
     },
     {
         "slug": "04-art",
         "image": "art.jpg",
         "kicker": "АРТ-ОБЪЕКТЫ",
         "title": "Ёлка как арт-объект",
-        "sub": "Своё производство 750 м².\nРасчёт за 1 рабочий день.",
-        "price": "от 120 000 ₽",
-        "note": "Улица и интерьер",
+        "sub": "Каркас, подсветка, брендинг.\nЛюбой размер и форма.",
+        "promise": "Улица и интерьер",
+        "note": "Своё производство 750 м²",
     },
 ]
 
@@ -152,25 +152,27 @@ def build(scene: dict, size: tuple[int, int], panel_ratio: float, out_path: Path
     header = font(round(height * 0.021), 750)
     draw.text((margin, bar_y + round(height * 0.022)), "SM PRODUCTION", font=header, fill=WHITE)
 
-    # Bottom block anchored to the bottom
-    price_face = font(round(height * 0.048), 750)
+    # Bottom block anchored to the bottom, no price anymore
     note_face = font(round(height * 0.019), 500)
     sub_face = font(round(height * 0.027), 500)
     kicker_face = font(round(height * 0.021), 700)
+    promise_face = font(round(height * 0.034), 750)
 
     bottom = height - round(height * 0.085)
-    price_h = line_height(price_face, 1.0)
-    chip_pad_y = round(height * 0.019)
-    chip_pad_x = round(height * 0.028)
-    chip_h = price_h + chip_pad_y * 2
-    chip_top = bottom - chip_h
+
     note_h = line_height(note_face, 1.2)
-    note_y = chip_top - round(height * 0.028) - note_h
+    note_y = bottom - note_h
+
+    promise_h = line_height(promise_face, 1.0)
+    promise_y = note_y - round(height * 0.032) - promise_h
+
+    rule_y = promise_y - round(height * 0.026)
+    rule_w = round(height * 0.062)
 
     sub_lines = scene["sub"].split("\n")
     sub_line_h = line_height(sub_face, 1.12)
     sub_block_h = len(sub_lines) * sub_line_h
-    sub_bottom = note_y - round(height * 0.03)
+    sub_bottom = rule_y - round(height * 0.03)
     sub_top = sub_bottom - sub_block_h
 
     kicker_h = line_height(kicker_face, 1.0)
@@ -196,27 +198,24 @@ def build(scene: dict, size: tuple[int, int], panel_ratio: float, out_path: Path
         draw.text((margin, cursor), line, font=title_face, fill=WHITE)
         cursor += title_line_h
 
+    # Shrink the sub-copy until every line fits inside the text column.
+    while any(text_width(draw, line, sub_face) > inner_w for line in sub_lines) and sub_face.size > 11:
+        sub_face = font(sub_face.size - 1, 500)
+        sub_line_h = line_height(sub_face, 1.12)
+        sub_block_h = len(sub_lines) * sub_line_h
+        sub_top = sub_bottom - sub_block_h
+
     cursor = sub_top
     for line in sub_lines:
         draw.text((margin, cursor), line, font=sub_face, fill=MUTED)
         cursor += sub_line_h
 
+    # Accent rule + promise instead of a price chip
+    draw.rectangle([margin, rule_y, margin + rule_w, rule_y + max(3, round(height * 0.005))], fill=CORAL)
+    while text_width(draw, scene["promise"], promise_face) > inner_w and promise_face.size > 12:
+        promise_face = font(promise_face.size - 1, 750)
+    draw.text((margin, promise_y), scene["promise"], font=promise_face, fill=CORAL)
     draw.text((margin, note_y), scene["note"], font=note_face, fill=(138, 152, 168))
-
-    # Price chip
-    chip_text_w = text_width(draw, scene["price"], price_face)
-    chip_w = min(inner_w, chip_text_w + chip_pad_x * 2)
-    draw.rounded_rectangle(
-        [margin, chip_top, margin + chip_w, chip_top + chip_h],
-        radius=max(4, round(height * 0.008)),
-        fill=CORAL,
-    )
-    draw.text(
-        (margin + chip_pad_x, chip_top + chip_pad_y - round(height * 0.004)),
-        scene["price"],
-        font=price_face,
-        fill=WHITE,
-    )
 
     canvas.save(out_path, quality=94)
 

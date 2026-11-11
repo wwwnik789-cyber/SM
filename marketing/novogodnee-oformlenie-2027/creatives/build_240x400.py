@@ -34,41 +34,41 @@ SCENES = [
     {
         "slug": "01-office",
         "image": "lobby.jpg",
-        "photo_h": 224,
+        "photo_h": 218,
         "kicker": "СЕЗОН 2027",
         "title": "Новогоднее оформление офиса",
-        "price": "от 65 000 ₽",
-        "note": "Смета за 1 день",
+        "promise": "Расчёт за 1 рабочий день",
+        "sub": "Своё производство 750 м²",
         "focus": (0.62, 0.55),
     },
     {
         "slug": "02-photozone",
         "image": "photozone.jpg",
-        "photo_h": 224,
-        "kicker": "ФОТОЗОНЫ",
+        "photo_h": 218,
+        "kicker": "ФОТОЗОНЫ И БРЕНД-ЗОНЫ",
         "title": "Фотозона к Новому году",
-        "price": "от 90 000 ₽",
-        "note": "Монтаж за 7 дней",
+        "promise": "Монтаж за 7 дней",
+        "sub": "Скрытый каркас и свет",
         "focus": (0.66, 0.50),
     },
     {
         "slug": "03-corporate",
         "image": "corporate.jpg",
-        "photo_h": 224,
+        "photo_h": 218,
         "kicker": "КОРПОРАТИВЫ",
-        "title": "Оформление события",
-        "price": "от 180 000 ₽",
-        "note": "Монтаж 24/7",
+        "title": "Оформление новогоднего события",
+        "promise": "Монтаж в ночное окно",
+        "sub": "Сцена, фотозона, навигация",
         "focus": (0.55, 0.50),
     },
     {
         "slug": "04-art",
         "image": "art.jpg",
-        "photo_h": 224,
+        "photo_h": 218,
         "kicker": "АРТ-ОБЪЕКТЫ",
-        "title": "Ёлка-арт-объект",
-        "price": "от 120 000 ₽",
-        "note": "Улица и интерьер",
+        "title": "Ёлка как арт-объект",
+        "promise": "Улица и интерьер",
+        "sub": "Своё производство 750 м²",
         "focus": (0.60, 0.50),
     },
 ]
@@ -144,36 +144,33 @@ def build(scene: dict, out_path: Path) -> int:
     draw.text((margin, cursor), scene["kicker"], font=kicker, fill=CORAL)
     cursor += 16
 
-    # Title, auto-fitted
-    title_size = 19
+    # Title, auto-fitted (up to 3 lines now that the price is gone)
+    title_size = 20
     while title_size > 12:
         face = font(title_size, 800)
         lines = wrap(draw, scene["title"], face, inner_w)
-        line_h = round(title_size * 1.14)
-        if len(lines) <= 2 and max(text_width(draw, l, face) for l in lines) <= inner_w:
+        line_h = round(title_size * 1.12)
+        if len(lines) <= 3 and max(text_width(draw, l, face) for l in lines) <= inner_w:
             break
         title_size -= 1
     face = font(title_size, 800)
     lines = wrap(draw, scene["title"], face, inner_w)
-    line_h = round(title_size * 1.14)
+    line_h = round(title_size * 1.12)
     for line in lines:
         draw.text((margin, cursor), line, font=face, fill=WHITE)
         cursor += line_h
 
-    cursor += 6
+    cursor += 8
 
-    # Price
-    price_size = 21
-    price_face = font(price_size, 800)
-    while text_width(draw, scene["price"], price_face) > inner_w and price_size > 13:
-        price_size -= 1
-        price_face = font(price_size, 800)
-    draw.text((margin, cursor), scene["price"], font=price_face, fill=CORAL)
-    cursor += round(price_size * 1.25) + 2
+    # Accent rule + promise (replaces the price block)
+    draw.rectangle([margin, cursor, margin + 22, cursor + 2], fill=CORAL)
+    cursor += 9
+    promise_face = font(11, 700)
+    draw.text((margin, cursor), scene["promise"], font=promise_face, fill=CORAL)
+    cursor += 16
 
-    # Note
-    note_face = font(9, 500)
-    draw.text((margin, cursor), scene["note"], font=note_face, fill=MUTED)
+    sub_face = font(8.5, 500)
+    draw.text((margin, cursor), scene["sub"], font=sub_face, fill=MUTED)
 
     # Brand lockup pinned to the bottom edge
     brand = font(9, 750)
