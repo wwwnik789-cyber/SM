@@ -289,8 +289,8 @@ def save(image: Image.Image, name: str, max_kb: int) -> None:
 
 
 def main() -> int:
-    desk = Image.open(SRC / "hero-scene.jpg").convert("RGB")
-    mob_src = Image.open(SRC / "hero-scene-mobile.jpg").convert("RGB")
+    desk = Image.open(SRC / "scene-v2-big.jpg").convert("RGB")
+    mob_src = Image.open(SRC / "scene-v2-mobile.jpg").convert("RGB")
 
     # приводим сцены к точным целевым размерам до наложения текста
     desk_wide = cover_crop(desk, (2560, 1440), (0.5, 0.45))
