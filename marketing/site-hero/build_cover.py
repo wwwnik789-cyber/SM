@@ -161,6 +161,14 @@ def text_scrim(image: Image.Image, side: str = "left", strength: int = 238,
             t = 1 - y / band
             d.rectangle([0, y, w, y + 1], fill=(6, 15, 27, int(strength * t ** power)))
 
+    if side == "top":
+        # нижняя подпись стоит на светящихся экранах ноутбуков — гасим отдельной полосой
+        foot = int(h * 0.22)
+        for i in range(foot):
+            y = h - 1 - i
+            t = 1 - i / foot
+            d.rectangle([0, y, w, y + 1], fill=(6, 15, 27, int(238 * t ** 0.55)))
+
     if veil:
         veil_layer = Image.new("RGBA", (w, h), (6, 15, 27, veil))
         layer = Image.alpha_composite(layer, veil_layer)
@@ -211,9 +219,9 @@ def lockup(draw, x: int, y: int, size: int, accent=CORAL, fill=WHITE) -> int:
 
 def compose_desktop(image: Image.Image, with_text: bool) -> Image.Image:
     w, h = image.size
-    img = text_scrim(vignette(grade(image), 0.30), "left", 218, fade=0.70, power=1.05)
+    img = text_scrim(vignette(grade(image), 0.30), "left", 272, fade=0.80, power=0.58)
     if not with_text:
-        return text_scrim(vignette(grade(image), 0.30), "left", 120, fade=0.70, power=1.05)
+        return text_scrim(vignette(grade(image), 0.30), "left", 140, fade=0.80, power=0.58)
 
     draw = ImageDraw.Draw(img)
     m = round(w * 0.072)
@@ -251,9 +259,9 @@ def compose_desktop(image: Image.Image, with_text: bool) -> Image.Image:
 
 def compose_mobile(image: Image.Image, with_text: bool) -> Image.Image:
     w, h = image.size
-    img = text_scrim(vignette(grade(image), 0.30), "top", 232, fade=0.62, power=0.9)
+    img = text_scrim(vignette(grade(image), 0.30), "top", 244, fade=0.74, power=0.62)
     if not with_text:
-        return text_scrim(vignette(grade(image), 0.32), "top", 110, fade=0.62, power=0.9)
+        return text_scrim(vignette(grade(image), 0.32), "top", 110, fade=0.74, power=0.62)
 
     draw = ImageDraw.Draw(img)
     m = round(w * 0.088)
@@ -298,8 +306,8 @@ def save(image: Image.Image, name: str, max_kb: int) -> None:
 
 
 def main() -> int:
-    desk = Image.open(SRC / "scene-conf.jpg").convert("RGB")
-    mob_src = Image.open(SRC / "scene-conf-mobile.jpg").convert("RGB")
+    desk = Image.open(SRC / "scene-conf-v4-big.jpg").convert("RGB")
+    mob_src = Image.open(SRC / "scene-conf-v5-big.jpg").convert("RGB")
 
     # приводим сцены к точным целевым размерам до наложения текста
     desk_wide = cover_crop(desk, (2560, 1440), (0.5, 0.45))
