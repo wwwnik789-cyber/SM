@@ -15,7 +15,7 @@
 | [`utm-and-measurement.md`](./utm-and-measurement.md) | UTM-схема, цели Метрики, поля amoCRM, отчётность | Никита, Анастасия |
 | [`launch-checklist.md`](./launch-checklist.md) | запуск за 90 минут, по шагам | Никита |
 | [`roles.md`](./roles.md) | кто что делает и когда | вся команда |
-| [`creatives/`](./creatives) | 8 рекламных креативов: 4 сюжета в 1:1 и 16:9 | Никита |
+| [`creatives/`](./creatives) | креативы: 4 сюжета в 240×400 (до 120 КБ), а также 1:1 и 16:9 | Никита |
 | [`campaign-one-pager.png`](./campaign-one-pager.png) | план сезона на одном листе: календарь, структура, бюджет, воронка | вся команда |
 | [`validate.py`](./validate.py) | проверка лимитов объявлений, дублей фраз и опасных минус-слов | Никита |
 | [`novogodnee-2027-klyuchi-i-minusy.pdf`](./novogodnee-2027-klyuchi-i-minusy.pdf) | ключи, минус-слова и площадки одним файлом, по одной фразе в строке — удобно копировать | Никита |

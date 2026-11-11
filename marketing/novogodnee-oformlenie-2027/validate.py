@@ -9,6 +9,8 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from PIL import Image
+
 ROOT = Path(__file__).resolve().parent
 
 LIMITS = {
@@ -178,10 +180,29 @@ def check_creatives() -> None:
         warn("папка creatives отсутствует")
         return
     files = sorted(folder.glob("[0-9][0-9]-*.jpg"))
-    print(f"Креативов: {len(files)}")
+    print(f"Креативов 1:1 и 16:9: {len(files)}")
     for path in files:
         if path.stat().st_size < 40_000:
             warn(f"{path.name}: подозрительно маленький файл")
+
+    # 240x400 hero creatives: exact size and hard 120 KB cap.
+    small_dir = folder / "240x400"
+    if not small_dir.exists():
+        fail("нет папки creatives/240x400 с креативами 240×400")
+        return
+    small = sorted(small_dir.glob("*.jpg"))
+    if len(small) != 4:
+        fail(f"креативов 240×400 должно быть 4, найдено {len(small)}")
+    limit = 120 * 1024
+    for path in small:
+        size = path.stat().st_size
+        with Image.open(path) as image:
+            width, height = image.size
+        if (width, height) != (240, 400):
+            fail(f"{path.name}: размер {width}×{height}, нужно 240×400")
+        if size > limit:
+            fail(f"{path.name}: {size/1024:.1f} КБ, лимит 120 КБ")
+        print(f"  {path.name}: {width}×{height}, {size/1024:.1f} КБ")
 
 
 def main() -> int:
