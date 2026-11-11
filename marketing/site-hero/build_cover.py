@@ -306,35 +306,29 @@ def save(image: Image.Image, name: str, max_kb: int) -> None:
 
 
 def main() -> int:
-    desk = Image.open(SRC / "scene-conf-v4-big.jpg").convert("RGB")
-    mob_src = Image.open(SRC / "scene-conf-v5-big.jpg").convert("RGB")
+    desk = Image.open(SRC / "scene-clean-desk-big.jpg").convert("RGB")
+    mob_src = Image.open(SRC / "scene-clean-mob-big.jpg").convert("RGB")
 
     # приводим сцены к точным целевым размерам до наложения текста
     desk_wide = cover_crop(desk, (2560, 1440), (0.5, 0.45))
     mob = cover_crop(mob_src, (1080, 1920), (0.5, 0.42), sharpen=True)
 
-    wide = compose_desktop(desk_wide, True)
-    save(wide, "cover-desktop-text-2560x1440.jpg", 480)
-    save(wide.resize((1920, 1080), Image.LANCZOS), "cover-desktop-text-1920x1080.jpg", 320)
-
+    # формат «только фото»: текст в файл не вшивается вообще
     clean = compose_desktop(desk_wide, False)
-    save(clean, "cover-desktop-clean-2560x1440.jpg", 460)
-    save(clean.resize((1920, 1080), Image.LANCZOS), "cover-desktop-clean-1920x1080.jpg", 300)
+    save(clean, "cover-desktop-clean-2560x1440.jpg", 500)
+    save(clean.resize((1920, 1080), Image.LANCZOS), "cover-desktop-clean-1920x1080.jpg", 340)
 
-    mtext = compose_mobile(mob, True)
-    save(mtext, "cover-mobile-text-1080x1920.jpg", 300)
-    save(compose_mobile(mob, False), "cover-mobile-clean-1080x1920.jpg", 280)
+    mclean = compose_mobile(mob, False)
+    save(mclean, "cover-mobile-clean-1080x1920.jpg", 330)
 
-    # OG: 1200×630 из десктопной обложки, кроп по левой части с заголовком
-    og = cover_crop(wide, (1200, 630), (0.0, 0.5))
-    save(og, "og-1200x630.jpg", 165)
+    # OG: 1200×630 из чистого широкого кадра
+    og = cover_crop(clean, (1200, 630), (0.0, 0.5))
+    save(og, "og-1200x630.jpg", 200)
 
     # контактный лист
     tiles = [
-        (wide, "десктоп с текстом"),
         (clean, "десктоп без текста"),
-        (mtext, "мобильный с текстом"),
-        (compose_mobile(mob, False), "мобильный без текста"),
+        (mclean, "мобильный без текста"),
     ]
     pad, ch = 26, 560
     widths = [round(t[0].width * (ch / t[0].height)) for t in tiles]
