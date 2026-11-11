@@ -30,7 +30,7 @@ NAVY = (8, 26, 43)
 CORAL = (217, 74, 67)
 WHITE = (255, 255, 255)
 MUTED = (188, 199, 212)
-DIM = (138, 152, 168)
+DIM = (203, 214, 228)
 
 if not FONT_VF.exists():
     raise SystemExit(f"нет шрифта: {FONT_VF}")
@@ -140,25 +140,32 @@ def vignette(image: Image.Image, strength: float = 0.34) -> Image.Image:
     return Image.composite(image, Image.blend(image, dark, strength), mask)
 
 
-def text_scrim(image: Image.Image, side: str = "left", strength: int = 238) -> Image.Image:
-    """Плотная шторка под текст: слева для десктопа, сверху для мобильного."""
+def text_scrim(image: Image.Image, side: str = "left", strength: int = 238,
+               fade: float = 0.62, power: float = 1.2, veil: int = 18) -> Image.Image:
+    """Плотная шторка под текст: слева для десктопа, сверху для мобильного.
+
+    Важно: PIL рисует прямоугольники в режиме замены, а не наложения, поэтому
+    общая вуаль кладётся отдельным слоем и композитится — иначе она стирает шторку.
+    """
     w, h = image.size
     layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
     if side == "left":
-        band = int(w * 0.62)
+        band = max(1, int(w * fade))
         for x in range(band):
             t = 1 - x / band
-            d.rectangle([x, 0, x + 1, h], fill=(6, 15, 27, int(strength * t ** 1.5)))
-        # общее лёгкое затемнение, чтобы свет не бил в глаза
-        d.rectangle([0, 0, w, h], fill=(6, 15, 27, 26))
+            d.rectangle([x, 0, x + 1, h], fill=(6, 15, 27, int(strength * t ** power)))
     else:
-        band = int(h * 0.78)
+        band = max(1, int(h * fade))
         for y in range(band):
             t = 1 - y / band
-            d.rectangle([0, y, w, y + 1], fill=(6, 15, 27, int(strength * t ** 1.1)))
-        d.rectangle([0, 0, w, h], fill=(6, 15, 27, 30))
-    layer = layer.filter(ImageFilter.GaussianBlur(round(min(w, h) * 0.012)))
+            d.rectangle([0, y, w, y + 1], fill=(6, 15, 27, int(strength * t ** power)))
+
+    if veil:
+        veil_layer = Image.new("RGBA", (w, h), (6, 15, 27, veil))
+        layer = Image.alpha_composite(layer, veil_layer)
+
+    layer = layer.filter(ImageFilter.GaussianBlur(max(1, round(min(w, h) * 0.010))))
     return Image.alpha_composite(image.convert("RGBA"), layer).convert("RGB")
 
 
@@ -204,9 +211,9 @@ def lockup(draw, x: int, y: int, size: int, accent=CORAL, fill=WHITE) -> int:
 
 def compose_desktop(image: Image.Image, with_text: bool) -> Image.Image:
     w, h = image.size
-    img = text_scrim(vignette(grade(image), 0.30), "left", 232)
+    img = text_scrim(vignette(grade(image), 0.30), "left", 218, fade=0.70, power=1.05)
     if not with_text:
-        return text_scrim(vignette(grade(image), 0.30), "left", 120)
+        return text_scrim(vignette(grade(image), 0.30), "left", 120, fade=0.70, power=1.05)
 
     draw = ImageDraw.Draw(img)
     m = round(w * 0.072)
@@ -237,15 +244,16 @@ def compose_desktop(image: Image.Image, with_text: bool) -> Image.Image:
     proof_face = font(round(h * 0.0155), 600)
     py = h - round(h * 0.105)
     draw.rectangle([m, py - round(h * 0.026), m + round(w * 0.020), py - round(h * 0.026) + max(3, round(h * 0.003))], fill=CORAL)
-    draw.text((m, py), PROOF, font=proof_face, fill=DIM)
+    draw.text((m, py), PROOF, font=proof_face, fill=DIM,
+              stroke_width=max(1, round(h * 0.0012)), stroke_fill=(6, 15, 27))
     return img
 
 
 def compose_mobile(image: Image.Image, with_text: bool) -> Image.Image:
     w, h = image.size
-    img = text_scrim(vignette(grade(image), 0.32), "top", 250)
+    img = text_scrim(vignette(grade(image), 0.30), "top", 232, fade=0.62, power=0.9)
     if not with_text:
-        return text_scrim(vignette(grade(image), 0.32), "top", 110)
+        return text_scrim(vignette(grade(image), 0.32), "top", 110, fade=0.62, power=0.9)
 
     draw = ImageDraw.Draw(img)
     m = round(w * 0.088)
@@ -271,7 +279,8 @@ def compose_mobile(image: Image.Image, with_text: bool) -> Image.Image:
 
     proof_face = font(round(w * 0.028), 600)
     py = h - round(h * 0.062)
-    draw.text((m, py), "Москва и Санкт-Петербург", font=proof_face, fill=DIM)
+    draw.text((m, py), "Москва и Санкт-Петербург", font=proof_face, fill=DIM,
+              stroke_width=max(1, round(w * 0.0018)), stroke_fill=(6, 15, 27))
     return img
 
 
@@ -289,8 +298,8 @@ def save(image: Image.Image, name: str, max_kb: int) -> None:
 
 
 def main() -> int:
-    desk = Image.open(SRC / "scene-v2-big.jpg").convert("RGB")
-    mob_src = Image.open(SRC / "scene-v2-mobile.jpg").convert("RGB")
+    desk = Image.open(SRC / "scene-conf.jpg").convert("RGB")
+    mob_src = Image.open(SRC / "scene-conf-mobile.jpg").convert("RGB")
 
     # приводим сцены к точным целевым размерам до наложения текста
     desk_wide = cover_crop(desk, (2560, 1440), (0.5, 0.45))
