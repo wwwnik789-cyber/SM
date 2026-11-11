@@ -4,14 +4,14 @@
 from __future__ import annotations
 
 import copy
+import sys
 import io
-import math
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw
+from PIL import Image
 import resvg_py
 
 ROOT = Path(__file__).resolve().parent
@@ -35,6 +35,15 @@ PLUM_DARK = "#1C1E2C"
 CORAL = "#D94A43"
 WHITE = "#FFFFFF"
 MUTED = "#AAB6C3"
+
+# Область, которую занимает плашка с названием в концепции 04 (x0, y0, x1, y1).
+PLAQUE_RECT = (750, 1030, 1500, 440)
+PLAQUE_ZONE = (
+    PLAQUE_RECT[0] - 60,
+    PLAQUE_RECT[1] - 60,
+    PLAQUE_RECT[0] + PLAQUE_RECT[2] + 60,
+    PLAQUE_RECT[1] + PLAQUE_RECT[3] + 60,
+)
 
 CONCEPTS = [
     ("01-arena-core", "Arena Core"),
@@ -76,6 +85,7 @@ class FontOutliner:
         self.cap_height = int(self.font["OS/2"].sCapHeight)
         self.glyph_sets: dict[int, object] = {}
         self.path_cache: dict[tuple[int, str], str] = {}
+        self.boxes: list[tuple[str, float, float, float, float]] = []
 
     def glyph_set(self, weight: int):
         if weight not in self.glyph_sets:
@@ -125,12 +135,19 @@ class FontOutliner:
     ) -> ET.Element:
         units, placements = self.measure(text, weight, tracking)
         scale = min(cap_height / self.cap_height, max_width / units)
+        if max_width / units < cap_height / self.cap_height:
+            print(
+                f"  WARNING: «{text[:36]}» сжато по ширине до {max_width / units * self.cap_height:.0f} mm "
+                f"вместо {cap_height:.0f} mm",
+                file=sys.stderr,
+            )
         text_width = units * scale
         start_x = x
         if align == "center":
             start_x = x - text_width / 2
         elif align == "right":
             start_x = x - text_width
+        self.boxes.append((text, start_x, baseline - cap_height, start_x + text_width, baseline + cap_height * 0.26))
         attributes = {
             "fill": fill,
             "opacity": f"{opacity:.4f}",
@@ -245,7 +262,7 @@ class ConceptBuilder:
         self.base(art)
         ET.SubElement(art, tag("path"), {"d": "M0 0 H650 L870 2500 H0 Z", "fill": PLUM})
         ET.SubElement(art, tag("path"), {"d": "M3000 0 H2480 L2250 2500 H3000 Z", "fill": PLUM_DARK})
-        ET.SubElement(art, tag("path"), {"d": "M560 0 H690 L900 2500 H770 Z", "fill": CORAL, "opacity": "0.22"})
+        ET.SubElement(art, tag("path"), {"d": "M300 0 H430 L560 2500 H430 Z", "fill": CORAL, "opacity": "0.22"})
         ET.SubElement(art, tag("path"), {"d": circle_path(1500, 1210, 770), "fill": "none", "stroke": CORAL, "stroke-width": "20"})
         self.add_logo(art, x=760, y=480, width=1480, height=1455, element_id="MAIN_LOGO")
         self.outliner.add_text(
@@ -254,7 +271,7 @@ class ConceptBuilder:
             x=1500,
             baseline=2240,
             cap_height=90,
-            max_width=1450,
+            max_width=2280,
             weight=670,
             tracking=24,
             align="center",
@@ -289,20 +306,28 @@ class ConceptBuilder:
         ET.SubElement(art, tag("path"), {"d": "M0 0 H520 L1030 2500 H0 Z", "fill": CORAL})
         ET.SubElement(art, tag("path"), {"d": "M300 0 H780 L1270 2500 H800 Z", "fill": WHITE})
         ET.SubElement(art, tag("path"), {"d": "M640 0 H1050 L1470 2500 H1090 Z", "fill": NAVY_LIGHT})
+        # Логотип нельзя класть на трёхцветную диагональ: белые элементы знака
+        # на белой полосе пропадают. Под знаком — сплошное поле в цвет фона.
+        ET.SubElement(art, tag("path"), {"id": "LOGO_FIELD", "d": circle_path(630, 915, 585), "fill": NAVY})
+        ET.SubElement(
+            art,
+            tag("path"),
+            {"d": circle_path(630, 915, 585), "fill": "none", "stroke": CORAL, "stroke-width": "14"},
+        )
         self.add_logo(art, x=160, y=630, width=1000, height=980, element_id="LEFT_LOGO")
         self.add_pitch(art, x=1670, y=290, width=1120, height=1880, opacity=0.24)
         ET.SubElement(
             art,
             tag("path"),
-            {"d": rounded_rect_path(1390, 220, 1280, 235, 42), "fill": NAVY_LIGHT, "stroke": WHITE, "stroke-width": "8"},
+            {"d": rounded_rect_path(1390, 220, 1280, 235, 42), "fill": NAVY_LIGHT, "stroke": WHITE, "stroke-width": "6"},
         )
         self.outliner.add_text(
             art,
             "АНИКОМ АРЕНА",
             x=2030,
             baseline=385,
-            cap_height=105,
-            max_width=1000,
+            cap_height=82,
+            max_width=1090,
             weight=760,
             tracking=15,
             align="center",
@@ -313,7 +338,7 @@ class ConceptBuilder:
             art, "МАТЧ", x=1450, baseline=1010, cap_height=260, max_width=1250, weight=780, element_id="MATCH_OUTLINES"
         )
         self.outliner.add_text(
-            art, "ТРАНСЛЯЦИЯ", x=1450, baseline=1350, cap_height=230, max_width=1320, weight=780, element_id="BROADCAST_OUTLINES"
+            art, "ТРАНСЛЯЦИЯ", x=1450, baseline=1230, cap_height=120, max_width=1360, weight=780, element_id="BROADCAST_OUTLINES"
         )
         self.outliner.add_text(
             art,
@@ -321,7 +346,7 @@ class ConceptBuilder:
             x=1450,
             baseline=1570,
             cap_height=90,
-            max_width=950,
+            max_width=1130,
             weight=680,
             tracking=25,
             fill=MUTED,
@@ -339,8 +364,8 @@ class ConceptBuilder:
                 label,
                 x=x + 215,
                 baseline=2098,
-                cap_height=48,
-                max_width=330,
+                cap_height=38,
+                max_width=390,
                 weight=670,
                 tracking=12,
                 align="center",
@@ -378,8 +403,8 @@ class ConceptBuilder:
             "ЭНЕРГИЯ ИГРЫ",
             x=2700,
             baseline=470,
-            cap_height=190,
-            max_width=1450,
+            cap_height=140,
+            max_width=1740,
             weight=790,
             tracking=8,
             align="right",
@@ -390,8 +415,8 @@ class ConceptBuilder:
             "ПОЛЕ  •  СОБЫТИЯ  •  КОНТЕНТ",
             x=2700,
             baseline=675,
-            cap_height=80,
-            max_width=1350,
+            cap_height=62,
+            max_width=1560,
             weight=660,
             tracking=22,
             fill=MUTED,
@@ -410,10 +435,14 @@ class ConceptBuilder:
         ET.SubElement(art, tag("path"), {"d": "M3000 0 H2470 L2220 2500 H3000 Z", "fill": PLUM_DARK})
         # Alternating arena marks and partner cells form a photography-friendly repeat.
         x_positions = (420, 960, 1500, 2040, 2580)
-        y_positions = (390, 920, 1450, 1980)
+        # Ряды разведены так, чтобы центр остался чистым под плашку с названием:
+        # 690 + 167 = 857 сверху, 1810 - 167 = 1643 снизу, плашка занимает 1030–1470.
+        y_positions = (300, 690, 1810, 2200)
         for row, y in enumerate(y_positions):
             for column, x in enumerate(x_positions):
                 cell_id = row * len(x_positions) + column + 1
+                if PLAQUE_ZONE[0] < x < PLAQUE_ZONE[2] and PLAQUE_ZONE[1] < y < PLAQUE_ZONE[3]:
+                    continue
                 if (row + column) % 2 == 0:
                     self.add_logo(
                         art,
@@ -435,21 +464,21 @@ class ConceptBuilder:
                         "ПАРТНЕР",
                         x=x,
                         baseline=y + 28,
-                        cap_height=58,
-                        max_width=280,
+                        cap_height=42,
+                        max_width=320,
                         weight=700,
                         tracking=16,
                         align="center",
                         element_id=f"PARTNER_CELL_{cell_id}_OUTLINES",
                     )
-        ET.SubElement(art, tag("path"), {"d": rounded_rect_path(750, 1030, 1500, 440, 55), "fill": NAVY, "stroke": CORAL, "stroke-width": "16"})
+        ET.SubElement(art, tag("path"), {"d": rounded_rect_path(*PLAQUE_RECT, 55), "fill": NAVY, "stroke": CORAL, "stroke-width": "16"})
         self.outliner.add_text(
             art,
             "АНИКОМ АРЕНА",
             x=1500,
             baseline=1315,
-            cap_height=170,
-            max_width=1180,
+            cap_height=104,
+            max_width=1420,
             weight=790,
             tracking=18,
             align="center",
@@ -472,11 +501,12 @@ class ConceptBuilder:
         ]
         PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
         for (slug, _), build in zip(CONCEPTS, builders):
+            self.outliner.boxes.clear()
             root = build()
             self.serialize(root, ROOT / f"{slug}.svg")
 
 
-def validate() -> None:
+def validate(builder: ConceptBuilder) -> None:
     for slug, _ in CONCEPTS:
         path = ROOT / f"{slug}.svg"
         root = ET.parse(path).getroot()
@@ -485,6 +515,22 @@ def validate() -> None:
         for forbidden in ("text", "image", "use", "foreignObject"):
             if root.findall(f".//{tag(forbidden)}"):
                 raise RuntimeError(f"Forbidden <{forbidden}> in {path}")
+
+    # Все надписи должны оставаться в безопасных полях, а не наезжать друг на друга.
+    inner = (SAFE, SAFE, WIDTH - SAFE, HEIGHT - SAFE)
+    for text, x0, y0, x1, y1 in builder.outliner.boxes:
+        if x0 < inner[0] or y0 < inner[1] or x1 > inner[2] or y1 > inner[3]:
+            raise RuntimeError(
+                f"«{text[:40]}» выходит за безопасное поле: "
+                f"x {x0:.0f}..{x1:.0f}, y {y0:.0f}..{y1:.0f}"
+            )
+    ordered = sorted(builder.outliner.boxes, key=lambda box: (box[2], box[1]))
+    for index, first in enumerate(ordered):
+        for second in ordered[index + 1:]:
+            if second[2] >= first[4]:
+                break
+            if first[1] < second[3] and second[1] < first[3]:
+                raise RuntimeError(f"Надписи пересекаются: «{first[0][:30]}» и «{second[0][:30]}»")
 
 
 def render_previews() -> None:
@@ -511,7 +557,7 @@ def render_previews() -> None:
 def main() -> None:
     builder = ConceptBuilder()
     builder.build_all()
-    validate()
+    validate(builder)
     render_previews()
     print("Built 4 vector concepts at 3000 × 2500 mm")
     print("Live text, rasters and external references: none")
