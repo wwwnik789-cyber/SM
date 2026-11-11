@@ -97,6 +97,11 @@ def load_keywords() -> dict[str, list[str]]:
     return groups
 
 
+def load_placements() -> list[str]:
+    path = ROOT / "blocked-placements.txt"
+    return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
 def load_negatives() -> list[tuple[str, list[str]]]:
     blocks: list[tuple[str, list[str]]] = []
     current_key = "OTHER"
@@ -147,10 +152,13 @@ class Layout:
         self.y = TOP
         self.page_first_column: list[list[tuple]] = [[], []]
         self.pages: list[list[list[tuple]]] = []
+        self.page_labels: list[str] = []
+        self.label = "Ключевые фразы"
         self.page = 1
 
     def _new_page(self) -> None:
         self.pages.append(self.page_first_column)
+        self.page_labels.append(self.label)
         self.page_first_column = [[], []]
         self.page += 1
         self.column = 0
@@ -180,8 +188,13 @@ class Layout:
             self.y -= LINE_H
         self.y -= GROUP_GAP
 
-    def add_section(self, title: str, subtitle: str = "") -> None:
-        if self.column == 0 and self.y < TOP - 40:
+    def add_section(self, title: str, subtitle: str = "", label: str | None = None,
+                    new_page: bool = False) -> None:
+        if label:
+            self.label = label
+        if new_page:
+            self._new_page()
+        elif self.column == 0 and self.y < TOP - 40:
             self._next_column()
         elif self.column == 1:
             self._new_page()
@@ -197,6 +210,7 @@ class Layout:
 
     def flush(self) -> list[list[list[tuple]]]:
         self.pages.append(self.page_first_column)
+        self.page_labels.append(self.label)
         return self.pages
 
 
@@ -280,6 +294,8 @@ def build() -> Path:
     search_codes = [code for code in GROUP_TITLES if code in keywords]
     search_total = sum(len(keywords[code]) for code in search_codes)
     negative_total = sum(len(words) for _, words in negatives)
+    placements = load_placements()
+    placements_total = len(placements)
 
     with tempfile.TemporaryDirectory() as raw_dir:
         workdir = Path(raw_dir)
@@ -288,6 +304,7 @@ def build() -> Path:
         layout = Layout(canvas.Canvas(str(OUTPUT), pagesize=A4), regular, semibold)
 
         # --- block 1: keywords grouped (reference copy) ---
+        layout.label = "Ключевые фразы"
         layout.page_first_column[0].append(
             ("section", "Ключевые фразы по группам", f"{search_total} фраз в {len(search_codes)} группах · поиск Яндекса")
         )
@@ -299,6 +316,7 @@ def build() -> Path:
         layout.add_section(
             "Все поисковые фразы одним списком",
             "Скопировать блок целиком и вставить в Директ — по одной фразе в строке",
+            label="Ключевые фразы",
         )
         for code in search_codes:
             for phrase in keywords[code]:
@@ -308,27 +326,29 @@ def build() -> Path:
         layout.add_section(
             "Минус-слова одним списком",
             f"{negative_total} слов · вставлять в общий список минус-слов кампании",
+            label="Минус-слова",
         )
         for _, words in negatives:
             for word in words:
                 layout.add_plain(word)
 
+        # --- block 4: blocked placements ---
+        layout.add_section(
+            "Площадки, где запрещены показы",
+            f"{placements_total} значений · Запрет показов → Площадки",
+            label="Запрещённые площадки",
+            new_page=True,
+        )
+        for item in placements:
+            layout.add_plain(item)
+
         pages = layout.flush()
 
         c = layout.c
         total = len(pages)
-        labels = [
-            "Ключевые фразы",
-            "Ключевые фразы",
-            "Минус-слова",
-        ]
-
         for index, columns in enumerate(pages):
             draw_page_background(c)
-            label = "Ключевые фразы и минус-слова"
-            if index >= 2:
-                label = "Минус-слова · если аренда входит в оффер — уберите 4 строки про аренду"
-            draw_header(c, regular, semibold, index + 1, total, label)
+            draw_header(c, regular, semibold, index + 1, total, layout.page_labels[index])
 
             # Column 1 stream first, column 2 second: keeps copy order correct.
             for column_index, items in enumerate(columns):
