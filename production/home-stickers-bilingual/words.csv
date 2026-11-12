@@ -1,37 +1,61 @@
-russian;english;category;rooms
-Стол;Table;furniture;Гостиная
-Стул;Chair;furniture;Гостиная
-Кровать;Bed;furniture;Спальня
-Диван;Sofa;furniture;Гостиная
-Шкаф;Wardrobe;furniture;Спальня
-Полка;Shelf;furniture;Гостиная
-Холодильник;Fridge;appliance;Кухня
-Плита;Stove;appliance;Кухня
-Чайник;Kettle;appliance;Кухня
-Телевизор;TV;appliance;Гостиная
-Стиральная машина;Washing machine;appliance;
-Лампа;Lamp;appliance;Гостиная, Спальня
-Окно;Window;house;Везде
-Дверь;Door;house;Прихожая, Везде
-Лестница;Stairs;house;Прихожая
-Коврик;Rug;house;Гостиная
-Корзина;Basket;house;Гостиная, Прихожая
-Цветок;Plant;house;Гостиная
-Зеркало;Mirror;bath;Прихожая, Ванная
-Ванна;Bathtub;bath;Ванная
-Раковина;Sink;bath;Ванная
-Душ;Shower;bath;Ванная
-Унитаз;Toilet;bath;Ванная
-Полотенце;Towel;bath;Кухня, Ванная
-Чашка;Cup;kitchen;Кухня
-Тарелка;Plate;kitchen;Кухня
-Ложка;Spoon;kitchen;Кухня
-Кастрюля;Pot;kitchen;Кухня
-Часы;Clock;room;Гостиная
-Подушка;Pillow;room;Спальня
-Комод;Dresser;furniture;
-Табурет;Stool;furniture;
-Выключатель;Light switch;house;Везде
-Розетка;Socket;house;Везде
-Кран;Tap;bath;
-Батарея;Radiator;house;Везде
+english;russian;category;rooms
+Table;Стол;furniture;Гостиная
+Chair;Стул;furniture;Гостиная
+Armchair;Кресло;furniture;Гостиная
+Bed;Кровать;furniture;Спальня
+Sofa;Диван;furniture;Гостиная
+Wardrobe;Шкаф;furniture;Спальня
+Shelf;Полка;furniture;Гостиная
+Dresser;Комод;furniture;Спальня
+Nightstand;Тумбочка;furniture;Спальня
+Stool;Табурет;furniture;Гостиная
+Shoe rack;Обувница;furniture;Прихожая
+Hanger;Вешалка;furniture;Прихожая
+Fridge;Холодильник;appliance;Кухня
+Stove;Плита;appliance;Кухня
+Oven;Духовка;appliance;Кухня
+Microwave;Микроволновка;appliance;Кухня
+Kettle;Чайник;appliance;Кухня
+TV;Телевизор;appliance;Гостиная
+Computer;Компьютер;appliance;Детская
+Speaker;Колонка;appliance;Детская
+Washing machine;Стиральная машина;appliance;Ванная
+Lamp;Лампа;appliance;Гостиная
+Window;Окно;house;Везде
+Windowsill;Подоконник;house;Везде
+Door;Дверь;house;Прихожая
+Curtain;Занавеска;house;Везде
+Stairs;Лестница;house;Прихожая
+Rug;Коврик;house;Гостиная
+Basket;Корзина;house;Гостиная
+Plant;Цветок;house;Гостиная
+Light switch;Выключатель;house;Везде
+Socket;Розетка;house;Везде
+Radiator;Батарея;house;Везде
+Floor;Пол;house;Везде
+Mirror;Зеркало;bath;Прихожая
+Bathtub;Ванна;bath;Ванная
+Sink;Раковина;bath;Ванная
+Shower;Душ;bath;Ванная
+Toilet;Унитаз;bath;Ванная
+Tap;Кран;bath;Ванная
+Toothbrush;Зубная щётка;bath;Ванная
+Soap;Мыло;bath;Ванная
+Towel;Полотенце;bath;Кухня
+Cup;Чашка;kitchen;Кухня
+Plate;Тарелка;kitchen;Кухня
+Spoon;Ложка;kitchen;Кухня
+Pot;Кастрюля;kitchen;Кухня
+Vase;Ваза;kitchen;Гостиная
+Clock;Часы;room;Гостиная
+Pillow;Подушка;room;Спальня
+Jewelry box;Шкатулка;room;Детская
+Piggy bank;Копилка;room;Детская
+Slippers;Тапочки;room;Спальня
+Backpack;Рюкзак;school;Детская
+Pencil case;Пенал;school;Детская
+Notebook;Тетрадь;school;Детская
+Textbook;Учебник;school;Детская
+Book;Книга;school;Детская
+Pencil;Карандаш;school;Детская
+Ruler;Линейка;school;Детская
