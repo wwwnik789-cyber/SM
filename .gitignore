@@ -21,3 +21,7 @@ pnpm-debug.log*
 # Python
 __pycache__/
 *.pyc
+
+# локальное окружение и рабочие превью
+.venv/
+image-search/
