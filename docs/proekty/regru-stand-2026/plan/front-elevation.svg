@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="158mm" height="100mm" viewBox="0 0 7900 5000" version="1.1">
+  <style>
+    text{font-family:'Montserrat','DejaVu Sans',Arial,sans-serif;fill:#16222e}
+    .title{font-size:190px;font-weight:600;letter-spacing:-2px}
+    .sub{font-size:104px;fill:#7b8794}
+    .zone{font-size:120px;font-weight:600;letter-spacing:2px}
+    .label{font-size:100px}
+    .small{font-size:86px;fill:#7b8794}
+    .dim{font-size:88px;fill:#7b8794}
+    .num{font-size:96px;font-weight:700;fill:#ffffff}
+  </style>
+  <rect x="0" y="0" width="7900" height="5000" fill="#ffffff" stroke="#ffffff" stroke-width="0" />
+  <text x="950" y="400" class="title" text-anchor="start">СТЕНД «РЕГ.РУ» · ФАСАД 1:50</text>
+  <text x="950" y="575" class="sub" text-anchor="start">вид с открытой стороны · 6 000 × 3 200 мм · размеры в мм</text>
+  <rect x="950" y="1150" width="6000" height="3000" fill="#eef2f4" stroke="#16222e" stroke-width="11" />
+  <rect x="950" y="950" width="6000" height="200" fill="#1f9d55" stroke="#1f9d55" stroke-width="0" />
+  <text x="1810" y="1115" class="zone" text-anchor="middle" fill="#ffffff">РЕГ.РУ</text>
+  <text x="3710" y="1115" class="zone" text-anchor="middle" fill="#ffffff">СДЕЛАЙТЕ САМИ</text>
+  <text x="5850" y="1115" class="zone" text-anchor="middle" fill="#ffffff">РЕГ.РЕШЕНИЯ</text>
+  <rect x="950" y="950" width="240" height="3200" fill="#e3e8ec" stroke="#16222e" stroke-width="9" />
+  <rect x="2430" y="950" width="240" height="3200" fill="#e3e8ec" stroke="#16222e" stroke-width="9" />
+  <rect x="4750" y="950" width="240" height="3200" fill="#e3e8ec" stroke="#16222e" stroke-width="9" />
+  <rect x="6710" y="950" width="240" height="3200" fill="#e3e8ec" stroke="#16222e" stroke-width="9" />
+  <rect x="1250" y="1470" width="265" height="1180" fill="#ffffff" stroke="#1f9d55" stroke-width="9" />
+  <text x="1382.5" y="1630" class="small" text-anchor="middle" fill="#14663a">01</text>
+  <rect x="1540" y="1470" width="265" height="1180" fill="#ffffff" stroke="#1f9d55" stroke-width="9" />
+  <text x="1672.5" y="1630" class="small" text-anchor="middle" fill="#14663a">02</text>
+  <rect x="1830" y="1470" width="265" height="1180" fill="#ffffff" stroke="#1f9d55" stroke-width="9" />
+  <text x="1962.5" y="1630" class="small" text-anchor="middle" fill="#14663a">03</text>
+  <rect x="2120" y="1470" width="265" height="1180" fill="#ffffff" stroke="#1f9d55" stroke-width="9" />
+  <text x="2252.5" y="1630" class="small" text-anchor="middle" fill="#14663a">04</text>
+  <text x="1250" y="2820" class="small" text-anchor="start" fill="#14663a">01 домены · 02 хостинг · 03 SSL · 04 Рег.облако</text>
+  <line x1="790" y1="4150" x2="7110" y2="4150" stroke="#16222e" stroke-width="10"/>
+  <rect x="2550" y="3070" width="1900" height="1080" fill="#ffffff" stroke="#16222e" stroke-width="13" />
+  <rect x="2550" y="3070" width="1900" height="60" fill="#1f9d55" stroke="#1f9d55" stroke-width="0" />
+  <text x="2690" y="3270" class="label" text-anchor="start">СТОЙКА</text>
+  <text x="2690" y="3410" class="small" text-anchor="start">проверка домена · 2 экрана</text>
+  <text x="2690" y="3850" class="small" text-anchor="start">1 900 × 1 080</text>
+  <rect x="5030" y="1550" width="1180" height="2600" fill="#fbf1cf" stroke="#efc14a" stroke-width="13" />
+  <text x="5620" y="2170" class="zone" text-anchor="middle" fill="#8a6d1a">ФОТОЗОНА</text>
+  <text x="5620" y="2330" class="small" text-anchor="middle" fill="#8a6d1a">2,4 × 2,6 м</text>
+  <rect x="4610" y="3170" width="300" height="980" fill="#1f9d55" stroke="#1f9d55" stroke-width="6" />
+  <text x="4760" y="3590" class="zone" text-anchor="middle" fill="#ffffff">Т</text>
+  <text x="4760" y="4270" class="small" text-anchor="middle" fill="#7b8794">киоск</text>
+  <line x1="650" y1="4150" x2="7110" y2="4150" stroke="#7b8794" stroke-width="5"/>
+  <text x="590" y="4186" class="dim" text-anchor="end">0</text>
+  <line x1="650" y1="1150" x2="7110" y2="1150" stroke="#7b8794" stroke-width="5"/>
+  <text x="590" y="1186" class="dim" text-anchor="end">3 000</text>
+  <line x1="650" y1="950" x2="7110" y2="950" stroke="#7b8794" stroke-width="5"/>
+  <text x="590" y="986" class="dim" text-anchor="end">3 200</text>
+  <line x1="950" y1="4450" x2="6950" y2="4450" stroke="#7b8794" stroke-width="5"/>
+  <line x1="950" y1="4390" x2="950" y2="4510" stroke="#7b8794" stroke-width="5"/>
+  <line x1="6950" y1="4390" x2="6950" y2="4510" stroke="#7b8794" stroke-width="5"/>
+  <text x="3950" y="4390" class="dim" text-anchor="middle">6 000</text>
+  <line x1="950" y1="4810" x2="2430" y2="4810" stroke="#7b8794" stroke-width="5"/>
+  <line x1="950" y1="4750" x2="950" y2="4870" stroke="#7b8794" stroke-width="5"/>
+  <line x1="2430" y1="4750" x2="2430" y2="4870" stroke="#7b8794" stroke-width="5"/>
+  <text x="1690" y="4750" class="dim" text-anchor="middle">1 480</text>
+  <line x1="2430" y1="4810" x2="4750" y2="4810" stroke="#7b8794" stroke-width="5"/>
+  <line x1="2430" y1="4750" x2="2430" y2="4870" stroke="#7b8794" stroke-width="5"/>
+  <line x1="4750" y1="4750" x2="4750" y2="4870" stroke="#7b8794" stroke-width="5"/>
+  <text x="3590" y="4750" class="dim" text-anchor="middle">2 320</text>
+  <line x1="4750" y1="4810" x2="6710" y2="4810" stroke="#7b8794" stroke-width="5"/>
+  <line x1="4750" y1="4750" x2="4750" y2="4870" stroke="#7b8794" stroke-width="5"/>
+  <line x1="6710" y1="4750" x2="6710" y2="4870" stroke="#7b8794" stroke-width="5"/>
+  <text x="5730" y="4750" class="dim" text-anchor="middle">1 960</text>
+</svg>
