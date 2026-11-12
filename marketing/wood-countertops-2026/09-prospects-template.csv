@@ -1,0 +1,6 @@
+account_id;segment;object_name;city;object_type;address_or_area;stage;trigger;trigger_date;source;source_url;checked_at;contact_name;role;contact_type;channel;score;status;next_step;next_date;owner;notes
+;;Дизайнер/архитектор;;ЖК/ресторан/офис;;;;;;;Публичный сайт бюро;;;ЛПР;Telegram/почта;;new;Отправить письмо;;;
+;;HoReCa;;Бар/ресторан/кофейня;;;;;;;Restoclub / карты / Telegram-канал;;;Владелец/управляющий;;;new;Позвонить;;;
+;;Офис;;Коворкинг/клиника/салон;;;;;;;Fit-out подрядчик;;;Офис-менеджер;;;new;Запросить фото места;;;
+;;Ритейл;;Шоурум/магазин;;;;;;;Сайт бренда;;;Маркетинг;;;new;Письмо с концептами;;;
+;;Частный;;Квартира/дом;;;;;;;Салон кухонь / Авито;;;Владелец;;;new;Отправить каталог;;;
