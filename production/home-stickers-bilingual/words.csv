@@ -21,18 +21,27 @@ Computer;Компьютер;appliance;Детская
 Speaker;Колонка;appliance;Детская
 Washing machine;Стиральная машина;appliance;Ванная
 Lamp;Лампа;appliance;Гостиная
+Iron;Утюг;appliance;Везде
+Hairdryer;Фен;appliance;Ванная
 Window;Окно;house;Везде
 Windowsill;Подоконник;house;Везде
 Door;Дверь;house;Прихожая
 Curtain;Занавеска;house;Везде
 Stairs;Лестница;house;Прихожая
 Rug;Коврик;house;Гостиная
-Basket;Корзина;house;Гостиная
+Basket;Корзина;house;Гостиная, Везде
 Plant;Цветок;house;Гостиная
 Light switch;Выключатель;house;Везде
 Socket;Розетка;house;Везде
 Radiator;Батарея;house;Везде
 Floor;Пол;house;Везде
+Box;Коробка;house;Везде
+Keys;Ключи;house;Прихожая
+Umbrella;Зонт;house;Прихожая
+Bag;Сумка;house;Прихожая
+Broom;Веник;house;Везде
+Bucket;Ведро;house;Везде
+Picture;Картина;house;Гостиная
 Mirror;Зеркало;bath;Прихожая
 Bathtub;Ванна;bath;Ванная
 Sink;Раковина;bath;Ванная
@@ -47,11 +56,22 @@ Plate;Тарелка;kitchen;Кухня
 Spoon;Ложка;kitchen;Кухня
 Pot;Кастрюля;kitchen;Кухня
 Vase;Ваза;kitchen;Гостиная
+Bottle;Бутылка;kitchen;Кухня
+Fork;Вилка;kitchen;Кухня
+Knife;Нож;kitchen;Кухня
+Frying pan;Сковорода;kitchen;Кухня
+Bin;Мусорное ведро;kitchen;Кухня
 Clock;Часы;room;Гостиная
 Pillow;Подушка;room;Спальня
 Jewelry box;Шкатулка;room;Детская
 Piggy bank;Копилка;room;Детская
 Slippers;Тапочки;room;Спальня
+Blanket;Одеяло;room;Спальня
+Alarm clock;Будильник;room;Спальня
+Remote control;Пульт;room;Гостиная
+Phone;Телефон;room;Детская
+Wallet;Кошелёк;room;Везде
+Candle;Свеча;room;Гостиная
 Backpack;Рюкзак;school;Детская
 Pencil case;Пенал;school;Детская
 Notebook;Тетрадь;school;Детская

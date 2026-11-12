@@ -935,6 +935,261 @@ def i_ruler(c, ink, acc):
     setup_ink(c, ink)
 
 
+# быт
+def i_bottle(c, ink, acc):
+    rr(c, -16, -38, 16, 4, 9)               # корпус
+    rr(c, -6, 4, 6, 20, 3)                  # горло
+    rr(c, -9, 20, 9, 30, 3)                 # крышка
+    setup_ink(c, acc, 2.4)
+    rr(c, -12, -28, 12, -8, 2, fill=1)      # этикетка
+    setup_ink(c, ink, 2.2)
+    ln(c, -8, -22, 8, -22)
+
+
+def i_box(c, ink, acc):
+    poly(c, [(-32, -24), (10, -24), (10, 16), (-32, 16)])          # фронт
+    poly(c, [(-32, 16), (10, 16), (26, 26), (-16, 26)])            # верх
+    poly(c, [(10, -24), (26, -14), (26, 26), (10, 16)])            # бок
+    setup_ink(c, acc, 2.4)
+    ln(c, -11, -24, -11, 16)                # скотч
+    ln(c, -16, 26, -11, 16)
+    ln(c, -11, 16, -11, -24)
+    setup_ink(c, ink)
+
+
+def i_keys(c, ink, acc):
+    circ(c, 0, 33, 10)                      # кольцо
+    for x, bot in ((-14, -36), (13, -22)):
+        circ(c, x, 17, 8)                   # головка ключа
+        ln(c, x, 9, x, bot)                 # стержень
+        setup_ink(c, acc, 2.6)
+        ln(c, x, bot, x + 13, bot)          # бородка
+        ln(c, x, bot + 9, x + 10, bot + 9)
+        setup_ink(c, ink)
+def i_umbrella(c, ink, acc):
+    p = c.beginPath()                       # купол
+    p.moveTo(-38, 4)
+    p.curveTo(-38, 44, 38, 44, 38, 4)
+    c.drawPath(p, stroke=1, fill=0)
+    for cx in (-25.3, 0, 25.3):             # фестоны по низу
+        c.arc(cx - 12.7, -8, cx + 12.7, 4, 180, 180)
+    setup_ink(c, acc, 2.2)                  # спицы
+    ln(c, 0, 40, 0, 4)
+    ln(c, 0, 38, -20, 8)
+    ln(c, 0, 38, 20, 8)
+    setup_ink(c, ink)
+    ln(c, 0, 4, 0, -24)                     # ручка с крючком
+    c.arc(-14, -34, 0, -18, 270, 180)
+
+
+def i_wallet(c, ink, acc):
+    c.saveState()                           # карточки выглядывают из кармана
+    c.translate(-10, 16); c.rotate(-14)
+    rr(c, -12, -6, 12, 22, 3)
+    c.restoreState()
+    c.saveState()
+    c.translate(6, 18); c.rotate(10)
+    rr(c, -11, -6, 13, 22, 3)
+    c.restoreState()
+    setup_ink(c, acc, 2.4)
+    rr(c, -34, -34, 34, 8, 8)               # кошелёк
+    setup_ink(c, ink)
+    ln(c, -34, -12, 34, -12)                # отворот
+    rr(c, -10, -26, 10, -12, 3)             # отделение
+    setup_ink(c, acc, 2.4)
+    ln(c, -10, -19, 10, -19)
+def i_bag(c, ink, acc):
+    ln(c, -15, 10, -15, 24)                 # ручка
+    ln(c, 15, 10, 15, 24)
+    c.arc(-15, 14, 15, 34, 0, 180)
+    poly(c, [(-30, 6), (30, 6), (24, -36), (-24, -36)])   # корпус
+    rr(c, -30, -4, 30, 8, 3)                # клапан
+    setup_ink(c, acc, 2.6)
+    ln(c, -30, 4, 30, 4)
+    setup_ink(c, ink, 2.4)
+    circ(c, 0, -8, 5)                       # замок
+    circ(c, 0, -8, 2, fill=1)
+def i_blanket(c, ink, acc):
+    # сложенное одеяло с отвёрнутым уголком и бахромой
+    p = c.beginPath()
+    p.moveTo(-34, 26)
+    p.lineTo(16, 26)
+    p.lineTo(34, 10)
+    p.lineTo(34, -28)
+    p.lineTo(-34, -28)
+    p.close()
+    c.drawPath(p, stroke=1, fill=0)
+    setup_ink(c, acc, 2.2)
+    ln(c, -34, 10, 16, 10)                  # линия сгиба
+    ln(c, -34, -8, 34, -8)
+    ln(c, 16, 26, 16, 10)                   # отвёрнутый уголок
+    ln(c, 16, 10, 34, 10)
+    setup_ink(c, ink, 2.4)
+    for x in range(-28, 35, 9):             # бахрома
+        ln(c, x, -28, x, -36)
+    setup_ink(c, acc, 2)
+    for x in (-20, -4, 12):                 # стёжка
+        ln(c, x, 22, x, 12)
+    for x in (-24, -8, 8, 24):
+        ln(c, x, 6, x, -6)
+
+
+def i_alarm(c, ink, acc):
+    circ(c, -20, 24, 9)                     # колокольчики
+    circ(c, 20, 24, 9)
+    circ(c, 0, 0, 30)                       # корпус
+    setup_ink(c, acc, 3)
+    ln(c, 0, 0, 0, 15)                      # стрелки
+    ln(c, 0, 0, 11, -7)
+    setup_ink(c, ink, 2.4)
+    ln(c, 0, 32, 0, 36)                     # молоточек
+    ln(c, -14, -26, -22, -36)               # ножки
+    ln(c, 14, -26, 22, -36)
+
+
+def i_remote(c, ink, acc):
+    rr(c, -15, -38, 15, 32, 9)
+    setup_ink(c, acc, 3)
+    circ(c, 0, 20, 5.5)                     # питание
+    setup_ink(c, ink, 2.6)
+    for x in (-6.5, 6.5):
+        for y in (2, -10, -22):
+            circ(c, x, y, 3, fill=1)
+
+
+def i_phone(c, ink, acc):
+    rr(c, -18, -36, 18, 34, 7)
+    setup_ink(c, acc, 2.4)
+    rr(c, -13, -26, 13, 24, 2)              # экран
+    setup_ink(c, ink, 2.6)
+    circ(c, 0, 30, 2.4, fill=1)             # камера
+    ln(c, -6, -31, 6, -31)
+
+
+def i_broom(c, ink, acc):
+    c.saveState()
+    c.rotate(14)
+    rr(c, -5, 8, 5, 44, 3)                  # черенок
+    poly(c, [(-16, 4), (16, 4), (22, -34), (-22, -34)])   # щётка
+    setup_ink(c, acc, 2.4)
+    for x in (-17, -9, 0, 9, 17):           # прутья
+        ln(c, x * 0.62, 0, x, -32)
+    setup_ink(c, ink)
+    rr(c, -18, 0, 18, 9, 3)                 # бандаж
+    ln(c, -18, 30, 18, 30)                  # верх щётки
+    c.restoreState()
+def i_bucket(c, ink, acc):
+    poly(c, [(-24, 26), (24, 26), (18, -32), (-18, -32)])
+    ln(c, -24, 26, 24, 26)                  # обод
+    c.arc(-22, 26, 22, 62, 0, 180)          # дужка
+    setup_ink(c, acc, 2.4)
+    ln(c, -21, 6, 21, 6)                    # вода
+    ln(c, -20, -2, 20, -2)
+
+
+def i_bin(c, ink, acc):
+    poly(c, [(-22, 18), (22, 18), (18, -34), (-18, -34)])   # корпус
+    rr(c, -26, 18, 26, 27, 3)               # крышка
+    setup_ink(c, acc, 3)
+    rr(c, -5, 27, 5, 32, 1)                 # ручка
+    rr(c, 18, -40, 34, -34, 2)              # педаль
+    setup_ink(c, ink, 2.4)
+    ln(c, 18, -34, 14, -30)
+    ln(c, -14, 10, 14, 10)                  # пакет
+
+
+def i_iron(c, ink, acc):
+    rr(c, -38, -22, 30, -13, 3)             # подошва
+    poly(c, [(30, -22), (44, -17), (30, -13)])   # нос
+    p = c.beginPath()                       # корпус
+    p.moveTo(-32, -13)
+    p.lineTo(28, -13)
+    p.curveTo(37, -13, 36, -1, 27, 2)
+    p.lineTo(-32, 2)
+    p.close()
+    c.drawPath(p, stroke=1, fill=0)
+    ln(c, -26, 2, -26, 20)                  # ручка
+    ln(c, 6, 2, 6, 20)
+    c.arc(-26, 10, 6, 30, 0, 180)
+    setup_ink(c, acc, 2.6)
+    ln(c, -30, -18, 26, -18)                # кромка подошвы
+    setup_ink(c, ink, 2.4)
+    circ(c, -20, -6, 3)                     # регулятор
+def i_picture(c, ink, acc):
+    rr(c, -32, -28, 32, 28, 3)              # рама
+    setup_ink(c, acc, 2.4)
+    rr(c, -25, -21, 25, 21, 1)              # паспарту
+    setup_ink(c, acc, 1)
+    poly(c, [(-25, -21), (-8, 4), (2, -8), (25, -21)], close=False)
+    circ(c, 12, 10, 5)                      # солнце
+    setup_ink(c, ink)
+
+
+def i_candle(c, ink, acc):
+    rr(c, -20, -38, 20, -32, 3)             # подсвечник
+    rr(c, -12, -32, 12, 12, 3)              # свеча
+    ln(c, 0, 12, 0, 18)                     # фитиль
+    setup_ink(c, acc, 1)
+    p = c.beginPath()                       # пламя
+    p.moveTo(0, 38)
+    p.curveTo(11, 26, 8, 18, 0, 18)
+    p.curveTo(-8, 18, -11, 26, 0, 38)
+    p.close()
+    c.drawPath(p, stroke=1, fill=1)
+    setup_ink(c, ink, 2.2)
+    ln(c, -12, -18, 12, -18)                # воск
+
+
+def i_fork(c, ink, acc):
+    setup_ink(c, ink, 8)                    # ручка
+    ln(c, 0, -38, 0, 2)
+    setup_ink(c, ink, 4.4)
+    c.arc(-14, -8, 14, 14, 0, 180)          # основание зубцов
+    for x in (-11, -4, 4, 11):
+        ln(c, x, 3, x, 30)                  # зубцы
+    setup_ink(c, acc, 2.6)
+    ln(c, -4, -32, 4, -32)
+    setup_ink(c, ink, 2.2)
+    ln(c, 0, 30, 0, 34)
+def i_knife(c, ink, acc):
+    c.saveState()
+    c.rotate(28)
+    p = c.beginPath()                       # клинок: прямая режущая кромка
+    p.moveTo(-42, -9)
+    p.lineTo(4, -9)
+    p.lineTo(4, 13)
+    p.curveTo(-10, 13, -27, 8, -42, -9)
+    p.close()
+    c.drawPath(p, stroke=1, fill=0)
+    rr(c, 4, -7, 40, 11, 5)                 # рукоять
+    setup_ink(c, acc, 2.6)
+    circ(c, 18, 2, 2.6)                     # заклёпки
+    circ(c, 30, 2, 2.6)
+    setup_ink(c, ink, 3.4)
+    ln(c, 4, -8, 4, 12)                     # больстер
+    c.restoreState()
+def i_pan(c, ink, acc):
+    circ(c, -6, 0, 26)                      # чаша
+    setup_ink(c, acc, 2.6)
+    circ(c, -6, 0, 17)                      # дно
+    setup_ink(c, ink, 4.2)
+    rr(c, 18, -5, 44, 5, 4)                 # ручка
+    setup_ink(c, acc, 2.6)
+    circ(c, 38, 0, 2.8)                     # отверстие
+
+
+def i_hairdryer(c, ink, acc):
+    rr(c, -14, 4, 22, 34, 9)                # корпус
+    poly(c, [(-14, 28), (-30, 34), (-30, 14), (-14, 10)])   # сопло
+    poly(c, [(2, 6), (20, 6), (26, -34), (8, -34)])         # ручка
+    setup_ink(c, acc, 2.6)
+    ln(c, -36, 30, -42, 33)                 # воздух
+    ln(c, -36, 24, -42, 25)
+    ln(c, -36, 18, -42, 15)
+    setup_ink(c, ink, 2.4)
+    circ(c, 4, 24, 3.2)                     # кнопка
+
+
 # ── список предметов: (русское, английское, группа, иконка) ─────────────────
 ITEMS = [
     # мебель
@@ -961,6 +1216,8 @@ ITEMS = [
     ("Колонка", "Speaker", "appliance", i_speaker),
     ("Стиральная машина", "Washing machine", "appliance", i_washer),
     ("Лампа", "Lamp", "appliance", i_lamp),
+    ("Утюг", "Iron", "appliance", i_iron),
+    ("Фен", "Hairdryer", "appliance", i_hairdryer),
     # дом
     ("Окно", "Window", "house", i_window),
     ("Подоконник", "Windowsill", "house", i_windowsill),
@@ -974,6 +1231,13 @@ ITEMS = [
     ("Розетка", "Socket", "house", i_socket),
     ("Батарея", "Radiator", "house", i_radiator),
     ("Пол", "Floor", "house", i_floor),
+    ("Коробка", "Box", "house", i_box),
+    ("Ключи", "Keys", "house", i_keys),
+    ("Зонт", "Umbrella", "house", i_umbrella),
+    ("Сумка", "Bag", "house", i_bag),
+    ("Веник", "Broom", "house", i_broom),
+    ("Ведро", "Bucket", "house", i_bucket),
+    ("Картина", "Picture", "house", i_picture),
     # ванная
     ("Зеркало", "Mirror", "bath", i_mirror),
     ("Ванна", "Bathtub", "bath", i_bath),
@@ -990,12 +1254,23 @@ ITEMS = [
     ("Ложка", "Spoon", "kitchen", i_spoon),
     ("Кастрюля", "Pot", "kitchen", i_pot),
     ("Ваза", "Vase", "kitchen", i_vase),
+    ("Бутылка", "Bottle", "kitchen", i_bottle),
+    ("Вилка", "Fork", "kitchen", i_fork),
+    ("Нож", "Knife", "kitchen", i_knife),
+    ("Сковорода", "Frying pan", "kitchen", i_pan),
+    ("Мусорное ведро", "Bin", "kitchen", i_bin),
     # комната
     ("Часы", "Clock", "room", i_clock),
     ("Подушка", "Pillow", "room", i_pillow),
     ("Шкатулка", "Jewelry box", "room", i_jewelry),
     ("Копилка", "Piggy bank", "room", i_piggy),
     ("Тапочки", "Slippers", "room", i_slippers),
+    ("Одеяло", "Blanket", "room", i_blanket),
+    ("Будильник", "Alarm clock", "room", i_alarm),
+    ("Пульт", "Remote control", "room", i_remote),
+    ("Телефон", "Phone", "room", i_phone),
+    ("Кошелёк", "Wallet", "room", i_wallet),
+    ("Свеча", "Candle", "room", i_candle),
     # школа
     ("Рюкзак", "Backpack", "school", i_backpack),
     ("Пенал", "Pencil case", "school", i_pencilcase),
@@ -1008,17 +1283,23 @@ ITEMS = [
 
 ROOMS = {
     "Кухня": ["Холодильник", "Плита", "Духовка", "Микроволновка", "Чайник",
-              "Чашка", "Тарелка", "Ложка", "Кастрюля", "Полотенце"],
+              "Чашка", "Тарелка", "Ложка", "Вилка", "Нож", "Кастрюля",
+              "Сковорода", "Бутылка", "Мусорное ведро", "Полотенце"],
     "Гостиная": ["Стол", "Стул", "Табурет", "Кресло", "Диван", "Телевизор",
-                 "Полка", "Лампа", "Коврик", "Часы", "Цветок", "Корзина", "Ваза"],
-    "Спальня": ["Кровать", "Шкаф", "Комод", "Подушка", "Тумбочка", "Тапочки"],
-    "Прихожая": ["Дверь", "Зеркало", "Обувница", "Вешалка", "Лестница"],
+                 "Полка", "Лампа", "Коврик", "Часы", "Цветок", "Корзина", "Ваза",
+                 "Пульт", "Картина", "Свеча"],
+    "Спальня": ["Кровать", "Шкаф", "Комод", "Подушка", "Тумбочка", "Одеяло",
+                "Будильник", "Тапочки"],
+    "Прихожая": ["Дверь", "Зеркало", "Обувница", "Вешалка", "Ключи", "Зонт",
+                 "Сумка", "Лестница"],
     "Ванная": ["Раковина", "Душ", "Ванна", "Унитаз", "Кран",
-               "Зубная щётка", "Мыло", "Стиральная машина"],
+               "Зубная щётка", "Мыло", "Фен", "Стиральная машина"],
     "Детская": ["Рюкзак", "Пенал", "Тетрадь", "Учебник", "Книга",
-                "Карандаш", "Линейка", "Компьютер", "Колонка", "Шкатулка", "Копилка"],
+                "Карандаш", "Линейка", "Компьютер", "Колонка", "Телефон",
+                "Шкатулка", "Копилка"],
     "Везде": ["Окно", "Подоконник", "Занавеска", "Выключатель", "Розетка",
-              "Батарея", "Пол"],
+              "Батарея", "Пол", "Коробка", "Корзина", "Веник", "Ведро",
+              "Утюг", "Кошелёк"],
 }
 
 
@@ -1100,6 +1381,22 @@ def draw_sticker(c: canvas.Canvas, cx, cy, item, show_cut=True):
 # ── страницы ────────────────────────────────────────────────────────────────
 def n_sheets() -> int:
     return (len(ITEMS) + PER_SHEET - 1) // PER_SHEET
+
+
+def sheet_batches():
+    """Полные листы по 12; остаток — либо отдельный лист, либо размазан по двум."""
+    out, pos = [], 0
+    while len(ITEMS) - pos > PER_SHEET:
+        out.append(ITEMS[pos:pos + PER_SHEET])
+        pos += PER_SHEET
+    rest = len(ITEMS) - pos
+    if rest and out and rest < COLS * 2:        # короткий хвост делим с предыдущим листом
+        tail = out.pop() + ITEMS[pos:]
+        half = (len(tail) + 1) // 2
+        out += [tail[:half], tail[half:]]
+    elif rest:
+        out.append(ITEMS[pos:])
+    return out
 
 
 def plural(n: int, forms=("лист", "листа", "листов")) -> str:
@@ -1210,11 +1507,14 @@ def page_sheet(c: canvas.Canvas, batch):
     grid_w = COLS * PITCH
     x0 = (PW - grid_w) / 2 + PITCH / 2
     y_top = PH / 2 + (ROWS - 1) * PITCH / 2      # сетка по центру листа
-    for idx, item in enumerate(batch):
-        r, col = divmod(idx, COLS)
-        cx = x0 + col * PITCH
-        cy = y_top - r * PITCH
-        draw_sticker(c, cx, cy, item, show_cut=True)
+    rows = [batch[i:i + COLS] for i in range(0, len(batch), COLS)]
+    y_top = PH / 2 + (len(rows) - 1) * PITCH / 2   # центрируем по числу рядов
+    for r, row in enumerate(rows):
+        shift = (COLS - len(row)) * PITCH / 2      # неполный ряд — по центру
+        for col, item in enumerate(row):
+            cx = x0 + col * PITCH + shift
+            cy = y_top - r * PITCH
+            draw_sticker(c, cx, cy, item, show_cut=True)
 
 
 def page_cut_only(c: canvas.Canvas, batch, label: str):
@@ -1228,17 +1528,19 @@ def page_cut_only(c: canvas.Canvas, batch, label: str):
 
     grid_w = COLS * PITCH
     x0 = (PW - grid_w) / 2 + PITCH / 2
-    y_top = (PH - 12 * mm) / 2 + (ROWS - 1) * PITCH / 2
+    rows = [batch[i:i + COLS] for i in range(0, len(batch), COLS)]
+    y_top = (PH - 12 * mm) / 2 + (len(rows) - 1) * PITCH / 2
     c.setStrokeColor(CUT_COLOR)
     c.setLineWidth(0.35)
-    for idx, item in enumerate(batch):
-        r, col = divmod(idx, COLS)
-        cx = x0 + col * PITCH
-        cy = y_top - r * PITCH
-        c.drawPath(scallop_path(c, cx, cy, R_CUT), stroke=1, fill=0)
-        c.setFillColor(colors.HexColor("#9A9A9A"))
-        c.setFont("M", 5.4)
-        c.drawCentredString(cx, cy - 1.6 * mm, f"{item[0]} · {item[1]}")
+    for r, row in enumerate(rows):
+        shift = (COLS - len(row)) * PITCH / 2
+        for col, item in enumerate(row):
+            cx = x0 + col * PITCH + shift
+            cy = y_top - r * PITCH
+            c.drawPath(scallop_path(c, cx, cy, R_CUT), stroke=1, fill=0)
+            c.setFillColor(colors.HexColor("#9A9A9A"))
+            c.setFont("M", 5.4)
+            c.drawCentredString(cx, cy - 1.6 * mm, f"{item[0]} · {item[1]}")
 
 
 def page_words(c: canvas.Canvas):
@@ -1282,8 +1584,8 @@ def page_words(c: canvas.Canvas):
         heights[idx] += len(words_) + 2.2
 
     col_w = (PW - 40 * mm) / 3
-    row_h = 6.0 * mm
-    y_start = PH - 52 * mm
+    row_h = 5.3 * mm
+    y_start = PH - 50 * mm
     min_y = PH
     for ci, col_rooms in enumerate(cols):
         x = 20 * mm + ci * col_w
@@ -1298,28 +1600,28 @@ def page_words(c: canvas.Canvas):
             c.setStrokeColor(colors.HexColor("#DCC9D2"))
             c.setLineWidth(0.5)
             c.line(x, y - 2.2 * mm, x + col_w - 10 * mm, y - 2.2 * mm)
-            y -= 8.4 * mm
+            y -= 7.6 * mm
             for ru in words_:
                 ru_, en_ = by_ru[ru]
-                w_en = pdfmetrics.stringWidth(en_, "MB", 9.4)
-                w_ru = pdfmetrics.stringWidth(ru_, "M", 8.2)
+                w_en = pdfmetrics.stringWidth(en_, "MB", 8.8)
+                w_ru = pdfmetrics.stringWidth(ru_, "M", 7.8)
                 avail = col_w - 14 * mm
                 k = min(1.0, avail / max(w_en + w_ru, 1))
                 c.setFillColor(INK)
-                c.setFont("MB", 9.4 * k)
+                c.setFont("MB", 8.8 * k)
                 c.drawString(x, y, en_)
                 c.setFillColor(colors.HexColor("#8E877C"))
-                c.setFont("M", 8.2 * k)
+                c.setFont("M", 7.8 * k)
                 c.drawRightString(x + col_w - 10 * mm, y, ru_)
                 c.setStrokeColor(colors.HexColor("#EDE9E2"))
                 c.setLineWidth(0.3)
                 c.line(x, y - 2.3 * mm, x + col_w - 10 * mm, y - 2.3 * mm)
                 y -= row_h
-            y -= 4.6 * mm
+            y -= 3.8 * mm
         min_y = min(min_y, y)
 
-    gy = min_y - 12 * mm
-    if gy >= 56 * mm:          # блок рисуем только если есть место под колонками
+    gy = min_y - 10 * mm
+    if gy >= 42 * mm:          # блок рисуем только если есть место под колонками
         # три игры — заполняем низ листа и добавляем пользу
         gy = min_y - 12 * mm
         c.setStrokeColor(colors.HexColor("#E4DFD6"))
@@ -1355,16 +1657,19 @@ def page_words(c: canvas.Canvas):
                     line = probe
             lines.append(line)
             for k, L in enumerate(lines):
-                c.drawString(x, gy - 15 * mm - k * 4 * mm, L)
+                c.drawString(x, gy - 14 * mm - k * 3.6 * mm, L)
             # вертикальные разделители
             if i:
                 c.setStrokeColor(colors.HexColor("#EDE9E2"))
                 c.setLineWidth(0.4)
-                c.line(x - 4 * mm, gy + 6 * mm, x - 4 * mm, gy - 26 * mm)
+                c.line(x - 4 * mm, gy + 6 * mm, x - 4 * mm, gy - 28 * mm)
 
+    c.setStrokeColor(colors.HexColor("#E4DFD6"))
+    c.setLineWidth(0.5)
+    c.line(20 * mm, 14 * mm, PW - 20 * mm, 14 * mm)
     c.setFillColor(colors.HexColor("#7A756C"))
-    c.setFont("M", 8)
-    c.drawString(20 * mm, 20 * mm,
+    c.setFont("M", 7.6)
+    c.drawString(20 * mm, 9 * mm,
                  "Печать A4 · 100 % · рез по малиновому контуру · матовая ламинация для влажных комнат")
 
 
@@ -1376,14 +1681,16 @@ def main() -> None:
     page_cover(c)
     c.showPage()
 
-    for start in range(0, len(ITEMS), PER_SHEET):
-        page_sheet(c, ITEMS[start:start + PER_SHEET])
+    batches = sheet_batches()
+    for batch in batches:
+        page_sheet(c, batch)
         c.showPage()
 
-    for start in range(0, len(ITEMS), PER_SHEET):
-        batch = ITEMS[start:start + PER_SHEET]
-        page_cut_only(c, batch, f"{start + 1}–{start + len(batch)} из {len(ITEMS)}")
+    pos = 1
+    for batch in batches:
+        page_cut_only(c, batch, f"{pos}–{pos + len(batch) - 1} из {len(ITEMS)}")
         c.showPage()
+        pos += len(batch)
 
     page_words(c)
     c.showPage()
