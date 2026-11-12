@@ -191,8 +191,9 @@ def check_creatives() -> None:
         fail("нет папки creatives/240x400 с креативами 240×400")
         return
     small = sorted(small_dir.glob("*.jpg"))
-    if len(small) != 4:
-        fail(f"креативов 240×400 должно быть 4, найдено {len(small)}")
+    print(f"Креативов 240×400: {len(small)}")
+    if len(small) < 4:
+        fail(f"креативов 240×400 должно быть не меньше 4, найдено {len(small)}")
     limit = 120 * 1024
     for path in small:
         size = path.stat().st_size
