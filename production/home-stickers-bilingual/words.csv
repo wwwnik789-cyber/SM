@@ -1,0 +1,37 @@
+russian;english;category;rooms
+Стол;Table;furniture;Гостиная
+Стул;Chair;furniture;Гостиная
+Кровать;Bed;furniture;Спальня
+Диван;Sofa;furniture;Гостиная
+Шкаф;Wardrobe;furniture;Спальня
+Полка;Shelf;furniture;Гостиная
+Холодильник;Fridge;appliance;Кухня
+Плита;Stove;appliance;Кухня
+Чайник;Kettle;appliance;Кухня
+Телевизор;TV;appliance;Гостиная
+Стиральная машина;Washing machine;appliance;
+Лампа;Lamp;appliance;Гостиная, Спальня
+Окно;Window;house;Везде
+Дверь;Door;house;Прихожая, Везде
+Лестница;Stairs;house;Прихожая
+Коврик;Rug;house;Гостиная
+Корзина;Basket;house;Гостиная, Прихожая
+Цветок;Plant;house;Гостиная
+Зеркало;Mirror;bath;Прихожая, Ванная
+Ванна;Bathtub;bath;Ванная
+Раковина;Sink;bath;Ванная
+Душ;Shower;bath;Ванная
+Унитаз;Toilet;bath;Ванная
+Полотенце;Towel;bath;Кухня, Ванная
+Чашка;Cup;kitchen;Кухня
+Тарелка;Plate;kitchen;Кухня
+Ложка;Spoon;kitchen;Кухня
+Кастрюля;Pot;kitchen;Кухня
+Часы;Clock;room;Гостиная
+Подушка;Pillow;room;Спальня
+Комод;Dresser;furniture;
+Табурет;Stool;furniture;
+Выключатель;Light switch;house;Везде
+Розетка;Socket;house;Везде
+Кран;Tap;bath;
+Батарея;Radiator;house;Везде
