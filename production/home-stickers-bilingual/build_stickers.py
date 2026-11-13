@@ -35,13 +35,14 @@ FONT_SRC = REPO / "banners/anikom-arena-3000x2500-concepts/source/Montserrat-Var
 
 # ── геометрия ───────────────────────────────────────────────────────────────
 PW, PH = A4
-R_CUT = 23.5 * mm          # радиус по линии реза
-R_BLEED = 24.3 * mm        # вылет краски за рез
-R_RING = 20.0 * mm         # внутреннее кольцо
-LOBE_N = 22                # число «лепестков» фестона
-LOBE_AMP = 1.05 * mm       # амплитуда фестона
-PITCH = 60 * mm            # шаг сетки
-COLS, ROWS = 3, 4
+D_CUT = 35 * mm            # диаметр наклейки по линии реза
+R_CUT = D_CUT / 2
+R_BLEED = R_CUT + 0.8 * mm # вылет краски за рез
+R_RING = 0.86 * R_CUT      # внутреннее кольцо
+LOBE_N = 18                # число «лепестков» фестона
+LOBE_AMP = 0.8 * mm        # амплитуда фестона
+PITCH = 45 * mm            # шаг сетки
+COLS, ROWS = 4, 5
 PER_SHEET = COLS * ROWS
 
 CUT_COLOR = colors.HexColor("#FF00FF")   # 100 % magenta — контур реза
@@ -1327,6 +1328,26 @@ def fit_size(text: str, font: str, start: float, floor: float, max_w: float) -> 
     return round(size, 1)
 
 
+def fit_lines(text: str, font: str, start: float, floor: float, max_w: float):
+    """Одна строка, если влезает; иначе две — по словам, крупнее."""
+    if pdfmetrics.stringWidth(text, font, floor) <= max_w:
+        return [text], fit_size(text, font, start, floor, max_w)
+    words = text.split()
+    if len(words) > 1:
+        best = None
+        for cut in range(1, len(words)):
+            a, b = " ".join(words[:cut]), " ".join(words[cut:])
+            widest = max(pdfmetrics.stringWidth(a, font, start),
+                         pdfmetrics.stringWidth(b, font, start))
+            if best is None or widest < best[0]:
+                best = (widest, a, b)
+        _, a, b = best
+        size = min(fit_size(a, font, start, floor, max_w),
+                   fit_size(b, font, start, floor, max_w))
+        return [a, b], size
+    return [text], fit_size(text, font, start, floor, max_w)
+
+
 def draw_sticker(c: canvas.Canvas, cx, cy, item, show_cut=True):
     ru, en, cat, icon = item
     pal = PALETTE[cat]
@@ -1341,7 +1362,7 @@ def draw_sticker(c: canvas.Canvas, cx, cy, item, show_cut=True):
     c.drawPath(p, stroke=1, fill=1)
 
     # светлое ядро под текст
-    core = scallop_path(c, cx, cy, R_BLEED * 0.72, amp=LOBE_AMP * 0.72, lobes=LOBE_N)
+    core = scallop_path(c, cx, cy, R_BLEED * 0.76, amp=LOBE_AMP * 0.76, lobes=LOBE_N)
     c.setFillColor(mix(tint, colors.white, 0.55))
     c.setStrokeColor(mix(tint, colors.white, 0.55))
     c.drawPath(core, stroke=0, fill=1)
@@ -1353,22 +1374,29 @@ def draw_sticker(c: canvas.Canvas, cx, cy, item, show_cut=True):
 
     # иконка
     c.saveState()
-    c.translate(cx, cy + 7.4 * mm)
-    s = 18.6 * mm / 100
+    c.translate(cx, cy + 5.6 * mm)
+    s = 13.0 * mm / 100
     c.scale(s, s)
     setup_ink(c, ink, 5.2)
     icon(c, ink, acc)
     c.restoreState()
 
     # подписи: английское первым и жирным, русское под ним
-    en_size = fit_size(en, "MB", 11.2, 6.0, 33 * mm)
-    ru_size = fit_size(ru, "MM", 7.8, 5.2, 30 * mm)
+    en_lines, en_size = fit_lines(en, "MB", 8.6, 7.0, 22.5 * mm)
     c.setFillColor(ink)
     c.setFont("MB", en_size)
-    c.drawCentredString(cx, cy - 6.6 * mm, en)
+    if len(en_lines) == 1:
+        c.drawCentredString(cx, cy - 3.9 * mm, en_lines[0])
+        ru_y = cy - 8.9 * mm
+    else:
+        c.drawCentredString(cx, cy - 3.3 * mm, en_lines[0])
+        c.drawCentredString(cx, cy - 6.3 * mm, en_lines[1])
+        ru_y = cy - 10.0 * mm
+
+    ru_size = fit_size(ru, "MM", 6.2, 4.6, 20.5 * mm)
     c.setFillColor(mix(ink, colors.white, 0.45))
     c.setFont("MM", ru_size)
-    c.drawCentredString(cx, cy - 12.2 * mm, ru)
+    c.drawCentredString(cx, ru_y, ru)
 
     # контур реза
     if show_cut:
@@ -1412,30 +1440,32 @@ def page_cover(c: canvas.Canvas):
     c.rect(0, 0, PW, PH, stroke=0, fill=1)
 
     by_ru = {ru: item for item in ITEMS for ru in [item[0]]}
-    samples = [by_ru["Стол"], by_ru["Холодильник"], by_ru["Компьютер"]]
-    xs = [PW * 0.24, PW * 0.5, PW * 0.76]
-    for x, it in zip(xs, samples):
-        draw_sticker(c, x, PH - 48 * mm, it, show_cut=False)
+    samples = [by_ru["Стол"], by_ru["Холодильник"], by_ru["Компьютер"],
+               by_ru["Зубная щётка"]]
+    margin = R_BLEED + 8 * mm                     # держим наклейки внутри полей
+    step = (PW - 2 * margin) / (len(samples) - 1)
+    for i, it in enumerate(samples):
+        draw_sticker(c, margin + i * step, PH - 44 * mm, it, show_cut=False)
 
     c.setFillColor(colors.HexColor("#E9A552"))
     c.setFont("MS", 8.4)
-    c.drawString(20 * mm, PH - 86 * mm, "SM PRODUCTION · ОБУЧАЮЩИЕ НАКЛЕЙКИ · 2026")
+    c.drawString(20 * mm, PH - 80 * mm, "SM PRODUCTION · ОБУЧАЮЩИЕ НАКЛЕЙКИ · 2026")
 
     c.setFillColor(colors.HexColor("#F4EFE6"))
     c.setFont("MB", 26)
-    c.drawString(20 * mm, PH - 99 * mm, "Дом говорит по-английски")
-    c.drawString(20 * mm, PH - 112 * mm, "и по-русски")
+    c.drawString(20 * mm, PH - 93 * mm, "Дом говорит по-английски")
+    c.drawString(20 * mm, PH - 106 * mm, "и по-русски")
 
     c.setFillColor(colors.HexColor("#B8AFA2"))
     c.setFont("M", 9.4)
-    c.drawString(20 * mm, PH - 124 * mm,
+    c.drawString(20 * mm, PH - 118 * mm,
                  f"{len(ITEMS)} наклеек на предметы дома: английское слово сверху, русское под ним.")
-    c.drawString(20 * mm, PH - 130 * mm,
+    c.drawString(20 * mm, PH - 124 * mm,
                  "Клеим на стол, холодильник, окно, дверь, зеркало — ребёнок читает слово там, где стоит предмет.")
 
-    items = [(str(len(ITEMS)), "наклеек"), ("47", "мм"), ("2", "языка"),
+    items = [(str(len(ITEMS)), "наклеек"), ("35", "мм"), ("2", "языка"),
              ("A4", f"{n_sheets()} {plural(n_sheets())}")]
-    y = PH - 152 * mm
+    y = PH - 146 * mm
     col = (PW - 40 * mm) / 4
     c.setStrokeColor(colors.HexColor("#2E2A25"))
     c.setLineWidth(0.5)
@@ -1455,7 +1485,7 @@ def page_cover(c: canvas.Canvas):
         ("3", "Покрытие", "Матовая ламинация держит воду и мытьё. Без неё — только сухая комната."),
         ("4", "Наклейка", "Обезжирить поверхность, прижать от центра к краям, разгладить."),
     ]
-    yy = PH - 170 * mm
+    yy = PH - 164 * mm
     for num, title, text in steps:
         c.setFillColor(colors.HexColor("#E9A552"))
         c.setFont("MB", 12)
@@ -1539,8 +1569,8 @@ def page_cut_only(c: canvas.Canvas, batch, label: str):
             cy = y_top - r * PITCH
             c.drawPath(scallop_path(c, cx, cy, R_CUT), stroke=1, fill=0)
             c.setFillColor(colors.HexColor("#9A9A9A"))
-            c.setFont("M", 5.4)
-            c.drawCentredString(cx, cy - 1.6 * mm, f"{item[0]} · {item[1]}")
+            c.setFont("M", 4.8)
+            c.drawCentredString(cx, cy - 1.4 * mm, f"{item[0]} · {item[1]}")
 
 
 def page_words(c: canvas.Canvas):
