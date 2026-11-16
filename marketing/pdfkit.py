@@ -262,7 +262,7 @@ class Doc:
 
     # ── таблицы ─────────────────────────────────────────────────────────────
     def table(self, rows: list[list[str]], widths: list[float] | None = None,
-              size: float = 8.8) -> None:
+              size: float = 8.8, keep: bool = True) -> None:
         n = len(rows[0])
         if widths is None:
             widths = [CONTENT_W / n] * n
@@ -273,10 +273,36 @@ class Doc:
             return max(len(wrap(cell, font, s, widths[i] - 12))
                        for i, cell in enumerate(cells)) * (s * 1.42) + 10
 
+        # таблицу лучше не рвать: если целиком не влезает — начинаем новую страницу
+        if keep:
+            total = sum(row_height(r, FONTS["S"] if i == 0 else FONTS["R"], size)
+                        for i, r in enumerate(rows))
+            self.need(total)
+
         for ri, row in enumerate(rows):
             font = FONTS["S"] if ri == 0 else FONTS["R"]
             h = row_height(row, font, size)
+            before = self.page
             self.need(h)
+            if self.page != before and ri > 0:
+                # переехали — повторяем шапку, иначе колонки читаются наугад
+                head = rows[0]
+                hh = row_height(head, FONTS["S"], size)
+                self.need(hh)
+                htop = self.y
+                self.c.setFillColor(NAVY)
+                self.c.setFont(FONTS["S"], size)
+                hx = ML
+                for ci, cell in enumerate(head):
+                    yy = htop - 10 - size
+                    for line in wrap(cell, FONTS["S"], size, widths[ci] - 12):
+                        self.c.drawString(hx + 6, yy, line)
+                        yy -= size * 1.42
+                    hx += widths[ci]
+                self.c.setStrokeColor(LINE)
+                self.c.setLineWidth(0.5)
+                self.c.line(ML, htop - hh, ML + CONTENT_W, htop - hh)
+                self.y = htop - hh
             top = self.y
             if ri == 0:
                 color, font = NAVY, FONTS["S"]
