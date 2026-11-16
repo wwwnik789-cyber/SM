@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Правка страницы «Контакты» — SM Production</title>
+<style>
+  :root {
+    --ink: #14141a; --mut: #5f6068; --line: #e2ded4; --bg: #faf8f3;
+    --card: #fff; --accent: #e8441a; --code-bg: #14141a; --code-ink: #e9e6dd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.62 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 22px 96px; }
+  header.top {
+    border-bottom: 1px solid var(--line); background: #fff; margin-bottom: 34px;
+  }
+  header.top .wrap { padding-top: 40px; padding-bottom: 34px; }
+  .kicker {
+    font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--mut); margin: 0 0 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .kicker::before {
+    content: ""; width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg);
+  }
+  h1 { font-size: 34px; line-height: 1.14; margin: 0 0 16px; letter-spacing: -.01em; }
+  .lead { font-size: 17px; color: var(--mut); margin: 0; max-width: 74ch; }
+  .meta {
+    margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tag {
+    font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px;
+    padding: 5px 12px; color: var(--mut); background: #fff;
+  }
+  h2 {
+    font-size: 23px; margin: 46px 0 6px; letter-spacing: -.01em;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .num {
+    font-size: 13px; font-weight: 700; color: #fff; background: var(--accent);
+    border-radius: 8px; padding: 3px 9px; letter-spacing: .04em; flex: none;
+  }
+  h3 { font-size: 16.5px; margin: 26px 0 8px; }
+  p { margin: 10px 0; }
+  .muted { color: var(--mut); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px 22px; margin: 16px 0;
+  }
+  .card.note { border-left: 3px solid var(--accent); }
+  .card.warn { border-left: 3px solid #b58900; background: #fffdf3; }
+  ul, ol { margin: 10px 0; padding-left: 22px; }
+  li { margin: 6px 0; }
+  code.inline {
+    background: #efece4; border-radius: 5px; padding: 1px 6px;
+    font: 13.5px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  .filepath {
+    display: inline-flex; align-items: center; gap: 8px; background: #14141a; color: #f4f2ec;
+    border-radius: 8px; padding: 6px 12px; margin: 8px 0 12px;
+    font: 13.5px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  .codebox { position: relative; margin: 12px 0 4px; }
+  pre {
+    margin: 0; background: var(--code-bg); color: var(--code-ink);
+    border-radius: 14px; padding: 18px 18px 20px; overflow-x: auto;
+    font: 12.7px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    tab-size: 2;
+  }
+  pre.small { max-height: 420px; overflow-y: auto; }
+  .copy {
+    position: absolute; top: 10px; right: 10px; z-index: 2;
+    background: rgba(255,255,255,.1); color: #f4f2ec; border: 1px solid rgba(255,255,255,.25);
+    border-radius: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer;
+    font-family: inherit; transition: background .2s, border-color .2s;
+  }
+  .copy:hover { background: rgba(255,255,255,.18); }
+  .copy.done { background: #d8ff3e; color: #14141a; border-color: #d8ff3e; }
+  .del { color: #ff8f7a; }
+  .add { color: #b6f36a; }
+  .dim { color: #8a8781; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); }
+  td:first-child { white-space: nowrap; font-weight: 600; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; border-bottom: 1px dashed var(--line); }
+  .checklist li::before {
+    content: "☐"; color: var(--accent); font-size: 17px; line-height: 1.35; flex: none;
+  }
+  footer {
+    margin-top: 60px; padding-top: 22px; border-top: 1px solid var(--line);
+    color: var(--mut); font-size: 13.5px;
+  }
+  a { color: var(--accent); }
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    .copy { display: none; }
+    pre { background: #f4f2ec; color: #14141a; border: 1px solid #ddd; }
+    header.top { border: none; }
+    h2 { page-break-after: avoid; }
+    .card, pre { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">Инструкция по правке</p>
+    <h1>Страница «Контакты»: убрать Санкт-Петербург и добавить блок производства</h1>
+    <p class="lead">
+      Один файл, три небольших правки. Код можно копировать прямо отсюда кнопкой
+      «Скопировать» — интернет, GitHub и доступы не нужны.
+    </p>
+    <div class="meta">
+      <span class="tag">Ветка arena/57df9bb4-sm</span>
+      <span class="tag">Коммит 817b219</span>
+      <span class="tag">3 файла</span>
+      <span class="tag">React + Vite + Tailwind</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card note">
+    <strong>Коротко, что меняется.</strong>
+    <ul>
+      <li>Страница контактов остаётся с одним адресом — Москва, Остаповский проезд, 9&nbsp;с13. Питерский адрес, телефон <code class="inline">+7 812</code> и вторая карта уходят.</li>
+      <li>Добавляется отдельный блок про производство: галерея цеха, шесть участков, чек-лист «что увидите на визите» и три шага, как попасть в цех.</li>
+      <li>В футере вместо петербургского адреса — режим производства.</li>
+      <li>В форме заявки тема «Визит на производство» больше не теряется.</li>
+    </ul>
+  </div>
+
+  <div class="card warn">
+    <strong>Перед началом — сделайте копию.</strong>
+    Сохраните исходные три файла рядом с проектом или переименуйте в
+    <code class="inline">Contacts.jsx.bak</code>. Если что-то пойдёт не так, вернётесь к ним одной командой.
+  </div>
+
+  <h2><span class="num">1</span> Заменить страницу целиком</h2>
+  <p class="muted">
+    Это самый простой путь: файл небольшой, и в нём проще заменить всё содержимое,
+    чем выискивать отдельные строки.
+  </p>
+  <div class="filepath">src/pages/Contacts.jsx</div>
+  <p>
+    Откройте файл, выделите всё (<code class="inline">Ctrl+A</code>), удалите и вставьте код ниже
+    (<code class="inline">Ctrl+V</code>). Сохраните.
+  </p>
+  <div class="codebox">
+    <button class="copy" data-target="code-contacts">Скопировать</button>
+    <pre id="code-contacts" class="small">import { usePageMeta } from &quot;../hooks/usePageMeta&quot;;
+import PageHero from &quot;../components/ui/PageHero&quot;;
+import { Counter, Reveal } from &quot;../components/ui/motion&quot;;
+import { Accordion, Btn, SectionHead } from &quot;../components/ui/bits&quot;;
+import {
+  ArrowUpRight, Bolt, Check, Clock, Cube, Factory, Mail, MapPin, Phone, Ruler, Send, Spark,
+} from &quot;../components/ui/Icons&quot;;
+import { EMAIL, PHONE, PHONE_HREF, TG } from &quot;../lib/format&quot;;
+import { useUI } from &quot;../lib/store&quot;;
+
+const ADDRESS = &quot;109316, Москва, Остаповский проезд, д. 9, с. 13&quot;;
+const HOURS = &quot;Работаем 24/7 · производство ежедневно 9:00–22:00&quot;;
+const MAP = &quot;https://yandex.ru/maps/?ll=37.714032%2C55.722381&amp;z=16&quot;;
+const MAP_ORG = &quot;https://yandex.ru/maps/org/sm_production/135757112868&quot;;
+const TG_HANDLE = &quot;@sm_production_sm&quot;;
+
+const channels = [
+  {
+    icon: &lt;Phone size={20} /&gt;,
+    label: &quot;Телефон&quot;,
+    value: PHONE,
+    href: PHONE_HREF,
+    note: &quot;Звонок или сообщение — как удобнее. Отвечаем круглосуточно.&quot;,
+  },
+  {
+    icon: &lt;Mail size={20} /&gt;,
+    label: &quot;Почта&quot;,
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
+    note: &quot;Пришлите бриф, макет или фото площадки — ответим со сметой и сроком.&quot;,
+  },
+  {
+    icon: &lt;Send size={20} /&gt;,
+    label: &quot;Telegram&quot;,
+    value: TG_HANDLE,
+    href: TG,
+    note: &quot;Быстрые вопросы, эскизы и правки в одном чате.&quot;,
+  },
+];
+
+const stats = [
+  { value: 6, suffix: &quot;&quot;, label: &quot;участков в одном цеху&quot; },
+  { value: 3, suffix: &quot; ч&quot;, label: &quot;минимальный срок печати баннера&quot; },
+  { value: 24, suffix: &quot;/7&quot;, label: &quot;монтажи и поддержка&quot; },
+  { value: 300, suffix: &quot;+&quot;, label: &quot;реализованных проектов&quot; },
+];
+
+const equipment = [
+  { icon: &lt;Factory size={18} /&gt;, title: &quot;УФ-печать и широкоформат&quot;, text: &quot;Баннер, плёнка, композит, ПВХ. Печать на своих материалах, без посредников.&quot; },
+  { icon: &lt;Ruler size={18} /&gt;, title: &quot;ЧПУ-фрезеровка и гравировка&quot;, text: &quot;Криволинейные формы, буквы, пазы и присадка — по вектору, а не по шаблону.&quot; },
+  { icon: &lt;Cube size={18} /&gt;, title: &quot;Поклейка и ламинация&quot;, text: &quot;Монтаж плёнки на плоскость и объём, запечатка торцов, матовые покрытия.&quot; },
+  { icon: &lt;Bolt size={18} /&gt;, title: &quot;Сварка каркасов&quot;, text: &quot;Металл для сцен, стендов и световых конструкций: прочность считаем под нагрузку.&quot; },
+  { icon: &lt;Spark size={18} /&gt;, title: &quot;Зона сборки и тестирования&quot;, text: &quot;Собираем конструкцию целиком до выезда: проверяем стыки, свет и крепёж.&quot; },
+  { icon: &lt;Check size={18} /&gt;, title: &quot;Склад и логистика&quot;, text: &quot;Храним каркасы между событиями и отгружаем на площадку в монтажное окно.&quot; },
+];
+
+const visitSteps = [
+  { n: &quot;01&quot;, t: &quot;Напишите или позвоните&quot;, d: &quot;Скажите, что хотите посмотреть, и когда вам удобно — включая вечер и монтажную ночь.&quot; },
+  { n: &quot;02&quot;, t: &quot;Согласуем время&quot;, d: &quot;Подберём окно, когда нужный участок свободен и можно показать его в работе, а не на паузе.&quot; },
+  { n: &quot;03&quot;, t: &quot;Встречаем на проходной&quot;, d: &quot;Проведём по цеху, покажем материалы и вашу конструкцию до отправки на площадку.&quot; },
+];
+
+const faq = [
+  {
+    q: &quot;Можно ли приехать без записи?&quot;,
+    a: &quot;Лучше записаться. Мы согласуем время так, чтобы вы застали нужный участок в работе, а не на паузе, и кто-то из производства смог провести вас по цеху и ответить на вопросы.&quot;,
+  },
+  {
+    q: &quot;Правда ли, что можно приехать ночью?&quot;,
+    a: &quot;Да, если это согласовано заранее. Монтажи идут круглосуточно, и перед ночным заездом часто нужно посмотреть конструкцию вживую. Напишите — подберём время.&quot;,
+  },
+  {
+    q: &quot;Можно забрать конструкцию самому?&quot;,
+    a: &quot;Да. Отгрузка идёт со склада по адресу производства: упакуем, поможем с погрузкой и отдадим документы. Если нужна доставка — организуем.&quot;,
+  },
+  {
+    q: &quot;Покажете материалы до печати?&quot;,
+    a: &quot;Покажем образцы плёнок, баннера, акрила и композита, объясним, что и где держится лучше, и предложим варианты под ваш бюджет — без сюрпризов после запуска тиража.&quot;,
+  },
+];
+
+export default function Contacts() {
+  usePageMeta(
+    &quot;Контакты SM Production — Москва, производство на Остаповском проезде&quot;,
+    &quot;Телефон, почта, мессенджеры и адрес производства SM-Production в Москве. Приезжайте в цех: покажем станки, материалы и вашу конструкцию до отправки на площадку.&quot;,
+  );
+  const { openLead } = useUI();
+
+  return (
+    &lt;&gt;
+      &lt;PageHero
+        overline=&quot;Контакты&quot;
+        title={&lt;&gt;Приезжайте в цех — &lt;span className=&quot;text-accent&quot;&gt;покажем, как делается ваш проект&lt;/span&gt;&lt;/&gt;}
+        text=&quot;Один адрес, один телефон и живые люди на связи круглосуточно. Производство в Москве на Остаповском проезде: здесь печатаем, фрезеруем, варим и собираем конструкции до отправки на площадку.&quot;
+      &gt;
+        &lt;div className=&quot;mt-8 flex flex-wrap gap-3&quot;&gt;
+          &lt;a href={PHONE_HREF} className=&quot;btn-sheen inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-4 font-display text-[13px] uppercase tracking-[0.14em] text-white&quot;&gt;
+            &lt;Phone size={15} /&gt; {PHONE}
+          &lt;/a&gt;
+          &lt;a href={`mailto:${EMAIL}`} className=&quot;inline-flex items-center gap-2 rounded-xl border border-line px-7 py-4 font-display text-[13px] uppercase tracking-[0.14em] hover:border-accent hover:text-accent&quot;&gt;
+            &lt;Mail size={15} /&gt; {EMAIL}
+          &lt;/a&gt;
+          &lt;a href={TG} target=&quot;_blank&quot; rel=&quot;noreferrer&quot; className=&quot;inline-flex items-center gap-2 rounded-xl border border-line px-7 py-4 font-display text-[13px] uppercase tracking-[0.14em] hover:border-accent hover:text-accent&quot;&gt;
+            &lt;Send size={15} /&gt; Telegram
+          &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;mt-7 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-mut&quot;&gt;
+          &lt;span className=&quot;inline-flex items-center gap-2&quot;&gt;&lt;span className=&quot;animate-pulse-dot h-2 w-2 rounded-full bg-acid&quot; /&gt; На связи прямо сейчас&lt;/span&gt;
+          &lt;span className=&quot;inline-flex items-center gap-2&quot;&gt;&lt;Clock size={14} className=&quot;text-accent&quot; /&gt; {HOURS}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/PageHero&gt;
+
+      {/* ---------- каналы связи ---------- */}
+      &lt;section className=&quot;mx-auto max-w-7xl px-5 pb-6&quot;&gt;
+        &lt;div className=&quot;grid gap-4 md:grid-cols-3&quot;&gt;
+          {channels.map((c, i) =&gt; (
+            &lt;Reveal key={c.label} delay={i * 0.07}&gt;
+              &lt;a
+                href={c.href}
+                target={c.href.startsWith(&quot;http&quot;) ? &quot;_blank&quot; : undefined}
+                rel=&quot;noreferrer&quot;
+                className=&quot;card-hover group flex h-full flex-col rounded-3xl border border-line bg-card p-7&quot;
+              &gt;
+                &lt;div className=&quot;flex items-start justify-between&quot;&gt;
+                  &lt;span className=&quot;rounded-2xl bg-accent/12 p-3 text-accent&quot;&gt;{c.icon}&lt;/span&gt;
+                  &lt;ArrowUpRight size={18} className=&quot;text-mut transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent&quot; /&gt;
+                &lt;/div&gt;
+                &lt;p className=&quot;mt-6 font-display text-[10px] uppercase tracking-[0.28em] text-mut&quot;&gt;{c.label}&lt;/p&gt;
+                &lt;p className=&quot;mt-2 display-h break-words text-xl font-bold group-hover:text-accent&quot;&gt;{c.value}&lt;/p&gt;
+                &lt;p className=&quot;mt-3 text-sm leading-relaxed text-mut&quot;&gt;{c.note}&lt;/p&gt;
+              &lt;/a&gt;
+            &lt;/Reveal&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* ---------- адрес производства ---------- */}
+      &lt;section className=&quot;mx-auto max-w-7xl px-5 py-16&quot;&gt;
+        &lt;Reveal&gt;
+          &lt;div className=&quot;overflow-hidden rounded-[28px] border border-line bg-card&quot;&gt;
+            &lt;div className=&quot;grid lg:grid-cols-[1.05fr_1fr]&quot;&gt;
+              &lt;div className=&quot;relative p-8 md:p-11&quot;&gt;
+                &lt;div className=&quot;grid-bg pointer-events-none absolute inset-0 opacity-30&quot; aria-hidden=&quot;true&quot; /&gt;
+                &lt;div className=&quot;relative&quot;&gt;
+                  &lt;div className=&quot;mb-4 flex items-center gap-3&quot;&gt;
+                    &lt;span className=&quot;h-2 w-2 rotate-45 bg-accent&quot; /&gt;
+                    &lt;span className=&quot;font-display text-xs uppercase tracking-[0.28em] text-mut&quot;&gt;Производство и офис · Москва&lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;h2 className=&quot;display-h max-w-md text-3xl font-bold md:text-4xl&quot;&gt;Наш адрес в Москве&lt;/h2&gt;
+
+                  &lt;div className=&quot;mt-8 space-y-5&quot;&gt;
+                    &lt;p className=&quot;flex items-start gap-3 text-ink/85&quot;&gt;
+                      &lt;MapPin size={18} className=&quot;mt-0.5 shrink-0 text-accent&quot; /&gt;
+                      &lt;span&gt;{ADDRESS}&lt;/span&gt;
+                    &lt;/p&gt;
+                    &lt;p className=&quot;flex items-start gap-3 text-mut&quot;&gt;
+                      &lt;Clock size={18} className=&quot;mt-0.5 shrink-0 text-accent&quot; /&gt;
+                      &lt;span&gt;{HOURS}&lt;/span&gt;
+                    &lt;/p&gt;
+                    &lt;p className=&quot;flex items-start gap-3 text-mut&quot;&gt;
+                      &lt;Phone size={18} className=&quot;mt-0.5 shrink-0 text-accent&quot; /&gt;
+                      &lt;a href={PHONE_HREF} className=&quot;link-underline font-display text-base font-bold text-ink&quot;&gt;{PHONE}&lt;/a&gt;
+                    &lt;/p&gt;
+                    &lt;p className=&quot;flex items-start gap-3 text-mut&quot;&gt;
+                      &lt;Mail size={18} className=&quot;mt-0.5 shrink-0 text-accent&quot; /&gt;
+                      &lt;a href={`mailto:${EMAIL}`} className=&quot;link-underline text-ink/85&quot;&gt;{EMAIL}&lt;/a&gt;
+                    &lt;/p&gt;
+                  &lt;/div&gt;
+
+                  &lt;div className=&quot;mt-9 flex flex-wrap gap-3&quot;&gt;
+                    &lt;a href={MAP} target=&quot;_blank&quot; rel=&quot;noreferrer&quot; className=&quot;inline-flex items-center gap-2 rounded-xl border border-line px-5 py-3 text-sm font-semibold transition-colors hover:border-accent hover:text-accent&quot;&gt;
+                      Построить маршрут &lt;ArrowUpRight size={14} /&gt;
+                    &lt;/a&gt;
+                    &lt;button onClick={() =&gt; openLead(&quot;Визит на производство&quot;)} className=&quot;inline-flex items-center gap-2 rounded-xl border border-line px-5 py-3 text-sm font-semibold transition-colors hover:border-accent hover:text-accent&quot;&gt;
+                      Записаться на визит
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+                  &lt;p className=&quot;mt-5 text-xs text-mut&quot;&gt;Визит — по предварительной записи: так вас встретят и проведут по цеху.&lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;div className=&quot;relative min-h-[320px] border-t border-line lg:border-l lg:border-t-0&quot;&gt;
+                &lt;img src=&quot;/media/workshop.jpg&quot; alt=&quot;Производственный цех SM-Production&quot; loading=&quot;lazy&quot; className=&quot;absolute inset-0 h-full w-full object-cover opacity-60&quot; /&gt;
+                &lt;div className=&quot;absolute inset-0 bg-gradient-to-tr from-black/85 via-black/45 to-black/10&quot; /&gt;
+                &lt;div className=&quot;relative flex h-full flex-col justify-between p-8 md:p-10&quot;&gt;
+                  &lt;div className=&quot;flex justify-end&quot;&gt;
+                    &lt;a href={MAP_ORG} target=&quot;_blank&quot; rel=&quot;noreferrer&quot; className=&quot;inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/30 px-4 py-2 text-xs font-semibold text-white/90 backdrop-blur transition-colors hover:border-acid hover:text-acid&quot;&gt;
+                      Карточка в Яндекс Картах &lt;ArrowUpRight size={13} /&gt;
+                    &lt;/a&gt;
+                  &lt;/div&gt;
+                  &lt;div&gt;
+                    &lt;p className=&quot;font-display text-[10px] uppercase tracking-[0.3em] text-acid&quot;&gt;Свой цех&lt;/p&gt;
+                    &lt;p className=&quot;mt-3 max-w-xs text-sm leading-relaxed text-white/80&quot;&gt;
+                      ЧПУ-фрезер, УФ-принтер, сварка и зона сборки в одном контуре. Конструкцию собирают целиком до выезда на площадку.
+                    &lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/Reveal&gt;
+      &lt;/section&gt;
+
+      {/* ---------- производство ---------- */}
+      &lt;section className=&quot;border-y border-line bg-bg2 py-20&quot;&gt;
+        &lt;div className=&quot;mx-auto max-w-7xl px-5&quot;&gt;
+          &lt;div className=&quot;grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end&quot;&gt;
+            &lt;SectionHead
+              overline=&quot;Производство&quot;
+              title={&lt;&gt;Цех, в который &lt;span className=&quot;text-accent&quot;&gt;можно приехать&lt;/span&gt;&lt;/&gt;}
+              text=&quot;Полный цикл в одном контуре: от файла до готовой конструкции. Печать, фрезеровка, поклейка, сварка и сборка — на своей площадке, поэтому сроки не зависят от подрядчиков.&quot;
+            /&gt;
+            &lt;div className=&quot;grid grid-cols-2 gap-4 lg:mb-1&quot;&gt;
+              {stats.map((s, i) =&gt; (
+                &lt;Reveal key={s.label} delay={i * 0.06}&gt;
+                  &lt;div className=&quot;rounded-2xl border border-line bg-card px-4 py-5 text-center&quot;&gt;
+                    &lt;p className=&quot;display-h text-2xl font-black text-accent&quot;&gt;&lt;Counter value={s.value} suffix={s.suffix} /&gt;&lt;/p&gt;
+                    &lt;p className=&quot;mt-2 text-[11px] leading-snug text-mut&quot;&gt;{s.label}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/Reveal&gt;
+              ))}
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div className=&quot;mt-12 grid gap-5 lg:grid-cols-[1.4fr_1fr]&quot;&gt;
+            &lt;Reveal&gt;
+              &lt;figure className=&quot;img-zoom group relative h-full min-h-[320px] overflow-hidden rounded-3xl border border-line&quot;&gt;
+                &lt;img src=&quot;/media/workshop.jpg&quot; alt=&quot;Цех: ЧПУ-фрезер и рулоны баннера на стеллажах&quot; loading=&quot;lazy&quot; className=&quot;h-full w-full object-cover&quot; /&gt;
+                &lt;figcaption className=&quot;absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-6 text-sm text-white/85&quot;&gt;
+                  Раскрой и фрезеровка: детали режутся по вектору, поэтому сложная форма не превращается в «примерно такую же».
+                &lt;/figcaption&gt;
+              &lt;/figure&gt;
+            &lt;/Reveal&gt;
+            &lt;div className=&quot;grid gap-5&quot;&gt;
+              &lt;Reveal delay={0.08}&gt;
+                &lt;figure className=&quot;img-zoom relative overflow-hidden rounded-3xl border border-line&quot;&gt;
+                  &lt;img src=&quot;/media/design-production.jpg&quot; alt=&quot;УФ-принтер в работе&quot; loading=&quot;lazy&quot; className=&quot;h-52 w-full object-cover&quot; /&gt;
+                  &lt;figcaption className=&quot;absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5 text-xs text-white/80&quot;&gt;
+                    УФ-печать: баннер 3 × 6 м уходит в работу в день утверждения макета.
+                  &lt;/figcaption&gt;
+                &lt;/figure&gt;
+              &lt;/Reveal&gt;
+              &lt;Reveal delay={0.14}&gt;
+                &lt;figure className=&quot;img-zoom relative overflow-hidden rounded-3xl border border-line&quot;&gt;
+                  &lt;img src=&quot;/media/studio.jpg&quot; alt=&quot;Съёмочная студия SM-Media&quot; loading=&quot;lazy&quot; className=&quot;h-52 w-full object-cover&quot; /&gt;
+                  &lt;figcaption className=&quot;absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5 text-xs text-white/80&quot;&gt;
+                    SM-Media: студия и выездная съёмка в одном контуре с производством.
+                  &lt;/figcaption&gt;
+                &lt;/figure&gt;
+              &lt;/Reveal&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          {/* что увидите на визите */}
+          &lt;Reveal delay={0.06}&gt;
+            &lt;div className=&quot;mt-5 rounded-3xl border border-line bg-card p-7 md:p-8&quot;&gt;
+              &lt;div className=&quot;flex flex-wrap items-end justify-between gap-3&quot;&gt;
+                &lt;h3 className=&quot;display-h text-xl font-bold&quot;&gt;Что увидите на визите&lt;/h3&gt;
+                &lt;p className=&quot;text-sm text-mut&quot;&gt;Без записи не проведём — производство действующее.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;ul className=&quot;mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4&quot;&gt;
+                {[
+                  &quot;Станки в работе, а не на фото&quot;,
+                  &quot;Образцы плёнок, баннера, акрила и композита&quot;,
+                  &quot;Свою конструкцию до отправки на площадку&quot;,
+                  &quot;Как считается срок и что влияет на смету&quot;,
+                ].map((t) =&gt; (
+                  &lt;li key={t} className=&quot;flex items-start gap-2.5 text-sm text-ink/85&quot;&gt;
+                    &lt;Check size={16} className=&quot;mt-0.5 shrink-0 text-acid&quot; /&gt; {t}
+                  &lt;/li&gt;
+                ))}
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/Reveal&gt;
+
+          &lt;div className=&quot;mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3&quot;&gt;
+            {equipment.map((e, i) =&gt; (
+              &lt;Reveal key={e.title} delay={(i % 3) * 0.06}&gt;
+                &lt;div className=&quot;card-hover flex h-full gap-4 rounded-2xl border border-line bg-card p-6&quot;&gt;
+                  &lt;span className=&quot;h-fit rounded-xl bg-accent/12 p-2.5 text-accent&quot;&gt;{e.icon}&lt;/span&gt;
+                  &lt;div&gt;
+                    &lt;h3 className=&quot;font-display text-sm font-bold&quot;&gt;{e.title}&lt;/h3&gt;
+                    &lt;p className=&quot;mt-2 text-sm leading-relaxed text-mut&quot;&gt;{e.text}&lt;/p&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/Reveal&gt;
+            ))}
+          &lt;/div&gt;
+
+          &lt;Reveal delay={0.1}&gt;
+            &lt;div className=&quot;mt-8 flex flex-col items-start justify-between gap-5 rounded-3xl border border-line bg-card p-7 md:flex-row md:items-center&quot;&gt;
+              &lt;div&gt;
+                &lt;h3 className=&quot;display-h text-xl font-bold&quot;&gt;Хотите увидеть цех своими глазами?&lt;/h3&gt;
+                &lt;p className=&quot;mt-2 max-w-xl text-sm text-mut&quot;&gt;Проведём по участкам, покажем материалы и объясним, из чего складывается цена и срок вашего проекта.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;Btn onClick={() =&gt; openLead(&quot;Визит на производство&quot;)}&gt;Записаться на визит&lt;/Btn&gt;
+            &lt;/div&gt;
+          &lt;/Reveal&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* ---------- как попасть ---------- */}
+      &lt;section className=&quot;mx-auto max-w-7xl px-5 py-20&quot;&gt;
+        &lt;SectionHead
+          overline=&quot;Визит&quot;
+          title=&quot;Как попасть в цех&quot;
+          text=&quot;Производство действующее, поэтому просто так по территории не пройти: нужен пропуск. Зато и увидеть можно всё по-настоящему.&quot;
+        /&gt;
+        &lt;div className=&quot;grid gap-4 md:grid-cols-3&quot;&gt;
+          {visitSteps.map((s, i) =&gt; (
+            &lt;Reveal key={s.n} delay={i * 0.07}&gt;
+              &lt;div className=&quot;card-hover h-full rounded-3xl border border-line bg-card p-7&quot;&gt;
+                &lt;p className=&quot;display-h text-4xl font-black text-outline-accent&quot;&gt;{s.n}&lt;/p&gt;
+                &lt;h3 className=&quot;mt-4 font-display text-lg font-bold&quot;&gt;{s.t}&lt;/h3&gt;
+                &lt;p className=&quot;mt-3 text-sm leading-relaxed text-mut&quot;&gt;{s.d}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/Reveal&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      {/* ---------- вопросы ---------- */}
+      &lt;section className=&quot;mx-auto max-w-4xl px-5 pb-16&quot;&gt;
+        &lt;SectionHead overline=&quot;Детали&quot; title=&quot;Частые вопросы о визите&quot; /&gt;
+        &lt;Accordion items={faq} /&gt;
+      &lt;/section&gt;
+
+      {/* ---------- финал ---------- */}
+      &lt;section className=&quot;mx-auto max-w-7xl px-5 pb-6&quot;&gt;
+        &lt;Reveal&gt;
+          &lt;div className=&quot;relative overflow-hidden rounded-[28px] border border-line bg-card p-9 md:p-12&quot;&gt;
+            &lt;div className=&quot;pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/15 blur-[110px]&quot; aria-hidden=&quot;true&quot; /&gt;
+            &lt;div className=&quot;relative flex flex-col items-start justify-between gap-7 md:flex-row md:items-center&quot;&gt;
+              &lt;div&gt;
+                &lt;h2 className=&quot;display-h text-2xl font-bold md:text-3xl&quot;&gt;Остались вопросы?&lt;/h2&gt;
+                &lt;p className=&quot;mt-3 max-w-xl text-mut&quot;&gt;Личный руководитель проектов ответит в течение 15 минут в рабочее время. Если проще написать — пишите в Telegram, там же можно прислать фото площадки.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;flex flex-wrap gap-3&quot;&gt;
+                &lt;Btn onClick={() =&gt; openLead()}&gt;Получить консультацию&lt;/Btn&gt;
+                &lt;a href={TG} target=&quot;_blank&quot; rel=&quot;noreferrer&quot; className=&quot;inline-flex items-center gap-2 rounded-xl border border-line px-7 py-4 font-display text-[13px] uppercase tracking-[0.14em] transition-colors hover:border-accent hover:text-accent&quot;&gt;
+                  &lt;Send size={15} /&gt; Telegram
+                &lt;/a&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/Reveal&gt;
+
+        &lt;div className=&quot;mt-8 flex flex-wrap justify-center gap-3 pb-4&quot;&gt;
+          {[[&quot;Группа VK&quot;, &quot;https://vk.com/clubsmproduction&quot;], [&quot;Rutube&quot;, &quot;https://rutube.ru/channel/55924772/&quot;], [&quot;Pinterest&quot;, &quot;https://ru.pinterest.com/SM_Production&quot;], [&quot;Яндекс Карты&quot;, MAP_ORG]].map(([t, url]) =&gt; (
+            &lt;a key={t} href={url} target=&quot;_blank&quot; rel=&quot;noreferrer&quot; className=&quot;rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-mut transition-colors hover:border-accent hover:text-accent&quot;&gt;{t}&lt;/a&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/&gt;
+  );
+}
+</pre>
+  </div>
+  <p class="muted">
+    Файл целиком — 23 552 байт, 357 строк. Если правите в редакторе,
+    следите, чтобы не сломались кавычки: в JSX текст пишется в двойных кавычках,
+    а фигурные скобки — это код.
+  </p>
+
+  <h2><span class="num">2</span> Футер: убрать питерский адрес</h2>
+  <div class="filepath">src/components/layout/Footer.jsx</div>
+
+  <h3>Правка 2.1 — добавить иконку часов в импорт</h3>
+  <p class="muted">Найдите строку 4 (самое начало файла) и замените:</p>
+  <div class="codebox">
+    <button class="copy" data-target="code-f1-before">Скопировать</button>
+    <pre id="code-f1-before"><span class="del">− import { Logo, Mail, MapPin, Phone, Send } from "../ui/Icons";</span>
+<span class="add">+ import { Clock, Logo, Mail, MapPin, Phone, Send } from "../ui/Icons";</span></pre>
+  </div>
+
+  <h3>Правка 2.2 — нижняя строка с адресами</h3>
+  <p class="muted">
+    Ближе к концу файла есть блок с тремя строками адресов. Две первые строки меняются так:
+  </p>
+  <div class="codebox">
+    <button class="copy" data-target="code-f2-before">Скопировать</button>
+    <pre id="code-f2-before"><span class="del">− &lt;p className="flex items-center gap-2"&gt;&lt;MapPin size={14} /&gt; Москва, Остаповский проезд, 9 с13&lt;/p&gt;
+− &lt;p className="flex items-center gap-2 md:justify-center"&gt;&lt;MapPin size={14} /&gt; СПб, ул. Швецова, 41 лит. А&lt;/p&gt;</span>
+<span class="add">+ &lt;Link to="/kontakty" className="flex items-center gap-2 hover:text-ink"&gt;&lt;MapPin size={14} /&gt; Москва, Остаповский проезд, 9 с13&lt;/Link&gt;
++ &lt;p className="flex items-center gap-2 md:justify-center"&gt;&lt;Clock size={14} /&gt; Производство ежедневно 9:00–22:00&lt;/p&gt;</span></pre>
+  </div>
+
+  <h2><span class="num">3</span> Форма заявки: показать тему визита</h2>
+  <div class="filepath">src/components/layout/overlays.jsx</div>
+  <p class="muted">
+    Без этой правки кнопка «Записаться на визит» откроет форму, но тема
+    «Визит на производство» не подсветится — человеку придётся выбирать её вручную,
+    а нужного варианта в списке нет.
+  </p>
+  <p>Найдите блок <code class="inline">step === 0</code> и добавьте четыре строки перед списком тем:</p>
+  <div class="codebox">
+    <button class="copy" data-target="code-o1">Скопировать</button>
+    <pre id="code-o1"><span class="dim">  {step === 0 &amp;&amp; (
+    &lt;div className="flex flex-wrap gap-2"&gt;</span>
+<span class="add">+     {topic &amp;&amp; !TOPICS.includes(topic) &amp;&amp; (
++       &lt;button className="rounded-xl border border-accent bg-accent px-4 py-2.5 text-sm font-semibold text-white"&gt;
++         {topic}
++       &lt;/button&gt;
++     )}</span>
+<span class="dim">      {TOPICS.map((t) =&gt; (</span></pre>
+  </div>
+  <p class="muted">
+    Здесь <code class="inline">+</code> — вставка, серым показано то, что уже есть в файле и остаётся на месте.
+  </p>
+
+  <h2><span class="num">4</span> Проверить</h2>
+  <p>Запустите проект и откройте страницу <code class="inline">/kontakty</code>:</p>
+  <div class="codebox">
+    <button class="copy" data-target="code-run">Скопировать</button>
+    <pre id="code-run">npm install
+npm run dev
+<span class="dim"># затем в браузере: http://localhost:5173/kontakty</span></pre>
+  </div>
+  <p>Ниже — чек-лист. Если все пункты совпали, страница собрана правильно.</p>
+  <ul class="checklist">
+    <li>В тексте страницы нет «Санкт-Петербург», «СПб», «Швецова» и телефона <code class="inline">+7 812</code>.</li>
+    <li>Вверху три кнопки: телефон, почта, Telegram — все кликаются и открывают звонок, почту и чат.</li>
+    <li>Блок «Наш адрес в Москве» показывает Остаповский проезд, режим 24/7 и производство 9:00–22:00.</li>
+    <li>Кнопка «Построить маршрут» открывает Яндекс Карты, «Карточка в Яндекс Картах» — карточку организации.</li>
+    <li>Кнопка «Записаться на визит» открывает форму с уже выбранной темой «Визит на производство».</li>
+    <li>Блок «Цех, в который можно приехать»: три фото (цех, УФ-принтер, студия) и четыре счётчика — 6 участков, 3 ч, 24/7, 300+.</li>
+    <li>Шесть карточек участков и три шага «Как попасть в цех» на месте, аккордеон с четырьмя вопросами раскрывается.</li>
+    <li>В футере внизу вместо адреса СПб — «Производство ежедневно 9:00–22:00».</li>
+    <li>Сборка проходит без ошибок: <code class="inline">npm run build</code>.</li>
+  </ul>
+
+  <h2><span class="num">5</span> Что осталось про Питер в других местах</h2>
+  <p class="muted">
+    На странице контактов Питера больше нет, но он встречается ещё в шести местах.
+    Их я не трогал: непонятно, цех закрылся или просто переехал, а формулировка зависит от этого.
+  </p>
+  <table>
+    <tr><th>Где</th><th>Что написано</th></tr>
+    <tr><td>index.html</td><td>Заголовок страницы: «…в Москве и СПб» — перебивает заголовок самой страницы для поиска и соцсетей</td></tr>
+    <tr><td>Footer.jsx</td><td>Описание компании: «Москва и Санкт-Петербург»</td></tr>
+    <tr><td>About.jsx</td><td>«750 м² в Москве и Санкт-Петербурге»</td></tr>
+    <tr><td>Production.jsx</td><td>«Москва и Санкт-Петербург, 750 м²»</td></tr>
+    <tr><td>data/faq.js, data/team.js</td><td>Визит в СПб и «открытие цеха в Санкт-Петербурге» в истории компании</td></tr>
+    <tr><td>data/blog.js</td><td>Два упоминания в статьях</td></tr>
+  </table>
+  <div class="card">
+    <strong>Почему «750 м²» я заменил на «6 участков».</strong>
+    750 м² — это сумма по двум городам. Если страница теперь про московский цех,
+    такая цифра вводила бы в заблуждение. Как только скажете площадь московского цеха,
+    поставлю точную.
+  </div>
+
+  <footer>
+    Файл собран из репозитория SM (ветка arena/57df9bb4-sm, коммит 817b219) —
+    код в нём совпадает с тем, что лежит в проекте. Если что-то не сойдётся
+    с вашей версией файла, скажите: пришлю конкретный файл целиком.
+  </footer>
+</div>
+
+<script>
+document.querySelectorAll(".copy").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const block = document.getElementById(btn.dataset.target);
+    const text = block.innerText;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const old = btn.textContent;
+    btn.textContent = "Скопировано";
+    btn.classList.add("done");
+    setTimeout(() => { btn.textContent = old; btn.classList.remove("done"); }, 1600);
+  });
+});
+</script>
+</body>
+</html>
