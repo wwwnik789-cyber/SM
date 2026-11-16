@@ -74,7 +74,9 @@ class Pdf(Doc):
 
     # ── код ────────────────────────────────────────────────────────────────
     def code(self, text: str, size: float = 7.4, label: str | None = None,
-             numbered: bool = False, max_lines: int | None = None) -> None:
+             numbered: bool = False, max_lines: int | None = None,
+             offset: int = 0) -> None:
+        """offset — сдвиг номеров: для куска файла номера нужны настоящие, файла."""
         mono = "Mono"
         pad = 9
         inner = CONTENT_W - pad * 2 - (28 if numbered else 0)
@@ -116,7 +118,7 @@ class Pdf(Doc):
                     if no is not None:
                         self.c.setFillColor(CODE_NUM)
                         self.c.setFont(mono, size - 0.6)
-                        self.c.drawRightString(ML + pad + 17, yy, str(no))
+                        self.c.drawRightString(ML + pad + 17, yy, str(no + offset))
                 self.c.setFillColor(CODE_INK)
                 self.c.setFont(mono, size)
                 self.c.drawString(x_text, yy, line)
@@ -307,7 +309,7 @@ def main() -> int:
     # шаг начинается с новой страницы: код занимает семь страниц подряд
     d.new_page()
     d.h1("Шаг 1. Заменить страницу целиком")
-    d.p("Файл src/pages/Contacts.jsx — 20 049 символов, около 357 строк. "
+    d.p("Файл src/pages/Contacts.jsx — 20 049 символов, 356 строк. "
         "Проще заменить содержимое полностью, чем выискивать отдельные строки: "
         "откройте файл, выделите всё (Ctrl+A), удалите и вставьте код с ниже.")
     d.gap(4)
