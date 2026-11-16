@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { EMAIL, PHONE, PHONE_HREF, TG } from "../../lib/format";
 import { useUI } from "../../lib/store";
-import { Logo, Mail, MapPin, Phone, Send } from "../ui/Icons";
+import { Clock, Logo, Mail, MapPin, Phone, Send } from "../ui/Icons";
 
 const cols = [
   {
@@ -95,8 +95,8 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto grid max-w-7xl gap-4 border-t border-line px-5 py-8 text-sm text-mut md:grid-cols-3">
-        <p className="flex items-center gap-2"><MapPin size={14} /> Москва, Остаповский проезд, 9 с13</p>
-        <p className="flex items-center gap-2 md:justify-center"><MapPin size={14} /> СПб, ул. Швецова, 41 лит. А</p>
+        <Link to="/kontakty" className="flex items-center gap-2 hover:text-ink"><MapPin size={14} /> Москва, Остаповский проезд, 9 с13</Link>
+        <p className="flex items-center gap-2 md:justify-center"><Clock size={14} /> Производство ежедневно 9:00–22:00</p>
         <p className="md:text-right">Работаем 24/7 · {PHONE}</p>
       </div>
 

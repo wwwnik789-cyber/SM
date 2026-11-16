@@ -93,6 +93,11 @@ export function LeadModal() {
                 <div className="mt-6 min-h-[160px]">
                   {step === 0 && (
                     <div className="flex flex-wrap gap-2">
+                      {topic && !TOPICS.includes(topic) && (
+                        <button className="rounded-xl border border-accent bg-accent px-4 py-2.5 text-sm font-semibold text-white">
+                          {topic}
+                        </button>
+                      )}
                       {TOPICS.map((t) => (
                         <button key={t} onClick={() => { setTopic(t); setErr(""); }} className={`rounded-xl border px-4 py-2.5 text-sm font-semibold transition-all ${topic === t ? "border-accent bg-accent text-white" : "border-line text-mut hover:border-ink hover:text-ink"}`}>
                           {t}
