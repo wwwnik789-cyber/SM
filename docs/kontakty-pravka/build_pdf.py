@@ -43,18 +43,26 @@ def mono_w(text: str, size: float) -> float:
     return pdfmetrics.stringWidth(text, "Mono", size)
 
 
-def wrap_mono(text: str, size: float, width: float) -> list[str]:
-    """Перенос по символам: код нельзя рвать по словам."""
+def wrap_mono(text: str, size: float, width: float,
+              numbers: bool = False) -> list:
+    """Перенос по символам: код нельзя рвать по словам.
+
+    При numbers=True возвращает пары (номер строки файла | None, текст): номер
+    стоит только у первой визуальной строки, продолжения идут без него. Иначе
+    счётчик врал бы и по нему нельзя было найти место в редакторе.
+    """
     per_line = max(10, int(width / mono_w("M", size)))
-    out: list[str] = []
-    for raw in text.split("\n"):
+    out: list = []
+    for no, raw in enumerate(text.split("\n"), 1):
         if not raw:
-            out.append("")
+            out.append((no, "") if numbers else "")
             continue
+        first = True
         while len(raw) > per_line:
-            out.append(raw[:per_line])
+            out.append((no if first else None, raw[:per_line]) if numbers else raw[:per_line])
+            first = False
             raw = "  " + raw[per_line:]
-        out.append(raw)
+        out.append((no if first else None, raw) if numbers else raw)
     return out
 
 
@@ -70,13 +78,14 @@ class Pdf(Doc):
         mono = "Mono"
         pad = 9
         inner = CONTENT_W - pad * 2 - (28 if numbered else 0)
-        lines = wrap_mono(text, size, inner)
+        lines = wrap_mono(text, size, inner, numbers=numbered)
         if max_lines:
             lines = lines[:max_lines]
         leading = size * 1.52
 
         if label:
-            self.need(26)
+            # ярлык держим вместе с началом блока: минимум восемь строк кода
+            self.need(26 + leading * 8)
             self.c.setFillColor(MUTED)
             self.c.setFont("Mono", 6.4)
             self.c.drawString(ML, self.y, label.upper())
@@ -101,11 +110,13 @@ class Pdf(Doc):
 
             yy = top - pad - size
             x_text = ML + pad + (28 if numbered else 0)
-            for k, line in enumerate(chunk):
+            for line in chunk:
                 if numbered:
-                    self.c.setFillColor(CODE_NUM)
-                    self.c.setFont(mono, size - 0.6)
-                    self.c.drawRightString(ML + pad + 17, yy, str(i + k + 1))
+                    no, line = line
+                    if no is not None:
+                        self.c.setFillColor(CODE_NUM)
+                        self.c.setFont(mono, size - 0.6)
+                        self.c.drawRightString(ML + pad + 17, yy, str(no))
                 self.c.setFillColor(CODE_INK)
                 self.c.setFont(mono, size)
                 self.c.drawString(x_text, yy, line)
@@ -120,7 +131,7 @@ class Pdf(Doc):
         mono = "Mono"
         size = 7.4
         pad = 7
-        inner = CONTENT_W - pad * 2 - 12
+        inner = CONTENT_W - pad * 2 - 12 - mono_w("− ", size)
 
         def block(text, bg, ink, mark):
             lines = wrap_mono(text, size, inner)
@@ -137,7 +148,11 @@ class Pdf(Doc):
                 yy -= size * 1.5
             self.y = top - h - 3
 
-        self.need(26)
+        def height(text: str) -> float:
+            return len(wrap_mono(text, size, inner)) * size * 1.5 + pad * 2
+
+        total = height(removed) + height(added) + 14 if removed else height(added) + 14
+        self.need(total + 10)
         self.c.setFillColor(MUTED)
         self.c.setFont(FONTS_S(), 7.4)
         self.c.drawString(ML, self.y, label.upper())
@@ -167,16 +182,10 @@ class Pdf(Doc):
                 yy -= 14.4
             self.y = yy - 6
 
-    def finish(self) -> None:
-        """Считает страницы после сборки: showPage меняет номер уже потом."""
-        pages = self.c.getPageNumber()
-        self.save()
-        print(f"  страниц: {pages}")
-
     def checkbox(self, text: str) -> None:
         body = wrap(text, "R", 10.3, CONTENT_W - 30)
         h = max(len(body) * 14.4, 18)
-        self.need(h + 5)
+        self.need(h + 26)
         top = self.y
         self.c.setStrokeColor(HexColor("#9AA7B2"))
         self.c.setLineWidth(0.8)
@@ -245,10 +254,60 @@ def main() -> int:
     d.callout("Перед правкой сохраните копию трёх файлов: Contacts.jsx, Footer.jsx, overlays.jsx. "
               "Если что-то пойдёт не так, вернётесь к ним одной командой.")
 
-    # ── 2. шаг 1 ──────────────────────────────────────────────────────────
+    # ── 2. как вообще открыть код ─────────────────────────────────────────
     d.gap(10)
+    d.h1("Если код в руках впервые")
+    d.p("Сайт — это папка с файлами. Один файл отвечает за одну страницу: "
+        "Contacts.jsx — за страницу контактов, Footer.jsx — за подвал, который виден везде. "
+        "Собирать и компилировать вручную ничего не нужно: всё делает одна команда.")
+    d.p("Понадобятся две бесплатные программы: Node.js — движок, который запускает сайт у вас "
+        "на компьютере, и VS Code — редактор, где удобно открывать файлы.")
+
+    d.steps([
+        "Поставьте Node.js с сайта nodejs.org: версию LTS, она помечена словом «Recommended». "
+        "Установка обычная — далее, далее, готово. Затем VS Code с code.visualstudio.com.",
+        "Скачайте проект: на странице репозитория на GitHub зелёная кнопка «Code» → «Download ZIP». "
+        "Распакуйте архив в простую папку вроде C:\\sm. Путь без русских букв избавит от половины ошибок.",
+        "Откройте папку в VS Code: меню File → Open Folder. Слева появится дерево файлов. "
+        "Страница контактов лежит по пути src → pages → Contacts.jsx.",
+        "Включите терминал: меню Terminal → New Terminal, внизу откроется строка ввода. "
+        "Наберите npm install и нажмите Enter. Это один раз, скачиваются библиотеки.",
+        "Затем npm run dev. Появится адрес http://localhost:5173 — откройте его в браузере. "
+        "Сайт работает у вас на компьютере, пока идёт эта команда.",
+    ])
+
+    d.callout("Пока npm run dev работает, терминал не закрывайте: остановится команда — пропадёт сайт. "
+              "Останавливают сочетанием Ctrl+C. Файлы сохраняются Ctrl+S, и браузер сам показывает "
+              "изменение — перезапускать ничего не нужно.")
+
+    d.gap(4)
+    d.h2("Что делаем в каждом файле")
+    d.table([
+        ["Файл", "Действие"],
+        ["pages/Contacts.jsx", "Шаг 1: заменить содержимое целиком — Ctrl+A, затем вставить код из PDF."],
+        ["layout/Footer.jsx", "Шаг 2: две точечные правки. Искать по строкам из плашек «было → стало»."],
+        ["layout/overlays.jsx", "Шаг 3: вставить четыре строки в форму заявки."],
+    ], widths=[1.05, 2.6])
+
+    d.gap(2)
+    d.h2("Три вещи, на которых спотыкаются")
+    d.bullet("Имя файла. Contacts.jsx — с большой буквы C и с расширением .jsx. "
+             "Если переименовать, соседний файл его не найдёт и сайт перестанет открываться.")
+    d.bullet("Кавычки. Код различает прямые кавычки \" и «ёлочки»: не заменяйте их на красивые, "
+             "даже если так аккуратнее выглядит в тексте.")
+    d.bullet("Красная ошибка в браузере. Это не смертельно: в терминале будет номер строки. "
+             "Ctrl+Z в редакторе отменяет последнюю правку, и страница возвращается.")
+
+    d.gap(4)
+    d.p("Можно и совсем без установки: на GitHub открыть файл, нажать карандаш, вставить текст "
+        "и «Commit changes». Так удобно править текст, но посмотреть результат до публикации "
+        "не получится — проверять всё равно лучше локально.", size=9.8)
+
+    # ── 3. шаг 1 ──────────────────────────────────────────────────────────
+    # шаг начинается с новой страницы: код занимает семь страниц подряд
+    d.new_page()
     d.h1("Шаг 1. Заменить страницу целиком")
-    d.p("Файл src/pages/Contacts.jsx — 20 049 символов, около 344 строк. "
+    d.p("Файл src/pages/Contacts.jsx — 20 049 символов, около 357 строк. "
         "Проще заменить содержимое полностью, чем выискивать отдельные строки: "
         "откройте файл, выделите всё (Ctrl+A), удалите и вставьте код с ниже.")
     d.gap(4)
@@ -279,7 +338,7 @@ def main() -> int:
     d.p("Третья строка с телефоном остаётся без изменений.", size=10.2)
 
     # ── 4. шаг 3 ──────────────────────────────────────────────────────────
-    d.gap(10)
+    d.new_page()
     d.h1("Шаг 3. Форма заявки: показать тему визита")
     d.p("Файл src/components/layout/overlays.jsx. Без этой правки кнопка «Записаться на визит» "
         "откроет форму, но тема не подсветится: в списке типовых тем «Визит на производство» нет.")
@@ -295,7 +354,7 @@ def main() -> int:
     )
 
     # ── 5. проверка ───────────────────────────────────────────────────────
-    d.gap(10)
+    d.new_page()
     d.h1("Шаг 4. Проверить")
     d.p("Запустите проект и откройте страницу /kontakty.")
     d.code("npm install\nnpm run dev\n# затем в браузере: http://localhost:5173/kontakty", size=8.4)
@@ -316,6 +375,8 @@ def main() -> int:
         d.checkbox(item)
 
     # ── 6. где остался Питер ──────────────────────────────────────────────
+    # раздел с таблицей не рвём между страницами: места нужно ~300 pt
+    d.need(330)
     d.gap(10)
     d.h1("Что осталось про Питер в других местах")
     d.p("На странице контактов Санкт-Петербурга больше нет, но он встречается ещё в шести местах. "
@@ -335,7 +396,7 @@ def main() -> int:
               "Для страницы про московский цех такая цифра вводила бы в заблуждение. "
               "Как только будет площадь московского цеха, поставлю точную.")
 
-    d.finish()
+    d.save()
     print(f"  размер: {OUT.stat().st_size:,} байт".replace(",", " "))
     return 0
 

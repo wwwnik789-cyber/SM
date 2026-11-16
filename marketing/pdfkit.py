@@ -302,5 +302,7 @@ class Doc:
 
     def save(self) -> None:
         self.c.showPage()
+        # getPageNumber после showPage смотрит уже на следующую (несуществующую)
+        pages = self.c.getPageNumber() - 1
         self.c.save()
-        print(f"  ✓ {self.path.name}  {self.page} стр.")
+        print(f"  ✓ {self.path.name}  {pages} стр.")
