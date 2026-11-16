@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Визуализация стойки TSUM Beauty Days в интерьерах ТЦ.
+"""Стойка TSUM Beauty Days в интерьерах универмага — фотореалистичный композит.
 
-Стойка — не сгенерированная картинка: она вырезана с реального фото со склада
-(04-foto-sklad-ugol.jpg) и вставлена в сгенерированный интерьер. Поэтому окно,
-графика «TSUM BEAUTY DAYS» и внутренняя полка на кадре — ровно те, что в жизни.
+Стойка — готовый рендер (`source/render-concept.jpg`), вырезанный по маске.
+Он честнее складских фото: чистая графика, окно с шарами и объём. Но у рендера
+одна ошибка — корпус повёрнут на ~7°, нижняя кромка уходит по y = 0.121·x.
+Из-за этого стойка тонет в пол углом; при вырезании наклон снимается сдвигом
+строк (вертикали остаются вертикальными).
 
-Масштаб считается физически. Для объекта высотой h, стоящего на полу, при
-камере на высоте c:
+Масштаб считается физически. Для объекта высотой h при камере на высоте c:
 
-    (низ − верх) / (низ − горизонт) = h / c
+    высота на кадре = (h / c) · (y_пола − y_горизонта)
 
-то есть высота на кадре = (h/c) · (y_пола − y_горизонта). Габарит стойки
-1800 мм, камера 1600 мм → коэффициент 1,125. Никаких «на глаз».
+Габарит 1800 мм, камера 1600 мм → коэффициент 1,125. Ничего не подбирается
+на глаз: линия глаз взята по сходу перспективы в фоне.
 
     .venv/bin/python visualizations/tsum-mall-2026/compose.py
 """
@@ -31,351 +32,270 @@ OUT = HERE / "frames"
 
 KIOSK_H_MM = 1800.0
 CAMERA_H_MM = 1600.0
+SS = 2  # во сколько раз крупнее фона собирается кадр
 
-# Контур стойки на фото 03 (1440×1920) — фронтальный ракурс, по пиксельным
-# срезам границ. Ракурс «три четверти» (04) для вставки не годится: он снят
-# с ~1 м широкоугольником, и при переносе в зал пятно опоры выглядит остриём.
-POINTS = [
-    (412, 199), (1110, 201), (1137, 340), (1123, 620),
-    (1107, 900), (1085, 1180), (1058, 1460), (1048, 1548),
-    (414, 1528), (396, 1020), (393, 296),
-]
-
-# Поля передней грани без текста: по ним замеряется перепад освещения.
-MARGIN_L = (25, 70)
-MARGIN_R = (-90, -45)
-
-SS = 4  # суперсэмплинг контура
+BG = Path("visualizations/tsum-beauty-days-2026/raw")
 
 
-# --------------------------------------------------------------- вырезание
-def cut_kiosk(photo: str = "03-foto-sklad-front.jpg") -> Image.Image:
-    """Вырезает стойку по ручному контуру, сжимая его на 1,4 px внутрь."""
-    im = Image.open(SOURCE / photo).convert("RGB")
+# ------------------------------------------------------------------ спрайт
+def cut_kiosk() -> Image.Image:
+    """Вырезает стойку с рендера и снимает наклон нижней кромки.
+
+    Фон лабораторно-белый, стойка насыщенно-оранжевая, поэтому маска по
+    насыщенности чистая. Мягкая серая тень на «столе» под стойкой в маску
+    не попадает (её насыщенность < 40) — она нам не нужна, тень считаем свою.
+    """
+    im = Image.open(SOURCE / "render-concept.jpg").convert("RGB")
+    a = np.asarray(im).astype(np.float32)
+    sat = a.max(2) - a.min(2)
+
+    m = sat > 40
+    m = ndi.binary_closing(m, np.ones((7, 7)))
+    m = ndi.binary_opening(m, np.ones((3, 3)))
+    lab, n = ndi.label(m)
+    sizes = ndi.sum(m, lab, range(1, n + 1))
+    m = ndi.binary_fill_holes(lab == (1 + int(np.argmax(sizes))))
+
+    # наклон нижней кромки, замер по 87 точкам: y = 0.1208·x + 1117.5
+    k, x0 = 0.1208, 124.0
     w, h = im.size
+    h2 = int(h + k * w) + 8
+    aff = (1, 0, 0, k, 1, -k * x0)
 
-    big = Image.new("L", (w * SS, h * SS), 0)
-    ImageDraw.Draw(big).polygon([(x * SS, y * SS) for x, y in POINTS], fill=255)
-    m = np.asarray(big) > 127
-    m = ndi.binary_erosion(m, ndi.generate_binary_structure(2, 1), iterations=int(2.4 * SS))
-    m = ndi.binary_fill_holes(m)
+    sprite = im.transform((w, h2), Image.AFFINE, aff,
+                          resample=Image.BICUBIC, fillcolor=(255, 255, 255))
+    mask = Image.fromarray((m * 255).astype(np.uint8)).transform(
+        (w, h2), Image.AFFINE, aff, resample=Image.BICUBIC, fillcolor=0)
+    sprite = sprite.convert("RGBA")
+    sprite.putalpha(mask.filter(ImageFilter.GaussianBlur(0.7)))
 
-    small = Image.fromarray((m * 255).astype(np.uint8)).resize((w, h), Image.LANCZOS)
-    alpha = small.filter(ImageFilter.GaussianBlur(0.8))
-
-    out = im.copy()
-    out.putalpha(alpha)
-    box = Image.fromarray(np.asarray(alpha) > 8).getbbox()
-    return out.crop(box)
-
-
-def relight(k: Image.Image) -> Image.Image:
-    """Вытягивает тени склада и приводит цвет к печатному оранжевому.
-
-    На складе стойка снята в темноте и с синим уклоном: передняя грань
-    почти чёрная, боковина уходит в розово-серое. Поднимаем яркость и тянем
-    оттенок насыщенных пикселей к 15°, не трогая белые буквы и окно.
-    """
-    arr = np.asarray(k).astype(np.float32)
-    rgb = arr[..., :3] / 255.0
-    alpha = arr[..., 3:]
-
-    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
-    mx, mn = rgb.max(-1), rgb.min(-1)
-    v = mx
-    s = np.where(mx > 1e-5, (mx - mn) / np.maximum(mx, 1e-5), 0.0)
-
-    # оттенок, устойчивый к серым (буквы, белая панель окна)
-    hue = np.zeros_like(v)
-    d = np.maximum(mx - mn, 1e-5)
-    warm = mx > mn
-    hue = np.where(warm & (mx == r), ((g - b) / d) % 6, hue)
-    hue = np.where(warm & (mx == g), (b - r) / d + 2, hue)
-    hue = np.where(warm & (mx == b), (r - g) / d + 4, hue)
-
-    # 1. подъём теней по кривой, а не по средней яркости
-    v2 = 0.055 + 0.945 * np.power(v, 0.66)
-
-    # 2. насыщенные поверхности тянем к печатному оранжевому (≈15°)
-    w = np.clip((s - 0.22) / 0.28, 0, 1)
-    s2 = np.clip(s * 1.18, 0, 0.84)
-    hue2 = hue * (1 - w) + (15 / 60.0) * w
-
-    # 3. HSV → RGB
-    c = v2 * s2
-    x = c * (1 - np.abs(hue2 % 2 - 1))
-    m_ = v2 - c
-    z = np.zeros_like(c)
-    r2 = np.select([hue2 < 1, hue2 < 2, hue2 < 3, hue2 < 4, hue2 < 5],
-                   [c, x, z, z, x], z)
-    g2 = np.select([hue2 < 1, hue2 < 2, hue2 < 3, hue2 < 4, hue2 < 5],
-                   [x, c, c, x, z], z)
-    b2 = np.select([hue2 < 1, hue2 < 2, hue2 < 3, hue2 < 4, hue2 < 5],
-                   [z, z, x, c, c], z)
-    out = np.stack([r2 + m_, g2 + m_, b2 + m_], -1)
-
-    # 4. тёплый баланс под лампы ТЦ и лёгкая компрессия пересветов
-    out = out ** 0.97
-    out[..., 0] *= 1.035
-    out[..., 2] *= 0.965
-
-    res = np.concatenate([np.clip(out, 0, 1) * 255.0, alpha], -1)
-    img = Image.fromarray(np.clip(res, 0, 255).astype(np.uint8))
-    return flatten_lighting(img)
-
-
-def flatten_lighting(img: Image.Image) -> Image.Image:
-    """Выравнивает перепад освещения сверху вниз, оставляя лёгкий спад.
-
-    Стойку на складе снимали с одной лампой: низ вдвое темнее верха, из-за
-    чего нижняя надпись пропадает. Считаем поправку по замеренному профилю
-    и подмешиваем её только в средне-яркие пиксели — окно и белые буквы
-    не трогаем.
-    """
-    arr = np.asarray(img).astype(np.float32)
-    rgb, alpha = arr[..., :3], arr[..., 3:4]
-    h, w_ = rgb.shape[:2]
-
-    # профиль по полям без текста, сглаженный по 60 строкам
-    band = np.concatenate([rgb[:, MARGIN_L[0]:MARGIN_L[1]],
-                           rgb[:, w_ + MARGIN_R[0]:w_ + MARGIN_R[1]]], axis=1)
-    prof = ndi.uniform_filter1d(band.max(axis=2).mean(axis=1), size=61, mode="nearest")
-    prof = np.maximum(prof, 1.0)
-
-    ys = np.arange(h, dtype=np.float32)
-    target = 202.0 * (1.0 - 0.20 * ys / h)
-    gain = np.clip(target / prof, 0.80, 1.90)[:, None]
-
-    luma = (0.299 * rgb[..., 0] + 0.587 * rgb[..., 1] + 0.114 * rgb[..., 2]) / 255.0
-    w = np.clip((0.62 - luma) / 0.18, 0, 1)
-    g = 1.0 + (gain - 1.0) * w
-
-    out = np.clip(rgb * g[..., None], 0, 255)
-    return Image.fromarray(np.concatenate([out, alpha], -1).astype(np.uint8))
+    box = sprite.split()[3].point(lambda v: 255 if v > 8 else 0).getbbox()
+    return sprite.crop(box)
 
 
 # ------------------------------------------------------------------ сцена
-def keystone(img: Image.Image, k: float) -> Image.Image:
-    """Сужает верх спрайта на долю k: верх стойки дальше от оптической оси.
-
-    Без этого стойка выглядит наклейкой с идеально параллельными сторонами.
-    """
-    if k <= 0:
-        return img
-    arr = np.asarray(img)
-    h, w = arr.shape[:2]
-    out = np.zeros_like(arr)
-    for y in range(h):
-        s_ = 1.0 - k * (1.0 - y / (h - 1))
-        sw_ = max(2, int(round(w * s_)))
-        x0 = (w - sw_) // 2
-        row = arr[y, x0:x0 + sw_]
-        idx = (np.arange(w) * (sw_ / w)).astype(np.int32).clip(0, sw_ - 1)
-        out[y] = row[idx]
-    return Image.fromarray(out)
-
-
-def _soft_ellipse(size, box, blur):
+def _soft(size, box, blur, shape="ellipse"):
     layer = Image.new("L", size, 0)
-    ImageDraw.Draw(layer).ellipse(box, fill=255)
+    d = ImageDraw.Draw(layer)
+    (d.ellipse if shape == "ellipse" else d.polygon)(box, fill=255)
     return np.asarray(layer.filter(ImageFilter.GaussianBlur(blur))).astype(np.float32) / 255.0
 
 
-def _polygon_shadow(size, quad, blur):
-    layer = Image.new("L", size, 0)
-    ImageDraw.Draw(layer).polygon(quad, fill=255)
-    return np.asarray(layer.filter(ImageFilter.GaussianBlur(blur))).astype(np.float32) / 255.0
+def _grade_under_scene(sprite: Image.Image, warmth: float, base_dark: float,
+                       ambient=(1.0, 1.0, 1.0)) -> Image.Image:
+    """Ставит стойку в свет зала.
 
-
-def place(bg_name: str, kiosk: Image.Image, out_name: str, *,
-          cx: float, floor: float, horizon: float,
-          light_from: str = "left", shadow: float = 0.55,
-          reflect: float = 0.30, grade=(1.0, 1.0, 1.0), env_mix: float = 0.11,
-          scale: float = 1.5,
-          caption: str = "") -> tuple[Image.Image, dict]:
-    """Ставит стойку на пол в точке (cx, floor) с физически верной высотой.
-
-    horizon — линия глаз камеры в долях высоты кадра; из неё и высоты пола
-    получается размер стойки. Ничего не подгоняется вручную.
+    Рендер снят в студии: ровный холодноватый свет и максимум насыщенности.
+    В зале верх стойки ловит свет с потолка, низ уходит в тень и в отражение
+    пола, а общий оттенок задаёт окружение — тёплый в историческом зале,
+    холодный у окна.
     """
-    bg = Image.open(WORK / bg_name).convert("RGB")
-    if scale != 1.0:
-        bg = bg.resize((round(bg.width * scale), round(bg.height * scale)), Image.LANCZOS)
+    arr = np.asarray(sprite).astype(np.float32)
+    rgb, alpha = arr[..., :3], arr[..., 3:]
+    h = rgb.shape[0]
+    t = np.arange(h, dtype=np.float32)[:, None] / max(h - 1, 1)      # 0 сверху, 1 снизу
+
+    fall = 1.0 - (1.0 - base_dark) * (t ** 1.5)                       # спад к полу
+    rgb = rgb * fall[..., None]
+
+    # боковая моделировка: свет падает не строго сверху
+    rgb[..., 0] *= 1.0 + 0.05 * warmth
+    rgb[..., 1] *= 1.0 + 0.012 * warmth
+    rgb[..., 2] *= 1.0 - 0.045 * warmth
+
+    rgb *= np.array(ambient, dtype=np.float32)
+
+    # снимаем студийную «звонкость»: приглушаем самые светлые пиксели
+    mx = rgb.max(-1, keepdims=True)
+    over = np.clip((mx - 215.0) / 40.0, 0, 1)
+    rgb = rgb - (rgb - rgb * 0.88) * over
+
+    out = np.concatenate([np.clip(rgb, 0, 255), alpha], -1)
+    return Image.fromarray(out.astype(np.uint8), "RGBA")
+
+
+def match_environment(sprite: Image.Image, bg: Image.Image, box, strength: float = 0.6):
+    """Согласует яркость и насыщенность спрайта с локальным окружением.
+
+    Поканальная подгонка здесь недопустима: в пятно попадают тёмные витрины и
+    синие окна, и белые элементы графики уезжают в бирюзу. Поэтому трогаем
+    только светлоту (один коэффициент на все каналы) и чуть приглушаем
+    насыщенность — студийный рендер иначе «звенит» на фоне зала.
+    """
+    patch = np.asarray(bg.crop(box)).astype(np.float32)
+    arr = np.asarray(sprite).astype(np.float32)
+    rgb, alpha = arr[..., :3], arr[..., 3:]
+    m = alpha[..., 0] > 8
+
+    lum = lambda x: 0.299 * x[..., 0] + 0.587 * x[..., 1] + 0.114 * x[..., 2]
+    src = float(lum(rgb)[m].mean())
+    dst = float(lum(patch).mean())
+    ratio = np.clip(dst / max(src, 1e-3), 0.78, 1.12)
+    gain = 1.0 + (ratio - 1.0) * strength
+
+    rgb = rgb * gain
+    grey = lum(rgb)[..., None]
+    rgb = grey + (rgb - grey) * (1.0 - 0.14 * strength)      # насыщенность вниз
+    return Image.fromarray(np.concatenate([np.clip(rgb, 0, 255), alpha], -1).astype(np.uint8), "RGBA")
+
+
+def composite(bg_name: str, sprite: Image.Image, out_name: str, *,
+              cx: float, floor: float, horizon: float,
+              shadow: float = 0.55, reflect: float = 0.32,
+              warmth: float = 1.0, base_dark: float = 0.80, ambient=(1.0, 1.0, 1.0),
+              sprite_blur: float = 0.5, bg_sharpen: float = 1.0, env_strength: float = 0.72,
+              final_width: int = 1920, caption: str = "") -> tuple[Image.Image, dict]:
+    bg = Image.open(BG / bg_name).convert("RGB")
+    bg = bg.resize((bg.width * SS, bg.height * SS), Image.LANCZOS)
+    if bg_sharpen != 1.0:
+        bg = bg.filter(ImageFilter.UnsharpMask(radius=1.8, percent=int(30 * bg_sharpen), threshold=2))
     W, H = bg.size
 
     h_px = round(KIOSK_H_MM / CAMERA_H_MM * (floor - horizon) * H)
-    sprite = kiosk.resize((max(1, round(kiosk.width * h_px / kiosk.height)), h_px), Image.LANCZOS)
-    sprite = keystone(sprite, 0.045)
+    spr = sprite.resize((max(1, round(sprite.width * h_px / sprite.height)), h_px), Image.LANCZOS)
+    scale = sprite.height / h_px                      # во сколько раз уменьшили спрайт
+    blur = max(sprite_blur, scale * 0.45)             # спрайт не должен быть резче фона
+    if blur:
+        spr = spr.filter(ImageFilter.GaussianBlur(blur))
+    spr = _grade_under_scene(spr, warmth, base_dark, ambient)
 
     base = round(floor * H)
-    left = round(cx * W - sprite.width / 2)
-    top = base - sprite.height
-    sw = sprite.width
+    left = round(cx * W - spr.width / 2)
+    top = base - spr.height
+    sw = spr.width
 
     arr = np.asarray(bg).astype(np.float32)
 
-    # 1. падающая тень: плотная у опоры, рассеивается в сторону от света
-    sign = -1 if light_from == "left" else 1
-    reach = sw * 0.50
-    drop = H * 0.060
-    quad = [
-        (left + sw * 0.02, base - 3),
-        (left + sw * 0.98, base - 3),
-        (left + sw * 0.98 + sign * reach, base + drop),
-        (left + sw * 0.02 + sign * reach * 0.30, base + drop),
-    ]
-    cast = _polygon_shadow((W, H), quad, max(8, sw * 0.05))
-    fade_y = np.clip(1.0 - (np.arange(H, dtype=np.float32) - base) / max(drop, 1), 0, 1)
-    fade_y = np.where(np.arange(H) < base, 1.0, fade_y) ** 1.4
-    sh = cast * fade_y[:, None] * shadow * 0.80
+    # 1. падающая тень: свет сверху, чуть сбоку — пятно короткое и широкое
+    quad = [(left + sw * 0.02, base - 2), (left + sw * 0.98, base - 2),
+            (left + sw * 1.10, base + H * 0.022), (left - sw * 0.06, base + H * 0.022)]
+    sh = _soft((W, H), quad, max(8, sw * 0.055), shape="polygon") * shadow * 0.50
 
-    # 2. контактная тень: узкая и плотная, стойка не должна «висеть»
-    ry = max(5, int(sw * 0.038))
-    contact = _soft_ellipse((W, H), [left - sw * 0.06, base - ry,
-                                     left + sw * 1.10, base + ry * 3.0], max(6, sw * 0.032))
-    sh = np.clip(sh + contact * shadow * 0.60, 0, 1)
+    # 2. контактная тень: узкая полоса под опорой
+    ry = max(4, int(sw * 0.030))
+    sh += _soft((W, H), [left - sw * 0.02, base - ry * 1.4, left + sw * 1.02, base + ry * 2.0],
+                max(3, sw * 0.014)) * shadow * 1.15
 
-    # 2b. общая присадка пола вокруг опоры (ambient occlusion)
-    ao = _soft_ellipse((W, H), [left - sw * 0.35, base - H * 0.03,
-                                left + sw * 1.35, base + H * 0.045], sw * 0.22)
-    sh = np.clip(sh + ao * shadow * 0.18, 0, 1)
+    # 3. общее затемнение пола вокруг опоры
+    sh += _soft((W, H), [left - sw * 0.30, base - H * 0.022,
+                         left + sw * 1.30, base + H * 0.040], sw * 0.16) * shadow * 0.20
+    arr *= (1.0 - np.clip(sh, 0, 1))[..., None]
 
-    arr *= (1.0 - sh)[..., None]
-
-    # 3. отражение в полированном полу
     out = Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8)).convert("RGBA")
+
+    # 4. отражение в полированном полу: тянется ниже и затухает
     if reflect > 0:
-        rh = int(sprite.height * 0.24)
-        ref = sprite.transpose(Image.FLIP_TOP_BOTTOM).crop((0, sprite.height - rh, sw, sprite.height))
-        ref = ref.filter(ImageFilter.GaussianBlur(max(1.5, rh * 0.035)))
-        a = np.asarray(ref.split()[3]).astype(np.float32) / 255.0
-        fade = (np.linspace(1.0, 0.0, rh, dtype=np.float32) ** 1.25) * reflect
-        ref.putalpha(Image.fromarray((a * fade[:, None] * 255).astype(np.uint8)))
+        rh = int(spr.height * 0.26)
+        ref = spr.transpose(Image.FLIP_TOP_BOTTOM).crop((0, spr.height - rh, sw, spr.height))
+        ref = ref.filter(ImageFilter.GaussianBlur(max(2.2, rh * 0.075)))
+        av = np.asarray(ref.split()[3]).astype(np.float32) / 255.0
+        fade = (np.linspace(1.0, 0.0, rh, dtype=np.float32) ** 1.7) * reflect * 0.62
+        ref.putalpha(Image.fromarray((av * fade[:, None] * 255).astype(np.uint8)))
         out.alpha_composite(ref, (left, base))
 
-    # 4. стойка
-    out.alpha_composite(sprite, (left, top))
+    # 5. сама стойка: сначала подтягиваем цвет к окружению, потом ставим
+    pad = int(sw * 0.9)
+    env_box = (max(0, left - pad), max(0, base - spr.height - pad // 2),
+               min(W, left + sw + pad), min(H, base + pad))
+    spr = match_environment(spr, bg, env_box, strength=env_strength)
+    out.alpha_composite(spr, (left, top))
 
-    # 4b. отражение окружения: глянцевый ламинат не бывает однотонным
-    env = bg.filter(ImageFilter.GaussianBlur(max(6, sw * 0.05)))
-    env = env.crop((left, base - sprite.height, left + sw, base))
-    env = env.transpose(Image.FLIP_TOP_BOTTOM)
-    env_a = np.asarray(env).astype(np.float32)
-
-    # 5. световая «обнимающая» подсветка: левый край чуть теплее и ярче
     sil = Image.new("L", (W, H), 0)
-    sil.paste(sprite.split()[3], (left, top))
+    sil.paste(spr.split()[3], (left, top))
     sil_a = np.asarray(sil).astype(np.float32) / 255.0
-    gx = np.linspace(0, 1, sw, dtype=np.float32)[None, :]
-    wrap = np.where(light_from == "left", 1.10 - 0.14 * gx, 0.96 + 0.14 * gx)
 
     canvas = np.asarray(out).astype(np.float32)
-    sub = canvas[top:top + sprite.height, left:left + sw, :3]
-    sub *= (1.0 + (wrap[..., None] - 1.0) * sil_a[top:top + sprite.height, left:left + sw][..., None])
-    canvas[top:top + sprite.height, left:left + sw, :3] = sub
 
-    # 5b. вносим отражение и легчайшее затемнение у самой опоры
-    hh, ww = sprite.height, sw
-    m = sil_a[top:top + hh, left:left + ww][..., None]
-    grad = np.linspace(1.0, 0.45, hh, dtype=np.float32)[:, None, None]
-    sub = canvas[top:top + hh, left:left + ww, :3]
-    sub = sub * (1 - env_mix * m * grad) + env_a * (env_mix * m * grad)
-    foot = np.clip((np.arange(hh)[:, None] - hh * 0.94) / (hh * 0.06), 0, 1)[..., None]
-    sub *= (1 - 0.22 * foot * m)
-    canvas[top:top + hh, left:left + ww, :3] = sub
+    # 6. отражение окружения на ламинированной поверхности
+    env = bg.filter(ImageFilter.GaussianBlur(max(8, sw * 0.06)))
+    env = env.crop((left, top, left + sw, base)).transpose(Image.FLIP_TOP_BOTTOM)
+    env_a = np.asarray(env).astype(np.float32)
+    m = sil_a[top:top + spr.height, left:left + sw][..., None]
+    foot = np.clip((np.arange(spr.height, dtype=np.float32) - spr.height * 0.90)
+                   / (spr.height * 0.10), 0, 1) ** 1.3
+    canvas[top:top + spr.height, left:left + sw, :3] *= (1.0 - 0.16 * foot[:, None, None])
+    grad = np.linspace(0.55, 1.0, spr.height, dtype=np.float32)[:, None, None]
+    sub = canvas[top:top + spr.height, left:left + sw, :3]
+    mix = 0.10 * m * grad
+    canvas[top:top + spr.height, left:left + sw, :3] = sub * (1 - mix) + env_a * mix
 
-    # 6. AO по контуру: стык с фоном не должен «звенеть»
-    glow = np.asarray(sil.filter(ImageFilter.GaussianBlur(max(2, sw * 0.025)))).astype(np.float32) / 255.0
+    # 7. AO по контуру — стык с фоном не должен «звенеть»
+    glow = np.asarray(sil.filter(ImageFilter.GaussianBlur(max(2, sw * 0.022)))).astype(np.float32) / 255.0
     ring = np.clip(glow - sil_a, 0, 1)
-    canvas[..., :3] *= (1.0 - ring * 0.18)[..., None]
+    canvas[..., :3] *= (1.0 - ring * 0.20)[..., None]
 
-    # 7. общий грейд под сцену + зерно
-    for i, k in enumerate(grade):
-        canvas[..., i] *= k
-    rng = np.random.default_rng(7)
-    canvas[..., :3] += rng.normal(0, 1.6, canvas.shape[:2])[..., None]
-    canvas[..., :3] += rng.normal(0, 1.0, canvas[..., :3].shape)
+    img = Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8), "RGBA").convert("RGB")
 
-    out = Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8), "RGBA").convert("RGB")
-    out.save(OUT / out_name, quality=94, optimize=True, progressive=True)
-    info = dict(h_px=h_px, pct=round(100 * h_px / H, 1), bg=(W, H), caption=caption)
-    print(f"  ✓ {out_name}  {W}×{H} · стойка {sprite.width}×{h_px} px "
-          f"({info['pct']} % высоты кадра)")
-    return out, info
+    # 8. зерно кадра, чтобы стойка жила в одной «плёночной» текстуре с фоном
+    g = np.asarray(img).astype(np.float32)
+    rng = np.random.default_rng(5)
+    g += rng.normal(0, 2.2, g.shape[:2])[..., None]
+    g += rng.normal(0, 1.1, g.shape)
+    img = Image.fromarray(np.clip(g, 0, 255).astype(np.uint8))
 
+    if final_width and final_width < img.width:
+        img = img.resize((final_width, round(img.height * final_width / img.width)), Image.LANCZOS)
+        img = img.filter(ImageFilter.UnsharpMask(radius=1.2, percent=40, threshold=2))
 
-def hero_crop(img: Image.Image, cx: float, floor: float, horizon: float,
-              out_name: str, width_px: int = 1500) -> None:
-    """Кадр «крупнее» — это кроп с той же точки съёмки, а не увеличенная вставка.
-
-    Перспектива остаётся верной: обрезаем кадр вокруг стойки и поднимаем
-    разрешение. Кроп эквивалентен более длинному объективу.
-    """
-    W, H = img.size
-    ratio = 16 / 9
-    h_px = KIOSK_H_MM / CAMERA_H_MM * (floor - horizon) * H
-    ch = int(h_px * 2.05)
-    cw = int(ch * ratio)
-    cx_px, base = cx * W, floor * H
-    l = int(np.clip(cx_px - cw * 0.48, 0, W - cw))
-    t = int(np.clip(base - ch * 0.78, 0, H - ch))
-    crop = img.crop((l, t, l + cw, t + ch))
-    k = width_px / crop.width
-    crop = crop.resize((width_px, round(crop.height * k)), Image.LANCZOS)
-    crop = crop.filter(ImageFilter.UnsharpMask(radius=1.6, percent=55, threshold=3))
-    crop.save(OUT / out_name, quality=94, optimize=True, progressive=True)
-    print(f"  ✓ {out_name}  {crop.size[0]}×{crop.size[1]} · кроп {cw}×{ch} → ×{k:.2f}")
+    img.save(OUT / out_name, quality=94, optimize=True, progressive=True)
+    pct = 100 * h_px / H
+    print(f"  ✓ {out_name}  {img.size[0]}×{img.size[1]} · стойка {round(sw/SS)}×{round(h_px/SS)} px "
+          f"в фоне 1:1 ({pct:.1f} % кадра) · {caption}")
+    return img, dict(h_px=h_px, pct=pct)
 
 
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
-    kiosk = relight(cut_kiosk())
-    kiosk.save(WORK / "kiosk-cut.png")
-    print(f"  вырезано {kiosk.width}×{kiosk.height} px, "
-          f"отношение ширины к высоте {kiosk.width / kiosk.height:.3f}")
+    WORK.mkdir(parents=True, exist_ok=True)
+    sprite = cut_kiosk()
+    sprite.save(WORK / "kiosk.png")
+    print(f"  спрайт {sprite.width}×{sprite.height} px, ш/в {sprite.width / sprite.height:.3f}")
 
-    atrium, a = place("bg3-atrium.jpg", kiosk, "01-atrium.jpg",
-                      cx=0.50, floor=0.910, horizon=0.549,
-                      light_from="left", shadow=0.55, reflect=0.30,
-                      grade=(1.0, 0.996, 0.986), caption="Исторический атриум")
+    # 1. парадный зал с окнами: стойка в среднем плане, высокий полированный пол
+    hall, a = composite("bg-hall-empty.png", sprite, "01-zal-okna.jpg",
+                        cx=0.44, floor=0.900, horizon=0.600,
+                        shadow=0.62, reflect=0.30, warmth=0.55, base_dark=0.80,
+                        ambient=(1.005, 1.0, 0.995), env_strength=0.95,
+                        caption="зал с окнами")
 
-    _, m = place("bg2-modern.jpg", kiosk, "02-modern-mall.jpg",
-                 cx=0.50, floor=0.925, horizon=0.581,
-                 light_from="left", shadow=0.44, reflect=0.36,
-                 grade=(1.005, 1.0, 0.998), caption="Современный ТЦ")
+    # 2. тот же зал с гостями: стойка ближе, люди вокруг
+    people, b = composite("bg-hall-people.png", sprite, "02-zal-gosti.jpg",
+                          cx=0.62, floor=0.930, horizon=0.520,
+                          shadow=0.62, reflect=0.34, warmth=1.55, base_dark=0.58,
+                          ambient=(0.96, 0.93, 0.90), caption="гости на приёме")
 
-    _, b = place("bg2-beauty.jpg", kiosk, "03-beauty-hall.jpg",
-                 cx=0.45, floor=0.915, horizon=0.581,
-                 light_from="left", shadow=0.50, reflect=0.32,
-                 grade=(1.012, 1.0, 0.976), caption="Бьюти-холл")
+    # 3. атриум с балюстрадой — общий план
+    _, c = composite("bg-atrium-empty.png", sprite, "03-atrium.jpg",
+                     cx=0.50, floor=0.905, horizon=0.610,
+                     shadow=0.55, reflect=0.22, warmth=0.85, base_dark=0.78,
+                     ambient=(1.0, 0.995, 0.985), env_strength=0.95,
+                     caption="атриум")
 
-    hero_crop(atrium, cx=0.50, floor=0.910, horizon=0.549,
-              out_name="04-hero-close.jpg")
+    # 4. крупный кадр: кроп кадра с гостями — эквивалент длинного объектива
+    hero = people.crop((int(people.width * 0.30), int(people.height * 0.02),
+                        int(people.width * 0.88), int(people.height * 0.99)))
+    hero = hero.resize((1500, round(hero.height * 1500 / hero.width)), Image.LANCZOS)
+    hero = hero.filter(ImageFilter.UnsharpMask(radius=1.4, percent=45, threshold=2))
+    hero.save(OUT / "04-krupno.jpg", quality=94, optimize=True, progressive=True)
+    print(f"  ✓ 04-krupno.jpg  {hero.size[0]}×{hero.size[1]} · кроп кадра 02")
 
-    _, p_ = place("bg4-atrium-people-clean.jpg", kiosk, "05-atrium-people.jpg",
-                  cx=0.42, floor=0.900, horizon=0.507,
-                  light_from="left", shadow=0.50, reflect=0.28,
-                  grade=(0.98, 0.982, 0.982), env_mix=0.22,
-                  caption="Атриум, с посетителями")
-
-    print("\n  масштаб:", f"атриум {a['pct']} %, совр. ТЦ {m['pct']} %, "
-          f"бьюти {b['pct']} %, с людьми {p_['pct']} %")
+    print("\n  масштабы:", f"зал {a['pct']:.1f} %, гости {b['pct']:.1f} %, "
+          f"атриум {c['pct']:.1f} %")
     preview()
     return 0
 
 
 def preview() -> None:
     from PIL import ImageFont
-    files = ["01-atrium.jpg", "02-modern-mall.jpg", "03-beauty-hall.jpg", "05-atrium-people.jpg"]
-    caps = ["1 · Исторический атриум", "2 · Современный ТЦ",
-            "3 · Бьюти-холл", "4 · Атриум, с посетителями"]
-    tw, gap, band, pad = 700, 22, 54, 30
+    files = ["01-zal-okna.jpg", "02-zal-gosti.jpg", "03-atrium.jpg", "04-krupno.jpg"]
+    caps = ["1 · Зал с окнами", "2 · Гости на приёме", "3 · Атриум", "4 · Крупный кадр"]
+    tw, gap, pad, band = 640, 20, 26, 50
     th = round(tw * 9 / 16)
     w = tw * 2 + gap + pad * 2
     h = (th + band) * 2 + gap + pad * 2
-    grid = Image.new("RGB", (w, h), (250, 247, 244))
+    grid = Image.new("RGB", (w, h), (250, 248, 245))
     d = ImageDraw.Draw(grid)
-    f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 25)
+    f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 23)
     for i, (name, cap) in enumerate(zip(files, caps)):
         x = pad + (i % 2) * (tw + gap)
         y = pad + (i // 2) * (th + band + gap)
