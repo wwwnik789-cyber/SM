@@ -1,11 +1,13 @@
 """Наклейки в интерьерах московских квартир.
 
-Интерьеры — сгенерированные фотореалистичные кадры (raw/). Наклейки —
-настоящие, из production/home-stickers-bilingual: рисуются в 1200 dpi,
-накладываются на плоскость с перспективой и мягкой тенью.
+Интерьеры — фотореалистичные кадры (raw/). Наклейки — настоящие, из
+production/home-stickers-bilingual: рисуются тем же вектором, что уходит
+в печать, в 1200 dpi, и накладываются на плоскость с тенью.
 
-Почему не «попросить нейросеть нарисовать наклейки»: любой генератор врёт
-в надписях. Здесь текст настоящий, потому что это наш же вектор.
+ГЛАВНОЕ: масштаб. Наклейка 35 мм на общем плане комнаты — это 10–40 пикселей,
+её физически не видно. Поэтому каждая сцена — крупный план: кадр обрезан так,
+что его ширина равна известной реальной ширине (30–35 см). Тогда 35 мм
+наклейки занимает 10–12 % кадра — как на настоящей фотографии.
 
     .venv/bin/python marketing/home-stickers-interiors/compose.py
 """
@@ -31,59 +33,50 @@ RAW = HERE / "raw"
 OUT = HERE / "final"
 WORK = HERE / ".work"
 
+OUT_W, OUT_H = 1408, 768          # 16:9, как остальные материалы проекта
+DPI = 1200                        # рендер наклейки до наложения
+
 # ── сцены ───────────────────────────────────────────────────────────────────
-# quad — четыре угла наклейки на фото: левый-верх, правый-верх, правый-низ,
-# левый-низ. Размеры подобраны по ширине предмета: холодильник ~60 см,
-# тумбочка ~45 см, плитка 20 см, ТВ 55".
-# Каждая сцена: сначала кроп исходника (приближаем к предмету), потом наклейка
-# на кропе. Масштаб наклейки берём от реального размера предмета:
-#   дверь холодильника 60 см, ящик тумбочки 45 см, полотенце 40 см,
-#   ТВ 55" = 123 см. При таком пересчёте 35 мм — это 60–130 px, как в жизни.
-# Каждая сцена: кроп исходника (приближаем камеру к предмету), затем наклейка
-# на кропе. Размер наклейки считаем от реального размера предмета:
-#   дверь холодильника ~45 см в кадре, ящик тумбочки ~45 см, полотенце ~40 см,
-#   фасад тумбы под ТВ ~90 см. Тогда 35 мм — это 55–110 px, как в жизни.
+# room_w   — реальная ширина кадра в сантиметрах (задаём сами кропом)
+# px_per_cm — сколько пикселей исходника приходится на 1 см (по предмету-эталону)
+# crop     — рамка в пикселях исходника, пропорции 16:9
+# sticker  — центр наклейки в долях кропа (0..1), от левого верхнего угла
 SCENES = [
+    # Кадр — крупный план: ширина кадра в сантиметрах задана кропом и известна
+    # по предмету-эталону. Наклейка 35 мм всегда 3,5 см, её размер в пикселях
+    # считается из этого, а не подбирается на глаз.
     dict(
         src="int-09-fridge-macro.jpg",
         out="01-kitchen-fridge.jpg",
-        crop=(150, 40, 1150, 690),      # 1000×650 → 1408×768
-        items=[("Холодильник", (560, 300), 172, 0.0, 1.0, dict(taper=0.03, sqz=0.97))],
-        caption="Кухня · холодильник",
-        note="Гладкая эмаль. Масштаб наклейки реальный: 35 мм по линии реза.",
+        px_per_cm=15.9,                    # дверь холодильника 60 см ≈ 955 px
+        crop=(600, 210, 1315, 600),        # 715×390 → кадр 45 см
+        sticker=("Холодильник", 0.40, 0.53),
+        caption="Кухня · дверь холодильника",
+        note="Гладкая эмаль. Обезжирить, прижать от центра к краям.",
     ),
     dict(
         src="int-10-nightstand-macro.jpg",
         out="02-bedroom-nightstand.jpg",
-        crop=(0, 180, 900, 686),        # 900×506 → 1408×768
-        items=[("Тумбочка", (330, 330), 196, 0.0, 1.0, dict(taper=0.02, sqz=0.96))],
+        px_per_cm=16.2,                    # ящик тумбочки 45 см ≈ 730 px
+        crop=(0, 215, 795, 649),           # 795×434 → кадр 49 см
+        sticker=("Тумбочка", 0.66, 0.50),
         caption="Спальня · тумбочка",
         note="Крашеное дерево. Снимается без следа, если прогреть феном.",
     ),
     dict(
         src="int-03-bathroom.jpg",
-        out="03-bathroom-towel.jpg",
-        crop=(790, 330, 1230, 580),     # 440×250 → 1408×768
-        items=[("Полотенце", (300, 470), 290, 0.0, 1.0, dict(taper=0.02, sqz=0.95))],
-        caption="Ванная · полотенце",
-        note="Влажная зона: нужна матовая ламинация, иначе вода убьёт печать.",
-    ),
-    dict(
-        src="int-04-livingroom.jpg",
-        out="04-livingroom-console.jpg",
-        crop=(430, 380, 870, 630),      # 440×250 → 1408×768
-        items=[("Телевизор", (520, 118), 190, 0.0, 1.0, dict(taper=0.03, sqz=0.97))],
-        caption="Гостиная · телевизор",
-        note="Наклейка под экраном: слово там, куда смотрит ребёнок.",
+        out="03-bathroom-sink.jpg",
+        px_per_cm=5.4,                     # раковина 60 см ≈ 326 px
+        crop=(430, 320, 754, 497),         # 324×177 → кадр 60 см
+        sticker=("Раковина", 0.34, 0.52),
+        caption="Ванная · раковина и плитка",
+        note="Влажная зона: только с матовой ламинацией, иначе вода убьёт печать.",
     ),
 ]
 
-DPI = 1200
-
-
 # ── отрисовка наклейки ──────────────────────────────────────────────────────
-def render_sticker(ru: str, path: Path, px: int = 1400) -> Image.Image:
-    """Наклейка с прозрачным фоном: рисуем в PDF, растеризуем с альфой."""
+def render_sticker(ru: str, path: Path) -> Image.Image:
+    """Наклейка с прозрачным фоном: PDF → растр 1200 dpi → вырезание белого."""
     import pymupdf
 
     item = next(it for it in bs.ITEMS if it[0] == ru)
@@ -98,9 +91,8 @@ def render_sticker(ru: str, path: Path, px: int = 1400) -> Image.Image:
     base = page.get_pixmap(dpi=DPI, alpha=False)
     img = Image.frombytes("RGB", (base.width, base.height), base.samples)
 
-    # маска: всё, что не белый фон
-    a = np.asarray(img).astype(np.int16)
-    dist = 255 - a.min(axis=2)          # чем дальше от белого, тем «плотнее»
+    arr = np.asarray(img).astype(np.int16)
+    dist = 255 - arr.min(axis=2)
     alpha = np.clip(dist * 42, 0, 255).astype(np.uint8)
     alpha = Image.fromarray(alpha).filter(ImageFilter.GaussianBlur(0.4))
     img.putalpha(alpha)
@@ -109,131 +101,151 @@ def render_sticker(ru: str, path: Path, px: int = 1400) -> Image.Image:
 
 
 # ── геометрия ───────────────────────────────────────────────────────────────
-def quad_for(cx, cy, size, angle_deg, flip, taper=0.0, sqz=1.0):
-    """Четырёхугольник наклейки на плоскости.
-
-    size   — ширина (по горизонтали)
-    taper  — насколько дальний (верхний) край уже ближнего: 0 = без перспективы
-    sqz    — сжатие по вертикали: плоскость видна под углом, круг становится эллипсом
-    flip   — сжатие по горизонтали
-    """
-    a = math.radians(angle_deg)
-    hw = size / 2
-    hh = size / 2 * sqz
-    top_w, bot_w = (1 - taper), (1 + taper)
-    pts = [(-hw * top_w * flip, -hh), (hw * top_w * flip, -hh),
-           (hw * bot_w * flip, hh), (-hw * bot_w * flip, hh)]
-    out = []
-    for x, y in pts:
-        xr = x * math.cos(a) - y * math.sin(a)
-        yr = x * math.sin(a) + y * math.cos(a)
-        out.append((cx + xr, cy + yr))
-    return out
+def quad_for(cx, cy, size, taper=0.0, sqz=1.0):
+    """Четырёхугольник: слегка уже сверху (taper) и сжат по вертикали (sqz)."""
+    hw, hh = size / 2, size / 2 * sqz
+    tw, bw = 1 - taper, 1 + taper
+    return [(cx - hw * tw, cy - hh), (cx + hw * tw, cy - hh),
+            (cx + hw * bw, cy + hh), (cx - hw * bw, cy + hh)]
 
 
 def perspective_coeffs(src_w, src_h, quad):
-    """Коэффициенты обратного перспективного преобразования (PIL QUAD)."""
-    # PIL берёт quad как 8 чисел: (x0,y0,x1,y1,x2,y2,x3,y3) в порядке
-    # левый-верх, левый-низ, правый-низ, правый-верх
     dst = np.array([quad[0], quad[3], quad[2], quad[1]], dtype=float)
     src = np.array([[0, 0], [0, src_h], [src_w, src_h], [src_w, 0]], dtype=float)
-
     A, b = [], []
     for (x, y), (u, v) in zip(dst, src):
-        A.append([x, y, 1, 0, 0, 0, -u * x, -u * y])
-        b.append(u)
-        A.append([0, 0, 0, x, y, 1, -v * x, -v * y])
-        b.append(v)
-    res = np.linalg.solve(np.array(A, dtype=float), np.array(b, dtype=float))
-    return res.tolist()
+        A.append([x, y, 1, 0, 0, 0, -u * x, -u * y]); b.append(u)
+        A.append([0, 0, 0, x, y, 1, -v * x, -v * y]); b.append(v)
+    return np.linalg.solve(np.array(A), np.array(b)).tolist()
 
 
 def paste_sticker(base: Image.Image, sticker: Image.Image, quad,
-                  shadow: float = 0.26, blur: float = 6.0,
-                  light=(-1, 1), gloss: float = 0.10) -> Image.Image:
-    """Наклейка с перспективой, контактной тенью и лёгким блеском."""
+                  shadow: float = 0.24, blur: float = 3.6,
+                  light=(-1, 1), gloss: float = 0.05,
+                  focus: float = 0.5, tint: float = 0.28) -> Image.Image:
     w, h = sticker.size
     coeffs = perspective_coeffs(w, h, quad)
 
-    # маска наклейки, растянутая в перспективу
-    mask = sticker.split()[-1].transform(base.size, Image.PERSPECTIVE, coeffs,
-                                         Image.BICUBIC)
-    art = sticker.convert("RGB").transform(base.size, Image.PERSPECTIVE, coeffs,
-                                           Image.BICUBIC)
+    mask = sticker.split()[-1].transform(base.size, Image.PERSPECTIVE, coeffs, Image.BICUBIC)
+    art = sticker.convert("RGB").transform(base.size, Image.PERSPECTIVE, coeffs, Image.BICUBIC)
 
-    # контактная тень: плотная у края, мягкая дальше (два слоя)
     tight = Image.new("L", base.size, 0)
     tight.paste(mask, (int(light[0] * 2), int(light[1] * 2)))
-    tight = tight.filter(ImageFilter.GaussianBlur(blur * 0.45))
+    tight = tight.filter(ImageFilter.GaussianBlur(blur * 0.5))
 
     wide = Image.new("L", base.size, 0)
-    wide.paste(mask, (int(light[0] * blur * 1.5), int(light[1] * blur * 1.5)))
-    wide = wide.filter(ImageFilter.GaussianBlur(blur * 1.8))
+    wide.paste(mask, (int(light[0] * blur * 1.6), int(light[1] * blur * 1.6)))
+    wide = wide.filter(ImageFilter.GaussianBlur(blur * 1.9))
 
-    sh = Image.new("L", base.size, 0)
-    sh.paste(tight.point(lambda v: int(v * shadow)))
-    sh = Image.composite(sh, Image.new("L", base.size, 0), Image.new("L", base.size, 255))
-    sh_np = (np.asarray(tight).astype(np.float32) * shadow * 0.75 +
-             np.asarray(wide).astype(np.float32) * shadow * 0.45)
-    sh = Image.fromarray(np.clip(sh_np, 0, 255).astype(np.uint8))
+    sh = (np.asarray(tight).astype(np.float32) * shadow * 0.85 +
+          np.asarray(wide).astype(np.float32) * shadow * 0.45)
+    sh = Image.fromarray(np.clip(sh, 0, 255).astype(np.uint8))
 
     base = base.copy()
     base.paste(Image.new("RGB", base.size, (0, 0, 0)), (0, 0), sh)
 
-    # блеск: подмешиваем белый по верхней части наклейки
+    # резкость: наклейка не должна быть резче фона
+    art = art.filter(ImageFilter.GaussianBlur(focus))
+
+    # локальный свет: наклейка впитывает цвет и яркость поверхности под собой
+    if tint > 0:
+        bg = np.asarray(base.filter(ImageFilter.GaussianBlur(28))).astype(np.float32)
+        m = np.asarray(mask).astype(np.float32) / 255.0
+        wsum = m.sum()
+        if wsum > 0:
+            local = (bg * m[..., None]).sum(axis=(0, 1)) / wsum
+            a = np.asarray(art).astype(np.float32)
+            # белый кружок должен стать чуть темнее/теплее в тёплом свете
+            gain = 1.0 + (local / 255.0 - 0.75) * tint
+            art = Image.fromarray(np.clip(a * gain, 0, 255).astype(np.uint8))
+
     if gloss > 0:
         g = np.asarray(mask).astype(np.float32) / 255.0
-        h = np.linspace(1.0, 0.0, base.size[1])[:, None]
-        gl = (g * h * gloss * 255).astype(np.uint8)
-        gloss_layer = Image.new("RGB", base.size, (255, 255, 255))
-        art = Image.composite(Image.blend(art, gloss_layer, 1.0),
-                              art, Image.fromarray(gl))
+        grad = np.linspace(1.0, 0.0, base.size[1])[:, None]
+        gl = (g * grad * gloss * 255).astype(np.uint8)
+        art = Image.composite(Image.new("RGB", base.size, (255, 255, 255)), art,
+                              Image.fromarray(gl))
 
     base.paste(art, (0, 0), mask)
     return base
 
 
-def add_highlight(img: Image.Image, quad, strength: int = 10) -> Image.Image:
-    """Лёгкий блик: у глянцевых поверхностей наклейка чуть светлеет сверху."""
-    return img
+def add_grain(img: Image.Image, amount: float = 2.2) -> Image.Image:
+    """Фотографическое зерно: убирает «наклеенность» ровного рендера."""
+    a = np.asarray(img).astype(np.float32)
+    rng = np.random.default_rng(7)
+    n = rng.normal(0, amount, (a.shape[0], a.shape[1], 1))
+    a = a + n + rng.normal(0, amount * 0.6, a.shape)
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+
+
+def preview() -> None:
+    """Полоса 3 в ряд с подписями: комната + честный масштаб в кадре."""
+    from PIL import ImageDraw, ImageFont
+
+    bs.register_fonts()
+    fdir = Path("/tmp/fonts-stickers")
+    f_cap = ImageFont.truetype(str(fdir / "Montserrat-SemiBold.ttf"), 26)
+    f_sub = ImageFont.truetype(str(fdir / "Montserrat-Regular.ttf"), 20)
+
+    tw, gap, band, pad = 620, 26, 66, 34
+    th = round(tw * OUT_H / OUT_W)
+    w = tw * len(SCENES) + gap * (len(SCENES) - 1) + pad * 2
+    h = th + band + pad * 2
+    grid = Image.new("RGB", (w, h), (250, 247, 243))
+    d = ImageDraw.Draw(grid)
+
+    for i, sc in enumerate(SCENES):
+        crop = sc["crop"]
+        frame_cm = (crop[2] - crop[0]) / sc["px_per_cm"]
+        x = pad + i * (tw + gap)
+        tile = Image.open(OUT / sc["out"]).resize((tw, th), Image.LANCZOS)
+        grid.paste(tile, (x, pad))
+        d.text((x, pad + th + 12), sc["caption"], font=f_cap, fill=(27, 26, 24))
+        d.text((x, pad + th + 38), f"Ø 35 мм · кадр {frame_cm:.0f} см", font=f_sub,
+               fill=(126, 120, 112))
+    grid.save(OUT / "preview-set.jpg", quality=90, optimize=True, progressive=True)
+    print(f"  preview-set.jpg  {grid.size[0]}×{grid.size[1]}")
 
 
 # ── сборка ──────────────────────────────────────────────────────────────────
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     WORK.mkdir(exist_ok=True)
-
     cache: dict[str, Image.Image] = {}
 
-    def get(ru):
+    def sticker_for(ru: str) -> Image.Image:
         if ru not in cache:
-            p = WORK / f"st-{abs(hash(ru)) % 10**6}.pdf"
-            cache[ru] = render_sticker(ru, p)
+            cache[ru] = render_sticker(ru, WORK / f"st-{abs(hash(ru)) % 10**6}.pdf")
         return cache[ru]
 
     for sc in SCENES:
-        base = Image.open(RAW / sc["src"]).convert("RGB")
-        if sc.get("crop"):
-            base = base.crop(sc["crop"]).resize((1408, 768), Image.LANCZOS)
-        for ru, (cx, cy), size, ang, flip, *rest in reversed(sc["items"]):
-            st = get(ru)
-            quad = quad_for(cx, cy, size, ang, flip, **(rest[0] if rest else {}))
-            base = paste_sticker(base, st, quad)
+        crop = sc["crop"]
+        cw, ch = crop[2] - crop[0], crop[3] - crop[1]
+        aspect = cw / ch
+        if abs(aspect - OUT_W / OUT_H) > 0.02:
+            print(f"  ! {sc['out']}: пропорции кропа {aspect:.2f}, нужно "
+                  f"{OUT_W / OUT_H:.2f} — кадр будет растянут")
 
-        base.save(OUT / sc["out"], quality=92, optimize=True, progressive=True)
+        img = Image.open(RAW / sc["src"]).convert("RGB").crop(crop)
+        img = img.resize((OUT_W, OUT_H), Image.LANCZOS)
+        img = img.filter(ImageFilter.UnsharpMask(radius=1.6, percent=70, threshold=2))
 
-        print(f"  {sc['out']}  {base.size[0]}×{base.size[1]}")
+        frame_cm = cw / sc["px_per_cm"]           # реальная ширина кадра
+        d_px = 3.5 / frame_cm * OUT_W             # наклейка 3,5 см в кадре
 
-    # превью-сетка 2×2
-    tiles = [Image.open(OUT / sc["out"]) for sc in SCENES]
-    tw = 960
-    th = round(tiles[0].height * tw / tiles[0].width)
-    grid = Image.new("RGB", (tw * 2 + 24, th * 2 + 24), (250, 247, 243))
-    for i, t in enumerate(tiles):
-        t = t.resize((tw, th), Image.LANCZOS)
-        grid.paste(t, ((i % 2) * (tw + 24), (i // 2) * (th + 24)))
-    grid.save(OUT / "preview-set.jpg", quality=90, optimize=True, progressive=True)
-    print(f"  preview-set.jpg  {grid.size[0]}×{grid.size[1]}")
+        ru, rx, ry = sc["sticker"]
+        cx, cy = rx * OUT_W, ry * OUT_H
+        quad = quad_for(cx, cy, d_px, taper=0.02, sqz=0.97)
+
+        img = paste_sticker(img, sticker_for(ru), quad)
+        img = add_grain(img, 2.2)
+        img.save(OUT / sc["out"], quality=92, optimize=True, progressive=True)
+        print(f"  {sc['out']:24} кадр {frame_cm:.0f} см · наклейка {d_px:.0f} px "
+              f"= {3.5 / frame_cm * 100:.1f} % ширины · апскейл {OUT_W / cw:.1f}×")
+
+    preview()
+
     return 0
 
 
