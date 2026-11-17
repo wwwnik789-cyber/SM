@@ -1,10 +1,17 @@
-# Визуализации и фото конструкций
+# Визуализации Joker / Tritix
 
-## Joker / Tritix с макетом SM Production
+## Joker
 
-- `public/media/product-visuals/joker.jpg` — Joker
-- `public/media/product-visuals/tritix.jpg` — Tritix
+Три визуализации с макетом SM Production по фотографиям реальных конструкций Joker:
 
-## Исходные фото Tritix
+- `public/media/product-visuals/joker-photos/visualizations/01.jpg`
+- `public/media/product-visuals/joker-photos/visualizations/02.jpg`
+- `public/media/product-visuals/joker-photos/visualizations/03.jpg`
 
-Три фото пользователя сохранены без изменений в `public/media/product-visuals/tritix-photos/originals/`. Обработанные версии лежат в `public/media/product-visuals/tritix-photos/enhanced/`: выполнены мягкая коррекция контраста и резкости, сохранены исходные сцены, надписи и цвета; первое фото увеличено до 2160 × 2880 пикселей.
+Исходники сохранены в `public/media/product-visuals/joker-photos/originals/`.
+
+## Tritix
+
+- Визуализация: `public/media/product-visuals/tritix.jpg`
+- Фото с улучшением качества находятся в `public/media/product-visuals/tritix-photos/enhanced/`; исходники сохранены в `originals/`.
+- Фотографии Tritix с нанесённым макетом пока не создавались.
