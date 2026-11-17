@@ -45,7 +45,7 @@ export default function Home() {
       {/* HERO */}
       <section ref={heroRef} className="relative flex min-h-svh items-center overflow-hidden pt-28">
         <motion.div style={{ y, scale }} className="absolute inset-0">
-          <img src="/media/hero-stage.jpg" alt="Сцена, оформленная SM-Production" className="h-full w-full object-cover" />
+          <img src="/media/home-hero.jpg" alt="Сцена и декорации мероприятия SM-Production" className="h-full w-full object-cover" />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/72 to-bg/30" />
         <div className="grid-bg absolute inset-0 opacity-30" />
