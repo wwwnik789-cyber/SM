@@ -55,7 +55,7 @@ ANALYTICS = [("amoCRM", "сделки и воронка", "funnel"), ("Янде�
              ("Аналитика телефонии", "коллтрекинг, записи", "phonecall"),
              ("Сквозная аналитика", "реклама → сделка", "route")]
 # мобильные номера менеджеров привязаны к телефонии, на них же MAX и Telegram
-MOBILE_DILYA = "+7 9XX XXX-XX-XX"          # TODO: номер Дили
+MOBILE_DILYA = "+7 999 928-51-48"
 MOBILE_NASTYA = "+7 909 993-60-28"
 CONTACTS = [("Почта", "sm-pro1@yandex.ru", "mail"), ("Телефония Билайн", "+7 495 799-00-19", "phone"),
             ("Диля", MOBILE_DILYA, "mobile", ("tg", "max")), ("Настя", MOBILE_NASTYA, "mobile", ("tg", "max")),
