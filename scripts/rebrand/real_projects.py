@@ -457,13 +457,6 @@ def pillar():
 
 
 # ================================================================ сборка
-JOBS = {
-    "sm-real-podium-runway": (podium, "Подиум (раннвей) — покрытие, боковина, торец"),
-    "sm-real-stage-cache-riser": (stage, "Сцена — каше, экран, раус"),
-    "sm-real-navigation-pillar": (pillar, "Навигационная стела — щит и указатели"),
-}
-
-
 def label(img, text, sub=None):
     h, w = img.shape[:2]
     bar = int(max(h, w) * 0.045)
@@ -499,17 +492,7 @@ def before_after(a, b, title):
     return sheet
 
 
-def main():
-    OUT.mkdir(parents=True, exist_ok=True)
-    results = []
-    for name, (fn, title) in JOBS.items():
-        a, b, info = fn()
-        cv2.imwrite(str(OUT / f"{name}.jpg"), b, [cv2.IMWRITE_JPEG_QUALITY, 90])
-        cv2.imwrite(str(OUT / f"{name}_before-after.jpg"), before_after(a, b, title),
-                    [cv2.IMWRITE_JPEG_QUALITY, 86])
-        results.append(b)
-        print("✓", name, info)
-    # обзорный лист: три «стало» в ряд по высоте
+def overview(results, title, path):
     H = 1200
     ims = [cv2.resize(r, (int(r.shape[1] * H / r.shape[0]), H), interpolation=cv2.INTER_AREA) for r in results]
     gap = 16
@@ -523,11 +506,272 @@ def main():
     lg = _logo
     s = 80 / lg.shape[0]
     L.paste_rgba(sheet, lg, gap, 15, s)
-    sheet = draw_texts(sheet, [("Ребрендинг реализованных проектов в фирменном стиле", "Unbounded_500Medium.ttf",
-                                34, (gap + int(lg.shape[1] * s) + 30, 68), WHITE, "ls")])
-    cv2.imwrite(str(OUT / "sm-real-projects-overview.jpg"), sheet, [cv2.IMWRITE_JPEG_QUALITY, 88])
-    print("✓ overview", sheet.shape)
+    sheet = draw_texts(sheet, [(title, "Unbounded_500Medium.ttf", 34,
+                                (gap + int(lg.shape[1] * s) + 30, 68), WHITE, "ls")])
+    cv2.imwrite(str(path), sheet, [cv2.IMWRITE_JPEG_QUALITY, 88])
+    print("✓", path.name, sheet.shape)
+
+
+def main(only=None):
+    OUT.mkdir(parents=True, exist_ok=True)
+    batches = {}
+    for name, (fn, title, batch, pair) in JOBS.items():
+        if only and name not in only:
+            continue
+        a, b, info = fn()
+        cv2.imwrite(str(OUT / f"{name}.jpg"), b, [cv2.IMWRITE_JPEG_QUALITY, 90])
+        if pair:
+            cv2.imwrite(str(OUT / f"{name}_before-after.jpg"), before_after(a, b, title),
+                        [cv2.IMWRITE_JPEG_QUALITY, 86])
+        batches.setdefault(batch, []).append(b)
+        print("✓", name, info)
+    sheets = {1: ("sm-real-projects-overview.jpg", "Ребрендинг реализованных проектов в фирменном стиле"),
+              2: ("sm-real-projects-overview-2.jpg", "Фотозоны и пресс-волл с LED-подсветкой · SM Production")}
+    for k, res in batches.items():
+        if only is None or len(res) == sum(1 for v in JOBS.values() if v[2] == k):
+            overview(res, sheets[k][1], OUT / sheets[k][0])
+
+
+
+# ================================================================ 4. Брус-баннер (МГУ) с LED-подсветкой
+def msu():
+    img = cv2.imread(str(SRC / "brus-banner-msu.jpg"))
+    h, w = img.shape[:2]
+    c = np.array([w / 2, h / 2])
+    H, S, V = hsv_planes(img)
+    navy = ((H > 105) & (H < 145) & (S > 30)).astype(np.uint8)
+
+    # геометрия: верхняя кромка — по маске, точки схода — по торцу (горизонт),
+    # нижняя кромка лица — через угол и правую точку схода (низ закрыт LED-барами)
+    top = G.fit_line(G.edge_points(navy, "top", 700, 1350))
+    s_top = G.line_through((405, 200), (642, 65))
+    s_bot = G.line_through((450, 2238), (690, 2352))
+    vl = G.meet(s_top, s_bot)
+    vr = G.meet(top, G.hline(vl[1]))
+    f = G.focal_from_vps(vl, vr, c) or 0.75 * np.hypot(w, h)
+    bot = G.line_through((698, 2350), vr)
+    left = G.line_through((642, 65), (698, 2350))
+    right = G.line_through((1392, 650), (1437, 1700))     # левый край кулисы
+    face_q = G.quad_from_lines(top, right, bot, left)
+    side_q = np.float32([(405, 200), (642, 65), (698, 2350), (445, 2236)])
+    face_ar = G.metric_aspect(face_q, f, c)
+
+    face = poly_mask(img.shape, face_q)
+    # LED-бары перед баннером: верх корпусов — прямая по верхушкам светодиодов
+    led = ((S < 40) & (V > 200)).astype(np.uint8)
+    pts = np.float32([(x, 1550 + np.flatnonzero(led[1550:2400, x])[0]) for x in range(850, 1560, 10)
+                      if led[1550:2400, x].any()])
+    bar = G.fit_line(pts)
+    bar_y = lambda x: -(bar[0] * x + bar[2]) / bar[1] - 14          # noqa: E731
+    occ = poly_mask(img.shape, [(824, bar_y(824)), (1620, bar_y(1620)), (1620, h), (824, h)])
+    face_m = face & (1 - occ)
+
+    # карта света: только по тёмно-синему фону, круг-эмблема и текст исключены
+    lav = ((V > 145) & (S < 80) & (H > 120) & (H < 160)).astype(np.uint8) & face
+    circ = fill_holes(biggest(cv2.morphologyEx(lav, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8)))[0])
+    cnt = max(cv2.findContours(circ, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)[0], key=cv2.contourArea)
+    ell = np.zeros_like(circ)
+    cv2.ellipse(ell, cv2.fitEllipse(cnt), 1, -1)
+    ell = cv2.dilate(ell, np.ones((25, 25), np.uint8))
+    textbox = poly_mask(img.shape, [(770, 290), (1220, 600), (1220, 700), (770, 560)])
+    keep = face_m & navy & (1 - ell) & (1 - textbox)
+    sh = shading_robust(img, keep, tol=90, blur=16, hi=1.8)
+    tex = L.horizontal(_master, face_ar)
+    out = apply_texture(img, face_m, face_q, tex, shade=sh, shade_gamma=1.0)
+
+    # блики от LED-баров на глянце баннера (полоса над барами) — переносим аддитивно
+    band = poly_mask(img.shape, [(700, 1800), (1440, 1300), (1440, 1900), (700, 2330)]) & face_m
+    orig = img.astype(np.float32)
+    base = cv2.medianBlur(img, 61).astype(np.float32)
+    spec = np.clip(orig - base, 0, None).mean(axis=2)
+    spec *= (band & navy & (1 - cv2.dilate(ell, np.ones((61, 61), np.uint8)))).astype(np.float32)
+    spec = cv2.GaussianBlur(spec, (0, 0), 1.5)
+    tint = np.array([235, 225, 245], np.float32) / 255
+    out = np.clip(out.astype(np.float32) + spec[..., None] * tint * 1.1, 0, 255).astype(np.uint8)
+
+    # торец — фирменный тёмно-синий, блики окна сохраняются
+    side_m = poly_mask(img.shape, side_q) & (1 - occ)
+    out = apply_color(out, side_m, (86, 58, 40), blur=4)
+    return img, out, dict(f=round(f), face_aspect=round(face_ar, 2))
+
+
+# ================================================================ 5. Пресс-волл с цветной LED-подсветкой
+def press_texture(ar, Hh=2400):
+    """Пресс-волл SM: тёмно-синий фон с лёгкой виньеткой и шахматной сеткой логотипов
+    (куб + SMPRODUCTION + слоган), как классический press wall."""
+    W = int(Hh * ar)
+    yy, xx = np.mgrid[0:Hh, 0:W].astype(np.float32)
+    r = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 * 0.35 + ((yy - Hh / 2) / (Hh / 2)) ** 2 * 0.65)
+    t = np.clip(r, 0, 1)[..., None]
+    c0, c1 = np.array(NAVY_DARK, np.float32), np.array(NAVY_MID, np.float32)
+    tex = (c0 * (1 - t) + c1 * t).astype(np.uint8)
+    lw = int(Hh * 0.125)
+    pad = lw
+    tex = cv2.copyMakeBorder(tex, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
+    s = lw / _logo.shape[1]
+    lh = int(_logo.shape[0] * s)
+    dx, dy = int(Hh * 0.118), int(Hh * 0.25)       # шаг соседних колонок / рядов в колонке
+    col = 0
+    for cx in range(-dx, W + dx, dx):
+        off = (dy // 2) * (col % 2)
+        for cy in range(-dy + off, Hh + dy, dy):
+            if -lh // 2 < cy < Hh + lh // 2 and -lw // 2 < cx < W + lw // 2:
+                L.paste_rgba(tex, _logo, pad + cx - lw // 2, pad + cy - lh // 2, s)
+        col += 1
+    return tex[pad:pad + Hh, pad:pad + W].copy()
+
+
+def light_map_color(img, keep, blur=10):
+    """Цветная карта света по фону поверхности (логотипы/текст вырезаны и заинпейнчены)."""
+    f = 0.25
+    small = cv2.resize(img, None, fx=f, fy=f, interpolation=cv2.INTER_AREA)
+    hs = cv2.resize(((1 - keep) * 255).astype(np.uint8), (small.shape[1], small.shape[0]),
+                    interpolation=cv2.INTER_NEAREST)
+    small = cv2.inpaint(small, hs, 9, cv2.INPAINT_TELEA)
+    big = cv2.resize(small, (img.shape[1], img.shape[0]), interpolation=cv2.INTER_CUBIC)
+    bg = np.where(keep[..., None] > 0, img, big).astype(np.float32)
+    return cv2.GaussianBlur(bg, (0, 0), blur)
+
+
+def presswall():
+    img = cv2.imread(str(SRC / "presswall-uplight.jpg"))
+    h, w = img.shape[:2]
+    c = np.array([w / 2, h / 2])
+    H, S, V = hsv_planes(img)
+
+    # одна горизонтальная точка схода — по рядам логотипов (сходятся в (-1885, 355));
+    # вертикали почти параллельны. f — по пропорции знака (ромбы ≈ 1.155:1) ≈ 2900
+    vp = np.array([-1885.0, 355.0])
+    top = G.line_through(vp, (1788, -700))
+    bot = G.line_through(vp, (1788, 1735))
+    face_q = G.quad_from_lines(top, G.vline(1788), bot, G.vline(85))
+    f = 2900.0
+    ar = G.metric_aspect(face_q, f, c)
+    face = poly_mask(img.shape, face_q)
+
+    # LED-бары перед стеной: от верхней кромки линейки светодиодов вниз
+    bars = [((38, 1012), (330, 1098)), ((430, 1142), (848, 1272)), ((994, 1330), (1652, 1532))]
+    occ = np.zeros((h, w), np.uint8)
+    for (x0, y0), (x1, y1) in bars:
+        occ |= poly_mask(img.shape, [(x0, y0 - 8), (x1, y1 - 8), (x1, h), (x0, h)])
+    face_m = face & (1 - occ)
+
+    # свет: фон без логотипов (красные знаки + светлый текст относительно локального фона)
+    red = (((H < 14) | (H > 155)) & (S > 80) & (V > 90)).astype(np.uint8)
+    loc = cv2.medianBlur(img.max(axis=2), 41).astype(int)
+    txt = ((img.max(axis=2).astype(int) - loc) > 22).astype(np.uint8)
+    logos = cv2.dilate(red | txt, np.ones((25, 25), np.uint8))
+    keep = face_m & (1 - logos)
+    B = light_map_color(img, keep, blur=22)
+    lum = B.mean(axis=2)
+    ref = np.percentile(lum[face_m > 0], 80)
+    Lm = np.clip(B / ref, 0.05, 6)
+    Ll = Lm.mean(axis=2, keepdims=True)
+    Lm = Ll + 0.75 * (Lm - Ll)                    # цвет света сохраняем, но мягче
+    Lm = np.clip(Lm, 0.02, None) ** 0.8
+
+    tex = press_texture(ar)
+    warped = warp_to_quad(tex, face_q, img.shape).astype(np.float32) * Lm
+    warped = 255 * (1 - np.exp(-warped / 255 * 1.3)) / (1 - np.exp(-1.3))   # мягкий «светлый» край
+    a = feather(face_m)[..., None]
+    out = (img * (1 - a) + warped * a).clip(0, 255).astype(np.uint8)
+    return img, out, dict(f=f, aspect=round(ar, 2))
+
+
+# ================================================================ 6. Рекламный креатив «LED-бары в подарок к фотозоне»
+PHONE = "+7 495 799-00-19"     # из контактов сайта (src)
+SITE = "sm-production.ru"
+
+
+def led_glow(img, bars):
+    """Включаем LED-бары: светящаяся линейка линз + точки светодиодов + bloom + засветка пола.
+    bars: [((x0, y0), (x1, y1), width, (bgr_start), (bgr_end))] — осевая линия линз."""
+    h, w = img.shape[:2]
+    emis = np.zeros((h, w, 3), np.float32)
+    core = np.zeros((h, w, 3), np.float32)
+    for (x0, y0), (x1, y1), wd, c0, c1 in bars:
+        p0, p1 = np.float32([x0, y0]), np.float32([x1, y1])
+        d = (p1 - p0) / np.linalg.norm(p1 - p0)
+        n = np.float32([-d[1], d[0]]) * wd / 2
+        strip = np.zeros((h, w), np.uint8)
+        cv2.fillConvexPoly(strip, np.int32([p0 - n, p1 - n, p1 + n, p0 + n]), 1, cv2.LINE_AA)
+        # цвет вдоль бара — градиент
+        t = np.clip(((np.mgrid[0:h, 0:w][1] - x0) / max(x1 - x0, 1)), 0, 1)[..., None]
+        col = np.float32(c0) * (1 - t) + np.float32(c1) * t
+        emis += strip[..., None] * col
+        k = int(np.linalg.norm(p1 - p0) / 34)                    # шаг линз ≈ 34 px
+        for i in range(k):
+            q = p0 + (p1 - p0) * (i + 0.5) / k
+            cc = tuple(float(v) for v in (np.float32(c0) * (1 - (i + .5) / k) + np.float32(c1) * (i + .5) / k))
+            cv2.circle(core, (int(q[0]), int(q[1])), max(3, int(wd * 0.32)), (255, 255, 255), -1, cv2.LINE_AA)
+            cv2.circle(emis, (int(q[0]), int(q[1])), int(wd * 0.55), cc, -1, cv2.LINE_AA)
+    base = img.astype(np.float32) * 0.92                        # чуть приглушаем сцену
+    glow = (cv2.GaussianBlur(emis, (0, 0), 6) * 1.1 + cv2.GaussianBlur(emis, (0, 0), 22) * 0.9
+            + cv2.GaussianBlur(emis, (0, 0), 70) * 0.55)
+    out = base + glow
+    m = (emis.max(axis=2) > 0).astype(np.float32)[..., None]
+    out = out * (1 - m * 0.85) + (emis * 0.55 + 255 * 0.45) * m * 0.85
+    out += cv2.GaussianBlur(core, (0, 0), 2.2) * 0.9
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def creative():
+    img = cv2.imread(str(SRC / "photozone-led-bars.jpg"))
+    MAG, VIO, CYA = (230, 80, 255), (255, 90, 150), (255, 210, 60)
+    lit = led_glow(img, [((160, 1504), (465, 1604), 22, MAG, VIO),
+                         ((490, 1626), (930, 1775), 18, VIO, (255, 140, 90)),
+                         ((950, 1801), (1580, 2031), 20, (255, 140, 90), CYA)])
+    W, Hc, top = 1800, 2250, 700
+    canvas = np.zeros((Hc, W, 3), np.uint8)
+    y0 = 640                      # верх стены с чужими логотипами уходит под плашку
+    canvas[top:] = lit[y0:y0 + Hc - top]
+
+    # верхняя фирменная плашка (фон баннера) с плавным переходом в фото
+    ph = top + 120
+    panel = cv2.resize(bg_only(W / ph, long_side=W), (W, ph))
+    a = np.ones((ph, 1), np.float32)
+    a[top - 40:] = np.linspace(1, 0, ph - top + 40)[:, None] ** 1.4
+    a = a[..., None]
+    region = canvas[:ph].astype(np.float32)
+    canvas[:ph] = (panel * a + region * (1 - a)).astype(np.uint8)
+
+    lg = logo_horizontal()
+    s = 560 / lg.shape[1]
+    L.paste_rgba(canvas, lg, W - 96 - int(lg.shape[1] * s), 70, s)
+    canvas = draw_texts(canvas, [
+        ("LED-БАРЫ", "Unbounded_500Medium.ttf", 160, (88, 300), GOLD, "ls"),
+        ("В ПОДАРОК", "Unbounded_500Medium.ttf", 160, (88, 480), WHITE, "ls"),
+        ("к фотозоне", "Manrope_600SemiBold.ttf", 96, (94, 600), (233, 220, 205), "ls"),
+    ])
+    cv2.line(canvas, (98, 645), (420, 645), GOLD, 6, cv2.LINE_AA)   # золотой акцент
+
+    # нижняя плашка с контактами
+    fh = 140
+    band = canvas[Hc - fh:].astype(np.float32)
+    navy = np.float32(NAVY_DARK)
+    grad = np.linspace(0.55, 0.92, fh)[:, None, None]
+    canvas[Hc - fh:] = (band * (1 - grad) + navy * grad).astype(np.uint8)
+    cv2.line(canvas, (0, Hc - fh), (W, Hc - fh), GOLD, 3, cv2.LINE_AA)
+    canvas = draw_texts(canvas, [
+        ("Подсветка фотозоны — бесплатно", "Manrope_600SemiBold.ttf", 50, (96, Hc - fh // 2), WHITE, "lm"),
+        (PHONE, "Manrope_600SemiBold.ttf", 50, (W - 96, Hc - fh // 2 - 26), WHITE, "rm"),
+        (SITE, "Manrope_400Regular.ttf", 40, (W - 96, Hc - fh // 2 + 30), (233, 220, 205), "rm"),
+    ])
+    return img, canvas, dict(size=f"{W}x{Hc}")
+
+
+# ================================================================ запуск
+# имя → (функция, заголовок, номер обзорного листа, делать ли «было/стало»)
+JOBS = {
+    "sm-real-podium-runway": (podium, "Подиум (раннвей) — покрытие, боковина, торец", 1, True),
+    "sm-real-stage-cache-riser": (stage, "Сцена — каше, экран, раус", 1, True),
+    "sm-real-navigation-pillar": (pillar, "Навигационная стела — щит и указатели", 1, True),
+    "sm-real-brus-banner-msu": (msu, "Брус-баннер с LED-подсветкой", 2, True),
+    "sm-real-presswall-uplight": (presswall, "Пресс-волл с цветной LED-подсветкой", 2, True),
+    "sm-ad-led-bars-gift": (creative, "Креатив «LED-бары в подарок к фотозоне»", 2, False),
+}
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(set(sys.argv[1:]) or None)
