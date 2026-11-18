@@ -31,6 +31,8 @@ ROOT = Path(__file__).resolve().parents[2]
 FONTS = ROOT / "scripts/rebrand/fonts"
 OUT = ROOT / "visualizations/sm-growth-tree"
 W, H = 1000, 2000
+SHIFT = 110                 # на сколько поднята верхняя часть (ствол/ветви/земля) ради места под корни
+GROUND = 1488 - SHIFT       # линия земли
 
 # ------------------------------------------------------------------ палитра (из баннера SM)
 NAVY_0 = "#141C2E"
@@ -237,8 +239,8 @@ def depth_bar(svg, x, y, score, n=5):
 
 # ------------------------------------------------------------------ дерево
 def inside_crown(x, y):
-    ell = [(500, 460, 450, 290), (500, 275, 300, 110), (225, 720, 215, 170), (775, 720, 215, 170),
-           (500, 590, 290, 150)]
+    ell = [(500, 440, 450, 280), (500, 265, 300, 105), (225, 630, 215, 170), (775, 630, 215, 170),
+           (500, 510, 290, 150)]
     return any(((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1 for cx, cy, rx, ry in ell)
 
 
@@ -246,7 +248,7 @@ def foliage(svg, rnd):
     def sample(n, rmin, rmax):
         pts = []
         while len(pts) < n:
-            x, y = rnd.uniform(20, 980), rnd.uniform(120, 930)
+            x, y = rnd.uniform(20, 980), rnd.uniform(120, 830)
             if inside_crown(x, y):
                 pts.append((x, y, rnd.uniform(rmin, rmax)))
         return pts
@@ -281,14 +283,17 @@ def branches(svg):
           ("M530 830 C 580 700 660 620 700 500", 30), ("M300 770 C 220 740 150 690 110 620", 22),
           ("M700 770 C 780 740 850 690 890 620", 22), ("M500 660 C 450 560 420 460 410 340", 20),
           ("M500 660 C 550 560 580 460 590 340", 20), ("M350 640 C 290 580 230 520 200 450", 14),
-          ("M650 640 C 710 580 770 520 800 450", 14), ("M500 560 C 500 450 500 360 500 260", 16)]
+          ("M650 640 C 710 580 770 520 800 450", 14), ("M500 560 C 500 480 500 420 500 380", 16)]
+    svg.add(f'<g transform="translate(0 {-SHIFT})">')
     for d, w in br:
         svg.add(f'<path d="{d}" fill="none" stroke="#1A120C" stroke-opacity="0.45" stroke-width="{w + 6}" '
                 f'stroke-linecap="round"/>')
         svg.add(f'<path d="{d}" fill="none" stroke="url(#barkV)" stroke-width="{w}" stroke-linecap="round"/>')
+    svg.add("</g>")
 
 
 def trunk(svg):
+    svg.add(f'<g transform="translate(0 {-SHIFT})">')
     # ствол с корневым расширением
     svg.add('<path d="M440 860 C 446 1050 430 1300 404 1430 C 392 1468 345 1480 300 1492 '
             'L 700 1492 C 655 1480 608 1468 596 1430 C 570 1300 554 1050 560 860 '
@@ -299,6 +304,7 @@ def trunk(svg):
                 f'stroke="#1E140D" stroke-opacity="0.45" stroke-width="2"/>')
         svg.add(f'<path d="M{x0 + 3} 840 C {x0 - 3} 1050 {x1 + 11} 1250 {x1 + 3} 1470" fill="none" '
                 f'stroke="#C9A27A" stroke-opacity="0.22" stroke-width="1.2"/>')
+    svg.add("</g>")
 
 
 def root_path(svg, x0, y0, x1, y1, w, op=1.0):
@@ -312,17 +318,17 @@ def roots(svg, groups):
     rnd = random.Random(7)
     for _ in range(46):                                   # мелкие корешки
         x0 = rnd.uniform(330, 670)
-        y0 = 1495
+        y0 = GROUND + 7
         x1 = x0 + rnd.uniform(-330, 330)
-        y1 = y0 + rnd.uniform(60, 420)
+        y1 = y0 + rnd.uniform(60, 500)
         svg.add(f'<path d="M{x0:.0f} {y0} C {x0:.0f} {(y0 + y1) / 2:.0f} {x1:.0f} {(y0 + y1) / 2:.0f} {x1:.0f} {y1:.0f}" '
                 f'fill="none" stroke="#B88A3A" stroke-opacity="{rnd.uniform(.08, .2):.2f}" '
                 f'stroke-width="{rnd.uniform(.8, 2.4):.1f}" stroke-linecap="round"/>')
     bases = [440, 500, 560]
     for (gx, gy, tips), bx in zip(groups, bases):
-        root_path(svg, bx, 1490, gx, gy, 20)
+        root_path(svg, bx, GROUND + 2, gx, gy, 22)
         for tx, ty in tips:
-            root_path(svg, gx, gy + 10, tx, ty - 16, 5.5, 0.9)
+            root_path(svg, gx, gy + 12, tx, ty - 18, 6, 0.9)
 
 
 def network(svg, rnd):
@@ -340,11 +346,12 @@ def network(svg, rnd):
 
 def particles(svg, tips):
     """«Сок» дерева: золотые частицы идут от корней к кроне (SMIL-анимация, в статике скрыты)."""
-    targets = [(250, 770), (750, 770), (500, 330), (300, 520), (700, 520), (500, 460)]
+    targets = [(250, 860), (750, 860), (500, 420), (300, 610), (700, 610), (500, 550)]
     for i, (tx, ty) in enumerate(tips[::2][:8]):
         ex, ey = targets[i % len(targets)]
-        d = (f"M{tx} {ty - 18} C {tx} {(ty + 1490) / 2 - 30} 500 {(ty + 1490) / 2} 500 1480 "
-             f"L 500 980 C 500 900 {ex} {ey + 80} {ex} {ey}")
+        g = GROUND
+        d = (f"M{tx} {ty - 18} C {tx} {(ty + g) / 2 - 30} 500 {(ty + g) / 2} 500 {g - 8} "
+             f"L 500 {980 - SHIFT} C 500 {900 - SHIFT} {ex} {ey - SHIFT + 80} {ex} {ey - SHIFT}")
         dur = 7 + i * 0.8
         svg.add(f'<circle r="3.4" fill="{GOLD_L}" filter="url(#glow)" opacity="0">'
                 f'<animateMotion dur="{dur:.1f}s" begin="{i * 1.1:.1f}s" repeatCount="indefinite" path="{d}"/>'
@@ -372,7 +379,7 @@ def defs(svg):
 <linearGradient id="bark" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0" stop-color="#2A1B12"/><stop offset="0.3" stop-color="#5E412B"/><stop offset="0.55" stop-color="#8C6745"/>
   <stop offset="0.8" stop-color="#553A26"/><stop offset="1" stop-color="#2A1B12"/></linearGradient>
-<linearGradient id="barkV" gradientUnits="userSpaceOnUse" x1="0" y1="300" x2="0" y2="900">
+<linearGradient id="barkV" gradientUnits="userSpaceOnUse" x1="0" y1="190" x2="0" y2="790">
   <stop offset="0" stop-color="#4A3322"/><stop offset="1" stop-color="#6E4F35"/></linearGradient>
 <linearGradient id="rootG" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0" stop-color="#5E412B"/><stop offset="0.45" stop-color="#8A6A2E"/><stop offset="1" stop-color="{GOLD}"/></linearGradient>
@@ -404,21 +411,22 @@ def build(outlined):
     svg.add(f'<rect width="{W}" height="{H}" fill="url(#sky)"/>')
     svg.add(f'<ellipse cx="500" cy="480" rx="560" ry="520" fill="url(#halo)"/>')
     network(svg, rnd)
-    svg.add(f'<rect x="0" y="1488" width="{W}" height="{H - 1488}" fill="url(#soil)"/>')
+    svg.add(f'<rect x="0" y="{GROUND}" width="{W}" height="{H - GROUND}" fill="url(#soil)"/>')
 
     # корни: группы и позиции подписей
-    GY, ROWS = 1622, [1712, 1772, 1832]
+    GY = GROUND + 140
+    ROWS = [GY + 105, GY + 185, GY + 265]
     soc_tips = [((80, 215, 350)[i % 3], ROWS[i // 3]) for i in range(len(SOCIAL))]
     out_tips = [(808, ROWS[i]) for i in range(len(OUTREACH))]
-    ads_tip = [(510, 1712)]
+    ads_tip = [(510, ROWS[0])]
     groups = [(215, GY, soc_tips), (510, GY, ads_tip), (808, GY, out_tips)]
     roots(svg, groups)
     tips = soc_tips + ads_tip + out_tips
-    svg.add('<rect x="0" y="1486" width="1000" height="4" fill="url(#ground)"/>')
+    svg.add(f'<rect x="0" y="{GROUND - 2}" width="1000" height="4" fill="url(#ground)"/>')
 
     # ствол, ветви, крона
     trunk(svg)
-    svg.add(f'<ellipse cx="500" cy="480" rx="430" ry="300" fill="#2F6B35" opacity="0.45" filter="url(#soft)"/>')
+    svg.add(f'<ellipse cx="500" cy="450" rx="430" ry="280" fill="#2F6B35" opacity="0.45" filter="url(#soft)"/>')
     foliage(svg, rnd)
     particles(svg, tips)
 
@@ -435,26 +443,26 @@ def build(outlined):
     svg.text(tx, 124, "активы превращают заявки в проекты, а проекты — в новых клиентов", 15.5, "m4", STEEL_L)
 
     # ---------------- 04 крона: клиенты и проекты
-    layer_title(svg, 500, 200, "04", "КЛИЕНТЫ И ПРОЕКТЫ")
+    layer_title(svg, 500, 190, "04", "КЛИЕНТЫ И ПРОЕКТЫ")
     for row, items in enumerate([CLIENTS[:6], CLIENTS[6:]]):
-        sz, gap = 12.5, 8
+        sz, gap = 12, 8
         ws = [F["m6"].width(c, sz) + 24 for c in items]
         x = 500 - (sum(ws) + gap * (len(ws) - 1)) / 2
         for c, w in zip(items, ws):
-            pill(svg, 0, 246 + row * 36, c, sz, "m6", h=28, stroke=GOLD, sw=1, x_left=x, w_fix=w,
+            pill(svg, 0, 230 + row * 31, c, sz, "m6", h=26, stroke=GOLD, sw=1, x_left=x, w_fix=w,
                  fill=NAVY_0, opacity=0.8)
             x += w + gap
-    svg.text(500, 302 + 26, "проекты по годам — крона растёт вверх", 12, "m4", STEEL_L, anchor="middle")
+    svg.text(500, 290, "проекты по годам — крона растёт вверх", 11.5, "m4", STEEL_L, anchor="middle")
 
     years = {}
     for p in port:
         years.setdefault(p["year"], []).append(p)
-    y = 368
+    y = 318
     for yr in sorted(years, reverse=True):
         items = [short_project(p) for p in years[yr]]
         rows = [items[i:i + 3] for i in range(0, len(items), 3)]
         for r_i, row in enumerate(rows):
-            sz = 12.5
+            sz = 12
             while True:
                 ws = [F["m6"].width(c, sz) + 26 for c in row]
                 tot = sum(ws) + 8 * (len(ws) - 1)
@@ -465,14 +473,14 @@ def build(outlined):
             if r_i == 0:
                 svg.text(x - 14, y + 5, str(yr), 15, "u5", GOLD_L, anchor="end")
             for c, w in zip(row, ws):
-                pill(svg, 0, y, c, sz, "m6", h=30, stroke=STEEL_L, sw=0.9, x_left=x, w_fix=w, fill=NAVY_1)
+                pill(svg, 0, y, c, sz, "m6", h=27, stroke=STEEL_L, sw=0.9, x_left=x, w_fix=w, fill=NAVY_1)
                 x += w + 8
-            y += 40
-        y += 6
+            y += 34
+        y += 4
     crown_bottom = y
 
     # ---------------- 03 ветви: активы компании
-    ay = max(crown_bottom + 26, 640)
+    ay = crown_bottom + 18
     layer_title(svg, 500, ay, "03", "АКТИВЫ КОМПАНИИ")
     # сайт в центре
     cy = ay + 92
@@ -489,7 +497,7 @@ def build(outlined):
         x_left = 28 if side < 0 else 1000 - 28 - CLW
         svg.text(x_left + CLW / 2, ay + 38, title, 12.5, "u5", GOLD_L, anchor="middle", ls=1.5)
         for i, (name, det) in enumerate(items):
-            py = ay + 64 + i * 37
+            py = ay + 60 + i * 34
             pill(svg, 0, py, name, 13.5, "m6", h=31, detail=det, dsize=12, x_left=x_left, w_fix=CLW,
                  fill=NAVY_0, stroke=STEEL, opacity=0.92)
         # связь с сайтом: золотые стрелки к сайту
@@ -501,23 +509,23 @@ def build(outlined):
                 x1, x2 = x_left - 6, 648
             svg.add(f'<line x1="{x1}" y1="{yk}" x2="{x2 - 7 * -side}" y2="{yk}" stroke="{GOLD}" stroke-width="1.6"/>')
             svg.add(f'<path d="M{x2} {yk} l{7 * side} -5 v10 Z" fill="{GOLD}"/>')
-    assets_bottom = ay + 64 + 4 * 37 + 16
+    assets_bottom = ay + 60 + 4 * 34 + 16
 
     # ---------------- 02 ствол: услуги
-    sy = assets_bottom + 34
+    sy = assets_bottom + 30
     layer_title(svg, 500, sy, "02", "УСЛУГИ — НА ЧЁМ ЗАРАБАТЫВАЕМ")
     lx = 500 - 175
     depth_bar(svg, lx, sy + 34, 3)
     svg.text(lx + 72, sy + 38, "— насколько подробно и уникально услуга описана на сайте", 12, "m4", STEEL_L)
-    top = sy + 76
-    step = (1440 - top) / 6
+    top = sy + 70
+    step = (GROUND - 42 - top) / 6
     for i, (title, sub, src, main) in enumerate(SERVICES):
         score = src if isinstance(src, int) else max(depth_score(svc[s_]) for s_ in src if s_ in svc)
         col, row = i % 2, i // 2
         CW = 344
         x0 = 24 if col == 0 else 1000 - 24 - CW
         cyc = top + row * step + step / 2 - 4
-        hh = 64
+        hh = 62
         svg.add(f'<rect x="{x0}" y="{cyc - hh / 2:.1f}" width="{CW}" height="{hh}" rx="16" fill="{NAVY_0}" '
                 f'fill-opacity="0.93" stroke="{GOLD if main else STEEL}" stroke-width="{1.8 if main else 1}"/>')
         # связь со стволом
@@ -537,22 +545,24 @@ def build(outlined):
             svg.text(bx + bw / 2, cyc - hh / 2 + 3.3, "ОСНОВНАЯ", 9, "u5", NAVY_0, anchor="middle", ls=1)
 
     # ---------------- 01 корни: каналы роста
-    layer_title(svg, 500, 1540, "01", "КАНАЛЫ ПРОДВИЖЕНИЯ И РОСТА")
+    layer_title(svg, 500, GROUND + 56, "01", "КАНАЛЫ ПРОДВИЖЕНИЯ И РОСТА")
     for (gx, gy, _), title in zip(groups, ["СОЦСЕТИ И ПЛОЩАДКИ", "ПЛАТНАЯ РЕКЛАМА", "ВЫХОД НА НОВЫХ КЛИЕНТОВ"]):
-        w = F["u5"].width(title, 11, 0.8) + 30
-        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 16}" width="{w:.1f}" height="32" rx="16" fill="{GOLD}"/>')
-        svg.text(gx, gy + 4, title, 11, "u5", NAVY_0, anchor="middle", ls=0.8)
+        w = F["u5"].width(title, 12, 0.8) + 34
+        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 19}" width="{w:.1f}" height="38" rx="19" fill="{GOLD}"/>')
+        svg.text(gx, gy + 4.5, title, 12, "u5", NAVY_0, anchor="middle", ls=0.8)
     for (tx_, ty_), name in zip(soc_tips, SOCIAL):
-        pill(svg, tx_, ty_, name, 13, "m6", h=32, fill=NAVY_0, stroke=GOLD, sw=1.2, opacity=0.95, w_fix=124)
+        pill(svg, tx_, ty_, name, 14.5, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=128)
     for (tx_, ty_), name in zip(out_tips, OUTREACH):
-        pill(svg, tx_, ty_, name, 13.5, "m6", h=32, fill=NAVY_0, stroke=GOLD, sw=1.2, opacity=0.95, w_fix=290)
+        pill(svg, tx_, ty_, name, 15, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=290)
     ax, ay_ = ads_tip[0]
-    svg.add(f'<rect x="{ax - 82}" y="{ay_ - 18}" width="164" height="104" rx="18" fill="{NAVY_0}" fill-opacity="0.95" '
-            f'stroke="{GOLD}" stroke-width="1.2"/>')
-    svg.text(ax, ay_ + 14, ADS[0], 13.5, "m6", WHITE, anchor="middle")
-    svg.text(ax, ay_ + 34, ADS[1], 13.5, "m6", WHITE, anchor="middle")
-    svg.text(ax, ay_ + 60, ADS[2], 11.5, "m4", STEEL_L, anchor="middle")
-    svg.text(500, 1890, "Каналы роста питают дерево:  лиды → заявки → услуги → проекты → новые клиенты",
+    hb = ROWS[2] - ROWS[0] + 40
+    mid = (ROWS[0] + ROWS[2]) / 2
+    svg.add(f'<rect x="{ax - 84}" y="{ay_ - 20}" width="168" height="{hb}" rx="20" fill="{NAVY_0}" fill-opacity="0.95" '
+            f'stroke="{GOLD}" stroke-width="1.3"/>')
+    svg.text(ax, mid - 16, ADS[0], 14.5, "m6", WHITE, anchor="middle")
+    svg.text(ax, mid + 6, ADS[1], 14.5, "m6", WHITE, anchor="middle")
+    svg.text(ax, mid + 34, ADS[2], 12, "m4", STEEL_L, anchor="middle")
+    svg.text(500, 1882, "Каналы роста питают дерево:  лиды → заявки → услуги → проекты → новые клиенты",
              14, "m6", GOLD_L, anchor="middle")
 
     # ---------------- ось времени слева
