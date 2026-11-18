@@ -17,3 +17,7 @@ pnpm-debug.log*
 .idea
 .vercel
 *.tsbuildinfo
+
+# scratch / python
+.cache
+__pycache__
