@@ -12,7 +12,7 @@
 | `sm-real-projects-overview.jpg` | — | Обзорный лист трёх проектов |
 | `sm-real-brus-banner-msu.jpg` | `sm-real-brus-banner-msu_before-after.jpg` | Брус-баннер: лицевая сторона → баннер SM (перспектива по точкам схода торца), торец → фирменный синий; LED-бары, кулиса и блики подсветки на глянце сохранены |
 | `sm-real-presswall-uplight.jpg` | `sm-real-presswall-uplight_before-after.jpg` | Пресс-волл: чёрный фон с логотипами → тёмно-синий press wall с шахматной сеткой логотипов SM; цветная подсветка LED-баров (фиолетовая/белая) перенесена с исходного фото |
-| `sm-ad-led-bars-gift.jpg` | — | Рекламный креатив 4:5 (1800×2250) «LED-бары в подарок к фотозоне»: фирменная плашка с заголовком, фото монтажа с «включёнными» LED-барами (RGB-свечение дорисовано программно), контакты с сайта |
+| `sm-ad-led-bars-gift.jpg` | — | Рекламный креатив 4:5 (1800×2250) «LED-бары в подарок к фотозоне»: фирменная плашка с заголовком, реальное фото фотозоны с включёнными LED-барами (`originals/photozone-led-bars-lit.jpg`), контакты с сайта |
 | `sm-real-projects-overview-2.jpg` | — | Обзорный лист: брус-баннер, пресс-волл, креатив |
 
 Исходники (уменьшены до 2400 px по длинной стороне) — `originals/`.
@@ -36,7 +36,6 @@ pip install -r scripts/rebrand/requirements.txt
 python3 scripts/rebrand/real_projects.py                       # всё
 python3 scripts/rebrand/real_projects.py sm-ad-led-bars-gift   # одна работа
 ```
-Тексты креатива (заголовок, подпись, телефон, сайт) — в функции `creative()`,
-цвета свечения LED-баров — там же (`MAG`, `VIO`, `CYA`).
+Тексты креатива (заголовок, подпись, телефон, сайт) и кадрирование фото — в функции `creative()`.
 Тексты табличек меняются в функциях `sign_top`, `sign_arrow` и `sign_bottom` в
 `scripts/rebrand/real_projects.py`.

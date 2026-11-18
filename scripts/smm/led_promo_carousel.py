@@ -148,17 +148,18 @@ def lit_photozone():
 
 
 def slide_cover():
-    """Обложка в стиле креатива «LED-бары в подарок»: фирменная плашка сверху, ниже — реальное фото
-    фотозоны, подсвеченной тремя LED-барами (src/led-bars-photozone-lit.jpg)."""
+    """Обложка в стиле креатива «LED-бары в подарок»: фирменная плашка сверху (закрывает чужие логотипы
+    на стенде), ниже — фотозона и три светящихся LED-бара."""
     img = brand_bg(W, H).convert("RGBA")
-    top = 560
-    ph = cover_crop(Image.open(SRC / "led-bars-photozone-lit.jpg").convert("RGB"), W, H - 96 - top, 0.25, 0.5)
-    img.alpha_composite(ph.convert("RGBA"), (0, top))
+    ph = lit_photozone()
+    s = W / ph.width
+    ph = ph.resize((W, round(ph.height * s)), Image.LANCZOS).convert("RGBA")
+    off = 40
+    img.alpha_composite(ph.crop((0, 0, W, H - off)), (0, off))
     # фирменная плашка сверху с плавным переходом в фото
-    ph_h = 690
-    panel = brand_bg(W, ph_h).convert("RGBA")
-    a = np.ones(ph_h, np.float32)
-    a[590:] = np.linspace(1, 0, ph_h - 590) ** 1.4
+    panel = brand_bg(W, 640).convert("RGBA")
+    a = np.ones(640, np.float32)
+    a[560:] = np.linspace(1, 0, 80) ** 1.4
     panel.putalpha(Image.fromarray((np.repeat(a[:, None], W, 1) * 255).astype(np.uint8)))
     img.alpha_composite(panel, (0, 0))
     d = ImageDraw.Draw(img)
@@ -167,7 +168,7 @@ def slide_cover():
     d.text((58, 356), "В ПОДАРОК", font=F("u", 116), fill=WHITE)
     d.text((64, 496), "к имиджевой фотозоне", font=F("ms", 50), fill=(233, 220, 205))
     d.line((66, 572, 330, 572), fill=GOLD, width=5)
-    gift_badge(img, W - 240, 1440, r=118)
+    gift_badge(img, 250, 860, r=112)
     chrome(img, 1, dark_top=False)
     return img
 

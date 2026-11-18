@@ -716,15 +716,15 @@ def led_glow(img, bars):
 
 
 def creative():
-    img = cv2.imread(str(SRC / "photozone-led-bars.jpg"))
-    MAG, VIO, CYA = (230, 80, 255), (255, 90, 150), (255, 210, 60)
-    lit = led_glow(img, [((160, 1504), (465, 1604), 22, MAG, VIO),
-                         ((490, 1626), (930, 1775), 18, VIO, (255, 140, 90)),
-                         ((950, 1801), (1580, 2031), 20, (255, 140, 90), CYA)])
+    # реальное фото фотозоны с включёнными LED-барами (прислано заказчиком)
+    img = cv2.imread(str(SRC / "photozone-led-bars-lit.jpg"))
     W, Hc, top = 1800, 2250, 700
     canvas = np.zeros((Hc, W, 3), np.uint8)
-    y0 = 640                      # верх стены с чужими логотипами уходит под плашку
-    canvas[top:] = lit[y0:y0 + Hc - top]
+    ph_h = Hc - top
+    s = max(W / img.shape[1], ph_h / img.shape[0])
+    rs = cv2.resize(img, (round(img.shape[1] * s), round(img.shape[0] * s)), interpolation=cv2.INTER_AREA)
+    x0 = int((rs.shape[1] - W) * 0.3)             # бары и звезда — в левой части кадра
+    canvas[top:] = rs[:ph_h, x0:x0 + W]
 
     # верхняя фирменная плашка (фон баннера) с плавным переходом в фото
     ph = top + 120
