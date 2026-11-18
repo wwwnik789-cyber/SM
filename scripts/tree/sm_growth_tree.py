@@ -70,10 +70,10 @@ SERVICES = [
     ("Аренда и SM-Media", "LED-бары, свет, мебель · видео", 3, False),
 ]
 
-# корни: каналы продвижения и роста
-ROOTS = ["SEO и органика", "Яндекс Директ", "Яндекс Бизнес и Карты", "ВКонтакте",
-         "Telegram-канал", "Rutube · видео SM-Media", "Pinterest", "Блог и полезный контент",
-         "Отзывы и рейтинги", "Сарафан и повторные заказы", "Партнёрство с агентствами", "Тендеры и выставки"]
+# корни: каналы продвижения и роста — три главных корня (группы) и их отростки
+SOCIAL = ["MAX", "Telegram", "YouTube", "Rutube", "Дзен", "Группа VK", "Яндекс Карты", "Яндекс Услуги", "Avito"]
+ADS = ("Рекламные кампании", "за деньги", "платное продвижение")
+OUTREACH = ["Автосалоны", "Коммерческие интерьеры", "и другие новые ниши"]
 
 PHONE, SITE = "+7 495 799-00-19", "sm-production.ru"
 
@@ -283,7 +283,7 @@ def branches(svg):
           ("M500 660 C 550 560 580 460 590 340", 20), ("M350 640 C 290 580 230 520 200 450", 14),
           ("M650 640 C 710 580 770 520 800 450", 14), ("M500 560 C 500 450 500 360 500 260", 16)]
     for d, w in br:
-        svg.add(f'<path d="{d}" fill="none" stroke="#141C2E" stroke-opacity="0.45" stroke-width="{w + 6}" '
+        svg.add(f'<path d="{d}" fill="none" stroke="#1A120C" stroke-opacity="0.45" stroke-width="{w + 6}" '
                 f'stroke-linecap="round"/>')
         svg.add(f'<path d="{d}" fill="none" stroke="url(#barkV)" stroke-width="{w}" stroke-linecap="round"/>')
 
@@ -296,29 +296,33 @@ def trunk(svg):
     # фактура коры
     for x0, x1 in [(462, 430), (480, 462), (497, 494), (514, 530), (534, 566)]:
         svg.add(f'<path d="M{x0} 840 C {x0 - 6} 1050 {x1 + 8} 1250 {x1} 1470" fill="none" '
-                f'stroke="#0F1626" stroke-opacity="0.35" stroke-width="2"/>')
+                f'stroke="#1E140D" stroke-opacity="0.45" stroke-width="2"/>')
         svg.add(f'<path d="M{x0 + 3} 840 C {x0 - 3} 1050 {x1 + 11} 1250 {x1 + 3} 1470" fill="none" '
-                f'stroke="{STEEL_L}" stroke-opacity="0.18" stroke-width="1.2"/>')
+                f'stroke="#C9A27A" stroke-opacity="0.22" stroke-width="1.2"/>')
 
 
-def roots(svg, tips):
-    """Корни: от основания ствола к подписям-каналам + мелкие корешки."""
-    base = [(420, 1488), (460, 1490), (500, 1492), (540, 1490), (580, 1488)]
-    for i, (tx, ty) in enumerate(tips):
-        bx, by = base[min(4, int(tx / 1000 * 5))]
-        midy = (by + ty) / 2
-        d = f"M{bx} {by} C {bx} {midy} {tx} {midy - 30} {tx} {ty - 18}"
-        w = max(3, 14 - (ty - 1580) / 28)
-        svg.add(f'<path d="{d}" fill="none" stroke="url(#rootG)" stroke-width="{w:.1f}" stroke-linecap="round"/>')
+def root_path(svg, x0, y0, x1, y1, w, op=1.0):
+    my = (y0 + y1) / 2
+    svg.add(f'<path d="M{x0:.0f} {y0:.0f} C {x0:.0f} {my:.0f} {x1:.0f} {my - 20:.0f} {x1:.0f} {y1:.0f}" fill="none" '
+            f'stroke="url(#rootG)" stroke-width="{w:.1f}" stroke-linecap="round" opacity="{op}"/>')
+
+
+def roots(svg, groups):
+    """Три главных корня от ствола к группам каналов, от групп — отростки к каждому каналу."""
     rnd = random.Random(7)
-    for _ in range(46):
+    for _ in range(46):                                   # мелкие корешки
         x0 = rnd.uniform(330, 670)
         y0 = 1495
         x1 = x0 + rnd.uniform(-330, 330)
         y1 = y0 + rnd.uniform(60, 420)
         svg.add(f'<path d="M{x0:.0f} {y0} C {x0:.0f} {(y0 + y1) / 2:.0f} {x1:.0f} {(y0 + y1) / 2:.0f} {x1:.0f} {y1:.0f}" '
-                f'fill="none" stroke="{GOLD}" stroke-opacity="{rnd.uniform(.08, .22):.2f}" '
+                f'fill="none" stroke="#B88A3A" stroke-opacity="{rnd.uniform(.08, .2):.2f}" '
                 f'stroke-width="{rnd.uniform(.8, 2.4):.1f}" stroke-linecap="round"/>')
+    bases = [440, 500, 560]
+    for (gx, gy, tips), bx in zip(groups, bases):
+        root_path(svg, bx, 1490, gx, gy, 20)
+        for tx, ty in tips:
+            root_path(svg, gx, gy + 10, tx, ty - 16, 5.5, 0.9)
 
 
 def network(svg, rnd):
@@ -337,7 +341,7 @@ def network(svg, rnd):
 def particles(svg, tips):
     """«Сок» дерева: золотые частицы идут от корней к кроне (SMIL-анимация, в статике скрыты)."""
     targets = [(250, 770), (750, 770), (500, 330), (300, 520), (700, 520), (500, 460)]
-    for i, (tx, ty) in enumerate(tips[::2]):
+    for i, (tx, ty) in enumerate(tips[::2][:8]):
         ex, ey = targets[i % len(targets)]
         d = (f"M{tx} {ty - 18} C {tx} {(ty + 1490) / 2 - 30} 500 {(ty + 1490) / 2} 500 1480 "
              f"L 500 980 C 500 900 {ex} {ey + 80} {ex} {ey}")
@@ -356,25 +360,25 @@ def defs(svg):
   <stop offset="0" stop-color="{NAVY_1}"/><stop offset="0.45" stop-color="{NAVY_2}"/>
   <stop offset="0.74" stop-color="{NAVY_1}"/><stop offset="1" stop-color="{NAVY_0}"/></linearGradient>
 <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
-  <stop offset="0" stop-color="{STEEL}" stop-opacity="0.45"/><stop offset="1" stop-color="{STEEL}" stop-opacity="0"/></radialGradient>
+  <stop offset="0" stop-color="#5E9A55" stop-opacity="0.32"/><stop offset="1" stop-color="#5E9A55" stop-opacity="0"/></radialGradient>
 <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#18213A"/><stop offset="1" stop-color="#0E1424"/></linearGradient>
+  <stop offset="0" stop-color="#2A2019"/><stop offset="0.25" stop-color="#1D1915"/><stop offset="1" stop-color="#121420"/></linearGradient>
 <radialGradient id="leafA" cx="0.35" cy="0.3" r="0.75">
-  <stop offset="0" stop-color="#4F77A3"/><stop offset="1" stop-color="#22395A"/></radialGradient>
+  <stop offset="0" stop-color="#3F7F3A"/><stop offset="1" stop-color="#173F1F"/></radialGradient>
 <radialGradient id="leafB" cx="0.35" cy="0.3" r="0.75">
-  <stop offset="0" stop-color="#7499C2"/><stop offset="0.7" stop-color="#3B5E88"/><stop offset="1" stop-color="#2D4A70"/></radialGradient>
+  <stop offset="0" stop-color="#7DBA55"/><stop offset="0.65" stop-color="#3E8A3C"/><stop offset="1" stop-color="#2A6430"/></radialGradient>
 <radialGradient id="leafC" cx="0.35" cy="0.3" r="0.7">
-  <stop offset="0" stop-color="#B5CCE4"/><stop offset="1" stop-color="#5E84AE" stop-opacity="0"/></radialGradient>
+  <stop offset="0" stop-color="#C8EC8E"/><stop offset="1" stop-color="#6FB04E" stop-opacity="0"/></radialGradient>
 <linearGradient id="bark" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="#121A2C"/><stop offset="0.3" stop-color="#3D5172"/><stop offset="0.55" stop-color="#6F87A8"/>
-  <stop offset="0.8" stop-color="#34476A"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+  <stop offset="0" stop-color="#2A1B12"/><stop offset="0.3" stop-color="#5E412B"/><stop offset="0.55" stop-color="#8C6745"/>
+  <stop offset="0.8" stop-color="#553A26"/><stop offset="1" stop-color="#2A1B12"/></linearGradient>
 <linearGradient id="barkV" gradientUnits="userSpaceOnUse" x1="0" y1="300" x2="0" y2="900">
-  <stop offset="0" stop-color="#2E4364"/><stop offset="1" stop-color="#4C6386"/></linearGradient>
+  <stop offset="0" stop-color="#4A3322"/><stop offset="1" stop-color="#6E4F35"/></linearGradient>
 <linearGradient id="rootG" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#34445F"/><stop offset="0.35" stop-color="#8A6A22"/><stop offset="1" stop-color="{GOLD}"/></linearGradient>
+  <stop offset="0" stop-color="#5E412B"/><stop offset="0.45" stop-color="#8A6A2E"/><stop offset="1" stop-color="{GOLD}"/></linearGradient>
 <linearGradient id="ground" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="{GOLD}" stop-opacity="0"/><stop offset="0.5" stop-color="{GOLD_L}"/>
-  <stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></linearGradient>
+  <stop offset="0" stop-color="#6FB04E" stop-opacity="0"/><stop offset="0.5" stop-color="#8FCB5E"/>
+  <stop offset="1" stop-color="#6FB04E" stop-opacity="0"/></linearGradient>
 <linearGradient id="timeG" x1="0" y1="1" x2="0" y2="0">
   <stop offset="0" stop-color="{GOLD}" stop-opacity="0.15"/><stop offset="1" stop-color="{GOLD_L}"/></linearGradient>
 <filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2.6" result="b"/>
@@ -402,16 +406,19 @@ def build(outlined):
     network(svg, rnd)
     svg.add(f'<rect x="0" y="1488" width="{W}" height="{H - 1488}" fill="url(#soil)"/>')
 
-    # корни (позиции подписей — сетка 4×3)
-    xs = [130, 375, 625, 870]
-    rows_y = [1612, 1712, 1812]
-    tips = [(xs[i % 4], rows_y[i // 4]) for i in range(len(ROOTS))]
-    roots(svg, tips)
+    # корни: группы и позиции подписей
+    GY, ROWS = 1622, [1712, 1772, 1832]
+    soc_tips = [((80, 215, 350)[i % 3], ROWS[i // 3]) for i in range(len(SOCIAL))]
+    out_tips = [(808, ROWS[i]) for i in range(len(OUTREACH))]
+    ads_tip = [(510, 1712)]
+    groups = [(215, GY, soc_tips), (510, GY, ads_tip), (808, GY, out_tips)]
+    roots(svg, groups)
+    tips = soc_tips + ads_tip + out_tips
     svg.add('<rect x="0" y="1486" width="1000" height="4" fill="url(#ground)"/>')
 
     # ствол, ветви, крона
     trunk(svg)
-    svg.add(f'<ellipse cx="500" cy="480" rx="430" ry="300" fill="{BLUE}" opacity="0.35" filter="url(#soft)"/>')
+    svg.add(f'<ellipse cx="500" cy="480" rx="430" ry="300" fill="#2F6B35" opacity="0.45" filter="url(#soft)"/>')
     foliage(svg, rnd)
     particles(svg, tips)
 
@@ -531,9 +538,20 @@ def build(outlined):
 
     # ---------------- 01 корни: каналы роста
     layer_title(svg, 500, 1540, "01", "КАНАЛЫ ПРОДВИЖЕНИЯ И РОСТА")
-    for (tx_, ty_), name in zip(tips, ROOTS):
-        sz = svg.fit(name, "m6", 13.5, 200)
-        pill(svg, tx_, ty_, name, sz, "m6", h=34, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=226)
+    for (gx, gy, _), title in zip(groups, ["СОЦСЕТИ И ПЛОЩАДКИ", "ПЛАТНАЯ РЕКЛАМА", "ВЫХОД НА НОВЫХ КЛИЕНТОВ"]):
+        w = F["u5"].width(title, 11, 0.8) + 30
+        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 16}" width="{w:.1f}" height="32" rx="16" fill="{GOLD}"/>')
+        svg.text(gx, gy + 4, title, 11, "u5", NAVY_0, anchor="middle", ls=0.8)
+    for (tx_, ty_), name in zip(soc_tips, SOCIAL):
+        pill(svg, tx_, ty_, name, 13, "m6", h=32, fill=NAVY_0, stroke=GOLD, sw=1.2, opacity=0.95, w_fix=124)
+    for (tx_, ty_), name in zip(out_tips, OUTREACH):
+        pill(svg, tx_, ty_, name, 13.5, "m6", h=32, fill=NAVY_0, stroke=GOLD, sw=1.2, opacity=0.95, w_fix=290)
+    ax, ay_ = ads_tip[0]
+    svg.add(f'<rect x="{ax - 82}" y="{ay_ - 18}" width="164" height="104" rx="18" fill="{NAVY_0}" fill-opacity="0.95" '
+            f'stroke="{GOLD}" stroke-width="1.2"/>')
+    svg.text(ax, ay_ + 14, ADS[0], 13.5, "m6", WHITE, anchor="middle")
+    svg.text(ax, ay_ + 34, ADS[1], 13.5, "m6", WHITE, anchor="middle")
+    svg.text(ax, ay_ + 60, ADS[2], 11.5, "m4", STEEL_L, anchor="middle")
     svg.text(500, 1890, "Каналы роста питают дерево:  лиды → заявки → услуги → проекты → новые клиенты",
              14, "m6", GOLD_L, anchor="middle")
 
