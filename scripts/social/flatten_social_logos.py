@@ -6,6 +6,8 @@
 
 Здесь каждый <use> заменяется на копию содержимого символа с явным transform,
 градиенты и clipPath переносятся в общий <defs>, символы удаляются.
+Дополнительно в комплект добавляется MAX (мессенджер VK): знак-«облачко» с max.ru на градиентной
+плашке приложения. Лист перестраивается в сетку 5 × 2 (1600 × 480), MAX стоит рядом с Telegram.
 На выходе: social-logos_flat.svg, PNG всего листа и каждого логотипа отдельно (SVG + PNG).
 
 Запуск: python3 scripts/social/flatten_social_logos.py <исходный.svg>
@@ -32,7 +34,7 @@ def vb(sym):
 
 
 def flatten(src):
-    tree = ET.parse(src)
+    tree = add_max(src)
     root = tree.getroot()
     defs = root.find(q("defs"))
     symbols = {s.get("id"): s for s in defs.findall(q("symbol"))}
@@ -88,6 +90,80 @@ def single_svg(sid, symbols, content, defs_all):
     return ET.ElementTree(root)
 
 
+# ---------------------------------------------------------------- MAX
+# знак «облачко» — с сайта max.ru (тот же контур используют сторонние сборки иконок); плашка — градиент приложения
+MAX_GLYPH = ("M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07"
+             ".08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67Zm.17-31.32"
+             "c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 "
+             "1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z")
+MAX_GRAD = [("0", "#20C7FF"), ("0.55", "#3A58FF"), ("1", "#A23BFF")]
+LABEL_FONT = "DejaVuSans.ttf"            # как у остальных подписей листа: DejaVu Sans 20 px, #20242D, в кривых
+COLS, TILE_W, TILE_H = 5, 320, 240
+ORDER = ["vkontakte", "pinterest", "telegram", "max", "dzen",
+         "youtube", "rutube", "yandex-maps", "yandex-uslugi", "avito"]
+
+
+def max_symbol():
+    sym = ET.Element(q("symbol"), {"id": "logo-max", "viewBox": "0 0 48 48"})
+    de = ET.SubElement(sym, q("defs"))
+    lg = ET.SubElement(de, q("linearGradient"), {"id": "social-max-gradient", "x1": "4", "y1": "46", "x2": "44",
+                                                 "y2": "2", "gradientUnits": "userSpaceOnUse"})
+    for off, col in MAX_GRAD:
+        ET.SubElement(lg, q("stop"), {"offset": off, "stop-color": col})
+    ET.SubElement(sym, q("rect"), {"width": "48", "height": "48", "rx": "11.5", "fill": "url(#social-max-gradient)"})
+    ET.SubElement(sym, q("path"), {"fill": "#FFFFFF", "fill-rule": "evenodd", "clip-rule": "evenodd",
+                                   "transform": "translate(9.6 9.4) scale(0.69)", "d": MAX_GLYPH})
+    return sym
+
+
+def label_path(text, cx, baseline, size=20):
+    import matplotlib
+    from fontTools.pens.svgPathPen import SVGPathPen
+    from fontTools.pens.transformPen import TransformPen
+    from fontTools.ttLib import TTFont
+    font = TTFont(str(Path(matplotlib.__file__).parent / "mpl-data/fonts/ttf" / LABEL_FONT))
+    gs, cmap, hmtx = font.getGlyphSet(), font.getBestCmap(), font["hmtx"]
+    k = size / font["head"].unitsPerEm
+    width = sum(hmtx[cmap[ord(c)]][0] for c in text) * k
+    pen = SVGPathPen(gs)
+    x = cx - width / 2
+    for c in text:
+        g = cmap[ord(c)]
+        gs[g].draw(TransformPen(pen, (k, 0, 0, -k, x, baseline)))
+        x += hmtx[g][0] * k
+    return pen.getCommands()
+
+
+def add_max(src):
+    """Исходник + символ MAX + плитка MAX → временное дерево (дальше обычное «уплощение»)."""
+    tree = ET.parse(src)
+    root = tree.getroot()
+    root.find(q("defs")).append(max_symbol())
+    grid = root.find(q("g"))
+    tiles = {t.get("id").replace("tile-", ""): t for t in grid.findall(q("g"))}
+    old = list(tiles)                                        # исходный порядок 3 × 3
+    tile = ET.Element(q("g"), {"id": "tile-max"})
+    ET.SubElement(tile, q("use"), {"href": "#logo-max", "x": "88", "y": "44", "width": "144", "height": "112"})
+    ET.SubElement(tile, q("path"), {"id": "label-max", "data-label": "MAX", "fill": "#20242D",
+                                    "d": label_path("MAX", 160, 192)})
+    tiles["max"] = tile
+    for t in list(grid):
+        grid.remove(t)
+    for i, name in enumerate(ORDER):
+        ox, oy = (old.index(name) % 3, old.index(name) // 3) if name in old else (0, 0)
+        nx, ny = i % COLS, i // COLS
+        dx, dy = (nx - ox) * TILE_W, (ny - oy) * TILE_H
+        wrap = ET.SubElement(grid, q("g"), {"transform": f"translate({dx} {dy})"} if (dx or dy) else {})
+        wrap.append(tiles[name])
+    W_, H_ = COLS * TILE_W, 2 * TILE_H
+    root.set("width", str(W_)); root.set("height", str(H_)); root.set("viewBox", f"0 0 {W_} {H_}")
+    root.find(q("title")).text = "Логотипы социальных сетей, мессенджеров и площадок"
+    d = root.find(q("desc"))
+    d.text = (d.text.replace("Telegram, Дзен", "Telegram, MAX, Дзен").replace("Девять", "Десять")
+              .replace("сетка 3 на 3", "сетка 5 на 2"))
+    return tree
+
+
 def render(svg, png, width):
     js = ROOT / ".cache/resvg/render.js"
     if js.exists():
@@ -100,7 +176,7 @@ def main(src):
     tree, symbols, content, defs_all, _ = flatten(src)
     flat = OUT / "social-logos_flat.svg"
     tree.write(flat, encoding="UTF-8", xml_declaration=True)
-    render(flat, OUT / "social-logos.png", 1920)
+    render(flat, OUT / "social-logos.png", 3200)
     try:                                   # вариант на белом фоне (для просмотрщиков с тёмной темой)
         from PIL import Image
         im = Image.open(OUT / "social-logos.png").convert("RGBA")
