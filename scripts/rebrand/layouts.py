@@ -113,7 +113,7 @@ def crop_to_ratio(img, ratio, cy=None):
     return img[y0:y0 + nh]
 
 
-def horizontal(master, ratio, long_side=3000):
+def horizontal(master, ratio, long_side=3000, frame=True):
     """Горизонтальный формат: обрезаем фон, логотип остаётся исходным."""
     inner = master[INSET:-INSET, INSET:-INSET]
     h = inner.shape[0]
@@ -125,7 +125,7 @@ def horizontal(master, ratio, long_side=3000):
     w_ = long_side if ratio >= 1 else int(long_side * ratio)
     h_ = int(round(w_ / ratio))
     lay = cv2.resize(lay, (w_, h_), interpolation=cv2.INTER_CUBIC)
-    return draw_frame(lay)
+    return draw_frame(lay) if frame else lay
 
 
 def paste_rgba(dst, rgba, x, y, scale):

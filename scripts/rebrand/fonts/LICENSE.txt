@@ -1,0 +1,2 @@
+Manrope и Unbounded — Google Fonts, лицензия SIL Open Font License 1.1 (https://openfontlicense.org).
+Источник: npm-пакеты @expo-google-fonts/manrope, @expo-google-fonts/unbounded.
