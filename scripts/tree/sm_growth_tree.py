@@ -1,7 +1,7 @@
 """«Дерево роста SM» — вертикальная инфографика 1:2 (SVG, 1000×2000).
 
 Пласты снизу вверх:
-  01 корни  — каналы продвижения и роста (соцсети, платная реклама, новые и старые клиенты);
+  01 корни  — каналы продвижения и роста (соцсети, платная реклама, новые клиенты, работа с клиентами);
   02 ствол  — услуги, на которых зарабатываем (+ насколько подробно описаны на сайте);
   03 ветви  — активы компании: сайт в центре, аналитика слева, каналы связи справа;
   04 крона  — клиенты и проекты по годам.
@@ -34,15 +34,21 @@ W, H = 1000, 2000
 SHIFT = 110                 # на сколько поднята верхняя часть (ствол/ветви/земля) ради места под корни
 GROUND = 1488 - SHIFT       # линия земли
 
-# ------------------------------------------------------------------ палитра (из баннера SM)
+# ------------------------------------------------------------------ палитра (фон — из баннера SM, акцент — фиолетовый SM)
 NAVY_0 = "#141C2E"
 NAVY_1 = "#1E2A44"
 NAVY_2 = "#2F3B51"
 BLUE = "#3B5274"
 STEEL = "#627C9A"
 STEEL_L = "#A9BCD3"
-GOLD = "#D4A027"
-GOLD_L = "#F0C75A"
+VIOLET = "#8B3DFF"          # ярко-фиолетовый SM — акцент (вместо золота)
+VIOLET_L = "#C4A0FF"        # светло-фиолетовый — подписи и акценты на тёмном фоне
+PASTEL = "#EFEAFB"          # светлые пастельные плашки
+PASTEL_LINE = "#C9B8F4"     # обводка обычных плашек
+ICON_BG = "#E0D1FF"         # подложка иконок
+INK = NAVY_0                # тёмно-синие подписи на плашках
+INK_2 = "#4B5876"           # второстепенный текст на плашках
+LOGO_GOLD = "#D4A027"       # золото логотипа SM не меняем
 WHITE = "#FFFFFF"
 
 # ------------------------------------------------------------------ содержимое
@@ -83,10 +89,10 @@ SERVICES = [
 SOCIAL = ["MAX", "Telegram", "YouTube", "Rutube", "Дзен", "Группа VK", "Яндекс Карты", "Яндекс Услуги", "Avito"]
 ADS = ("Рекламные кампании", "за деньги", "платное продвижение")
 OUTREACH = ["Автосалоны", "Коммерческие интерьеры", "и другие новые ниши"]
-# старые клиенты: работа с базой — категории по вниманию и условиям
-REPEAT = [("A", "Ключевые", "максимум внимания · лучшие условия"),
-          ("Б", "Постоянные", "регулярные касания · скидки за серию"),
-          ("В", "Разовые", "рассылки, акции · базовые условия")]
+# работа с клиентами: база делится на три группы
+REPEAT = [("A", "Приоритет", "активные · максимум внимания"),
+          ("Б", "Средние", "подтягиваем в актив"),
+          ("В", "Спящие", "«мертвяк» — тоже раскачиваем")]
 
 PHONE, SITE = "+7 495 799-00-19", "sm-production.ru"
 
@@ -194,7 +200,7 @@ def logo_paths():
     b, g, r, a = [lg[..., i].astype(int) for i in range(4)]
     k = 4
     out = []
-    for name, m, col in [("white", (a > 0) & ~((r - b > 60) & (a > 60)), WHITE), ("gold", (r - b > 60) & (a > 60), GOLD)]:
+    for name, m, col in [("white", (a > 0) & ~((r - b > 60) & (a > 60)), WHITE), ("gold", (r - b > 60) & (a > 60), LOGO_GOLD)]:
         alpha = np.where(m, a, 0).astype(np.uint8)
         big = cv2.resize(alpha, None, fx=k, fy=k, interpolation=cv2.INTER_CUBIC)
         big = cv2.GaussianBlur(big, (0, 0), 1.2)
@@ -232,21 +238,21 @@ ICONS = {
 ICONS["phonecall"] = ICONS["phone"] + ['<path d="M14.05 2a9 9 0 0 1 8 7.94"/>', '<path d="M14.05 6A5 5 0 0 1 18 10"/>']
 
 
-def icon(svg, kind, cx, cy, size, color=GOLD_L, sw=2.0):
+def icon(svg, kind, cx, cy, size, color=VIOLET_L, sw=2.0):
     s_ = size / 24
     svg.add(f'<g transform="translate({cx - size / 2:.2f} {cy - size / 2:.2f}) scale({s_:.4f})" fill="none" '
             f'stroke="{color}" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round">'
             + "".join(ICONS[kind]) + "</g>")
 
 
-def icon_badge(svg, kind, cx, cy, r, ring=GOLD, fill="#2A2410", color=GOLD_L):
+def icon_badge(svg, kind, cx, cy, r, ring=VIOLET, fill=ICON_BG, color=VIOLET):
     """Иконка в круглой подложке."""
     svg.add(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r}" fill="{fill}" stroke="{ring}" stroke-width="1"/>')
     icon(svg, kind, cx, cy, r * 1.15, color)
 
 
-def pill(svg, cx, cy, label, size=13, font="m6", h=30, fill=NAVY_1, stroke=STEEL, tfill=WHITE,
-         padx=14, sw=1.2, opacity=0.94, detail=None, dsize=None, dfill=STEEL_L, x_left=None, w_fix=None,
+def pill(svg, cx, cy, label, size=13, font="m6", h=30, fill=PASTEL, stroke=PASTEL_LINE, tfill=INK,
+         padx=14, sw=1.2, opacity=0.97, detail=None, dsize=None, dfill=INK_2, x_left=None, w_fix=None,
          ico=None, badges=()):
     w = F[font].width(label, size) + 2 * padx
     if detail:
@@ -262,7 +268,7 @@ def pill(svg, cx, cy, label, size=13, font="m6", h=30, fill=NAVY_1, stroke=STEEL
         icon_badge(svg, ico, x0 + h / 2, cy, h / 2 - 3.5)
         lx = x0 + h + 4
     for k, b in enumerate(badges):                       # значки мессенджеров справа
-        icon_badge(svg, b, x0 + w - h / 2 - k * (h - 5), cy, h / 2 - 5, ring=STEEL, fill=NAVY_1)
+        icon_badge(svg, b, x0 + w - h / 2 - k * (h - 5), cy, h / 2 - 5, ring=PASTEL_LINE, fill=WHITE)
     if detail:
         svg.text(lx, ty, label, size, font, tfill)
         dx = lx + F[font].width(label, size) + 8
@@ -274,22 +280,22 @@ def pill(svg, cx, cy, label, size=13, font="m6", h=30, fill=NAVY_1, stroke=STEEL
     return w
 
 
-def layer_title(svg, cx, cy, num, title, color=GOLD):
+def layer_title(svg, cx, cy, num, title, color=VIOLET):
     size = 15
     tw = F["u5"].width(title, size, 1.2)
     w = tw + 74
     svg.add(f'<rect x="{cx - w / 2:.1f}" y="{cy - 19:.1f}" width="{w:.1f}" height="38" rx="19" '
-            f'fill="{NAVY_0}" fill-opacity="0.92" stroke="{color}" stroke-width="1.5"/>')
+            f'fill="{PASTEL}" fill-opacity="0.97" stroke="{color}" stroke-width="1.5"/>')
     svg.add(f'<circle cx="{cx - w / 2 + 21:.1f}" cy="{cy}" r="13" fill="{color}"/>')
-    svg.text(cx - w / 2 + 21, cy + 4.6, num, 12.5, "u5", NAVY_0, anchor="middle")
-    svg.text(cx - w / 2 + 44, cy + 5.4, title, size, "u5", WHITE, ls=1.2)
+    svg.text(cx - w / 2 + 21, cy + 4.6, num, 12.5, "u5", WHITE, anchor="middle")
+    svg.text(cx - w / 2 + 44, cy + 5.4, title, size, "u5", INK, ls=1.2)
 
 
 def depth_bar(svg, x, y, score, n=5):
     for i in range(n):
         on = i < score
         svg.add(f'<rect x="{x + i * 13:.1f}" y="{y - 5:.1f}" width="10" height="10" rx="2.5" '
-                f'fill="{GOLD if on else "none"}" stroke="{GOLD if on else STEEL}" stroke-width="1.1"/>')
+                f'fill="{VIOLET if on else "none"}" stroke="{VIOLET if on else STEEL}" stroke-width="1.1"/>')
 
 
 # ------------------------------------------------------------------ дерево
@@ -325,7 +331,7 @@ def foliage(svg, rnd):
     sp = sample(220, 1.2, 3.4)
     g = ['<g>']
     for x, y, r in sp:
-        col = GOLD_L if rnd.random() < 0.35 else WHITE
+        col = VIOLET_L if rnd.random() < 0.35 else WHITE
         g.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.1f}" fill="{col}" opacity="{rnd.uniform(.25, .7):.2f}"/>')
     g.append("</g>")
     svg.add("".join(g))
@@ -408,7 +414,7 @@ def particles(svg, tips):
         d = (f"M{tx} {ty - 18} C {tx} {(ty + g) / 2 - 30} 500 {(ty + g) / 2} 500 {g - 8} "
              f"L 500 {980 - SHIFT} C 500 {900 - SHIFT} {ex} {ey - SHIFT + 80} {ex} {ey - SHIFT}")
         dur = 7 + i * 0.8
-        svg.add(f'<circle r="3.4" fill="{GOLD_L}" filter="url(#glow)" opacity="0">'
+        svg.add(f'<circle r="3.4" fill="{VIOLET_L}" filter="url(#glow)" opacity="0">'
                 f'<animateMotion dur="{dur:.1f}s" begin="{i * 1.1:.1f}s" repeatCount="indefinite" path="{d}"/>'
                 f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="{dur:.1f}s" '
                 f'begin="{i * 1.1:.1f}s" repeatCount="indefinite"/></circle>')
@@ -437,12 +443,12 @@ def defs(svg):
 <linearGradient id="barkV" gradientUnits="userSpaceOnUse" x1="0" y1="190" x2="0" y2="790">
   <stop offset="0" stop-color="#4A3322"/><stop offset="1" stop-color="#6E4F35"/></linearGradient>
 <linearGradient id="rootG" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#5E412B"/><stop offset="0.45" stop-color="#8A6A2E"/><stop offset="1" stop-color="{GOLD}"/></linearGradient>
+  <stop offset="0" stop-color="#5E412B"/><stop offset="0.45" stop-color="#7A5A36"/><stop offset="1" stop-color="#A47A4E"/></linearGradient>
 <linearGradient id="ground" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0" stop-color="#6FB04E" stop-opacity="0"/><stop offset="0.5" stop-color="#8FCB5E"/>
   <stop offset="1" stop-color="#6FB04E" stop-opacity="0"/></linearGradient>
 <linearGradient id="timeG" x1="0" y1="1" x2="0" y2="0">
-  <stop offset="0" stop-color="{GOLD}" stop-opacity="0.15"/><stop offset="1" stop-color="{GOLD_L}"/></linearGradient>
+  <stop offset="0" stop-color="{VIOLET}" stop-opacity="0.15"/><stop offset="1" stop-color="{VIOLET_L}"/></linearGradient>
 <filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2.6" result="b"/>
   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
@@ -496,7 +502,7 @@ def build(outlined):
     tx = 40 + lw * s + 26
     svg.add(f'<line x1="{tx - 13:.0f}" y1="42" x2="{tx - 13:.0f}" y2="124" stroke="{STEEL}" stroke-opacity="0.6"/>')
     svg.text(tx, 78, "ДЕРЕВО РОСТА", 36, "u5", WHITE, ls=1)
-    svg.text(tx + F["u5"].width("ДЕРЕВО РОСТА ", 36, 1), 78, "SM", 36, "u5", GOLD, ls=1)
+    svg.text(tx + F["u5"].width("ДЕРЕВО РОСТА ", 36, 1), 78, "SM", 36, "u5", VIOLET, ls=1)
     svg.text(tx, 104, "Как компания растёт во времени: каналы продвижения питают услуги,", 15.5, "m4", STEEL_L)
     svg.text(tx, 124, "активы превращают заявки в проекты, а проекты — в новых клиентов", 15.5, "m4", STEEL_L)
 
@@ -507,8 +513,8 @@ def build(outlined):
         ws = [F["m6"].width(c, sz) + 24 for c in items]
         x = 500 - (sum(ws) + gap * (len(ws) - 1)) / 2
         for c, w in zip(items, ws):
-            pill(svg, 0, 230 + row * 31, c, sz, "m6", h=26, stroke=GOLD, sw=1, x_left=x, w_fix=w,
-                 fill=NAVY_0, opacity=0.8)
+            pill(svg, 0, 230 + row * 31, c, sz, "m6", h=26, stroke=VIOLET, sw=1, x_left=x, w_fix=w,
+                 fill=PASTEL, opacity=0.95)
             x += w + gap
     svg.text(500, 290, "проекты по годам — крона растёт вверх", 11.5, "m4", STEEL_L, anchor="middle")
 
@@ -529,9 +535,9 @@ def build(outlined):
                 sz -= 0.5
             x = 520 - tot / 2
             if r_i == 0:
-                svg.text(x - 14, y + 5, str(yr), 15, "u5", GOLD_L, anchor="end")
+                svg.text(x - 14, y + 5, str(yr), 15, "u5", VIOLET_L, anchor="end")
             for c, w in zip(row, ws):
-                pill(svg, 0, y, c, sz, "m6", h=27, stroke=STEEL_L, sw=0.9, x_left=x, w_fix=w, fill=NAVY_1)
+                pill(svg, 0, y, c, sz, "m6", h=27, stroke=PASTEL_LINE, sw=0.9, x_left=x, w_fix=w)
                 x += w + 8
             y += 34
         y += 4
@@ -542,18 +548,18 @@ def build(outlined):
     layer_title(svg, 500, ay, "03", "АКТИВЫ КОМПАНИИ")
     # сайт в центре
     cy = ay + 92
-    svg.add(f'<rect x="355" y="{cy - 52}" width="290" height="104" rx="22" fill="{NAVY_0}" fill-opacity="0.95" '
-            f'stroke="{GOLD}" stroke-width="2"/>')
-    svg.add(f'<rect x="355" y="{cy - 52}" width="290" height="104" rx="22" fill="none" stroke="{GOLD_L}" '
+    svg.add(f'<rect x="355" y="{cy - 52}" width="290" height="104" rx="22" fill="{PASTEL}" fill-opacity="0.98" '
+            f'stroke="{VIOLET}" stroke-width="2"/>')
+    svg.add(f'<rect x="355" y="{cy - 52}" width="290" height="104" rx="22" fill="none" stroke="{VIOLET_L}" '
             f'stroke-opacity="0.35" stroke-width="7" filter="url(#glow)"/>')
-    svg.text(500, cy - 20, "САЙТ · ГЛАВНЫЙ АКТИВ", 11, "u5", GOLD_L, anchor="middle", ls=1.5)
-    svg.text(500, cy + 12, "SM-PRODUCTION.RU", 22.5, "u5", WHITE, anchor="middle")
-    svg.text(500, cy + 36, "услуги · портфолио · калькулятор · заявки", 11.5, "m4", STEEL_L, anchor="middle")
+    svg.text(500, cy - 20, "САЙТ · ГЛАВНЫЙ АКТИВ", 11, "u5", VIOLET, anchor="middle", ls=1.5)
+    svg.text(500, cy + 12, "SM-PRODUCTION.RU", 22.5, "u5", INK, anchor="middle")
+    svg.text(500, cy + 36, "услуги · портфолио · калькулятор · заявки", 11.5, "m4", INK_2, anchor="middle")
     # кластеры
     for side, title, items in [(-1, "АНАЛИТИКА", ANALYTICS), (1, "КАНАЛЫ СВЯЗИ", CONTACTS)]:
         CLW = 290
         x_left = 28 if side < 0 else 1000 - 28 - CLW
-        svg.text(x_left + CLW / 2, ay + 38, title, 12.5, "u5", GOLD_L, anchor="middle", ls=1.5)
+        svg.text(x_left + CLW / 2, ay + 38, title, 12.5, "u5", VIOLET_L, anchor="middle", ls=1.5)
         step_c = 34 if len(items) <= 5 else 31
         for i, it in enumerate(items):
             name, det, ico = it[:3]
@@ -561,7 +567,7 @@ def build(outlined):
             py = ay + 60 + i * step_c
             mob = bool(badges)
             pill(svg, 0, py, name, 13.5, "m6", h=step_c - 3, detail=det, dsize=12, x_left=x_left, w_fix=CLW,
-                 fill=NAVY_0, stroke=GOLD if mob else STEEL, sw=1.2, opacity=0.92, ico=ico, badges=badges,
+                 stroke=VIOLET if mob else PASTEL_LINE, sw=1.4 if mob else 1.1, ico=ico, badges=badges,
                  padx=12)
         # связь с сайтом: золотые стрелки к сайту
         for k in (-1, 1):
@@ -570,12 +576,12 @@ def build(outlined):
                 x1, x2 = x_left + CLW + 6, 352
             else:
                 x1, x2 = x_left - 6, 648
-            svg.add(f'<line x1="{x1}" y1="{yk}" x2="{x2 - 7 * -side}" y2="{yk}" stroke="{GOLD}" stroke-width="1.6"/>')
-            svg.add(f'<path d="M{x2} {yk} l{7 * side} -5 v10 Z" fill="{GOLD}"/>')
+            svg.add(f'<line x1="{x1}" y1="{yk}" x2="{x2 - 7 * -side}" y2="{yk}" stroke="{VIOLET}" stroke-width="1.6"/>')
+            svg.add(f'<path d="M{x2} {yk} l{7 * side} -5 v10 Z" fill="{VIOLET}"/>')
     assets_bottom = ay + 60 + (len(CONTACTS) - 1) * 31 + 16
     # подпись к мобильным: привязаны к телефонии
     svg.text(1000 - 28 - 145, assets_bottom + 12, "мобильные менеджеров — в телефонии, с MAX и Telegram", 10.5, "m4",
-             GOLD_L, anchor="middle")
+             VIOLET_L, anchor="middle")
     assets_bottom += 14
 
     # ---------------- 02 ствол: услуги
@@ -593,76 +599,76 @@ def build(outlined):
         x0 = 24 if col == 0 else 1000 - 24 - CW
         cyc = top + row * step + step / 2 - 4
         hh = 58
-        svg.add(f'<rect x="{x0}" y="{cyc - hh / 2:.1f}" width="{CW}" height="{hh}" rx="16" fill="{NAVY_0}" '
-                f'fill-opacity="0.93" stroke="{GOLD if main else STEEL}" stroke-width="{1.8 if main else 1}"/>')
+        svg.add(f'<rect x="{x0}" y="{cyc - hh / 2:.1f}" width="{CW}" height="{hh}" rx="16" fill="{PASTEL}" '
+                f'fill-opacity="0.97" stroke="{VIOLET if main else PASTEL_LINE}" stroke-width="{1.8 if main else 1}"/>')
         # связь со стволом
         ex = x0 + CW if col == 0 else x0
         tx_ = 440 if col == 0 else 560
-        svg.add(f'<line x1="{ex}" y1="{cyc:.1f}" x2="{tx_}" y2="{cyc:.1f}" stroke="{GOLD if main else STEEL}" '
+        svg.add(f'<line x1="{ex}" y1="{cyc:.1f}" x2="{tx_}" y2="{cyc:.1f}" stroke="{VIOLET if main else STEEL}" '
                 f'stroke-width="1.2" stroke-opacity="0.8"/>')
-        svg.add(f'<circle cx="{tx_}" cy="{cyc:.1f}" r="4" fill="{GOLD if main else STEEL_L}"/>')
+        svg.add(f'<circle cx="{tx_}" cy="{cyc:.1f}" r="4" fill="{VIOLET if main else STEEL_L}"/>')
         tsz = svg.fit(title, "m6", 16.5, CW - 32)
-        svg.text(x0 + 16, cyc - 6, title, tsz, "m6", WHITE)
-        svg.text(x0 + 16, cyc + 17, sub, 12, "m4", STEEL_L)
+        svg.text(x0 + 16, cyc - 6, title, tsz, "m6", INK)
+        svg.text(x0 + 16, cyc + 17, sub, 12, "m4", INK_2)
         depth_bar(svg, x0 + CW - 16 - 62, cyc + 13, score)
         if main:
             bw = F["u5"].width("ОСНОВНАЯ", 9, 1) + 18
             bx = x0 + CW - 18 - bw
-            svg.add(f'<rect x="{bx:.1f}" y="{cyc - hh / 2 - 9:.1f}" width="{bw:.1f}" height="18" rx="9" fill="{GOLD}"/>')
-            svg.text(bx + bw / 2, cyc - hh / 2 + 3.3, "ОСНОВНАЯ", 9, "u5", NAVY_0, anchor="middle", ls=1)
+            svg.add(f'<rect x="{bx:.1f}" y="{cyc - hh / 2 - 9:.1f}" width="{bw:.1f}" height="18" rx="9" fill="{VIOLET}"/>')
+            svg.text(bx + bw / 2, cyc - hh / 2 + 3.3, "ОСНОВНАЯ", 9, "u5", WHITE, anchor="middle", ls=1)
 
     # ---------------- 01 корни: каналы роста
     layer_title(svg, 500, GROUND + 56, "01", "КАНАЛЫ ПРОДВИЖЕНИЯ И РОСТА")
     heads = [(["СОЦСЕТИ И ПЛОЩАДКИ"], 330), (["ПЛАТНАЯ", "РЕКЛАМА"], 140), (["ВЫХОД НА НОВЫХ", "КЛИЕНТОВ"], 190),
-             (["СТАРЫЕ КЛИЕНТЫ", "РАБОТА С БАЗОЙ"], 236)]
+             (["РАБОТА С КЛИЕНТАМИ", "ГРУППЫ A · Б · В"], 236)]
     for (gx, gy, _), (lines, w) in zip(groups, heads):
-        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 23}" width="{w:.1f}" height="46" rx="23" fill="{GOLD}"/>')
+        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 23}" width="{w:.1f}" height="46" rx="23" fill="{VIOLET}"/>')
         if len(lines) == 1:
-            svg.text(gx, gy + 4.5, lines[0], 12, "u5", NAVY_0, anchor="middle", ls=0.8)
+            svg.text(gx, gy + 4.5, lines[0], 12, "u5", WHITE, anchor="middle", ls=0.8)
         else:
-            svg.text(gx, gy - 3, lines[0], 11, "u5", NAVY_0, anchor="middle", ls=0.6)
-            svg.text(gx, gy + 12, lines[1], 11 if gx != RX else 9.5, "u5", NAVY_0, anchor="middle",
-                     ls=0.6, opacity=1 if gx != RX else 0.75)
+            svg.text(gx, gy - 3, lines[0], 11, "u5", WHITE, anchor="middle", ls=0.6)
+            svg.text(gx, gy + 12, lines[1], 11 if gx != RX else 9.5, "u5", WHITE, anchor="middle",
+                     ls=0.6, opacity=1 if gx != RX else 0.8)
     for (tx_, ty_), name in zip(soc_tips, SOCIAL):
-        pill(svg, tx_, ty_, name, 14, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=122)
+        pill(svg, tx_, ty_, name, 14, "m6", h=40, stroke=VIOLET, sw=1.3, opacity=0.95, w_fix=122)
     for (tx_, ty_), name in zip(out_tips, OUTREACH):
         sz = svg.fit(name, "m6", 14, 190 - 20)
-        pill(svg, tx_, ty_, name, sz, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=190)
-    # старые клиенты: категории A / Б / В
+        pill(svg, tx_, ty_, name, sz, "m6", h=40, stroke=VIOLET, sw=1.3, opacity=0.95, w_fix=190)
+    # работа с клиентами: группы A / Б / В
     for (tx_, ty_), (letter, name, det) in zip(rep_tips, REPEAT):
         w, hh = 236, 56
         x0 = tx_ - w / 2
-        svg.add(f'<rect x="{x0:.1f}" y="{ty_ - hh / 2:.1f}" width="{w}" height="{hh}" rx="18" fill="{NAVY_0}" '
-                f'fill-opacity="0.95" stroke="{GOLD}" stroke-width="1.3"/>')
-        svg.add(f'<circle cx="{x0 + 28:.1f}" cy="{ty_}" r="17" fill="{GOLD}"/>')
-        svg.text(x0 + 28, ty_ + 6.5, letter, 17, "u5", NAVY_0, anchor="middle")
-        svg.text(x0 + 54, ty_ - 3, name, 14, "m6", WHITE)
+        svg.add(f'<rect x="{x0:.1f}" y="{ty_ - hh / 2:.1f}" width="{w}" height="{hh}" rx="18" fill="{PASTEL}" '
+                f'fill-opacity="0.97" stroke="{VIOLET}" stroke-width="1.3"/>')
+        svg.add(f'<circle cx="{x0 + 28:.1f}" cy="{ty_}" r="17" fill="{VIOLET}"/>')
+        svg.text(x0 + 28, ty_ + 6.5, letter, 17, "u5", WHITE, anchor="middle")
+        svg.text(x0 + 54, ty_ - 3, name, 14, "m6", INK)
         dsz = svg.fit(det, "m4", 10.5, w - 54 - 10)
-        svg.text(x0 + 54, ty_ + 15, det, dsz, "m4", STEEL_L)
-    svg.text(RX, ROWS[2] + 46, "кому сколько внимания и какие условия", 11, "m4", GOLD_L, anchor="middle")
+        svg.text(x0 + 54, ty_ + 15, det, dsz, "m4", INK_2)
+    svg.text(RX, ROWS[2] + 46, "кому сколько внимания и какие условия", 11, "m4", VIOLET_L, anchor="middle")
     ax, ay_ = ads_tip[0]
     hb = ROWS[2] - ROWS[0] + 40
     mid = (ROWS[0] + ROWS[2]) / 2
-    svg.add(f'<rect x="{ax - 70}" y="{ay_ - 20}" width="140" height="{hb}" rx="20" fill="{NAVY_0}" fill-opacity="0.95" '
-            f'stroke="{GOLD}" stroke-width="1.3"/>')
-    svg.text(ax, mid - 30, "Рекламные", 14, "m6", WHITE, anchor="middle")
-    svg.text(ax, mid - 10, "кампании", 14, "m6", WHITE, anchor="middle")
-    svg.text(ax, mid + 10, ADS[1], 14, "m6", WHITE, anchor="middle")
-    svg.text(ax, mid + 36, "платное", 12, "m4", STEEL_L, anchor="middle")
-    svg.text(ax, mid + 52, "продвижение", 12, "m4", STEEL_L, anchor="middle")
+    svg.add(f'<rect x="{ax - 70}" y="{ay_ - 20}" width="140" height="{hb}" rx="20" fill="{PASTEL}" fill-opacity="0.97" '
+            f'stroke="{VIOLET}" stroke-width="1.3"/>')
+    svg.text(ax, mid - 30, "Рекламные", 14, "m6", INK, anchor="middle")
+    svg.text(ax, mid - 10, "кампании", 14, "m6", INK, anchor="middle")
+    svg.text(ax, mid + 10, ADS[1], 14, "m6", INK, anchor="middle")
+    svg.text(ax, mid + 36, "платное", 12, "m4", INK_2, anchor="middle")
+    svg.text(ax, mid + 52, "продвижение", 12, "m4", INK_2, anchor="middle")
     svg.text(500, 1890, "Каналы роста питают дерево:  лиды → заявки → услуги → проекты → клиенты → повторные заказы",
-             14, "m6", GOLD_L, anchor="middle")
+             14, "m6", VIOLET_L, anchor="middle")
 
     # ---------------- ось времени слева
     svg.add(f'<line x1="12" y1="1870" x2="12" y2="190" stroke="url(#timeG)" stroke-width="2"/>')
-    svg.add(f'<path d="M5 200 L12 184 L19 200 Z" fill="{GOLD_L}"/>')
+    svg.add(f'<path d="M5 200 L12 184 L19 200 Z" fill="{VIOLET_L}"/>')
     tag = "ВРЕМЯ  ·  РОСТ КОМПАНИИ"
     if outlined:
         svg.add(f'<g transform="rotate(-90 9 1040)">')
-        svg.text(9, 1040 + 4, tag, 10, "u5", GOLD_L, anchor="middle", ls=2)
+        svg.text(9, 1040 + 4, tag, 10, "u5", VIOLET_L, anchor="middle", ls=2)
         svg.add("</g>")
     else:
-        svg.text(9, 1044, tag, 10, "u5", GOLD_L, anchor="middle", ls=2, extra=' transform="rotate(-90 9 1040)"')
+        svg.text(9, 1044, tag, 10, "u5", VIOLET_L, anchor="middle", ls=2, extra=' transform="rotate(-90 9 1040)"')
 
     # ---------------- подвал
     svg.add(f'<line x1="40" y1="1930" x2="960" y2="1930" stroke="{STEEL}" stroke-opacity="0.4"/>')
