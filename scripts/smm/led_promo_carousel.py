@@ -136,20 +136,100 @@ def gift_badge(img, cx, cy, r=118):
     d.text((cx, cy + 58), "в подарок", font=F("ms", 26), fill=NAVY0, anchor="mm")
 
 
+# ------------------------------------------------------------------ фото монтажа: SM-лого на футболках
+INSTALL_SRC = SRC / "install-nloto.jpg"           # монтаж фотозоны + 3 LED-бара (присланное фото)
+INSTALL_OUT = SRC / "install-nloto-sm.jpg"        # обработанная версия
+
+
+def _print_on_shirt(img, center, width, angle, color_bgr, shirt_mask, tilt=0.0, ink=1.0):
+    """Печать логотипа SM на спине футболки: поворот, лёгкая перспектива, складки ткани из яркости."""
+    lg = RP._logo.copy()
+    a = lg[..., 3].astype(np.float32) / 255
+    gold = (lg[..., 2].astype(int) - lg[..., 0].astype(int)) > 60      # «SM» в SMPRODUCTION — золото
+    col = np.zeros(lg.shape[:2] + (3,), np.float32)
+    col[:] = color_bgr
+    col[gold] = (25, 155, 209)
+    h0, w0 = lg.shape[:2]
+    hh = width * h0 / w0
+    cx, cy = center
+    src = np.float32([[0, 0], [w0, 0], [w0, h0], [0, h0]])
+    loc = np.float32([[-width / 2, -hh / 2], [width / 2, -hh / 2 * (1 - tilt)],
+                      [width / 2, hh / 2 * (1 - tilt)], [-width / 2, hh / 2]])
+    r = np.deg2rad(angle)
+    R = np.float32([[np.cos(r), -np.sin(r)], [np.sin(r), np.cos(r)]])
+    dst = loc @ R.T + np.float32([cx, cy])
+    M = cv2.getPerspectiveTransform(src, dst)
+    H_, W_ = img.shape[:2]
+    wa = cv2.warpPerspective(a, M, (W_, H_), flags=cv2.INTER_AREA)
+    wc = cv2.warpPerspective(col, M, (W_, H_), flags=cv2.INTER_AREA)
+    wa = cv2.GaussianBlur(wa, (0, 0), 0.7) * shirt_mask * ink
+    # складки: отношение локальной яркости к сглаженной
+    g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    fine = cv2.GaussianBlur(g, (0, 0), 1.5)
+    coarse = cv2.GaussianBlur(g, (0, 0), 40)
+    sh = np.clip((fine + 8) / (coarse + 8), 0.55, 1.25)
+    big = np.clip(coarse / np.median(coarse[shirt_mask > 0.5]), 0.75, 1.15)
+    wc = wc * (sh * big)[..., None]
+    out = img.astype(np.float32) * (1 - wa[..., None]) + wc * wa[..., None]
+    return np.clip(out, 0, 255).astype(np.uint8)
+
+
+def prepare_install():
+    img = cv2.imread(str(INSTALL_SRC))
+    # маски спин (вручную по фото): печать не заходит на руки и голову
+    def back(pts):
+        m = np.zeros(img.shape[:2], np.uint8)
+        cv2.fillPoly(m, [np.int32(pts)], 1)
+        return cv2.GaussianBlur(m.astype(np.float32), (0, 0), 2)
+    # белая футболка (стоящий монтажник) — тёмно-синяя печать
+    img = _print_on_shirt(img, (2182, 1600), 188, 1.5, (81, 59, 47),
+                          back([(2058, 1470), (2318, 1485), (2318, 1760), (2052, 1760)]), tilt=0.03)
+    # чёрная футболка (присевший монтажник) — белая печать
+    img = _print_on_shirt(img, (2532, 2088), 190, 10, (232, 234, 236),
+                          back([(2385, 1965), (2510, 1925), (2645, 1980), (2695, 2210), (2395, 2235)]), ink=0.93)
+    # «красиво»: мягкий контраст, сочность, чуть глубины
+    f = img.astype(np.float32) / 255
+    f = 0.5 + (f - 0.5) * 1.06
+    hsv = cv2.cvtColor(np.clip(f, 0, 1).astype(np.float32), cv2.COLOR_BGR2HSV)
+    hsv[..., 1] = np.clip(hsv[..., 1] * 1.12, 0, 1)
+    f = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+    blur = cv2.GaussianBlur(f, (0, 0), 6)
+    f = np.clip(f + (f - blur) * 0.35, 0, 1)                      # микроконтраст
+    yy, xx = np.mgrid[0:f.shape[0], 0:f.shape[1]].astype(np.float32)
+    vig = 1 - 0.18 * (((xx / f.shape[1] - 0.6) ** 2 + (yy / f.shape[0] - 0.5) ** 2) / 0.5)
+    f = f * np.clip(vig, 0.8, 1)[..., None]
+    out = Image.fromarray(cv2.cvtColor((f * 255).astype(np.uint8), cv2.COLOR_BGR2RGB))
+    return out
+
+
 # ------------------------------------------------------------------ слайды
+def install_photo():
+    """Обработанное фото монтажа (кэш в src/, пересоздаётся при отсутствии)."""
+    if not INSTALL_OUT.exists() or INSTALL_OUT.stat().st_mtime < Path(__file__).stat().st_mtime:
+        prepare_install().save(INSTALL_OUT, quality=90)
+    return Image.open(INSTALL_OUT).convert("RGB")
+
+
 def slide_cover():
+    """Обложка: реальная фотозона на монтаже + 3 LED-бара на полу, монтажники SM."""
     img = brand_bg(W, H).convert("RGBA")
-    ph = cover_crop(Image.open(SRC / "led-bar-hero.jpg").convert("RGB"), W, 1060, 0.5, 0.6).convert("RGBA")
-    img.alpha_composite(ph, (0, 0))
-    img.alpha_composite(vgrad(W, 380, 0.0, 1.0, power=1.5), (0, 1060 - 380))
+    ph = install_photo()
+    s = W / ph.width
+    ph = ph.resize((W, round(ph.height * s)), Image.LANCZOS)
+    top = (H - 96) - ph.height                       # низ фото = верх нижней полосы
+    img.alpha_composite(ph.convert("RGBA"), (0, top))
+    # верх: тёмный фирменный градиент под заголовок (потолок и верх стенда)
+    img.alpha_composite(vgrad(W, 620, 0.96, 0.0, power=0.9), (0, 0))
+    # низ: лёгкое затемнение пола под подписью
+    img.alpha_composite(vgrad(W, 260, 0.0, 0.88, power=1.3), (0, H - 96 - 260))
     d = ImageDraw.Draw(img)
-    y = 1010
+    y = 190
     pill(d, 64, y, f"АКЦИЯ {DEADLINE.upper()}", F("u", 26), GOLD, NAVY0, padx=26, h=56)
-    d.text((60, y + 92), "ОСВЕЩЕНИЕ", font=F("u", 118), fill=WHITE)
-    d.text((60, y + 238), "В ПОДАРОК", font=F("u", 118), fill=GOLD)
-    d.text((64, y + 410), "при заказе имиджевой фотозоны", font=F("ms", 48), fill=WHITE)
-    d.text((64, y + 478), "3 LED-бара на 1–2 дня — бесплатно", font=F("m", 40), fill=STEEL_L)
-    gift_badge(img, W - 200, 900)
+    d.text((60, y + 84), "ОСВЕЩЕНИЕ", font=F("u", 104), fill=WHITE)
+    d.text((60, y + 212), "В ПОДАРОК", font=F("u", 104), fill=GOLD)
+    d.text((64, H - 96 - 118), "при заказе имиджевой фотозоны", font=F("ms", 46), fill=WHITE)
+    d.text((64, H - 96 - 58), "3 LED-бара на 1–2 дня — бесплатно", font=F("m", 38), fill=STEEL_L)
+    gift_badge(img, 230, 760, r=112)
     chrome(img, 1)
     return img
 
@@ -157,7 +237,7 @@ def slide_cover():
 def slide_terms():
     img = brand_bg(W, H).convert("RGBA")
     # полоса с баром внизу
-    ph = cover_crop(Image.open(SRC / "led-bar-hero.jpg").convert("RGB"), W, 560, 0.5, 1.0).convert("RGBA")
+    ph = cover_crop(install_photo().crop((0, 2380, 3092, 3800)), W, 560, 0.5, 0.75).convert("RGBA")
     img.alpha_composite(ph, (0, H - 96 - 560))
     img.alpha_composite(vgrad(W, 300, 1.0, 0.0, color=NAVY1, power=1.3), (0, H - 96 - 560))
     d = ImageDraw.Draw(img)
