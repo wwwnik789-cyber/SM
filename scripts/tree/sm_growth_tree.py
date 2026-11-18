@@ -1,7 +1,7 @@
 """«Дерево роста SM» — вертикальная инфографика 1:2 (SVG, 1000×2000).
 
 Пласты снизу вверх:
-  01 корни  — каналы продвижения и роста;
+  01 корни  — каналы продвижения и роста (соцсети, платная реклама, новые и старые клиенты);
   02 ствол  — услуги, на которых зарабатываем (+ насколько подробно описаны на сайте);
   03 ветви  — активы компании: сайт в центре, аналитика слева, каналы связи справа;
   04 крона  — клиенты и проекты по годам.
@@ -49,11 +49,18 @@ WHITE = "#FFFFFF"
 CLIENTS = ["Tele2", "Сбер", "Яндекс", "S7 Airlines", "Haval", "Mitsubishi Motors",
            "Газпромнефть · G-Drive", "Sanofi", "Aurus", "МОСГОРТУР", "Домодедово", "Новатэк"]
 
-ANALYTICS = [("amoCRM", "сделки и воронка"), ("Яндекс Метрика", "цели, вебвизор"),
-             ("Аналитика сайта", "заявки и конверсии"), ("Аналитика телефонии", "коллтрекинг, записи"),
-             ("Сквозная аналитика", "реклама → сделка")]
-CONTACTS = [("Почта", "sm-pro1@yandex.ru"), ("Телефония Билайн", "+7 495 799-00-19"),
-            ("Telegram", "чат и канал"), ("MAX", "мессенджер"), ("Заявки с сайта", "формы, калькулятор")]
+# (название, подпись, иконка[, значки мессенджеров справа])
+ANALYTICS = [("amoCRM", "сделки и воронка", "funnel"), ("Яндекс Метрика", "цели, вебвизор", "chart"),
+             ("Аналитика сайта", "заявки и конверсии", "cursor"),
+             ("Аналитика телефонии", "коллтрекинг, записи", "phonecall"),
+             ("Сквозная аналитика", "реклама → сделка", "route")]
+# мобильные номера менеджеров привязаны к телефонии, на них же MAX и Telegram
+MOBILE_DILYA = "+7 9XX XXX-XX-XX"          # TODO: номер Дили
+MOBILE_NASTYA = "+7 909 993-60-28"
+CONTACTS = [("Почта", "sm-pro1@yandex.ru", "mail"), ("Телефония Билайн", "+7 495 799-00-19", "phone"),
+            ("Диля", MOBILE_DILYA, "mobile", ("tg", "max")), ("Настя", MOBILE_NASTYA, "mobile", ("tg", "max")),
+            ("Telegram", "чат и канал", "tg"), ("MAX", "мессенджер", "max"),
+            ("Заявки с сайта", "формы, калькулятор", "form")]
 
 # услуги: (заголовок, подпись, slug-и из services.js для оценки | число для ручной оценки, основная?)
 SERVICES = [
@@ -76,6 +83,10 @@ SERVICES = [
 SOCIAL = ["MAX", "Telegram", "YouTube", "Rutube", "Дзен", "Группа VK", "Яндекс Карты", "Яндекс Услуги", "Avito"]
 ADS = ("Рекламные кампании", "за деньги", "платное продвижение")
 OUTREACH = ["Автосалоны", "Коммерческие интерьеры", "и другие новые ниши"]
+# старые клиенты: работа с базой — категории по вниманию и условиям
+REPEAT = [("A", "Ключевые", "максимум внимания · лучшие условия"),
+          ("Б", "Постоянные", "регулярные касания · скидки за серию"),
+          ("В", "Разовые", "рассылки, акции · базовые условия")]
 
 PHONE, SITE = "+7 495 799-00-19", "sm-production.ru"
 
@@ -200,8 +211,43 @@ def logo_paths():
 
 
 # ------------------------------------------------------------------ элементы
+# линейные иконки 24×24 (stroke), в стиле Lucide
+ICONS = {
+    "funnel": ['<path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/>'],
+    "chart": ['<path d="M3 3v18h18"/>', '<path d="M18 17V9"/>', '<path d="M13 17V5"/>', '<path d="M8 17v-3"/>'],
+    "cursor": ['<rect x="2" y="3" width="20" height="14" rx="2"/>', '<path d="M11 10l3 9 1.5-3.5L19 14z"/>'],
+    "phone": ['<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 '
+              '19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 '
+              '2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 '
+              '2.81.7A2 2 0 0 1 22 16.92z"/>'],
+    "route": ['<circle cx="6" cy="19" r="3"/>', '<path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/>',
+              '<circle cx="18" cy="5" r="3"/>'],
+    "mail": ['<rect x="2" y="4" width="20" height="16" rx="2"/>', '<path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>'],
+    "mobile": ['<rect x="5" y="2" width="14" height="20" rx="2.5"/>', '<path d="M10.5 18h3"/>'],
+    "tg": ['<path d="M22 2L15 22l-4-9-9-4z"/>', '<path d="M22 2L11 13"/>'],
+    "max": ['<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/>', '<path d="M8 14.5V9.5l4 3.2 4-3.2v5"/>'],
+    "form": ['<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/>', '<path d="M14 2v5h6"/>',
+             '<path d="M8 13h8"/>', '<path d="M8 17h5"/>'],
+}
+ICONS["phonecall"] = ICONS["phone"] + ['<path d="M14.05 2a9 9 0 0 1 8 7.94"/>', '<path d="M14.05 6A5 5 0 0 1 18 10"/>']
+
+
+def icon(svg, kind, cx, cy, size, color=GOLD_L, sw=2.0):
+    s_ = size / 24
+    svg.add(f'<g transform="translate({cx - size / 2:.2f} {cy - size / 2:.2f}) scale({s_:.4f})" fill="none" '
+            f'stroke="{color}" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round">'
+            + "".join(ICONS[kind]) + "</g>")
+
+
+def icon_badge(svg, kind, cx, cy, r, ring=GOLD, fill="#2A2410", color=GOLD_L):
+    """Иконка в круглой подложке."""
+    svg.add(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r}" fill="{fill}" stroke="{ring}" stroke-width="1"/>')
+    icon(svg, kind, cx, cy, r * 1.15, color)
+
+
 def pill(svg, cx, cy, label, size=13, font="m6", h=30, fill=NAVY_1, stroke=STEEL, tfill=WHITE,
-         padx=14, sw=1.2, opacity=0.94, detail=None, dsize=None, dfill=STEEL_L, x_left=None, w_fix=None):
+         padx=14, sw=1.2, opacity=0.94, detail=None, dsize=None, dfill=STEEL_L, x_left=None, w_fix=None,
+         ico=None, badges=()):
     w = F[font].width(label, size) + 2 * padx
     if detail:
         dsize = dsize or size - 1.5
@@ -211,9 +257,18 @@ def pill(svg, cx, cy, label, size=13, font="m6", h=30, fill=NAVY_1, stroke=STEEL
     svg.add(f'<rect x="{x0:.1f}" y="{cy - h / 2:.1f}" width="{w:.1f}" height="{h}" rx="{h / 2}" '
             f'fill="{fill}" fill-opacity="{opacity}" stroke="{stroke}" stroke-width="{sw}"/>')
     ty = cy + size * 0.36
+    lx = x0 + padx
+    if ico:
+        icon_badge(svg, ico, x0 + h / 2, cy, h / 2 - 3.5)
+        lx = x0 + h + 4
+    for k, b in enumerate(badges):                       # значки мессенджеров справа
+        icon_badge(svg, b, x0 + w - h / 2 - k * (h - 5), cy, h / 2 - 5, ring=STEEL, fill=NAVY_1)
     if detail:
-        svg.text(x0 + padx, ty, label, size, font, tfill)
-        svg.text(x0 + padx + F[font].width(label, size) + 8, ty, detail, dsize, "m4", dfill)
+        svg.text(lx, ty, label, size, font, tfill)
+        dx = lx + F[font].width(label, size) + 8
+        room = x0 + w - 10 - len(badges) * (h - 5) - dx
+        dsize = svg.fit(detail, "m4", dsize, room, min_size=9.5)
+        svg.text(dx, ty, detail, dsize, "m4", dfill)
     else:
         svg.text(x0 + w / 2, ty, label, size, font, tfill, anchor="middle")
     return w
@@ -324,7 +379,7 @@ def roots(svg, groups):
         svg.add(f'<path d="M{x0:.0f} {y0} C {x0:.0f} {(y0 + y1) / 2:.0f} {x1:.0f} {(y0 + y1) / 2:.0f} {x1:.0f} {y1:.0f}" '
                 f'fill="none" stroke="#B88A3A" stroke-opacity="{rnd.uniform(.08, .2):.2f}" '
                 f'stroke-width="{rnd.uniform(.8, 2.4):.1f}" stroke-linecap="round"/>')
-    bases = [440, 500, 560]
+    bases = [430, 480, 525, 572]
     for (gx, gy, tips), bx in zip(groups, bases):
         root_path(svg, bx, GROUND + 2, gx, gy, 22)
         for tx, ty in tips:
@@ -416,12 +471,15 @@ def build(outlined):
     # корни: группы и позиции подписей
     GY = GROUND + 140
     ROWS = [GY + 105, GY + 185, GY + 265]
-    soc_tips = [((80, 215, 350)[i % 3], ROWS[i // 3]) for i in range(len(SOCIAL))]
-    out_tips = [(808, ROWS[i]) for i in range(len(OUTREACH))]
-    ads_tip = [(510, ROWS[0])]
-    groups = [(215, GY, soc_tips), (510, GY, ads_tip), (808, GY, out_tips)]
+    SOC_X = (74, 202, 330)
+    AX, OX, RX = 472, 642, 868               # платная реклама · новые клиенты · старые клиенты
+    soc_tips = [(SOC_X[i % 3], ROWS[i // 3]) for i in range(len(SOCIAL))]
+    out_tips = [(OX, ROWS[i]) for i in range(len(OUTREACH))]
+    rep_tips = [(RX, ROWS[i]) for i in range(len(REPEAT))]
+    ads_tip = [(AX, ROWS[0])]
+    groups = [(202, GY, soc_tips), (AX, GY, ads_tip), (OX, GY, out_tips), (RX, GY, rep_tips)]
     roots(svg, groups)
-    tips = soc_tips + ads_tip + out_tips
+    tips = soc_tips + ads_tip + out_tips + rep_tips
     svg.add(f'<rect x="0" y="{GROUND - 2}" width="1000" height="4" fill="url(#ground)"/>')
 
     # ствол, ветви, крона
@@ -496,10 +554,15 @@ def build(outlined):
         CLW = 290
         x_left = 28 if side < 0 else 1000 - 28 - CLW
         svg.text(x_left + CLW / 2, ay + 38, title, 12.5, "u5", GOLD_L, anchor="middle", ls=1.5)
-        for i, (name, det) in enumerate(items):
-            py = ay + 60 + i * 34
-            pill(svg, 0, py, name, 13.5, "m6", h=31, detail=det, dsize=12, x_left=x_left, w_fix=CLW,
-                 fill=NAVY_0, stroke=STEEL, opacity=0.92)
+        step_c = 34 if len(items) <= 5 else 31
+        for i, it in enumerate(items):
+            name, det, ico = it[:3]
+            badges = it[3] if len(it) > 3 else ()
+            py = ay + 60 + i * step_c
+            mob = bool(badges)
+            pill(svg, 0, py, name, 13.5, "m6", h=step_c - 3, detail=det, dsize=12, x_left=x_left, w_fix=CLW,
+                 fill=NAVY_0, stroke=GOLD if mob else STEEL, sw=1.2, opacity=0.92, ico=ico, badges=badges,
+                 padx=12)
         # связь с сайтом: золотые стрелки к сайту
         for k in (-1, 1):
             yk = cy + k * 26
@@ -509,7 +572,11 @@ def build(outlined):
                 x1, x2 = x_left - 6, 648
             svg.add(f'<line x1="{x1}" y1="{yk}" x2="{x2 - 7 * -side}" y2="{yk}" stroke="{GOLD}" stroke-width="1.6"/>')
             svg.add(f'<path d="M{x2} {yk} l{7 * side} -5 v10 Z" fill="{GOLD}"/>')
-    assets_bottom = ay + 60 + 4 * 34 + 16
+    assets_bottom = ay + 60 + (len(CONTACTS) - 1) * 31 + 16
+    # подпись к мобильным: привязаны к телефонии
+    svg.text(1000 - 28 - 145, assets_bottom + 12, "мобильные менеджеров — в телефонии, с MAX и Telegram", 10.5, "m4",
+             GOLD_L, anchor="middle")
+    assets_bottom += 14
 
     # ---------------- 02 ствол: услуги
     sy = assets_bottom + 30
@@ -525,7 +592,7 @@ def build(outlined):
         CW = 344
         x0 = 24 if col == 0 else 1000 - 24 - CW
         cyc = top + row * step + step / 2 - 4
-        hh = 62
+        hh = 58
         svg.add(f'<rect x="{x0}" y="{cyc - hh / 2:.1f}" width="{CW}" height="{hh}" rx="16" fill="{NAVY_0}" '
                 f'fill-opacity="0.93" stroke="{GOLD if main else STEEL}" stroke-width="{1.8 if main else 1}"/>')
         # связь со стволом
@@ -546,23 +613,44 @@ def build(outlined):
 
     # ---------------- 01 корни: каналы роста
     layer_title(svg, 500, GROUND + 56, "01", "КАНАЛЫ ПРОДВИЖЕНИЯ И РОСТА")
-    for (gx, gy, _), title in zip(groups, ["СОЦСЕТИ И ПЛОЩАДКИ", "ПЛАТНАЯ РЕКЛАМА", "ВЫХОД НА НОВЫХ КЛИЕНТОВ"]):
-        w = F["u5"].width(title, 12, 0.8) + 34
-        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 19}" width="{w:.1f}" height="38" rx="19" fill="{GOLD}"/>')
-        svg.text(gx, gy + 4.5, title, 12, "u5", NAVY_0, anchor="middle", ls=0.8)
+    heads = [(["СОЦСЕТИ И ПЛОЩАДКИ"], 330), (["ПЛАТНАЯ", "РЕКЛАМА"], 140), (["ВЫХОД НА НОВЫХ", "КЛИЕНТОВ"], 190),
+             (["СТАРЫЕ КЛИЕНТЫ", "РАБОТА С БАЗОЙ"], 236)]
+    for (gx, gy, _), (lines, w) in zip(groups, heads):
+        svg.add(f'<rect x="{gx - w / 2:.1f}" y="{gy - 23}" width="{w:.1f}" height="46" rx="23" fill="{GOLD}"/>')
+        if len(lines) == 1:
+            svg.text(gx, gy + 4.5, lines[0], 12, "u5", NAVY_0, anchor="middle", ls=0.8)
+        else:
+            svg.text(gx, gy - 3, lines[0], 11, "u5", NAVY_0, anchor="middle", ls=0.6)
+            svg.text(gx, gy + 12, lines[1], 11 if gx != RX else 9.5, "u5", NAVY_0, anchor="middle",
+                     ls=0.6, opacity=1 if gx != RX else 0.75)
     for (tx_, ty_), name in zip(soc_tips, SOCIAL):
-        pill(svg, tx_, ty_, name, 14.5, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=128)
+        pill(svg, tx_, ty_, name, 14, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=122)
     for (tx_, ty_), name in zip(out_tips, OUTREACH):
-        pill(svg, tx_, ty_, name, 15, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=290)
+        sz = svg.fit(name, "m6", 14, 190 - 20)
+        pill(svg, tx_, ty_, name, sz, "m6", h=40, fill=NAVY_0, stroke=GOLD, sw=1.3, opacity=0.95, w_fix=190)
+    # старые клиенты: категории A / Б / В
+    for (tx_, ty_), (letter, name, det) in zip(rep_tips, REPEAT):
+        w, hh = 236, 56
+        x0 = tx_ - w / 2
+        svg.add(f'<rect x="{x0:.1f}" y="{ty_ - hh / 2:.1f}" width="{w}" height="{hh}" rx="18" fill="{NAVY_0}" '
+                f'fill-opacity="0.95" stroke="{GOLD}" stroke-width="1.3"/>')
+        svg.add(f'<circle cx="{x0 + 28:.1f}" cy="{ty_}" r="17" fill="{GOLD}"/>')
+        svg.text(x0 + 28, ty_ + 6.5, letter, 17, "u5", NAVY_0, anchor="middle")
+        svg.text(x0 + 54, ty_ - 3, name, 14, "m6", WHITE)
+        dsz = svg.fit(det, "m4", 10.5, w - 54 - 10)
+        svg.text(x0 + 54, ty_ + 15, det, dsz, "m4", STEEL_L)
+    svg.text(RX, ROWS[2] + 46, "кому сколько внимания и какие условия", 11, "m4", GOLD_L, anchor="middle")
     ax, ay_ = ads_tip[0]
     hb = ROWS[2] - ROWS[0] + 40
     mid = (ROWS[0] + ROWS[2]) / 2
-    svg.add(f'<rect x="{ax - 84}" y="{ay_ - 20}" width="168" height="{hb}" rx="20" fill="{NAVY_0}" fill-opacity="0.95" '
+    svg.add(f'<rect x="{ax - 70}" y="{ay_ - 20}" width="140" height="{hb}" rx="20" fill="{NAVY_0}" fill-opacity="0.95" '
             f'stroke="{GOLD}" stroke-width="1.3"/>')
-    svg.text(ax, mid - 16, ADS[0], 14.5, "m6", WHITE, anchor="middle")
-    svg.text(ax, mid + 6, ADS[1], 14.5, "m6", WHITE, anchor="middle")
-    svg.text(ax, mid + 34, ADS[2], 12, "m4", STEEL_L, anchor="middle")
-    svg.text(500, 1882, "Каналы роста питают дерево:  лиды → заявки → услуги → проекты → новые клиенты",
+    svg.text(ax, mid - 30, "Рекламные", 14, "m6", WHITE, anchor="middle")
+    svg.text(ax, mid - 10, "кампании", 14, "m6", WHITE, anchor="middle")
+    svg.text(ax, mid + 10, ADS[1], 14, "m6", WHITE, anchor="middle")
+    svg.text(ax, mid + 36, "платное", 12, "m4", STEEL_L, anchor="middle")
+    svg.text(ax, mid + 52, "продвижение", 12, "m4", STEEL_L, anchor="middle")
+    svg.text(500, 1890, "Каналы роста питают дерево:  лиды → заявки → услуги → проекты → клиенты → повторные заказы",
              14, "m6", GOLD_L, anchor="middle")
 
     # ---------------- ось времени слева
