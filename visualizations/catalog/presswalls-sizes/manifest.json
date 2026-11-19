@@ -1,0 +1,461 @@
+{
+  "title": "SM Production — catalog presswall sizes",
+  "dimension_order": "width x height, meters",
+  "canvas_px": [
+    1264,
+    848
+  ],
+  "reference_size_m": [
+    3,
+    3
+  ],
+  "reference": "references/sm-production-3x3-original.jpg",
+  "background": "assets/background-locked.png",
+  "background_sha256": "6762864231a3383b16c443a26e621b5d05809869d0ee6292ff8fee12a43ef6c2",
+  "camera_policy": "Fixed projective camera and floor origin. No per-item camera zoom, crop or auto-fit.",
+  "front_homography_world_m_to_pixels": [
+    [
+      157.3626165969765,
+      0.14381633965908133,
+      563.017268414281
+    ],
+    [
+      -29.597204352953796,
+      -189.36160474965155,
+      695.1867561917015
+    ],
+    [
+      -0.07476948643722527,
+      0.0004891712233301169,
+      1.0
+    ]
+  ],
+  "camera_matrix": [
+    [
+      157.3626165969765,
+      0.14381633965908133,
+      462.4773528171893,
+      563.017268414281
+    ],
+    [
+      -29.597204352953796,
+      -189.36160474965155,
+      125.3518242638181,
+      695.1867561917015
+    ],
+    [
+      -0.07476948643722527,
+      0.0004891712233301169,
+      0.280473065283644,
+      1.0
+    ]
+  ],
+  "floor_origin_px": [
+    563.017268414281,
+    695.1867561917015
+  ],
+  "brand_policy": "Original white/gold ink extracted from supplied image; isotropic logo scaling, independent decorative-artwork adaptation.",
+  "common_background_pixels": 416709,
+  "items": [
+    {
+      "id": "2x2",
+      "label": "2 × 2 м",
+      "width_m": 2,
+      "height_m": 2,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-2x2.png",
+        "jpg": "sm-production-presswall-2x2.jpg",
+        "webp": "sm-production-presswall-2x2.webp"
+      },
+      "front_quad_px": [
+        [
+          377.358219,
+          321.69319
+        ],
+        [
+          778.083165,
+          309.72101
+        ],
+        [
+          778.595036,
+          719.377001
+        ],
+        [
+          377.434098,
+          674.362242
+        ]
+      ],
+      "side_quad_px": [
+        [
+          778.083165,
+          309.72101
+        ],
+        [
+          827.812396,
+          317.556353
+        ],
+        [
+          828.344586,
+          703.803355
+        ],
+        [
+          778.595036,
+          719.377001
+        ]
+      ]
+    },
+    {
+      "id": "2x2p5",
+      "label": "2 × 2,5 м",
+      "width_m": 2,
+      "height_m": 2.5,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-2x2p5.png",
+        "jpg": "sm-production-presswall-2x2p5.jpg",
+        "webp": "sm-production-presswall-2x2p5.webp"
+      },
+      "front_quad_px": [
+        [
+          377.33927,
+          233.626135
+        ],
+        [
+          777.955366,
+          207.4422
+        ],
+        [
+          778.595036,
+          719.377001
+        ],
+        [
+          377.434098,
+          674.362242
+        ]
+      ],
+      "side_quad_px": [
+        [
+          777.955366,
+          207.4422
+        ],
+        [
+          827.679514,
+          221.114788
+        ],
+        [
+          828.344586,
+          703.803355
+        ],
+        [
+          778.595036,
+          719.377001
+        ]
+      ]
+    },
+    {
+      "id": "3x2",
+      "label": "3 × 2 м",
+      "width_m": 3,
+      "height_m": 2,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-3x2.png",
+        "jpg": "sm-production-presswall-3x2.jpg",
+        "webp": "sm-production-presswall-3x2.webp"
+      },
+      "front_quad_px": [
+        [
+          294.0,
+          324.183626
+        ],
+        [
+          899.332966,
+          306.098514
+        ],
+        [
+          900.0,
+          733.0
+        ],
+        [
+          294.0,
+          665.0
+        ]
+      ],
+      "side_quad_px": [
+        [
+          899.332966,
+          306.098514
+        ],
+        [
+          943.831752,
+          314.458902
+        ],
+        [
+          944.505267,
+          716.0
+        ],
+        [
+          900.0,
+          733.0
+        ]
+      ]
+    },
+    {
+      "id": "3x2p5",
+      "label": "3 × 2,5 м",
+      "width_m": 3,
+      "height_m": 2.5,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-3x2p5.png",
+        "jpg": "sm-production-presswall-3x2p5.jpg",
+        "webp": "sm-production-presswall-3x2p5.webp"
+      },
+      "front_quad_px": [
+        [
+          294.0,
+          239.07312
+        ],
+        [
+          899.166437,
+          199.519945
+        ],
+        [
+          900.0,
+          733.0
+        ],
+        [
+          294.0,
+          665.0
+        ]
+      ],
+      "side_quad_px": [
+        [
+          899.166437,
+          199.519945
+        ],
+        [
+          943.663591,
+          214.203514
+        ],
+        [
+          944.505267,
+          716.0
+        ],
+        [
+          900.0,
+          733.0
+        ]
+      ]
+    },
+    {
+      "id": "4x2p5",
+      "label": "4 × 2,5 м",
+      "width_m": 4,
+      "height_m": 2.5,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-4x2p5.png",
+        "jpg": "sm-production-presswall-4x2p5.jpg",
+        "webp": "sm-production-presswall-4x2p5.webp"
+      },
+      "front_quad_px": [
+        [
+          216.075607,
+          244.166194
+        ],
+        [
+          1031.018651,
+          190.902194
+        ],
+        [
+          1032.078453,
+          747.820685
+        ],
+        [
+          215.992708,
+          656.246706
+        ]
+      ],
+      "side_quad_px": [
+        [
+          1031.018651,
+          190.902194
+        ],
+        [
+          1069.200736,
+          206.722991
+        ],
+        [
+          1070.246468,
+          729.202581
+        ],
+        [
+          1032.078453,
+          747.820685
+        ]
+      ]
+    },
+    {
+      "id": "4x3",
+      "label": "4 × 3 м",
+      "width_m": 4,
+      "height_m": 3,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-4x3.png",
+        "jpg": "sm-production-presswall-4x3.jpg",
+        "webp": "sm-production-presswall-4x3.webp"
+      },
+      "front_quad_px": [
+        [
+          216.092166,
+          161.85517
+        ],
+        [
+          1030.807055,
+          79.710363
+        ],
+        [
+          1032.078453,
+          747.820685
+        ],
+        [
+          215.992708,
+          656.246706
+        ]
+      ],
+      "side_quad_px": [
+        [
+          1030.807055,
+          79.710363
+        ],
+        [
+          1068.991927,
+          102.395955
+        ],
+        [
+          1070.246468,
+          729.202581
+        ],
+        [
+          1032.078453,
+          747.820685
+        ]
+      ]
+    },
+    {
+      "id": "5x2p5",
+      "label": "5 × 2,5 м",
+      "width_m": 5,
+      "height_m": 2.5,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-5x2p5.png",
+        "jpg": "sm-production-presswall-5x2p5.jpg",
+        "webp": "sm-production-presswall-5x2p5.webp"
+      },
+      "front_quad_px": [
+        [
+          143.054958,
+          248.938762
+        ],
+        [
+          1174.977621,
+          181.493155
+        ],
+        [
+          1176.302678,
+          764.004261
+        ],
+        [
+          142.899434,
+          648.044821
+        ]
+      ],
+      "side_quad_px": [
+        [
+          1174.977621,
+          181.493155
+        ],
+        [
+          1205.521904,
+          198.599867
+        ],
+        [
+          1206.80442,
+          743.540899
+        ],
+        [
+          1176.302678,
+          764.004261
+        ]
+      ]
+    },
+    {
+      "id": "5x3",
+      "label": "5 × 3 м",
+      "width_m": 5,
+      "height_m": 3,
+      "depth_m_visual_assumption": 0.2,
+      "pixel_width": 1264,
+      "pixel_height": 848,
+      "files": {
+        "png": "sm-production-presswall-5x3.png",
+        "jpg": "sm-production-presswall-5x3.jpg",
+        "webp": "sm-production-presswall-5x3.webp"
+      },
+      "front_quad_px": [
+        [
+          143.086024,
+          169.21612
+        ],
+        [
+          1174.713087,
+          65.200829
+        ],
+        [
+          1176.302678,
+          764.004261
+        ],
+        [
+          142.899434,
+          648.044821
+        ]
+      ],
+      "side_quad_px": [
+        [
+          1174.713087,
+          65.200829
+        ],
+        [
+          1205.265833,
+          89.795367
+        ],
+        [
+          1206.80442,
+          743.540899
+        ],
+        [
+          1176.302678,
+          764.004261
+        ]
+      ]
+    }
+  ]
+}
