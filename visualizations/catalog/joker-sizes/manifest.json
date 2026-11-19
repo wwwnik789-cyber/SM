@@ -1,0 +1,433 @@
+{
+  "title": "SM Production — Joker tube-frame photozones, four sizes",
+  "dimension_order": "outer frame width x height, meters",
+  "canvas_px": [
+    1264,
+    848
+  ],
+  "reference_size_m": [
+    3,
+    3
+  ],
+  "user_reference": "references/joker-3x3-user-reference.jpg",
+  "user_reference_sha256": "fd95aa14193598b416eec11a35dde17ca05449d42558658be27e01c747378794",
+  "background": "../presswalls-sizes/assets/background-locked.png",
+  "background_sha256": "6762864231a3383b16c443a26e621b5d05809869d0ee6292ff8fee12a43ef6c2",
+  "people_layer": "../presswalls-with-people/assets/people-layer-160-185.png",
+  "people_layer_sha256": "25b30408750b4bd8d0534e371d448d4ffe6bb4f4287171c8b22c6d3308a44e25",
+  "people_heights_cm": [
+    160,
+    185
+  ],
+  "people": [
+    {
+      "id": "woman",
+      "file": "woman-160cm.png",
+      "height_m": 1.6,
+      "height_cm": 160,
+      "native_size_px": [
+        176,
+        613
+      ],
+      "crown_y_px": 3,
+      "ground_y_px": 609,
+      "ground_anchor_x_px": 87.28865483420225,
+      "world_foot_m": [
+        -0.047608489958116604,
+        0.0,
+        -0.36269163704051316
+      ],
+      "head_px": [
+        429.8820721897846,
+        385.7152806243458
+      ],
+      "foot_px": [
+        430.0,
+        722.0081163976724
+      ],
+      "height_px": 336.2928564501989,
+      "uniform_scale": 0.5549387070135295,
+      "transform": [
+        [
+          0.5549386728932784,
+          0.00019460034689010856,
+          381.44163811641226
+        ],
+        [
+          -0.00019460034689010856,
+          0.5549386728932784,
+          384.06745100817625
+        ]
+      ],
+      "screen_x_per_world_x": 311.20062768814427
+    },
+    {
+      "id": "man",
+      "file": "man-185cm.png",
+      "height_m": 1.85,
+      "height_cm": 185,
+      "native_size_px": [
+        215,
+        692
+      ],
+      "crown_y_px": 3,
+      "ground_y_px": 688,
+      "ground_anchor_x_px": 102.56311349452754,
+      "world_foot_m": [
+        0.7878654033032663,
+        0.0,
+        -0.13996809719654082
+      ],
+      "head_px": [
+        689.6030229315043,
+        336.7571192615252
+      ],
+      "foot_px": [
+        690.0,
+        725.5465824169883
+      ],
+      "height_px": 388.78966582395947,
+      "uniform_scale": 0.5675761544875321,
+      "transform": [
+        [
+          0.567575858621114,
+          0.0005795285671470713,
+          631.3889371412915
+        ],
+        [
+          -0.0005795285671470713,
+          0.567575858621114,
+          335.11382993986746
+        ]
+      ],
+      "screen_x_per_world_x": 311.20062768814427
+    }
+  ],
+  "camera_matrix": [
+    [
+      157.3626165969765,
+      0.14381633965908133,
+      462.4773528171893,
+      563.017268414281
+    ],
+    [
+      -29.597204352953796,
+      -189.36160474965155,
+      125.3518242638181,
+      695.1867561917015
+    ],
+    [
+      -0.07476948643722527,
+      0.0004891712233301169,
+      0.280473065283644,
+      1.0
+    ]
+  ],
+  "camera_policy": "Same camera, room, ground origin and people as the approved wooden-frame catalog. No per-item zoom or crop.",
+  "construction": {
+    "type": "open Joker chrome tube frame, eyeleted tension banner, two transverse T-feet",
+    "tube_diameter_m_visual_assumption": 0.025,
+    "foot_depth_m_visual_assumption": 0.3,
+    "maximum_eyelet_spacing_m_visual_assumption": 0.3,
+    "note": "Visual hardware dimensions are inferred, not fabrication measurements. Requested sizes refer to outer frame."
+  },
+  "common_background_pixels": 557019,
+  "items": [
+    {
+      "id": "2x2",
+      "label": "2 × 2 м",
+      "width_m": 2.0,
+      "height_m": 2.0,
+      "canvas_px": [
+        1264,
+        848
+      ],
+      "files": {
+        "png": "sm-production-joker-2x2-people.png",
+        "jpg": "sm-production-joker-2x2-people.jpg",
+        "webp": "sm-production-joker-2x2-people.webp"
+      },
+      "outer_frame_quad_px": [
+        [
+          377.358219,
+          321.69319
+        ],
+        [
+          778.083165,
+          309.72101
+        ],
+        [
+          778.595036,
+          719.377001
+        ],
+        [
+          377.434098,
+          674.362242
+        ]
+      ],
+      "banner_quad_px": [
+        [
+          386.885023,
+          331.135633
+        ],
+        [
+          765.354237,
+          321.305941
+        ],
+        [
+          765.811963,
+          697.532807
+        ],
+        [
+          386.963317,
+          657.71547
+        ]
+      ],
+      "feet_endpoints_px": [
+        [
+          316.974359,
+          683.519482
+        ],
+        [
+          418.168583,
+          665.544643
+        ],
+        [
+          725.338372,
+          732.030772
+        ],
+        [
+          806.302713,
+          707.037829
+        ]
+      ],
+      "eyelet_and_tie_count": 28,
+      "banner_visible_size_m": [
+        1.89,
+        1.845
+      ]
+    },
+    {
+      "id": "3x2p5",
+      "label": "3 × 2,5 м",
+      "width_m": 3.0,
+      "height_m": 2.5,
+      "canvas_px": [
+        1264,
+        848
+      ],
+      "files": {
+        "png": "sm-production-joker-3x2p5-people.png",
+        "jpg": "sm-production-joker-3x2p5-people.jpg",
+        "webp": "sm-production-joker-3x2p5-people.webp"
+      },
+      "outer_frame_quad_px": [
+        [
+          294.0,
+          239.07312
+        ],
+        [
+          899.166437,
+          199.519945
+        ],
+        [
+          900.0,
+          733.0
+        ],
+        [
+          294.0,
+          665.0
+        ]
+      ],
+      "banner_quad_px": [
+        [
+          302.892561,
+          247.886937
+        ],
+        [
+          885.354349,
+          212.09069
+        ],
+        [
+          886.114821,
+          710.176746
+        ],
+        [
+          302.901767,
+          648.880525
+        ]
+      ],
+      "feet_endpoints_px": [
+        [
+          231.627088,
+          673.380718
+        ],
+        [
+          335.789444,
+          656.737963
+        ],
+        [
+          851.543461,
+          747.023209
+        ],
+        [
+          924.277153,
+          719.649798
+        ]
+      ],
+      "eyelet_and_tie_count": 40,
+      "banner_visible_size_m": [
+        2.89,
+        2.345
+      ]
+    },
+    {
+      "id": "3x3",
+      "label": "3 × 3 м",
+      "width_m": 3.0,
+      "height_m": 3.0,
+      "canvas_px": [
+        1264,
+        848
+      ],
+      "files": {
+        "png": "sm-production-joker-3x3-people.png",
+        "jpg": "sm-production-joker-3x3-people.jpg",
+        "webp": "sm-production-joker-3x3-people.webp"
+      },
+      "outer_frame_quad_px": [
+        [
+          294.0,
+          154.0
+        ],
+        [
+          899.0,
+          93.0
+        ],
+        [
+          900.0,
+          733.0
+        ],
+        [
+          294.0,
+          665.0
+        ]
+      ],
+      "banner_quad_px": [
+        [
+          302.890601,
+          162.494485
+        ],
+        [
+          885.192454,
+          106.054407
+        ],
+        [
+          886.114821,
+          710.176746
+        ],
+        [
+          302.901767,
+          648.880525
+        ]
+      ],
+      "feet_endpoints_px": [
+        [
+          231.627088,
+          673.380718
+        ],
+        [
+          335.789444,
+          656.737963
+        ],
+        [
+          851.543461,
+          747.023209
+        ],
+        [
+          924.277153,
+          719.649798
+        ]
+      ],
+      "eyelet_and_tie_count": 44,
+      "banner_visible_size_m": [
+        2.89,
+        2.845
+      ]
+    },
+    {
+      "id": "4x3",
+      "label": "4 × 3 м",
+      "width_m": 4.0,
+      "height_m": 3.0,
+      "canvas_px": [
+        1264,
+        848
+      ],
+      "files": {
+        "png": "sm-production-joker-4x3-people.png",
+        "jpg": "sm-production-joker-4x3-people.jpg",
+        "webp": "sm-production-joker-4x3-people.webp"
+      },
+      "outer_frame_quad_px": [
+        [
+          216.092166,
+          161.85517
+        ],
+        [
+          1030.807055,
+          79.710363
+        ],
+        [
+          1032.078453,
+          747.820685
+        ],
+        [
+          215.992708,
+          656.246706
+        ]
+      ],
+      "banner_quad_px": [
+        [
+          224.411776,
+          170.101109
+        ],
+        [
+          1015.767428,
+          93.398323
+        ],
+        [
+          1016.942776,
+          723.926883
+        ],
+        [
+          224.32723,
+          640.622269
+        ]
+      ],
+      "feet_endpoints_px": [
+        [
+          152.090968,
+          663.932285
+        ],
+        [
+          258.620165,
+          648.488239
+        ],
+        [
+          989.530414,
+          763.415264
+        ],
+        [
+          1052.218039,
+          733.327222
+        ]
+      ],
+      "eyelet_and_tie_count": 50,
+      "banner_visible_size_m": [
+        3.89,
+        2.845
+      ]
+    }
+  ]
+}
