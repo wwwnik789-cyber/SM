@@ -1,0 +1,32 @@
+{
+  "source_sha256": "7775696913f9586bd53f0fe5f10df685f44d8cee0d62b9000f2e7d17799a39b3",
+  "people_are": "AI-generated fictional adults",
+  "assets": [
+    {
+      "id": "woman",
+      "file": "woman-160cm.png",
+      "height_m": 1.6,
+      "height_cm": 160,
+      "native_size_px": [
+        176,
+        613
+      ],
+      "crown_y_px": 3,
+      "ground_y_px": 609,
+      "ground_anchor_x_px": 87.28865483420225
+    },
+    {
+      "id": "man",
+      "file": "man-185cm.png",
+      "height_m": 1.85,
+      "height_cm": 185,
+      "native_size_px": [
+        215,
+        692
+      ],
+      "crown_y_px": 3,
+      "ground_y_px": 688,
+      "ground_anchor_x_px": 102.56311349452754
+    }
+  ]
+}
