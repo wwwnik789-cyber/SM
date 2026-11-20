@@ -1,5 +1,5 @@
 {
-  "title": "SM Production — Joker tube-frame photozones, four sizes",
+  "title": "SM Production — Joker PressWall, repeated SM logo grid, four sizes",
   "dimension_order": "outer frame width x height, meters",
   "canvas_px": [
     1264,
@@ -131,6 +131,42 @@
     "maximum_eyelet_spacing_m_visual_assumption": 0.3,
     "note": "Visual hardware dimensions are inferred, not fabrication measurements. Requested sizes refer to outer frame."
   },
+  "banner_design": {
+    "style": "classic light PressWall with a repeated regular SM logo grid",
+    "paper_rgb": [
+      244,
+      243,
+      238
+    ],
+    "logo_navy_rgb": [
+      34,
+      51,
+      71
+    ],
+    "logo_gold_rgb": [
+      190,
+      143,
+      49
+    ],
+    "logo": "assets/sm-logo-presswall-navy-gold.png",
+    "logo_sha256": "b782715fc54ac5495f49a9f0cde5dc536bea083c13857cc75d68d4d533c0870c",
+    "logo_source": "../presswalls-sizes/assets/branding-extracted.png",
+    "logo_source_sha256": "bb88f1a2374a3cec4c84ffd3cc3f0d32c692545b5de9a2d12db2c815326ea86e",
+    "logo_source_crop_px": [
+      0,
+      0,
+      490,
+      408
+    ],
+    "logo_policy": "Reuse the approved cube + SM PRODUCTION alpha; no redrawing or nonuniform stretch. Omit the tiny tagline in the repeated marks.",
+    "logo_width_m": 0.4,
+    "grid_pitch_m": [
+      0.55,
+      0.49
+    ],
+    "scope": "Only banner artwork changes; room, camera, frame, feet, ties and the 160/185 cm people remain unchanged.",
+    "previous_design_commit": "2a5939238402902c74297051cac9df745d70aea8"
+  },
   "common_background_pixels": 557019,
   "items": [
     {
@@ -205,7 +241,17 @@
       "banner_visible_size_m": [
         1.89,
         1.845
-      ]
+      ],
+      "print_layout": {
+        "columns": 3,
+        "rows": 3,
+        "logo_count": 9,
+        "logo_width_m": 0.4,
+        "logo_height_m": 0.333333,
+        "horizontal_pitch_m": 0.55,
+        "vertical_pitch_m": 0.49,
+        "alignment": "centered regular grid; same physical mark size and pitch in all four images"
+      }
     },
     {
       "id": "3x2p5",
@@ -279,7 +325,17 @@
       "banner_visible_size_m": [
         2.89,
         2.345
-      ]
+      ],
+      "print_layout": {
+        "columns": 5,
+        "rows": 4,
+        "logo_count": 20,
+        "logo_width_m": 0.4,
+        "logo_height_m": 0.333333,
+        "horizontal_pitch_m": 0.55,
+        "vertical_pitch_m": 0.49,
+        "alignment": "centered regular grid; same physical mark size and pitch in all four images"
+      }
     },
     {
       "id": "3x3",
@@ -353,7 +409,17 @@
       "banner_visible_size_m": [
         2.89,
         2.845
-      ]
+      ],
+      "print_layout": {
+        "columns": 5,
+        "rows": 5,
+        "logo_count": 25,
+        "logo_width_m": 0.4,
+        "logo_height_m": 0.333333,
+        "horizontal_pitch_m": 0.55,
+        "vertical_pitch_m": 0.49,
+        "alignment": "centered regular grid; same physical mark size and pitch in all four images"
+      }
     },
     {
       "id": "4x3",
@@ -427,7 +493,17 @@
       "banner_visible_size_m": [
         3.89,
         2.845
-      ]
+      ],
+      "print_layout": {
+        "columns": 7,
+        "rows": 5,
+        "logo_count": 35,
+        "logo_width_m": 0.4,
+        "logo_height_m": 0.333333,
+        "horizontal_pitch_m": 0.55,
+        "vertical_pitch_m": 0.49,
+        "alignment": "centered regular grid; same physical mark size and pitch in all four images"
+      }
     }
   ]
 }

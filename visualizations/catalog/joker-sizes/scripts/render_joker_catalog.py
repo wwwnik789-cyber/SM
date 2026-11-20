@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Four Joker tube-frame catalog images on the approved photographic set.
 
-The room, projective camera, brand ink and calibrated people are reused from
-previous catalog series. The Joker is rebuilt as an open, thin metal frame,
-with an inset eyeleted banner, individual ties and two transverse tube feet.
+The room, projective camera and calibrated people are reused from the approved
+catalog series. Only the banner artwork is redesigned as a classic light
+PressWall with a regular grid of the existing SM cube/wordmark. The open
+metal frame, eyelets, individual ties and two transverse tube feet are locked.
 """
 from __future__ import annotations
 
@@ -39,6 +40,13 @@ FOOT_FRONT_Z = -0.18
 FOOT_BACK_Z = 0.12
 TIE_SPACING = 0.30
 EYELET_RADIUS = 0.009
+PRINT_LOGO = ASSETS / "sm-logo-presswall-navy-gold.png"
+LOGO_SOURCE = BASE / "assets/branding-extracted.png"
+LOGO_SOURCE_CROP = (0, 0, 490, 408)  # Existing cube + SM PRODUCTION, without tiny tagline.
+LOGO_WIDTH_M = 0.40
+GRID_PITCH_X_M = 0.55
+GRID_PITCH_Y_M = 0.49
+GRID_EDGE_MARGIN_M = 0.06
 
 
 def read_rgb(path: Path) -> np.ndarray:
@@ -94,21 +102,53 @@ def banner_geometry(w: float, h: float) -> tuple[float, float, float, float]:
     return -w / 2 + BANNER_INSET, w / 2 - BANNER_INSET, BANNER_BOTTOM, h - BANNER_INSET
 
 
+def prepare_presswall_logo() -> None:
+    """Reuse the approved mark's exact alpha, uniformly recolored for light vinyl."""
+    source = Image.open(LOGO_SOURCE).convert("RGBA").crop(LOGO_SOURCE_CROP)
+    pixels = np.array(source)
+    rgb = pixels[:, :, :3].astype(float)
+    gold = (rgb[:, :, 0] > rgb[:, :, 2] * 1.5) & (rgb[:, :, 1] > rgb[:, :, 2] * 1.2)
+    pixels[:, :, :3] = np.where(gold[:, :, None], [190, 143, 49], [34, 51, 71])
+    # Remove only near-transparent remnants of the old decorative network.
+    pixels[:, :, 3][pixels[:, :, 3] < 24] = 0
+    logo = Image.fromarray(pixels)
+    logo = logo.crop(logo.getchannel("A").getbbox())
+    logo.save(PRINT_LOGO, compress_level=9)
+
+
+def presswall_layout(w: float, h: float) -> dict:
+    left, right, bottom, top = banner_geometry(w, h)
+    with Image.open(PRINT_LOGO) as logo:
+        logo_height = LOGO_WIDTH_M * logo.height / logo.width
+    columns = max(1, int(math.floor((right-left-LOGO_WIDTH_M-2*GRID_EDGE_MARGIN_M) / GRID_PITCH_X_M)) + 1)
+    rows = max(1, int(math.floor((top-bottom-logo_height-2*GRID_EDGE_MARGIN_M) / GRID_PITCH_Y_M)) + 1)
+    return {"columns": columns, "rows": rows, "logo_count": columns*rows,
+            "logo_width_m": LOGO_WIDTH_M, "logo_height_m": round(logo_height, 6),
+            "horizontal_pitch_m": GRID_PITCH_X_M, "vertical_pitch_m": GRID_PITCH_Y_M,
+            "alignment": "centered regular grid; same physical mark size and pitch in all four images"}
+
+
 def banner_texture(w: float, h: float) -> np.ndarray:
     left, right, bottom, top = banner_geometry(w, h)
     pw, ph = right - left, top - bottom
     tw, th = round(pw * PPM), round(ph * PPM)
-    pattern = Image.open(BASE / "assets/print-pattern-clean.png").convert("RGB")
-    image = pattern.resize((tw, th), Image.Resampling.LANCZOS).convert("RGBA")
-    # Reuse the supplied brand block without any independent X/Y stretching.
-    logo = Image.open(BASE / "assets/branding-extracted.png").convert("RGBA")
-    factor = min(w, h) / 3
-    lw, lh = round(logo.width * factor), round(logo.height * factor)
-    image.alpha_composite(logo.resize((lw, lh), Image.Resampling.LANCZOS),
-                          (round(tw * 0.48 - lw / 2), round(th * 0.39 - lh / 2)))
+    image = Image.new("RGBA", (tw, th), (244, 243, 238, 255))
+    logo = Image.open(PRINT_LOGO).convert("RGBA")
+    lw = round(LOGO_WIDTH_M * PPM)
+    lh = round(lw * logo.height / logo.width)
+    mark = logo.resize((lw, lh), Image.Resampling.LANCZOS)
+    layout = presswall_layout(w, h)
+    for row in range(layout["rows"]):
+        cy = th/2 + (row-(layout["rows"]-1)/2) * GRID_PITCH_Y_M * PPM
+        for column in range(layout["columns"]):
+            cx = tw/2 + (column-(layout["columns"]-1)/2) * GRID_PITCH_X_M * PPM
+            image.alpha_composite(mark, (round(cx-lw/2), round(cy-lh/2)))
     array = np.array(image.convert("RGB")).astype(float)
-    # Soft, localized tension creases stop the print from looking like a rigid box.
     yy, xx = np.mgrid[:th, :tw]
+    # A quiet daylight falloff from the same left-hand windows, not a new room.
+    illumination = 1 - .022*xx/max(tw-1, 1) - .018*yy/max(th-1, 1)
+    array *= illumination[:, :, None]
+    # Soft, localized tension creases stop the print from looking like a rigid box.
     shade = np.zeros((th, tw), float)
     for x in positions(left, right):
         u = (x - left) / pw * (tw - 1)
@@ -264,6 +304,7 @@ def render_product(w: float, h: float) -> tuple[np.ndarray, np.ndarray, np.ndarr
         "feet_endpoints_px": np.round(project(feet), 6).tolist(),
         "eyelet_and_tie_count": tie_count,
         "banner_visible_size_m": [round(right-left, 3), round(top-bottom, 3)],
+        "print_layout": presswall_layout(w, h),
     }
     return pm, a, banner_mask, info
 
@@ -295,8 +336,8 @@ def overview(items: list[dict]) -> None:
     tile_w, tile_h, caption, gap, header = 632, 424, 56, 24, 144
     board = Image.new("RGB", (tile_w*2 + gap*3, header + (tile_h+caption)*2 + gap*3), "#f3f4f6")
     draw = ImageDraw.Draw(board)
-    draw.text((gap, 20), "SM PRODUCTION / ДЖОКЕР", font=font(17, True), fill="#99752b")
-    draw.text((gap, 50), "Открытый трубный каркас — четыре размера", font=font(29, True), fill="#17283d")
+    draw.text((gap, 20), "SM PRODUCTION / PRESSWALL", font=font(17, True), fill="#99752b")
+    draw.text((gap, 50), '«Джокер» — сетка логотипов SM', font=font(29, True), fill="#17283d")
     draw.text((gap, 99), "Один фон и масштаб · девушка 160 см, мужчина 185 см · ширина × высота", font=font(17), fill="#576579")
     for i, item in enumerate(items):
         row, col = divmod(i, 2)
@@ -319,6 +360,8 @@ def verify() -> None:
     assert sha(BASE/"assets/background-locked.png") == manifest["background_sha256"]
     assert sha(HUMANS/"assets/people-layer-160-185.png") == manifest["people_layer_sha256"]
     assert sha(ROOT/"references/joker-3x3-user-reference.jpg") == manifest["user_reference_sha256"]
+    assert sha(PRINT_LOGO) == manifest["banner_design"]["logo_sha256"]
+    assert sha(LOGO_SOURCE) == manifest["banner_design"]["logo_source_sha256"]
     for item in manifest["items"]:
         for filename in item["files"].values():
             with Image.open(ROOT/filename) as image:
@@ -335,6 +378,7 @@ def verify() -> None:
             assert np.all((q[:, 0] > 0) & (q[:, 0] < CANVAS[0]))
             assert np.all((q[:, 1] > 0) & (q[:, 1] < CANVAS[1]))
         assert item["eyelet_and_tie_count"] >= 24
+        assert item["print_layout"] == presswall_layout(w, h)
     print(f"Verified 4 sizes / 12 files; {int(common.sum()):,} background pixels and {int(opaque.sum()):,} person pixels are identical across every PNG.")
 
 
@@ -349,9 +393,20 @@ def package(items: list[dict]) -> None:
         assert len(z.namelist()) == 15
         assert z.testzip() is None
     print(f"Archive CRC passed: {archive.name}, {archive.stat().st_size:,} bytes.")
+    jpeg_archive = ROOT/"sm-production-joker-presswall-jpg.zip"
+    with zipfile.ZipFile(jpeg_archive, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+        for item in items:
+            path = ROOT/item["files"]["jpg"]
+            z.write(path, path.name)
+    with zipfile.ZipFile(jpeg_archive) as z:
+        assert len(z.namelist()) == 4
+        assert all(name.endswith(".jpg") for name in z.namelist())
+        assert z.testzip() is None
+    print(f"Archive CRC passed: {jpeg_archive.name}, {jpeg_archive.stat().st_size:,} bytes, exactly four JPEGs.")
 
 
 def render() -> None:
+    prepare_presswall_logo()
     bg_path = BASE/"assets/background-locked.png"
     people_path = HUMANS/"assets/people-layer-160-185.png"
     bg = read_rgb(bg_path)
@@ -384,7 +439,7 @@ def render() -> None:
     common = (~union).astype(np.uint8)*255
     Image.fromarray(common).save(ASSETS/"common-background-check-mask.png", compress_level=9)
     manifest = {
-        "title": "SM Production — Joker tube-frame photozones, four sizes",
+        "title": "SM Production — Joker PressWall, repeated SM logo grid, four sizes",
         "dimension_order": "outer frame width x height, meters", "canvas_px": list(CANVAS),
         "reference_size_m": [3,3], "user_reference": "references/joker-3x3-user-reference.jpg",
         "user_reference_sha256": sha(ROOT/"references/joker-3x3-user-reference.jpg"),
@@ -397,6 +452,17 @@ def render() -> None:
                          "foot_depth_m_visual_assumption": FOOT_BACK_Z-FOOT_FRONT_Z,
                          "maximum_eyelet_spacing_m_visual_assumption": TIE_SPACING,
                          "note": "Visual hardware dimensions are inferred, not fabrication measurements. Requested sizes refer to outer frame."},
+        "banner_design": {
+            "style": "classic light PressWall with a repeated regular SM logo grid",
+            "paper_rgb": [244, 243, 238], "logo_navy_rgb": [34, 51, 71], "logo_gold_rgb": [190, 143, 49],
+            "logo": str(PRINT_LOGO.relative_to(ROOT)), "logo_sha256": sha(PRINT_LOGO),
+            "logo_source": "../presswalls-sizes/assets/branding-extracted.png",
+            "logo_source_sha256": sha(LOGO_SOURCE), "logo_source_crop_px": list(LOGO_SOURCE_CROP),
+            "logo_policy": "Reuse the approved cube + SM PRODUCTION alpha; no redrawing or nonuniform stretch. Omit the tiny tagline in the repeated marks.",
+            "logo_width_m": LOGO_WIDTH_M, "grid_pitch_m": [GRID_PITCH_X_M, GRID_PITCH_Y_M],
+            "scope": "Only banner artwork changes; room, camera, frame, feet, ties and the 160/185 cm people remain unchanged.",
+            "previous_design_commit": "2a5939238402902c74297051cac9df745d70aea8"
+        },
         "common_background_pixels": int((~union).sum()), "items": items,
     }
     (ROOT/"manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2)+"\n")
