@@ -1,0 +1,277 @@
+{
+  "schema": "sm-production.photo-series.v1",
+  "series": "Фрезеровка — фотографии производства для сайта",
+  "revision": "v1-source-restored",
+  "source_kind": "Seven photographs uploaded by the user",
+  "aspect_ratio": "3:2",
+  "master_size": [
+    1680,
+    1120
+  ],
+  "web_size": [
+    1260,
+    840
+  ],
+  "color_space": "sRGB",
+  "provenance_note": "ИИ применён для периферийного расширения и отдельных зон уборки кадров 02–05; основа этих четырёх кадров — совмещённые исходные фотографии. Кадры 01/06/07 обработаны и скадрированы без генеративной замены станков или раскроя. В 01 нет расширения: сохранён более тесный исходный вид, чтобы не добавлять выдуманное оборудование. Это отретушированная серия для сайта, не техническая документация.",
+  "scope_note": "Новые изображения для ручной загрузки на сайт. Действующий сайт, прежние каталоги и единый PDF не изменены.",
+  "images": [
+    {
+      "number": 1,
+      "basename": "sm-production-milling-01-workshop",
+      "title": "Станок и рабочие столы",
+      "alt": "Фрезерный станок с системой пылеудаления и рабочие столы в производственном цехе.",
+      "source": {
+        "filename": "IMG_2993.jpg",
+        "sha256": "fdb2d77d8c9d1d2217cbaf16e2248011dc4248ef5dc79576ba614f7b66f1f3b4",
+        "dimensions": [
+          3024,
+          4032
+        ]
+      },
+      "retouch": {
+        "type": "conventional photo retouch; no generative machine replacement",
+        "source_job_preserved_in_center": true,
+        "framing": "original-photo-only 3:2 crop",
+        "source_crop_box": [
+          320,
+          500,
+          2700,
+          2087
+        ],
+        "notes": "Генеративный общий план отклонён из-за изменения оборудования. В финале — исходная фотография, горизонтальное кадрирование, коррекция света/цвета и клонирование фактуры стены в области пакетов на заднем плане. Расширение этого кадра не применено."
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-01-workshop.jpg",
+          "bytes": 685946,
+          "sha256": "9c4b979ead0d58b684de5b93d807e2f9971020f2936944f7420bae46ac8aa22d"
+        },
+        "webp": {
+          "file": "sm-production-milling-01-workshop.webp",
+          "bytes": 126896,
+          "sha256": "e27ae768258ea4c29337bf84f636475dcace1e27d4df383468ba921d7ee8f1cc"
+        }
+      }
+    },
+    {
+      "number": 2,
+      "basename": "sm-production-milling-02-printed-panel",
+      "title": "Обработка листа с печатью",
+      "alt": "Фрезерный станок над листом с напечатанным рисунком гоночной трассы.",
+      "source": {
+        "filename": "IMG_7308.jpg",
+        "sha256": "8786142ad3ed2628907b421212015c837d2941bff6955e4a6bfe52ce54c41f75",
+        "dimensions": [
+          3024,
+          4032
+        ]
+      },
+      "retouch": {
+        "type": "AI-assisted cleanup and peripheral extension",
+        "source_job_preserved_in_center": true,
+        "framing": "AI-assisted peripheral extension",
+        "notes": "Основная зона исходной фотографии восстановлена поверх совмещённого расширенного фона. ИИ использован в боковых/верхних/нижних полях и отдельных местах уборки. Геометрия периферийной дорисовки не является технической документацией."
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-02-printed-panel.jpg",
+          "bytes": 687343,
+          "sha256": "e9482fac56a95c00a7a32757ac491c0f9f14e27323593dafb16717d40a1b719d"
+        },
+        "webp": {
+          "file": "sm-production-milling-02-printed-panel.webp",
+          "bytes": 146784,
+          "sha256": "7d9adfc8ba0a175b36db79ca43939b61c21a931e95f632bf60530be47bc12e6e"
+        }
+      }
+    },
+    {
+      "number": 3,
+      "basename": "sm-production-milling-03-machines",
+      "title": "Станки в производственном цехе",
+      "alt": "Два фрезерных станка с ЧПУ в цехе, на переднем плане — обработка белого листового материала.",
+      "source": {
+        "filename": "DSC_1249.JPG",
+        "sha256": "6e45b2ca8c0af8100aca084c3643eb251303ff9cc64f734b3a8a01144a03efa3",
+        "dimensions": [
+          3840,
+          2160
+        ]
+      },
+      "retouch": {
+        "type": "AI-assisted cleanup and peripheral extension",
+        "source_job_preserved_in_center": true,
+        "framing": "AI-assisted peripheral extension",
+        "notes": "Основная зона исходной фотографии восстановлена поверх совмещённого расширенного фона. ИИ использован в боковых/верхних/нижних полях и отдельных местах уборки. Геометрия периферийной дорисовки не является технической документацией."
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-03-machines.jpg",
+          "bytes": 641368,
+          "sha256": "78e61602d877613f12130680279555dd5d26bd80eef8cf8b23845c97148cf93b"
+        },
+        "webp": {
+          "file": "sm-production-milling-03-machines.webp",
+          "bytes": 110250,
+          "sha256": "a842726476e5ec1fc896a15b7ee9892270429db76c447b54474cf2a1405f631b"
+        }
+      }
+    },
+    {
+      "number": 4,
+      "basename": "sm-production-milling-04-sheet-milling",
+      "title": "Головка станка и листовой материал",
+      "alt": "Фрезерная головка с системой пылеудаления над белым листовым материалом.",
+      "source": {
+        "filename": "IMG_0481.jpg",
+        "sha256": "7a4c237a8a2d513c35580de55595013dfd980c32e300f585f9b8c2d6ee3b403a",
+        "dimensions": [
+          4032,
+          3024
+        ]
+      },
+      "retouch": {
+        "type": "AI-assisted cleanup and peripheral extension",
+        "source_job_preserved_in_center": true,
+        "framing": "AI-assisted peripheral extension",
+        "notes": "Основная зона исходной фотографии восстановлена поверх совмещённого расширенного фона. ИИ использован в боковых/верхних/нижних полях и отдельных местах уборки. Геометрия периферийной дорисовки не является технической документацией."
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-04-sheet-milling.jpg",
+          "bytes": 629752,
+          "sha256": "c3145aa291215f7a067313d65f1c16a098b883ceabd632a841180ba87aab6ff7"
+        },
+        "webp": {
+          "file": "sm-production-milling-04-sheet-milling.webp",
+          "bytes": 123844,
+          "sha256": "9d62a2ea77cedc9655fc1f5fabda8b003dd170f802b1443c737ab58ce213de4b"
+        }
+      }
+    },
+    {
+      "number": 5,
+      "basename": "sm-production-milling-05-white-sheet",
+      "title": "Работа с листовой заготовкой",
+      "alt": "Рабочая головка фрезерного станка над белой листовой заготовкой.",
+      "source": {
+        "filename": "IMG_1667 копия.jpg",
+        "sha256": "8961dd2625b35a7d5c8298ce42cde9b39608bbc9c9c96ecb9d864112d320c9a9",
+        "dimensions": [
+          4032,
+          3024
+        ]
+      },
+      "retouch": {
+        "type": "AI-assisted cleanup and peripheral extension",
+        "source_job_preserved_in_center": true,
+        "framing": "AI-assisted peripheral extension",
+        "notes": "В финале восстановлена вся исходная центральная фотография: головка, шланг, листовая заготовка с вырезом/уступом слева, фактура верстака и исходная подпись SM Production внизу. Боковые поля расширены с ИИ. Инструмент на заднем поле оставлен, это не мусор. Варианты с упрощённой геометрией листа и размытым удалением подписи отклонены.",
+        "original_sm_signature_retained": true
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-05-white-sheet.jpg",
+          "bytes": 612718,
+          "sha256": "eae913c37c9f4de24476fefc1cdb2b89f5bfac5def95ed62d907c567c97de297"
+        },
+        "webp": {
+          "file": "sm-production-milling-05-white-sheet.webp",
+          "bytes": 120612,
+          "sha256": "ee3929b8d2300a8feda6cf9a7a3df0427c5599ed4779c1c83a4cf3361b0a3694"
+        }
+      }
+    },
+    {
+      "number": 6,
+      "basename": "sm-production-milling-06-nested-parts-detail",
+      "title": "Крупный план раскроя",
+      "alt": "Крупный план фрезерной головки и раскроенных деталей на рабочем столе станка.",
+      "source": {
+        "filename": "IMG_1706.jpg",
+        "sha256": "a45123c7d24d0012d535fd4b5fa923fda2f06822fc1527c59e4669fe8f276e63",
+        "dimensions": [
+          4032,
+          3024
+        ]
+      },
+      "retouch": {
+        "type": "conventional tonal retouch and framing; no generative machine/job replacement",
+        "source_job_preserved_in_center": true,
+        "framing": "full-width 3:2 crop, trimmed lower foreground only",
+        "notes": "Сохранены исходные ракурс и раскрой; оставлена естественная технологическая стружка."
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-06-nested-parts-detail.jpg",
+          "bytes": 877516,
+          "sha256": "3ce8c9a29c012cb817da99176fe7a751484a42f239f56ac32d04813da1924c2f"
+        },
+        "webp": {
+          "file": "sm-production-milling-06-nested-parts-detail.webp",
+          "bytes": 208720,
+          "sha256": "f808869cbe58fade049a67978cb5d26c1bcd65bbff78dedba8d2c0e1b1c8973e"
+        }
+      }
+    },
+    {
+      "number": 7,
+      "basename": "sm-production-milling-07-nested-parts-wide",
+      "title": "Раскрой деталей на станке",
+      "alt": "Фрезерный станок MultiCam 3000 Series и лист с рядами вырезанных деталей.",
+      "source": {
+        "filename": "IMG_1707.jpg",
+        "sha256": "c2e64775b2f79963ead6150a090f7f7e20afa440b1599f2604ac712fd8de75c0",
+        "dimensions": [
+          4032,
+          3024
+        ]
+      },
+      "retouch": {
+        "type": "conventional tonal retouch and framing; no generative machine/job replacement",
+        "source_job_preserved_in_center": true,
+        "framing": "full-width 3:2 crop, trimmed lower foreground only",
+        "notes": "Сохранены исходные ракурс и раскрой; оставлена естественная технологическая стружка."
+      },
+      "exports": {
+        "jpeg": {
+          "file": "sm-production-milling-07-nested-parts-wide.jpg",
+          "bytes": 812809,
+          "sha256": "53c93d950ad8533d5c89750efad22b5e02b75fc4b1017898a6a2a8561fe3cfa5"
+        },
+        "webp": {
+          "file": "sm-production-milling-07-nested-parts-wide.webp",
+          "bytes": 191666,
+          "sha256": "07fd3dfbe4807812a783e4b5c5948756bd85b2338e07e44bb163febc85992fe9"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "file": "sm-production-milling-overview.jpg",
+    "bytes": 749400,
+    "sha256": "7a900d5c9b0bb6fe71ab92051beee50bb3e1ef0dbd1fdc8ae807539b9eab8f36"
+  },
+  "archives": {
+    "jpeg": {
+      "file": "sm-production-milling-jpeg.zip",
+      "bytes": 4948590,
+      "sha256": "4f508b8d3714cfefed82421eb3ab32b3bae72bb2c5b7c3ad878652730257fcdb"
+    },
+    "webp": {
+      "file": "sm-production-milling-webp.zip",
+      "bytes": 1029924,
+      "sha256": "5d82072218a55ef6a982e2d07c1aecc624f74e5cafc934e3ee23ee56f2f9bd25"
+    }
+  },
+  "alt_register": {
+    "file": "image-alt.csv",
+    "bytes": 1735,
+    "sha256": "edd02d94be50a5fa1ef871a65ec8050c6a3ae3ba8017d10640b32ae5a10e28b3"
+  },
+  "totals": {
+    "jpeg": 4947452,
+    "webp": 1028772
+  }
+}
