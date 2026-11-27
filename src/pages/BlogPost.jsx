@@ -35,6 +35,19 @@ export default function BlogPost() {
               <Reveal key={i}>
                 {b.h && <h2 className="display-h mb-3 text-2xl font-bold">{b.h}</h2>}
                 {b.p && <p className="text-lg leading-relaxed text-ink/85">{b.p}</p>}
+                {b.img && (
+                  <figure className="my-2">
+                    <img
+                      src={b.img}
+                      alt={b.cap || ""}
+                      loading="lazy"
+                      className="w-full rounded-3xl border border-line object-cover"
+                    />
+                    {b.cap && (
+                      <figcaption className="mt-3 text-sm leading-relaxed text-mut">{b.cap}</figcaption>
+                    )}
+                  </figure>
+                )}
                 {b.list && (
                   <ul className="space-y-3">
                     {b.list.map((li) => (
